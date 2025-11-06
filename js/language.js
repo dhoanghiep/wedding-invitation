@@ -43,6 +43,7 @@
             // Countdown Section
             countdown: {
                 title: 'Countdown to Our Special Day',
+                months: 'Months',
                 days: 'Days',
                 hours: 'Hours',
                 minutes: 'Minutes',
@@ -128,6 +129,7 @@
             // Countdown Section
             countdown: {
                 title: 'Đếm ngược đến ngày đặc biệt',
+                months: 'Tháng',
                 days: 'Ngày',
                 hours: 'Giờ',
                 minutes: 'Phút',
@@ -226,6 +228,7 @@
 
         // Update countdown section
         updateText('[data-i18n="countdown.title"]', t.countdown.title);
+        updateText('[data-i18n="countdown.months"]', t.countdown.months);
         updateText('[data-i18n="countdown.days"]', t.countdown.days);
         updateText('[data-i18n="countdown.hours"]', t.countdown.hours);
         updateText('[data-i18n="countdown.minutes"]', t.countdown.minutes);

@@ -23,23 +23,21 @@
             return;
         }
         
-        // Calculate months
-        let months = wedding.getMonth() - now.getMonth();
-        let years = wedding.getFullYear() - now.getFullYear();
-        if (months < 0) {
-            months += 12;
-            years--;
-        }
-        months += years * 12;
+        // Calculate months by incrementally adding months until we would exceed the wedding date
+        let months = 0;
+        const tempDate = new Date(now);
         
-        // Create a date that's exactly 'months' months from now
-        const tempDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
-        tempDate.setMonth(now.getMonth() + months);
-        
-        // If adding months pushed us past the wedding date, reduce by one month
-        if (tempDate > wedding) {
-            months--;
-            tempDate.setMonth(now.getMonth() + months);
+        // Add months one by one until adding one more would exceed the wedding date
+        while (true) {
+            const nextMonth = new Date(tempDate);
+            nextMonth.setMonth(tempDate.getMonth() + 1);
+            
+            if (nextMonth > wedding) {
+                break;
+            }
+            
+            months++;
+            tempDate.setMonth(tempDate.getMonth() + 1);
         }
         
         // Calculate remaining days after months
