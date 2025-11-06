@@ -2,6 +2,31 @@
 (function() {
     'use strict';
     
+    // Check for RSVP success parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('rsvp') === 'success') {
+        const rsvpMessage = document.getElementById('rsvp-message');
+        if (rsvpMessage) {
+            showMessage(rsvpMessage, 'Thank you for your RSVP! We look forward to seeing you.', 'success');
+        }
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    
+    // Helper function to show messages (defined early)
+    function showMessage(element, message, type) {
+        element.textContent = message;
+        element.className = `form-message ${type}`;
+        
+        // Scroll to message
+        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            element.classList.remove('success', 'error');
+        }, 5000);
+    }
+    
     // Navigation elements
     const header = document.getElementById('header');
     const hamburger = document.getElementById('hamburger');
@@ -120,29 +145,66 @@
             submitButton.textContent = 'Submitting...';
             
             try {
-                // Submit to Google Apps Script using URL-encoded form data to avoid CORS preflight
-                const formDataEncoded = new URLSearchParams();
-                formDataEncoded.append('name', data.name);
-                formDataEncoded.append('email', data.email);
-                formDataEncoded.append('attendance', data.attendance);
-                formDataEncoded.append('guests', data.guests || '');
-                formDataEncoded.append('dietary', data.dietary || '');
-                formDataEncoded.append('message', data.message || '');
+                // Submit to Google Apps Script using redirect pattern to avoid CORS issues
+                // Create a hidden iframe for form submission
+                const iframe = document.createElement('iframe');
+                iframe.name = 'rsvp-submit-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
                 
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Google Apps Script doesn't support CORS properly
-                    body: formDataEncoded
+                // Create success redirect URL (current page with success parameter)
+                const successUrl = window.location.origin + window.location.pathname + '?rsvp=success';
+                
+                // Create a temporary form for submission
+                const tempForm = document.createElement('form');
+                tempForm.method = 'POST';
+                tempForm.action = GOOGLE_SCRIPT_URL;
+                tempForm.target = 'rsvp-submit-iframe';
+                
+                // Add redirect URL
+                const redirectInput = document.createElement('input');
+                redirectInput.type = 'hidden';
+                redirectInput.name = 'redirect';
+                redirectInput.value = successUrl;
+                tempForm.appendChild(redirectInput);
+                
+                // Add form fields
+                Object.keys(data).forEach(key => {
+                    if (data[key]) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = data[key];
+                        tempForm.appendChild(input);
+                    }
                 });
                 
-                // With no-cors mode, we can't read the response, so assume success
-                // The data will still be saved to the sheet
+                // Submit form - Apps Script will save data and redirect to successUrl
+                document.body.appendChild(tempForm);
+                tempForm.submit();
+                
+                // Show success message immediately (form submission is fire-and-forget)
+                // The redirect will happen in the iframe, updating the main page URL
                 showMessage(rsvpMessage, 'Thank you for your RSVP! We look forward to seeing you.', 'success');
                 rsvpForm.reset();
+                
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                
+                // Clean up after a delay
+                setTimeout(() => {
+                    if (document.body.contains(tempForm)) {
+                        document.body.removeChild(tempForm);
+                    }
+                    if (document.body.contains(iframe)) {
+                        document.body.removeChild(iframe);
+                    }
+                }, 3000);
+                
             } catch (error) {
                 console.error('RSVP submission error:', error);
                 showMessage(rsvpMessage, 'Sorry, there was an error submitting your RSVP. Please try again later or contact us directly.', 'error');
-            } finally {
                 // Re-enable submit button
                 submitButton.disabled = false;
                 submitButton.textContent = originalButtonText;
