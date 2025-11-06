@@ -101,7 +101,7 @@
         // Priority 1: Use Google Maps embed URL if available (easiest method)
         if (CONFIG.GOOGLE_MAPS_EMBED_URL) {
             // Use the embed URL directly
-            mapElement.innerHTML = `<iframe src="${CONFIG.GOOGLE_MAPS_EMBED_URL}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+            mapElement.innerHTML = `<iframe src="${CONFIG.GOOGLE_MAPS_EMBED_URL}" style="border:0; width: 100%; height: 100%; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
 
             // Update map link - convert embed URL to a shareable Google Maps link
             if (mapLink) {
