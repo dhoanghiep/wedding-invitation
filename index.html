@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding Invitation - Join us for our special day">
+    <title>Sarah & John's Wedding</title>
+    
+    <!-- Leaflet CSS for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>Sarah & John</h1>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#invitation" class="nav-link">Invitation</a></li>
+                    <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="#countdown" class="nav-link">Countdown</a></li>
+                    <li class="nav-item"><a href="#rsvp" class="nav-link">RSVP</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero/Home Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2 class="hero-title">We're Getting Married!</h2>
+            <p class="hero-subtitle">Sarah & John</p>
+            <p class="hero-date">June 15, 2025</p>
+            <a href="#invitation" class="btn btn-primary">View Invitation</a>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Invitation Section -->
+    <section class="invitation" id="invitation">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">You're Invited</h2>
+                <p class="section-subtitle">Join us as we celebrate our special day</p>
+            </div>
+            
+            <div class="invitation-content">
+                <div class="invitation-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">📅</div>
+                        <div class="detail-content">
+                            <h3>Date & Time</h3>
+                            <p>Saturday, June 15, 2025</p>
+                            <p>Ceremony: 4:00 PM</p>
+                            <p>Reception: 6:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">📍</div>
+                        <div class="detail-content">
+                            <h3>Location</h3>
+                            <p>Grand Ballroom</p>
+                            <p>123 Wedding Lane</p>
+                            <p>San Francisco, CA 94102</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <h3>Venue Location</h3>
+                    <div id="map" class="map"></div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=37.7749,-122.4194" 
+                       target="_blank" 
+                       class="map-link">
+                        Open in Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Gallery</h2>
+                <p class="section-subtitle">Memories we've shared together</p>
+            </div>
+            
+            <div class="gallery-tabs">
+                <button class="tab-btn active" data-tab="photos">Photos</button>
+                <button class="tab-btn" data-tab="videos">Videos</button>
+            </div>
+            
+            <!-- Photo Gallery -->
+            <div class="gallery-content active" id="photos-gallery">
+                <div class="gallery-grid" id="photo-grid">
+                    <!-- Photos will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Video Gallery -->
+            <div class="gallery-content" id="videos-gallery">
+                <div class="video-grid" id="video-grid">
+                    <!-- Videos will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Lightbox -->
+            <div class="lightbox" id="lightbox">
+                <span class="lightbox-close">&times;</span>
+                <span class="lightbox-prev">&lt;</span>
+                <span class="lightbox-next">&gt;</span>
+                <img src="" alt="" class="lightbox-image" id="lightbox-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown" id="countdown">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Countdown to Our Special Day</h2>
+            </div>
+            
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="rsvp" id="rsvp">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">RSVP</h2>
+                <p class="section-subtitle">Please let us know if you'll be joining us</p>
+            </div>
+            
+            <form class="rsvp-form" id="rsvp-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="attendance">Will you be attending? *</label>
+                    <select id="attendance" name="attendance" required>
+                        <option value="">Please select...</option>
+                        <option value="yes">Yes, I'll be there!</option>
+                        <option value="no">Sorry, I can't make it</option>
+                        <option value="maybe">Maybe</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" name="guests" min="1" value="1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dietary">Dietary Restrictions or Allergies</label>
+                    <textarea id="dietary" name="dietary" rows="3" placeholder="Please let us know of any dietary restrictions or allergies"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message (Optional)</label>
+                    <textarea id="message" name="message" rows="3" placeholder="Any additional notes or messages"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit RSVP</button>
+                
+                <div class="form-message" id="rsvp-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Sarah</h3>
+                        <p>📧 sarah@example.com</p>
+                        <p>📱 (555) 123-4567</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>John</h3>
+                        <p>📧 john@example.com</p>
+                        <p>📱 (555) 987-6543</p>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label for="contact-name">Your Name *</label>
+                        <input type="text" id="contact-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-email">Your Email *</label>
+                        <input type="email" id="contact-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-message">Message *</label>
+                        <textarea id="contact-message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    
+                    <div class="form-message" id="contact-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Sarah & John. Made with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS for maps -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- JavaScript files -->
+    <script src="js/countdown.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
