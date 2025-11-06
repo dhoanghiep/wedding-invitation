@@ -89,9 +89,12 @@
     // RSVP Form Handler
     const rsvpForm = document.getElementById('rsvp-form');
     const rsvpMessage = document.getElementById('rsvp-message');
-    
+
+    // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
+    const GOOGLE_SCRIPT_URL = CONFIG.GOOGLE_SCRIPT_URL;
+
     if (rsvpForm) {
-        rsvpForm.addEventListener('submit', (e) => {
+        rsvpForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const formData = new FormData(rsvpForm);
@@ -110,24 +113,40 @@
                 return;
             }
             
-            // Simulate form submission
-            // In production, replace this with actual form submission service
-            // Options: Formspree, EmailJS, Google Apps Script, etc.
-            console.log('RSVP Data:', data);
+            // Disable submit button during submission
+            const submitButton = rsvpForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
             
-            // Show success message
-            showMessage(rsvpMessage, 'Thank you for your RSVP! We look forward to seeing you.', 'success');
-            
-            // Reset form
-            rsvpForm.reset();
-            
-            // Store in localStorage for demo purposes
-            const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
-            rsvps.push({
-                ...data,
-                timestamp: new Date().toISOString()
-            });
-            localStorage.setItem('rsvps', JSON.stringify(rsvps));
+            try {
+                // Submit to Google Apps Script using URL-encoded form data to avoid CORS preflight
+                const formDataEncoded = new URLSearchParams();
+                formDataEncoded.append('name', data.name);
+                formDataEncoded.append('email', data.email);
+                formDataEncoded.append('attendance', data.attendance);
+                formDataEncoded.append('guests', data.guests || '');
+                formDataEncoded.append('dietary', data.dietary || '');
+                formDataEncoded.append('message', data.message || '');
+                
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Google Apps Script doesn't support CORS properly
+                    body: formDataEncoded
+                });
+                
+                // With no-cors mode, we can't read the response, so assume success
+                // The data will still be saved to the sheet
+                showMessage(rsvpMessage, 'Thank you for your RSVP! We look forward to seeing you.', 'success');
+                rsvpForm.reset();
+            } catch (error) {
+                console.error('RSVP submission error:', error);
+                showMessage(rsvpMessage, 'Sorry, there was an error submitting your RSVP. Please try again later or contact us directly.', 'error');
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
         });
     }
     
