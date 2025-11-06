@@ -6,11 +6,13 @@
     <meta name="description" content="Wedding Invitation - Join us for our special day">
     <title>Sarah & John's Wedding</title>
     
-    <!-- Leaflet CSS for maps -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Maps API -->
+    <!-- Note: Add your Google Maps API key (if available) for better performance -->
+    <!-- Example: <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 </head>
 <body>
     <!-- Header -->
@@ -82,7 +84,8 @@
                 <div class="map-container">
                     <h3>Venue Location</h3>
                     <div id="map" class="map"></div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=37.7749,-122.4194" 
+                    <a href="#" 
+                       id="map-link"
                        target="_blank" 
                        class="map-link">
                         Open in Google Maps
@@ -261,9 +264,6 @@
         </div>
     </footer>
 
-    <!-- Leaflet JS for maps -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
     <!-- JavaScript files -->
     <script src="js/countdown.js"></script>
     <script src="js/gallery.js"></script>
