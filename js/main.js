@@ -4,12 +4,19 @@
 
     // Mark active navigation link based on current page
     function setActiveNavLink() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const currentPath = window.location.pathname;
+        const currentPage = currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.endsWith('/') 
+            ? '/' 
+            : currentPath;
         const navLinks = document.querySelectorAll('.nav-link');
         
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
-            if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
+            // Match exact path or handle root/index.html cases
+            if (linkHref === currentPage || 
+                (currentPage === '/' && linkHref === '/') ||
+                (currentPage === '/' && linkHref === '/index.html') ||
+                (currentPath.endsWith(linkHref) && linkHref !== '/')) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
