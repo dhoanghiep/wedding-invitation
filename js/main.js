@@ -24,8 +24,34 @@
         });
     }
 
-    // Set active nav link on page load
-    setActiveNavLink();
+    // Set active nav link after components are loaded
+    function initActiveNavLink() {
+        setActiveNavLink();
+    }
+    
+    // Wait for components to load, then set active nav link
+    function waitForNavLinks() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        if (navLinks.length > 0) {
+            initActiveNavLink();
+        } else {
+            // Wait for componentsReady event
+            document.addEventListener('componentsReady', initActiveNavLink);
+            // Fallback: try again after a short delay
+            setTimeout(() => {
+                if (document.querySelectorAll('.nav-link').length > 0) {
+                    initActiveNavLink();
+                }
+            }, 100);
+        }
+    }
+
+    // Initialize active nav link when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', waitForNavLinks);
+    } else {
+        waitForNavLinks();
+    }
 
     // Check for RSVP success parameter in URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -53,72 +79,106 @@
         }, 5000);
     }
 
-    // Navigation elements
-    const header = document.getElementById('header');
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
+    // Initialize navigation elements after components are loaded
+    function initNavigation() {
+        // Navigation elements
+        const header = document.getElementById('header');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
 
-    // Handle navigation links (page navigation or smooth scroll for anchors)
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            
-            // If it's an anchor link (starts with #), use smooth scroll
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                const targetSection = document.querySelector(href);
+        // Check if elements exist (components might not be loaded yet)
+        if (!header || !hamburger || !navMenu) {
+            return;
+        }
 
-                if (targetSection) {
-                    const headerHeight = header.offsetHeight;
-                    const targetPosition = targetSection.offsetTop - headerHeight;
+        // Handle navigation links (page navigation or smooth scroll for anchors)
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                
+                // If it's an anchor link (starts with #), use smooth scroll
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetSection = document.querySelector(href);
 
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                    if (targetSection && header) {
+                        const headerHeight = header.offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
 
-                    // Close mobile menu if open
-                    navMenu.classList.remove('active');
-                    hamburger.classList.remove('active');
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+                        // Close mobile menu if open
+                        if (navMenu) navMenu.classList.remove('active');
+                        if (hamburger) hamburger.classList.remove('active');
+                    }
                 }
-            }
-            // Otherwise, let the browser handle page navigation
-            // Close mobile menu when navigating to a new page
-            else {
+                // Otherwise, let the browser handle page navigation
+                // Close mobile menu when navigating to a new page
+                else {
+                    if (navMenu) navMenu.classList.remove('active');
+                    if (hamburger) hamburger.classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (hamburger && navMenu && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
             }
         });
-    });
 
-    // Mobile menu toggle
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
+        // Sticky header on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            if (!header) return;
+            
+            const currentScroll = window.pageYOffset;
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
+            if (currentScroll > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
 
-    // Sticky header on scroll
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
+            lastScroll = currentScroll;
+        });
+    }
 
-        if (currentScroll > 100) {
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.15)';
+    // Wait for components to load, then initialize navigation
+    function waitForComponents() {
+        const header = document.getElementById('header');
+        if (header) {
+            initNavigation();
         } else {
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            // Wait for componentsReady event
+            document.addEventListener('componentsReady', initNavigation);
+            // Fallback: try again after a short delay
+            setTimeout(() => {
+                if (document.getElementById('header')) {
+                    initNavigation();
+                }
+            }, 100);
         }
+    }
 
-        lastScroll = currentScroll;
-    });
+    // Initialize navigation when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', waitForComponents);
+    } else {
+        waitForComponents();
+    }
 
     // Initialize Google Map
     function initMap() {

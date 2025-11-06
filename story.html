@@ -10,32 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <h1>Hoàng Hiệp & Minh Anh</h1>
-                </div>
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item"><a href="/" class="nav-link" data-i18n="nav.home">Home</a></li>
-                    <li class="nav-item"><a href="/location.html" class="nav-link" data-i18n="nav.location">Location</a></li>
-                    <li class="nav-item"><a href="/story.html" class="nav-link active" data-i18n="nav.story">Our Story</a></li>
-                    <li class="nav-item"><a href="/album.html" class="nav-link" data-i18n="nav.album">Album</a></li>
-                    <li class="nav-item"><a href="/rsvp.html" class="nav-link" data-i18n="nav.rsvp">RSVP</a></li>
-                    <li class="nav-item"><a href="/contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
-                </ul>
-                <div class="nav-actions">
-                    <button class="language-toggle" id="language-toggle" aria-label="Switch language">VI</button>
-                </div>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- Header placeholder - will be loaded by components.js -->
+    <div id="header-placeholder"></div>
 
     <!-- Page Content -->
     <main style="padding-top: 80px;">
@@ -104,14 +80,11 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p data-i18n="footer.text">&copy; 2025 Hoàng Hiệp & Minh Anh. Made with ❤️</p>
-        </div>
-    </footer>
+    <!-- Footer placeholder - will be loaded by components.js -->
+    <div id="footer-placeholder"></div>
 
     <!-- JavaScript files -->
+    <script src="js/components.js"></script>
     <script src="js/language.js"></script>
     <script src="config.js"></script>
     <script src="js/main.js"></script>

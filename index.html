@@ -15,114 +15,58 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <h1>Hoàng Hiệp & Minh Anh</h1>
-                </div>
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item"><a href="/" class="nav-link active" data-i18n="nav.home">Home</a></li>
-                    <li class="nav-item"><a href="/location.html" class="nav-link" data-i18n="nav.location">Location</a></li>
-                    <li class="nav-item"><a href="/story.html" class="nav-link" data-i18n="nav.story">Our Story</a></li>
-                    <li class="nav-item"><a href="/album.html" class="nav-link" data-i18n="nav.album">Album</a></li>
-                    <li class="nav-item"><a href="/rsvp.html" class="nav-link" data-i18n="nav.rsvp">RSVP</a></li>
-                    <li class="nav-item"><a href="/contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
-                </ul>
-                <div class="nav-actions">
-                    <button class="language-toggle" id="language-toggle" aria-label="Switch language">VI</button>
-                </div>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- Header placeholder - will be loaded by components.js -->
+    <div id="header-placeholder"></div>
 
     <!-- Hero/Home Section -->
     <section class="hero" id="home">
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h2 class="hero-title" data-i18n="hero.title">We're Getting Married!</h2>
             <p class="hero-subtitle">Hoàng Hiệp & Minh Anh</p>
             <p class="hero-date" data-i18n="hero.date">January 01, 2026</p>
             <a href="/rsvp.html" class="btn btn-primary" data-i18n="hero.button">RSVP</a>
         </div>
-        <div class="hero-overlay"></div>
     </section>
 
     <!-- Timeline Section -->
     <section class="timeline" id="timeline">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="timeline.title">Wedding Timeline</h2>
-                <p class="section-subtitle" data-i18n="timeline.subtitle">Join us for our special day</p>
-            </div>
-            
             <div class="timeline-container">
                 <div class="timeline-item">
-                    <div class="timeline-icon">💒</div>
                     <div class="timeline-content">
-                        <h3 data-i18n="timeline.ceremony">Ceremony</h3>
-                        <p class="timeline-date" data-i18n="timeline.ceremonyDate">Date & Time</p>
-                        <p class="timeline-location" data-i18n="timeline.ceremonyLocation">Location</p>
+                        <h3 class="timeline-title" data-i18n="timeline.ceremony">Ceremony</h3>
+                        <p class="timeline-date" data-i18n="timeline.ceremonyDate">4:30 PM - 10:00 PM</p>
+                        <p class="timeline-location-name" data-i18n="timeline.ceremonyLocation">The Barrel Keg</p>
+                        <p class="timeline-address">123 Demo St.</p>
+                        <p class="timeline-city">Flagstaff, AZ 12345</p>
+                        <a href="/location.html" class="timeline-map-link">Map</a>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="https://images.pixieset.com/82784299/90cc6fcf2e899b038db4af58559a8bda-cover.jpg" alt="Ceremony" />
                     </div>
                 </div>
                 
                 <div class="timeline-item">
-                    <div class="timeline-icon">🎉</div>
                     <div class="timeline-content">
-                        <h3 data-i18n="timeline.party">Party/Reception</h3>
-                        <p class="timeline-date" data-i18n="timeline.partyDate">Date & Time</p>
-                        <p class="timeline-location" data-i18n="timeline.partyLocation">Location</p>
+                        <h3 class="timeline-title" data-i18n="timeline.party">Reception</h3>
+                        <p class="timeline-date" data-i18n="timeline.partyDate">4:30 PM - 10:00 PM</p>
+                        <p class="timeline-location-name" data-i18n="timeline.partyLocation">The Barrel Keg</p>
+                        <p class="timeline-address">123 Demo St.</p>
+                        <p class="timeline-city">Flagstaff, AZ 12345</p>
+                        <a href="/location.html" class="timeline-map-link">Map</a>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="https://images.pixieset.com/82784299/90cc6fcf2e899b038db4af58559a8bda-cover.jpg" alt="Reception" />
                     </div>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-icon">💍</div>
-                    <div class="timeline-content">
-                        <h3 data-i18n="timeline.mainWedding">Main Wedding</h3>
-                        <p class="timeline-date" data-i18n="timeline.mainWeddingDate">Date & Time</p>
-                        <p class="timeline-location" data-i18n="timeline.mainWeddingLocation">Location</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Schedule Section -->
-    <section class="schedule" id="schedule">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="schedule.title">Wedding Schedule</h2>
             </div>
             
-            <div class="schedule-grid">
-                <div class="schedule-card">
-                    <div class="schedule-icon">💒</div>
-                    <h3 data-i18n="schedule.ceremony">Ceremony</h3>
-                    <p class="schedule-date" data-i18n="schedule.ceremonyDate">Date & Time</p>
-                    <p class="schedule-location" data-i18n="schedule.ceremonyLocation">Location</p>
-                    <a href="/location.html" class="btn btn-secondary" data-i18n="schedule.viewLocation">View Location</a>
-                </div>
-                
-                <div class="schedule-card">
-                    <div class="schedule-icon">🎉</div>
-                    <h3 data-i18n="schedule.party">Party/Reception</h3>
-                    <p class="schedule-date" data-i18n="schedule.partyDate">Date & Time</p>
-                    <p class="schedule-location" data-i18n="schedule.partyLocation">Location</p>
-                    <a href="/location.html" class="btn btn-secondary" data-i18n="schedule.viewLocation">View Location</a>
-                </div>
-                
-                <div class="schedule-card">
-                    <div class="schedule-icon">💍</div>
-                    <h3 data-i18n="schedule.mainWedding">Main Wedding</h3>
-                    <p class="schedule-date" data-i18n="schedule.mainWeddingDate">Date & Time</p>
-                    <p class="schedule-location" data-i18n="schedule.mainWeddingLocation">Location</p>
-                    <a href="/location.html" class="btn btn-secondary" data-i18n="schedule.viewLocation">View Location</a>
-                </div>
+            <div class="story-section">
+                <div class="story-divider"></div>
+                <p class="story-text">See how it all started</p>
+                <div class="story-divider"></div>
+                <a href="/story.html" class="btn btn-story" data-i18n="nav.story">Our Story</a>
             </div>
         </div>
     </section>
@@ -155,49 +99,21 @@
         </div>
     </section>
 
-    <!-- Quick Links Section -->
-    <section class="quick-links" id="quick-links">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="quickLinks.title">Explore More</h2>
-            </div>
-            
-            <div class="quick-links-grid">
-                <a href="/rsvp.html" class="quick-link-card">
-                    <div class="quick-link-icon">✉️</div>
-                    <h3 data-i18n="quickLinks.rsvp">RSVP</h3>
-                    <p data-i18n="quickLinks.rsvpDesc">Let us know if you'll be joining us</p>
-                </a>
-                
-                <a href="/location.html" class="quick-link-card">
-                    <div class="quick-link-icon">📍</div>
-                    <h3 data-i18n="quickLinks.location">Location</h3>
-                    <p data-i18n="quickLinks.locationDesc">Find venues and accommodations</p>
-                </a>
-                
-                <a href="/album.html" class="quick-link-card">
-                    <div class="quick-link-icon">📸</div>
-                    <h3 data-i18n="quickLinks.album">Album</h3>
-                    <p data-i18n="quickLinks.albumDesc">View our photos and memories</p>
-                </a>
-                
-                <a href="/story.html" class="quick-link-card">
-                    <div class="quick-link-icon">💕</div>
-                    <h3 data-i18n="quickLinks.story">Our Story</h3>
-                    <p data-i18n="quickLinks.storyDesc">Learn how we met</p>
-                </a>
-            </div>
+    <!-- RSVP Banner Section -->
+    <section class="rsvp-banner" id="rsvp-banner">
+        <div class="rsvp-banner-overlay"></div>
+        <div class="rsvp-banner-content">
+            <p class="rsvp-banner-subtitle">Join Us</p>
+            <h2 class="rsvp-banner-title">We hope you can make it!</h2>
+            <a href="/rsvp.html" class="btn btn-rsvp-banner" data-i18n="nav.rsvp">RSVP</a>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p data-i18n="footer.text">&copy; 2025 Hoàng Hiệp & Minh Anh. Made with ❤️</p>
-        </div>
-    </footer>
+    <!-- Footer placeholder - will be loaded by components.js -->
+    <div id="footer-placeholder"></div>
 
     <!-- JavaScript files -->
+    <script src="js/components.js"></script>
     <script src="js/language.js"></script>
     <script src="js/countdown.js?v=2"></script>
     <script src="config.js"></script>
