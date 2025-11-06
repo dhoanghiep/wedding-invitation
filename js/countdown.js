@@ -3,7 +3,7 @@
     'use strict';
     
     // Set wedding date (June 15, 2025 at 4:00 PM)
-    const weddingDate = new Date('2025-06-15T16:00:00').getTime();
+    const weddingDate = new Date('2026-01-01T17:00:00').getTime();
     
     const daysElement = document.getElementById('days');
     const hoursElement = document.getElementById('hours');
