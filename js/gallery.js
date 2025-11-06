@@ -3,53 +3,78 @@
     'use strict';
     
     let photos = [];
+    let categoryPhotos = {
+        'journey': [],
+        'pre-wedding': [],
+        'wedding-photos': []
+    };
     
-    // Load photos based on configured source
-    async function loadPhotoUrls() {
+    // Load photos for a specific category
+    async function loadCategoryPhotos(category) {
         // Safety check for CONFIG
         if (typeof CONFIG === 'undefined') {
             console.warn('CONFIG not loaded, using default photos');
-            photos = getDefaultPhotos();
-            return;
+            return getDefaultPhotos();
         }
         
         const source = CONFIG.PHOTO_SOURCE || 'static';
+        let categoryPhotoList = [];
         
         switch (source) {
             case 'static':
                 // Use static URLs from config (local images or direct URLs)
-                photos = CONFIG.PHOTOS && CONFIG.PHOTOS.length > 0 
-                    ? CONFIG.PHOTOS 
-                    : getDefaultPhotos(); // Fallback to sample photos
+                if (CONFIG.PHOTOS && CONFIG.PHOTOS.length > 0) {
+                    categoryPhotoList = CONFIG.PHOTOS;
+                } else {
+                    categoryPhotoList = getDefaultPhotos();
+                }
                 break;
                 
             case 'imgur':
-                if (CONFIG.IMGUR_ALBUM_ID) {
-                    photos = await loadImgurAlbum(CONFIG.IMGUR_ALBUM_ID);
+                // Check if category-specific album ID exists
+                const albumId = CONFIG.IMGUR_ALBUMS && CONFIG.IMGUR_ALBUMS[category] 
+                    ? CONFIG.IMGUR_ALBUMS[category]
+                    : (category === 'pre-wedding' ? CONFIG.IMGUR_ALBUM_ID : null);
+                
+                if (albumId) {
+                    categoryPhotoList = await loadImgurAlbum(albumId);
                 } else {
-                    console.warn('Imgur Album ID not configured. Please add IMGUR_ALBUM_ID to config.js');
-                    photos = getDefaultPhotos();
+                    console.warn(`Imgur Album ID not configured for category: ${category}`);
+                    categoryPhotoList = [];
                 }
                 break;
                 
             case 'cloudinary':
                 if (CONFIG.CLOUDINARY_CLOUD_NAME) {
-                    photos = await loadCloudinaryPhotos(CONFIG.CLOUDINARY_CLOUD_NAME, CONFIG.CLOUDINARY_FOLDER);
+                    categoryPhotoList = await loadCloudinaryPhotos(CONFIG.CLOUDINARY_CLOUD_NAME, CONFIG.CLOUDINARY_FOLDER);
                 } else {
                     console.warn('Cloudinary configuration not set');
-                    photos = getDefaultPhotos();
+                    categoryPhotoList = [];
                 }
                 break;
                 
             default:
                 console.warn(`Unknown photo source: ${source}. Using default photos.`);
-                photos = getDefaultPhotos();
+                categoryPhotoList = getDefaultPhotos();
         }
         
         // Ensure we have at least some photos
-        if (photos.length === 0) {
-            photos = getDefaultPhotos();
+        if (categoryPhotoList.length === 0 && category !== 'wedding-photos') {
+            categoryPhotoList = getDefaultPhotos();
         }
+        
+        return categoryPhotoList;
+    }
+    
+    // Load photos based on configured source (legacy function for backward compatibility)
+    async function loadPhotoUrls() {
+        // Load photos for all categories
+        categoryPhotos['journey'] = await loadCategoryPhotos('journey');
+        categoryPhotos['pre-wedding'] = await loadCategoryPhotos('pre-wedding');
+        categoryPhotos['wedding-photos'] = await loadCategoryPhotos('wedding-photos');
+        
+        // Set default photos to journey for backward compatibility
+        photos = categoryPhotos['journey'];
     }
     
     // Default sample photos (fallback)
@@ -124,7 +149,9 @@
         }
     ];
     
-    const photoGrid = document.getElementById('photo-grid');
+    const journeyGrid = document.getElementById('journey-grid');
+    const preWeddingGrid = document.getElementById('pre-wedding-grid');
+    const weddingPhotosGrid = document.getElementById('wedding-photos-grid');
     const videoGrid = document.getElementById('video-grid');
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
@@ -134,17 +161,62 @@
     const tabBtns = document.querySelectorAll('.tab-btn');
     
     let currentPhotoIndex = 0;
+    let currentCategory = 'journey';
+    let allPhotos = []; // All photos from current category for lightbox navigation
     
     // Initialize galleries
     async function initGalleries() {
         await loadPhotoUrls();
-        loadPhotos();
+        loadCategoryPhotosToGrid('journey');
+        loadCategoryPhotosToGrid('pre-wedding');
+        loadCategoryPhotosToGrid('wedding-photos');
         loadVideos();
     }
     
-    // Load photos into grid with error handling
-    function loadPhotos() {
-        photos.forEach((photoUrl, index) => {
+    // Load photos for a specific category into its grid
+    function loadCategoryPhotosToGrid(category) {
+        const categoryPhotoList = categoryPhotos[category] || [];
+        let gridElement;
+        
+        switch (category) {
+            case 'journey':
+                gridElement = journeyGrid;
+                break;
+            case 'pre-wedding':
+                gridElement = preWeddingGrid;
+                break;
+            case 'wedding-photos':
+                gridElement = weddingPhotosGrid;
+                break;
+            default:
+                return;
+        }
+        
+        if (!gridElement) {
+            console.warn(`Grid element not found for category: ${category}`);
+            return;
+        }
+        
+        // Handle empty photo lists (especially for wedding-photos)
+        if (categoryPhotoList.length === 0) {
+            // Check if there's already a placeholder
+            const existingPlaceholder = gridElement.querySelector('p');
+            if (category === 'wedding-photos') {
+                // Keep existing placeholder if it exists, otherwise add one
+                if (!existingPlaceholder) {
+                    gridElement.innerHTML = '<p data-i18n="album.comingSoon">Photos coming soon...</p>';
+                }
+            } else {
+                // For other categories, clear if empty
+                gridElement.innerHTML = '';
+            }
+            return;
+        }
+        
+        // Clear existing content
+        gridElement.innerHTML = '';
+        
+        categoryPhotoList.forEach((photoUrl, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
             
@@ -171,10 +243,22 @@
             loadImageWithRetry(img, photoUrl, index);
             
             galleryItem.appendChild(img);
-            galleryItem.addEventListener('click', () => openLightbox(index));
+            galleryItem.addEventListener('click', () => openLightbox(index, category));
             
-            photoGrid.appendChild(galleryItem);
+            // Safety check before appending
+            if (gridElement) {
+                gridElement.appendChild(galleryItem);
+            } else {
+                console.warn(`Grid element is null for category: ${category}, cannot append gallery item`);
+            }
         });
+    }
+    
+    // Load photos into grid with error handling (legacy function for backward compatibility)
+    function loadPhotos() {
+        if (journeyGrid) {
+            loadCategoryPhotosToGrid('journey');
+        }
     }
     
     // Load image with retry logic for rate limiting
@@ -210,6 +294,11 @@
     
     // Load videos into grid
     function loadVideos() {
+        if (!videoGrid) {
+            console.warn('Video grid element not found');
+            return;
+        }
+        
         videos.forEach((video) => {
             const videoItem = document.createElement('div');
             videoItem.className = 'video-item';
@@ -226,34 +315,52 @@
     }
     
     // Open lightbox with photo
-    function openLightbox(index) {
+    function openLightbox(index, category) {
+        if (!lightbox || !lightboxImage) {
+            console.warn('Lightbox elements not found');
+            return;
+        }
+        
+        currentCategory = category || 'journey';
+        allPhotos = categoryPhotos[currentCategory] || [];
+        if (allPhotos.length === 0 || index >= allPhotos.length) {
+            console.warn('Invalid photo index or empty photo list');
+            return;
+        }
+        
         currentPhotoIndex = index;
-        lightboxImage.src = photos[index];
+        lightboxImage.src = allPhotos[index];
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
     
     // Close lightbox
     function closeLightbox() {
+        if (!lightbox) return;
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
     }
     
     // Show previous photo
     function showPrevPhoto() {
-        currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
-        lightboxImage.src = photos[currentPhotoIndex];
+        if (!lightboxImage || allPhotos.length === 0) return;
+        currentPhotoIndex = (currentPhotoIndex - 1 + allPhotos.length) % allPhotos.length;
+        lightboxImage.src = allPhotos[currentPhotoIndex];
     }
     
     // Show next photo
     function showNextPhoto() {
-        currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
-        lightboxImage.src = photos[currentPhotoIndex];
+        if (!lightboxImage || allPhotos.length === 0) return;
+        currentPhotoIndex = (currentPhotoIndex + 1) % allPhotos.length;
+        lightboxImage.src = allPhotos[currentPhotoIndex];
     }
     
     // Tab switching
     function switchTab(tabName) {
-        const photosGallery = document.getElementById('photos-gallery');
+        const journeyGallery = document.getElementById('journey-gallery');
+        const preWeddingGallery = document.getElementById('pre-wedding-gallery');
+        const weddingPhotosGallery = document.getElementById('wedding-photos-gallery');
+        const guestUploadsGallery = document.getElementById('guest-uploads-gallery');
         const videosGallery = document.getElementById('videos-gallery');
         
         tabBtns.forEach(btn => {
@@ -263,29 +370,55 @@
             }
         });
         
-        if (tabName === 'photos') {
-            photosGallery.classList.add('active');
-            videosGallery.classList.remove('active');
-        } else {
-            photosGallery.classList.remove('active');
-            videosGallery.classList.add('active');
+        // Hide all galleries
+        if (journeyGallery) journeyGallery.classList.remove('active');
+        if (preWeddingGallery) preWeddingGallery.classList.remove('active');
+        if (weddingPhotosGallery) weddingPhotosGallery.classList.remove('active');
+        if (guestUploadsGallery) guestUploadsGallery.classList.remove('active');
+        if (videosGallery) videosGallery.classList.remove('active');
+        
+        // Show selected gallery
+        switch (tabName) {
+            case 'journey':
+                if (journeyGallery) journeyGallery.classList.add('active');
+                break;
+            case 'pre-wedding':
+                if (preWeddingGallery) preWeddingGallery.classList.add('active');
+                break;
+            case 'wedding-photos':
+                if (weddingPhotosGallery) weddingPhotosGallery.classList.add('active');
+                break;
+            case 'guest-uploads':
+                if (guestUploadsGallery) guestUploadsGallery.classList.add('active');
+                break;
+            case 'videos':
+                if (videosGallery) videosGallery.classList.add('active');
+                break;
         }
     }
     
-    // Event listeners
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxPrev.addEventListener('click', showPrevPhoto);
-    lightboxNext.addEventListener('click', showNextPhoto);
+    // Event listeners (only if elements exist)
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', showPrevPhoto);
+    }
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', showNextPhoto);
+    }
     
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            closeLightbox();
-        }
-    });
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
     
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-        if (lightbox.classList.contains('active')) {
+        if (lightbox && lightbox.classList.contains('active')) {
             if (e.key === 'Escape') {
                 closeLightbox();
             } else if (e.key === 'ArrowLeft') {
@@ -297,11 +430,13 @@
     });
     
     // Tab button listeners
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            switchTab(btn.dataset.tab);
+    if (tabBtns && tabBtns.length > 0) {
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTab(btn.dataset.tab);
+            });
         });
-    });
+    }
     
     // Initialize on page load
     if (document.readyState === 'loading') {
