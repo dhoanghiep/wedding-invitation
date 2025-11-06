@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding Album - Photos and Videos">
+    <title>Album - Hoàng Hiệp & Minh Anh</title>
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>Hoàng Hiệp & Minh Anh</h1>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a href="location.html" class="nav-link" data-i18n="nav.location">Location</a></li>
+                    <li class="nav-item"><a href="story.html" class="nav-link" data-i18n="nav.story">Our Story</a></li>
+                    <li class="nav-item"><a href="album.html" class="nav-link active" data-i18n="nav.album">Album</a></li>
+                    <li class="nav-item"><a href="rsvp.html" class="nav-link" data-i18n="nav.rsvp">RSVP</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="language-toggle" id="language-toggle" aria-label="Switch language">VI</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main style="padding-top: 80px;">
+        <section class="album" id="album">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="album.title">Our Album</h2>
+                    <p class="section-subtitle" data-i18n="album.subtitle">Memories we've shared together</p>
+                </div>
+                
+                <!-- Gallery Tabs -->
+                <div class="gallery-tabs">
+                    <button class="tab-btn active" data-tab="journey" data-i18n="album.journey">Journey</button>
+                    <button class="tab-btn" data-tab="pre-wedding" data-i18n="album.preWedding">Pre-wedding</button>
+                    <button class="tab-btn" data-tab="wedding-photos" data-i18n="album.weddingPhotos">Wedding Photos</button>
+                    <button class="tab-btn" data-tab="guest-uploads" data-i18n="album.guestUploads">Guest Uploads</button>
+                    <button class="tab-btn" data-tab="videos" data-i18n="album.videos">Videos</button>
+                </div>
+                
+                <!-- Journey Gallery -->
+                <div class="gallery-content active" id="journey-gallery">
+                    <div class="gallery-grid" id="journey-grid">
+                        <!-- Journey photos will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Pre-wedding Gallery -->
+                <div class="gallery-content" id="pre-wedding-gallery">
+                    <div class="gallery-grid" id="pre-wedding-grid">
+                        <!-- Pre-wedding photos will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Wedding Photos Gallery -->
+                <div class="gallery-content" id="wedding-photos-gallery">
+                    <div class="gallery-grid" id="wedding-photos-grid">
+                        <p data-i18n="album.comingSoon">Photos coming soon...</p>
+                    </div>
+                </div>
+                
+                <!-- Guest Uploads -->
+                <div class="gallery-content" id="guest-uploads-gallery">
+                    <div class="guest-upload-section">
+                        <h3 data-i18n="album.uploadTitle">Share Your Photos</h3>
+                        <p data-i18n="album.uploadDesc">Upload your favorite moments from our wedding</p>
+                        <form class="upload-form" id="upload-form">
+                            <input type="file" id="photo-upload" accept="image/*" multiple>
+                            <button type="submit" class="btn btn-primary" data-i18n="album.uploadButton">Upload Photos</button>
+                        </form>
+                    </div>
+                    <div class="gallery-grid" id="guest-uploads-grid">
+                        <!-- Guest uploaded photos will be displayed here -->
+                    </div>
+                </div>
+                
+                <!-- Video Gallery -->
+                <div class="gallery-content" id="videos-gallery">
+                    <div class="video-grid" id="video-grid">
+                        <!-- Videos will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Lightbox -->
+                <div class="lightbox" id="lightbox">
+                    <span class="lightbox-close">&times;</span>
+                    <span class="lightbox-prev">&lt;</span>
+                    <span class="lightbox-next">&gt;</span>
+                    <img src="" alt="" class="lightbox-image" id="lightbox-image">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.text">&copy; 2025 Hoàng Hiệp & Minh Anh. Made with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript files -->
+    <script src="js/language.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

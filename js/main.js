@@ -2,6 +2,24 @@
 (function () {
     'use strict';
 
+    // Mark active navigation link based on current page
+    function setActiveNavLink() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    // Set active nav link on page load
+    setActiveNavLink();
+
     // Check for RSVP success parameter in URL
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('rsvp') === 'success') {
@@ -34,23 +52,33 @@
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // Smooth scroll for navigation links
+    // Handle navigation links (page navigation or smooth scroll for anchors)
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            const href = link.getAttribute('href');
+            
+            // If it's an anchor link (starts with #), use smooth scroll
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
 
-            if (targetSection) {
-                const headerHeight = header.offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
+                if (targetSection) {
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
 
-                // Close mobile menu if open
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            }
+            // Otherwise, let the browser handle page navigation
+            // Close mobile menu when navigating to a new page
+            else {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
             }

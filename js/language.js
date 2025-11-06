@@ -7,9 +7,9 @@
             // Navigation
             nav: {
                 home: 'Home',
-                invitation: 'Invitation',
-                gallery: 'Gallery',
-                countdown: 'Countdown',
+                location: 'Location',
+                story: 'Our Story',
+                album: 'Album',
                 rsvp: 'RSVP',
                 contact: 'Contact'
             },
@@ -87,15 +87,55 @@
             // Footer
             footer: {
                 text: '© 2025 Hoàng Hiệp & Minh Anh. Made with ❤️'
+            },
+            // Timeline Section
+            timeline: {
+                title: 'Wedding Timeline',
+                subtitle: 'Join us for our special day',
+                ceremony: 'Ceremony',
+                ceremonyDate: 'Date & Time',
+                ceremonyLocation: 'Location',
+                party: 'Party/Reception',
+                partyDate: 'Date & Time',
+                partyLocation: 'Location',
+                mainWedding: 'Main Wedding',
+                mainWeddingDate: 'Date & Time',
+                mainWeddingLocation: 'Location'
+            },
+            // Schedule Section
+            schedule: {
+                title: 'Wedding Schedule',
+                ceremony: 'Ceremony',
+                ceremonyDate: 'Date & Time',
+                ceremonyLocation: 'Location',
+                party: 'Party/Reception',
+                partyDate: 'Date & Time',
+                partyLocation: 'Location',
+                mainWedding: 'Main Wedding',
+                mainWeddingDate: 'Date & Time',
+                mainWeddingLocation: 'Location',
+                viewLocation: 'View Location'
+            },
+            // Quick Links Section
+            quickLinks: {
+                title: 'Explore More',
+                rsvp: 'RSVP',
+                rsvpDesc: 'Let us know if you\'ll be joining us',
+                location: 'Location',
+                locationDesc: 'Find venues and accommodations',
+                album: 'Album',
+                albumDesc: 'View our photos and memories',
+                story: 'Our Story',
+                storyDesc: 'Learn how we met'
             }
         },
         vi: {
             // Navigation
             nav: {
                 home: 'Trang chủ',
-                invitation: 'Thiệp mời',
-                gallery: 'Thư viện ảnh',
-                countdown: 'Đếm ngược',
+                location: 'Địa điểm',
+                story: 'Câu chuyện của chúng tôi',
+                album: 'Album',
                 rsvp: 'Xác nhận',
                 contact: 'Liên hệ'
             },
@@ -173,6 +213,46 @@
             // Footer
             footer: {
                 text: '© 2025 Hoàng Hiệp & Minh Anh. Được tạo bằng ❤️'
+            },
+            // Timeline Section
+            timeline: {
+                title: 'Lịch trình đám cưới',
+                subtitle: 'Hãy cùng chúng tôi chúc mừng ngày đặc biệt',
+                ceremony: 'Lễ cưới',
+                ceremonyDate: 'Ngày & Giờ',
+                ceremonyLocation: 'Địa điểm',
+                party: 'Tiệc/Đón khách',
+                partyDate: 'Ngày & Giờ',
+                partyLocation: 'Địa điểm',
+                mainWedding: 'Đám cưới chính',
+                mainWeddingDate: 'Ngày & Giờ',
+                mainWeddingLocation: 'Địa điểm'
+            },
+            // Schedule Section
+            schedule: {
+                title: 'Lịch trình đám cưới',
+                ceremony: 'Lễ cưới',
+                ceremonyDate: 'Ngày & Giờ',
+                ceremonyLocation: 'Địa điểm',
+                party: 'Tiệc/Đón khách',
+                partyDate: 'Ngày & Giờ',
+                partyLocation: 'Địa điểm',
+                mainWedding: 'Đám cưới chính',
+                mainWeddingDate: 'Ngày & Giờ',
+                mainWeddingLocation: 'Địa điểm',
+                viewLocation: 'Xem địa điểm'
+            },
+            // Quick Links Section
+            quickLinks: {
+                title: 'Khám phá thêm',
+                rsvp: 'Xác nhận',
+                rsvpDesc: 'Cho chúng tôi biết bạn có tham dự không',
+                location: 'Địa điểm',
+                locationDesc: 'Tìm địa điểm và chỗ ở',
+                album: 'Album',
+                albumDesc: 'Xem ảnh và kỷ niệm của chúng tôi',
+                story: 'Câu chuyện của chúng tôi',
+                storyDesc: 'Tìm hiểu cách chúng tôi gặp nhau'
             }
         }
     };
@@ -200,9 +280,9 @@
 
         // Update navigation
         updateText('[data-i18n="nav.home"]', t.nav.home);
-        updateText('[data-i18n="nav.invitation"]', t.nav.invitation);
-        updateText('[data-i18n="nav.gallery"]', t.nav.gallery);
-        updateText('[data-i18n="nav.countdown"]', t.nav.countdown);
+        updateText('[data-i18n="nav.location"]', t.nav.location);
+        updateText('[data-i18n="nav.story"]', t.nav.story);
+        updateText('[data-i18n="nav.album"]', t.nav.album);
         updateText('[data-i18n="nav.rsvp"]', t.nav.rsvp);
         updateText('[data-i18n="nav.contact"]', t.nav.contact);
 
@@ -263,6 +343,43 @@
 
         // Update footer
         updateText('[data-i18n="footer.text"]', t.footer.text);
+
+        // Update timeline section
+        updateText('[data-i18n="timeline.title"]', t.timeline.title);
+        updateText('[data-i18n="timeline.subtitle"]', t.timeline.subtitle);
+        updateText('[data-i18n="timeline.ceremony"]', t.timeline.ceremony);
+        updateText('[data-i18n="timeline.ceremonyDate"]', t.timeline.ceremonyDate);
+        updateText('[data-i18n="timeline.ceremonyLocation"]', t.timeline.ceremonyLocation);
+        updateText('[data-i18n="timeline.party"]', t.timeline.party);
+        updateText('[data-i18n="timeline.partyDate"]', t.timeline.partyDate);
+        updateText('[data-i18n="timeline.partyLocation"]', t.timeline.partyLocation);
+        updateText('[data-i18n="timeline.mainWedding"]', t.timeline.mainWedding);
+        updateText('[data-i18n="timeline.mainWeddingDate"]', t.timeline.mainWeddingDate);
+        updateText('[data-i18n="timeline.mainWeddingLocation"]', t.timeline.mainWeddingLocation);
+
+        // Update schedule section
+        updateText('[data-i18n="schedule.title"]', t.schedule.title);
+        updateText('[data-i18n="schedule.ceremony"]', t.schedule.ceremony);
+        updateText('[data-i18n="schedule.ceremonyDate"]', t.schedule.ceremonyDate);
+        updateText('[data-i18n="schedule.ceremonyLocation"]', t.schedule.ceremonyLocation);
+        updateText('[data-i18n="schedule.party"]', t.schedule.party);
+        updateText('[data-i18n="schedule.partyDate"]', t.schedule.partyDate);
+        updateText('[data-i18n="schedule.partyLocation"]', t.schedule.partyLocation);
+        updateText('[data-i18n="schedule.mainWedding"]', t.schedule.mainWedding);
+        updateText('[data-i18n="schedule.mainWeddingDate"]', t.schedule.mainWeddingDate);
+        updateText('[data-i18n="schedule.mainWeddingLocation"]', t.schedule.mainWeddingLocation);
+        updateText('[data-i18n="schedule.viewLocation"]', t.schedule.viewLocation);
+
+        // Update quick links section
+        updateText('[data-i18n="quickLinks.title"]', t.quickLinks.title);
+        updateText('[data-i18n="quickLinks.rsvp"]', t.quickLinks.rsvp);
+        updateText('[data-i18n="quickLinks.rsvpDesc"]', t.quickLinks.rsvpDesc);
+        updateText('[data-i18n="quickLinks.location"]', t.quickLinks.location);
+        updateText('[data-i18n="quickLinks.locationDesc"]', t.quickLinks.locationDesc);
+        updateText('[data-i18n="quickLinks.album"]', t.quickLinks.album);
+        updateText('[data-i18n="quickLinks.albumDesc"]', t.quickLinks.albumDesc);
+        updateText('[data-i18n="quickLinks.story"]', t.quickLinks.story);
+        updateText('[data-i18n="quickLinks.storyDesc"]', t.quickLinks.storyDesc);
 
         // Update language toggle button
         const langToggle = document.getElementById('language-toggle');

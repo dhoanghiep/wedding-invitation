@@ -23,12 +23,12 @@
                     <h1>Hoàng Hiệp & Minh Anh</h1>
                 </div>
                 <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item"><a href="#home" class="nav-link" data-i18n="nav.home">Home</a></li>
-                    <li class="nav-item"><a href="#invitation" class="nav-link" data-i18n="nav.invitation">Invitation</a></li>
-                    <li class="nav-item"><a href="#gallery" class="nav-link" data-i18n="nav.gallery">Gallery</a></li>
-                    <li class="nav-item"><a href="#countdown" class="nav-link" data-i18n="nav.countdown">Countdown</a></li>
-                    <li class="nav-item"><a href="#rsvp" class="nav-link" data-i18n="nav.rsvp">RSVP</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a href="location.html" class="nav-link" data-i18n="nav.location">Location</a></li>
+                    <li class="nav-item"><a href="story.html" class="nav-link" data-i18n="nav.story">Our Story</a></li>
+                    <li class="nav-item"><a href="album.html" class="nav-link" data-i18n="nav.album">Album</a></li>
+                    <li class="nav-item"><a href="rsvp.html" class="nav-link" data-i18n="nav.rsvp">RSVP</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
                 </ul>
                 <div class="nav-actions">
                     <button class="language-toggle" id="language-toggle" aria-label="Switch language">VI</button>
@@ -48,89 +48,81 @@
             <h2 class="hero-title" data-i18n="hero.title">We're Getting Married!</h2>
             <p class="hero-subtitle">Hoàng Hiệp & Minh Anh</p>
             <p class="hero-date" data-i18n="hero.date">January 01, 2026</p>
-            <a href="#invitation" class="btn btn-primary" data-i18n="hero.button">View Invitation</a>
+            <a href="rsvp.html" class="btn btn-primary" data-i18n="hero.button">RSVP</a>
         </div>
         <div class="hero-overlay"></div>
     </section>
 
-    <!-- Invitation Section -->
-    <section class="invitation" id="invitation">
+    <!-- Timeline Section -->
+    <section class="timeline" id="timeline">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-i18n="invitation.title">You're Invited</h2>
-                <p class="section-subtitle" data-i18n="invitation.subtitle">Join us as we celebrate our special day</p>
+                <h2 class="section-title" data-i18n="timeline.title">Wedding Timeline</h2>
+                <p class="section-subtitle" data-i18n="timeline.subtitle">Join us for our special day</p>
             </div>
             
-            <div class="invitation-content">
-                <div class="invitation-details">
-                    <div class="detail-item">
-                        <div class="detail-icon">📅</div>
-                        <div class="detail-content">
-                            <h3 data-i18n="invitation.dateTime">Date & Time</h3>
-                            <p data-i18n="invitation.date">Ngày 01 tháng 01 năm 2026</p>
-                            <p data-i18n="invitation.time">Đón khách: 05:00 chiều</p>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-icon">📍</div>
-                        <div class="detail-content">
-                            <h3 data-i18n="invitation.location">Địa điểm</h3>
-                            <p>Siha</p>
-                            <p>Phạm Đình Chính</p>
-                            <p>TP. Hồ Chí Minh</p>
-                        </div>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-icon">💒</div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.ceremony">Ceremony</h3>
+                        <p class="timeline-date" data-i18n="timeline.ceremonyDate">Date & Time</p>
+                        <p class="timeline-location" data-i18n="timeline.ceremonyLocation">Location</p>
                     </div>
                 </div>
                 
-                <div class="map-container">
-                    <h3 data-i18n="invitation.location">Địa điểm</h3>
-                    <div id="map" class="map"></div>
-                    <a href="#" 
-                       id="map-link"
-                       target="_blank" 
-                       class="map-link"
-                       data-i18n="invitation.mapLink">
-                        Xem trên Google Maps
-                    </a>
+                <div class="timeline-item">
+                    <div class="timeline-icon">🎉</div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.party">Party/Reception</h3>
+                        <p class="timeline-date" data-i18n="timeline.partyDate">Date & Time</p>
+                        <p class="timeline-location" data-i18n="timeline.partyLocation">Location</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">💍</div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.mainWedding">Main Wedding</h3>
+                        <p class="timeline-date" data-i18n="timeline.mainWeddingDate">Date & Time</p>
+                        <p class="timeline-location" data-i18n="timeline.mainWeddingLocation">Location</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery" id="gallery">
+    <!-- Schedule Section -->
+    <section class="schedule" id="schedule">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-i18n="gallery.title">Our Gallery</h2>
-                <p class="section-subtitle" data-i18n="gallery.subtitle">Memories we've shared together</p>
+                <h2 class="section-title" data-i18n="schedule.title">Wedding Schedule</h2>
             </div>
             
-            <div class="gallery-tabs">
-                <button class="tab-btn active" data-tab="photos" data-i18n="gallery.photos">Photos</button>
-                <button class="tab-btn" data-tab="videos" data-i18n="gallery.videos">Videos</button>
-            </div>
-            
-            <!-- Photo Gallery -->
-            <div class="gallery-content active" id="photos-gallery">
-                <div class="gallery-grid" id="photo-grid">
-                    <!-- Photos will be loaded here via JavaScript -->
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <div class="schedule-icon">💒</div>
+                    <h3 data-i18n="schedule.ceremony">Ceremony</h3>
+                    <p class="schedule-date" data-i18n="schedule.ceremonyDate">Date & Time</p>
+                    <p class="schedule-location" data-i18n="schedule.ceremonyLocation">Location</p>
+                    <a href="location.html" class="btn btn-secondary" data-i18n="schedule.viewLocation">View Location</a>
                 </div>
-            </div>
-            
-            <!-- Video Gallery -->
-            <div class="gallery-content" id="videos-gallery">
-                <div class="video-grid" id="video-grid">
-                    <!-- Videos will be loaded here via JavaScript -->
+                
+                <div class="schedule-card">
+                    <div class="schedule-icon">🎉</div>
+                    <h3 data-i18n="schedule.party">Party/Reception</h3>
+                    <p class="schedule-date" data-i18n="schedule.partyDate">Date & Time</p>
+                    <p class="schedule-location" data-i18n="schedule.partyLocation">Location</p>
+                    <a href="location.html" class="btn btn-secondary" data-i18n="schedule.viewLocation">View Location</a>
                 </div>
-            </div>
-            
-            <!-- Lightbox -->
-            <div class="lightbox" id="lightbox">
-                <span class="lightbox-close">&times;</span>
-                <span class="lightbox-prev">&lt;</span>
-                <span class="lightbox-next">&gt;</span>
-                <img src="" alt="" class="lightbox-image" id="lightbox-image">
+                
+                <div class="schedule-card">
+                    <div class="schedule-icon">💍</div>
+                    <h3 data-i18n="schedule.mainWedding">Main Wedding</h3>
+                    <p class="schedule-date" data-i18n="schedule.mainWeddingDate">Date & Time</p>
+                    <p class="schedule-location" data-i18n="schedule.mainWeddingLocation">Location</p>
+                    <a href="location.html" class="btn btn-secondary" data-i18n="schedule.viewLocation">View Location</a>
+                </div>
             </div>
         </div>
     </section>
@@ -163,99 +155,37 @@
         </div>
     </section>
 
-    <!-- RSVP Section -->
-    <section class="rsvp" id="rsvp">
+    <!-- Quick Links Section -->
+    <section class="quick-links" id="quick-links">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-i18n="rsvp.title">RSVP</h2>
-                <p class="section-subtitle" data-i18n="rsvp.subtitle">Please let us know if you'll be joining us</p>
+                <h2 class="section-title" data-i18n="quickLinks.title">Explore More</h2>
             </div>
             
-            <form class="rsvp-form" id="rsvp-form">
-                <div class="form-group">
-                    <label for="name" data-i18n="rsvp.fullName">Full Name *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+            <div class="quick-links-grid">
+                <a href="rsvp.html" class="quick-link-card">
+                    <div class="quick-link-icon">✉️</div>
+                    <h3 data-i18n="quickLinks.rsvp">RSVP</h3>
+                    <p data-i18n="quickLinks.rsvpDesc">Let us know if you'll be joining us</p>
+                </a>
                 
-                <div class="form-group">
-                    <label for="email" data-i18n="rsvp.email">Email Address *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+                <a href="location.html" class="quick-link-card">
+                    <div class="quick-link-icon">📍</div>
+                    <h3 data-i18n="quickLinks.location">Location</h3>
+                    <p data-i18n="quickLinks.locationDesc">Find venues and accommodations</p>
+                </a>
                 
-                <div class="form-group">
-                    <label for="attendance" data-i18n="rsvp.attendance">Will you be attending? *</label>
-                    <select id="attendance" name="attendance" required>
-                        <option value="" data-i18n="rsvp.selectOption">Please select...</option>
-                        <option value="yes" data-i18n="rsvp.yes">Yes, I'll be there!</option>
-                        <option value="no" data-i18n="rsvp.no">Sorry, I can't make it</option>
-                        <option value="maybe" data-i18n="rsvp.maybe">Maybe</option>
-                    </select>
-                </div>
+                <a href="album.html" class="quick-link-card">
+                    <div class="quick-link-icon">📸</div>
+                    <h3 data-i18n="quickLinks.album">Album</h3>
+                    <p data-i18n="quickLinks.albumDesc">View our photos and memories</p>
+                </a>
                 
-                <div class="form-group">
-                    <label for="guests" data-i18n="rsvp.guests">Number of Guests</label>
-                    <input type="number" id="guests" name="guests" min="1" value="1">
-                </div>
-                
-                <div class="form-group">
-                    <label for="dietary" data-i18n="rsvp.dietary">Dietary Restrictions or Allergies</label>
-                    <textarea id="dietary" name="dietary" rows="3" data-i18n-placeholder="rsvp.dietary" placeholder="Please let us know of any dietary restrictions or allergies"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message" data-i18n="rsvp.message">Message (Optional)</label>
-                    <textarea id="message" name="message" rows="3" data-i18n-placeholder="rsvp.message" placeholder="Any additional notes or messages"></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-primary" data-i18n="rsvp.submit">Submit RSVP</button>
-                
-                <div class="form-message" id="rsvp-message"></div>
-            </form>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="contact.title">Contact Us</h2>
-                <p class="section-subtitle" data-i18n="contact.subtitle">Have questions? We'd love to hear from you</p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <h3>Sarah</h3>
-                        <p>📧 sarah@example.com</p>
-                        <p>📱 (555) 123-4567</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>John</h3>
-                        <p>📧 john@example.com</p>
-                        <p>📱 (555) 987-6543</p>
-                    </div>
-                </div>
-                
-                <form class="contact-form" id="contact-form">
-                    <div class="form-group">
-                        <label for="contact-name" data-i18n="contact.yourName">Your Name *</label>
-                        <input type="text" id="contact-name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contact-email" data-i18n="contact.yourEmail">Your Email *</label>
-                        <input type="email" id="contact-email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contact-message" data-i18n="contact.message">Message *</label>
-                        <textarea id="contact-message" name="message" rows="5" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" data-i18n="contact.send">Send Message</button>
-                    
-                    <div class="form-message" id="contact-message"></div>
-                </form>
+                <a href="story.html" class="quick-link-card">
+                    <div class="quick-link-icon">💕</div>
+                    <h3 data-i18n="quickLinks.story">Our Story</h3>
+                    <p data-i18n="quickLinks.storyDesc">Learn how we met</p>
+                </a>
             </div>
         </div>
     </section>
@@ -270,7 +200,6 @@
     <!-- JavaScript files -->
     <script src="js/language.js"></script>
     <script src="js/countdown.js?v=2"></script>
-    <script src="js/gallery.js"></script>
     <script src="config.js"></script>
     <script src="js/main.js"></script>
 </body>

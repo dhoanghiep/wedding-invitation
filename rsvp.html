@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RSVP - Confirm Your Attendance">
+    <title>RSVP - Hoàng Hiệp & Minh Anh</title>
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>Hoàng Hiệp & Minh Anh</h1>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a href="location.html" class="nav-link" data-i18n="nav.location">Location</a></li>
+                    <li class="nav-item"><a href="story.html" class="nav-link" data-i18n="nav.story">Our Story</a></li>
+                    <li class="nav-item"><a href="album.html" class="nav-link" data-i18n="nav.album">Album</a></li>
+                    <li class="nav-item"><a href="rsvp.html" class="nav-link active" data-i18n="nav.rsvp">RSVP</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="language-toggle" id="language-toggle" aria-label="Switch language">VI</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main style="padding-top: 80px;">
+        <section class="rsvp" id="rsvp">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="rsvp.title">RSVP</h2>
+                    <p class="section-subtitle" data-i18n="rsvp.subtitle">Please let us know if you'll be joining us</p>
+                </div>
+                
+                <form class="rsvp-form" id="rsvp-form">
+                    <div class="form-group">
+                        <label for="name" data-i18n="rsvp.fullName">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" data-i18n="rsvp.email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" data-i18n="rsvp.phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guests" data-i18n="rsvp.guests">Number of Guests *</label>
+                        <input type="number" id="guests" name="guests" min="1" value="1" required>
+                    </div>
+                    
+                    <!-- Ceremony Selection -->
+                    <div class="form-group">
+                        <label data-i18n="rsvp.ceremonySelection">Which ceremonies will you attend? *</label>
+                        <div class="ceremony-checkboxes">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="ceremonies" value="ceremony" data-i18n="rsvp.ceremony">
+                                <span data-i18n="rsvp.ceremony">Ceremony</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="ceremonies" value="party" data-i18n="rsvp.party">
+                                <span data-i18n="rsvp.party">Party/Reception</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="ceremonies" value="main-wedding" data-i18n="rsvp.mainWedding">
+                                <span data-i18n="rsvp.mainWedding">Main Wedding</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dietary" data-i18n="rsvp.dietary">Dietary Restrictions or Allergies</label>
+                        <textarea id="dietary" name="dietary" rows="3" data-i18n-placeholder="rsvp.dietary" placeholder="Please let us know of any dietary restrictions or allergies"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accommodations" data-i18n="rsvp.accommodations">Special Accommodations</label>
+                        <textarea id="accommodations" name="accommodations" rows="3" data-i18n-placeholder="rsvp.accommodations" placeholder="Any special accommodations needed"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" data-i18n="rsvp.message">Message (Optional)</label>
+                        <textarea id="message" name="message" rows="3" data-i18n-placeholder="rsvp.message" placeholder="Any additional notes or messages"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" data-i18n="rsvp.submit">Submit RSVP</button>
+                    
+                    <div class="form-message" id="rsvp-message"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.text">&copy; 2025 Hoàng Hiệp & Minh Anh. Made with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript files -->
+    <script src="js/language.js"></script>
+    <script src="config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

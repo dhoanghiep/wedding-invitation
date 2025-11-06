@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding Location - Venues and Accommodations">
+    <title>Location - Hoàng Hiệp & Minh Anh</title>
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>Hoàng Hiệp & Minh Anh</h1>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a href="location.html" class="nav-link active" data-i18n="nav.location">Location</a></li>
+                    <li class="nav-item"><a href="story.html" class="nav-link" data-i18n="nav.story">Our Story</a></li>
+                    <li class="nav-item"><a href="album.html" class="nav-link" data-i18n="nav.album">Album</a></li>
+                    <li class="nav-item"><a href="rsvp.html" class="nav-link" data-i18n="nav.rsvp">RSVP</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="language-toggle" id="language-toggle" aria-label="Switch language">VI</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main style="padding-top: 80px;">
+        <!-- Venues Section -->
+        <section class="venues" id="venues">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="location.title">Wedding Venues</h2>
+                    <p class="section-subtitle" data-i18n="location.subtitle">Find all our wedding venues</p>
+                </div>
+                
+                <!-- Ceremony Venue -->
+                <div class="venue-card">
+                    <h3 data-i18n="location.ceremony">Ceremony</h3>
+                    <div class="venue-details">
+                        <p class="venue-name" data-i18n="location.ceremonyVenue">Venue Name</p>
+                        <p class="venue-address" data-i18n="location.ceremonyAddress">Address</p>
+                        <p class="venue-time" data-i18n="location.ceremonyTime">Date & Time</p>
+                    </div>
+                    <div class="venue-map" id="ceremony-map"></div>
+                    <a href="#" id="ceremony-map-link" target="_blank" class="map-link" data-i18n="location.viewMap">View on Google Maps</a>
+                </div>
+                
+                <!-- Party/Reception Venue -->
+                <div class="venue-card">
+                    <h3 data-i18n="location.party">Party/Reception</h3>
+                    <div class="venue-details">
+                        <p class="venue-name" data-i18n="location.partyVenue">Venue Name</p>
+                        <p class="venue-address" data-i18n="location.partyAddress">Address</p>
+                        <p class="venue-time" data-i18n="location.partyTime">Date & Time</p>
+                    </div>
+                    <div class="venue-map" id="party-map"></div>
+                    <a href="#" id="party-map-link" target="_blank" class="map-link" data-i18n="location.viewMap">View on Google Maps</a>
+                </div>
+                
+                <!-- Main Wedding Venue -->
+                <div class="venue-card">
+                    <h3 data-i18n="location.mainWedding">Main Wedding</h3>
+                    <div class="venue-details">
+                        <p class="venue-name" data-i18n="location.mainWeddingVenue">Venue Name</p>
+                        <p class="venue-address" data-i18n="location.mainWeddingAddress">Address</p>
+                        <p class="venue-time" data-i18n="location.mainWeddingTime">Date & Time</p>
+                    </div>
+                    <div class="venue-map" id="main-wedding-map"></div>
+                    <a href="#" id="main-wedding-map-link" target="_blank" class="map-link" data-i18n="location.viewMap">View on Google Maps</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Accommodation Section -->
+        <section class="accommodation" id="accommodation">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="location.accommodationTitle">Where to Stay</h2>
+                    <p class="section-subtitle" data-i18n="location.accommodationSubtitle">Recommended accommodations</p>
+                </div>
+                
+                <div class="accommodation-grid">
+                    <!-- Accommodation cards will be added here -->
+                    <div class="accommodation-card">
+                        <h3 data-i18n="location.hotel1">Hotel Name</h3>
+                        <p class="accommodation-address" data-i18n="location.hotel1Address">Address</p>
+                        <p class="accommodation-distance" data-i18n="location.hotel1Distance">Distance from venues</p>
+                        <a href="#" class="btn btn-secondary" data-i18n="location.bookNow">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.text">&copy; 2025 Hoàng Hiệp & Minh Anh. Made with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript files -->
+    <script src="js/language.js"></script>
+    <script src="config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
