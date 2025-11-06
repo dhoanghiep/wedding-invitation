@@ -7,7 +7,8 @@
     if (urlParams.get('rsvp') === 'success') {
         const rsvpMessage = document.getElementById('rsvp-message');
         if (rsvpMessage) {
-            showMessage(rsvpMessage, 'Thank you for your RSVP! We look forward to seeing you.', 'success');
+            const successMsg = window.Language ? window.Language.t('rsvp.success') : 'Thank you for your RSVP! We look forward to seeing you.';
+            showMessage(rsvpMessage, successMsg, 'success');
         }
         // Clean URL
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -180,14 +181,16 @@
 
             // Form validation
             if (!data.name || !data.email || !data.attendance) {
-                showMessage(rsvpMessage, 'Please fill in all required fields.', 'error');
+                const msg = window.Language ? window.Language.t('rsvp.fillFields') : 'Please fill in all required fields.';
+                showMessage(rsvpMessage, msg, 'error');
                 return;
             }
 
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
-                showMessage(rsvpMessage, 'Please enter a valid email address.', 'error');
+                const msg = window.Language ? window.Language.t('rsvp.validEmail') : 'Please enter a valid email address.';
+                showMessage(rsvpMessage, msg, 'error');
                 return;
             }
 
@@ -195,7 +198,8 @@
             const submitButton = rsvpForm.querySelector('button[type="submit"]');
             const originalButtonText = submitButton.textContent;
             submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
+            const submittingText = window.Language ? window.Language.t('rsvp.submitting') : 'Submitting...';
+            submitButton.textContent = submittingText;
 
             try {
                 // Submit to Google Apps Script using redirect pattern to avoid CORS issues
@@ -238,7 +242,8 @@
 
                 // Show success message immediately (form submission is fire-and-forget)
                 // The redirect will happen in the iframe, updating the main page URL
-                showMessage(rsvpMessage, 'Thank you for your RSVP! We look forward to seeing you.', 'success');
+                const successMsg = window.Language ? window.Language.t('rsvp.success') : 'Thank you for your RSVP! We look forward to seeing you.';
+                showMessage(rsvpMessage, successMsg, 'success');
                 rsvpForm.reset();
 
                 // Re-enable submit button
@@ -257,7 +262,8 @@
 
             } catch (error) {
                 console.error('RSVP submission error:', error);
-                showMessage(rsvpMessage, 'Sorry, there was an error submitting your RSVP. Please try again later or contact us directly.', 'error');
+                const errorMsg = window.Language ? window.Language.t('rsvp.error') : 'Sorry, there was an error submitting your RSVP. Please try again later or contact us directly.';
+                showMessage(rsvpMessage, errorMsg, 'error');
                 // Re-enable submit button
                 submitButton.disabled = false;
                 submitButton.textContent = originalButtonText;
@@ -278,14 +284,16 @@
 
             // Form validation
             if (!data.name || !data.email || !data.message) {
-                showMessage(contactMessage, 'Please fill in all required fields.', 'error');
+                const msg = window.Language ? window.Language.t('contact.fillFields') : 'Please fill in all required fields.';
+                showMessage(contactMessage, msg, 'error');
                 return;
             }
 
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
-                showMessage(contactMessage, 'Please enter a valid email address.', 'error');
+                const msg = window.Language ? window.Language.t('contact.validEmail') : 'Please enter a valid email address.';
+                showMessage(contactMessage, msg, 'error');
                 return;
             }
 
@@ -294,7 +302,8 @@
             console.log('Contact Data:', data);
 
             // Show success message
-            showMessage(contactMessage, 'Thank you for your message! We will get back to you soon.', 'success');
+            const successMsg = window.Language ? window.Language.t('contact.success') : 'Thank you for your message! We will get back to you soon.';
+            showMessage(contactMessage, successMsg, 'success');
 
             // Reset form
             contactForm.reset();
