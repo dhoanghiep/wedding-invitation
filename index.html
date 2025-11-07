@@ -31,28 +31,30 @@
     <section class="bride-groom-section" id="bride-groom">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Bride and Groom</h2>
-                <p class="section-subtitle">A journey of love and togetherness</p>
+                <h2 class="section-title" data-i18n="brideGroom.title">Bride & Groom</h2>
+                <p class="section-subtitle" data-i18n="brideGroom.subtitle">about us</p>
             </div>
             <div class="bride-groom-content">
                 <div class="bride-groom-photos">
                     <div class="bride-groom-photo">
-                        <div class="photo-placeholder">
-                            <p>Bride Photo</p>
+                        <div class="photo-wrapper">
+                            <img src="https://i.imgur.com/CglrhdI.jpeg" alt="Bride Photo" />
                         </div>
                         <h3 class="person-name">Minh Anh</h3>
+                        <p class="person-quote">"Look like it could kill you and it actually kill you"</p>
                     </div>
                     <div class="bride-groom-photo">
-                        <div class="photo-placeholder">
-                            <p>Groom Photo</p>
+                        <div class="photo-wrapper">
+                            <img src="https://i.imgur.com/0C86Dr4.jpeg" alt="Groom Photo" />
                         </div>
                         <h3 class="person-name">Hoàng Hiệp</h3>
+                        <p class="person-quote">"Look like a cinnamon roll and actually a cinnamon roll"</p>
                     </div>
                 </div>
                 <div class="bride-groom-intro">
-                    <p class="intro-text">Two hearts, one love story. Join us as we celebrate the beginning of our forever together.</p>
+                    <p class="intro-text" data-i18n="brideGroom.intro">Here's a little bit about our journey to "I do."</p>
                 </div>
-                <a href="/story.html" class="btn btn-story" data-i18n="nav.story">Read Our Story</a>
+                <a href="/story.html" class="btn btn-story" data-i18n="brideGroom.button">Explore</a>
             </div>
         </div>
     </section>
@@ -62,8 +64,8 @@
         <div class="container">
             <div class="timeline-separator"></div>
             <div class="section-header" id="timeline-header">
-                <h2 class="section-title" data-i18n="timeline.title">Timeline</h2>
-                <p class="section-subtitle" data-i18n="timeline.subtitle">Our Wedding Events</p>
+                <h2 class="section-title" data-i18n="timeline.title">Wedding schedule</h2>
+                <p class="section-subtitle" data-i18n="timeline.subtitle">Here's the plan for our celebration! We can't wait to see you there.</p>
             </div>
         </div>
         <div class="timeline-container">
@@ -119,21 +121,25 @@
             
             <!-- Countdown inside RSVP Banner -->
             <div class="countdown-container">
-                <div class="countdown-item">
+                <div class="countdown-item" id="countdown-months">
                     <div class="countdown-number" id="months">00</div>
                     <div class="countdown-label" data-i18n="countdown.months">Months</div>
                 </div>
-                <div class="countdown-item">
+                <div class="countdown-item" id="countdown-days">
                     <div class="countdown-number" id="days">00</div>
                     <div class="countdown-label" data-i18n="countdown.days">Days</div>
                 </div>
-                <div class="countdown-item">
+                <div class="countdown-item" id="countdown-hours">
                     <div class="countdown-number" id="hours">00</div>
                     <div class="countdown-label" data-i18n="countdown.hours">Hours</div>
                 </div>
-                <div class="countdown-item">
+                <div class="countdown-item" id="countdown-minutes">
                     <div class="countdown-number" id="minutes">00</div>
                     <div class="countdown-label" data-i18n="countdown.minutes">Minutes</div>
+                </div>
+                <div class="countdown-item" id="countdown-seconds">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label" data-i18n="countdown.seconds">Seconds</div>
                 </div>
             </div>
             

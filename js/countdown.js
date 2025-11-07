@@ -2,13 +2,19 @@
 (function() {
     'use strict';
     
-    // Set wedding date (June 15, 2025 at 4:00 PM)
     const weddingDate = new Date('2026-01-01T17:00:00').getTime();
     
     const monthsElement = document.getElementById('months');
     const daysElement = document.getElementById('days');
     const hoursElement = document.getElementById('hours');
     const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+    
+    const monthsItem = document.getElementById('countdown-months');
+    const daysItem = document.getElementById('countdown-days');
+    const hoursItem = document.getElementById('countdown-hours');
+    const minutesItem = document.getElementById('countdown-minutes');
+    const secondsItem = document.getElementById('countdown-seconds');
     
     function updateCountdown() {
         const now = new Date();
@@ -20,6 +26,11 @@
             daysElement.textContent = '00';
             hoursElement.textContent = '00';
             minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+            // Hide all items
+            [monthsItem, daysItem, hoursItem, minutesItem, secondsItem].forEach(item => {
+                if (item) item.style.display = 'none';
+            });
             return;
         }
         
@@ -41,22 +52,46 @@
         }
         
         // Calculate remaining days after months
-        const daysDiff = Math.floor((wedding - tempDate) / (1000 * 60 * 60 * 24));
+        const tempDateTimestamp = tempDate.getTime();
+        const daysDiff = Math.floor((wedding - tempDateTimestamp) / (1000 * 60 * 60 * 24));
         
-        // Calculate hours and minutes from the remaining time
-        const remainingTime = wedding - tempDate - (daysDiff * 1000 * 60 * 60 * 24);
+        // Calculate hours, minutes, and seconds from the remaining time
+        const remainingTime = wedding - tempDateTimestamp - (daysDiff * 1000 * 60 * 60 * 24);
         const hours = Math.floor(remainingTime / (1000 * 60 * 60));
         const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
         
-        // Update display with leading zeros
-        monthsElement.textContent = String(months).padStart(2, '0');
-        daysElement.textContent = String(daysDiff).padStart(2, '0');
-        hoursElement.textContent = String(hours).padStart(2, '0');
-        minutesElement.textContent = String(minutes).padStart(2, '0');
+        // Create array of values with their corresponding elements and items
+        const countdownValues = [
+            { value: months, element: monthsElement, item: monthsItem },
+            { value: daysDiff, element: daysElement, item: daysItem },
+            { value: hours, element: hoursElement, item: hoursItem },
+            { value: minutes, element: minutesElement, item: minutesItem },
+            { value: seconds, element: secondsElement, item: secondsItem }
+        ];
+        
+        // Find first 3 non-zero values
+        const nonZeroValues = countdownValues.filter(item => item.value > 0);
+        const displayItems = nonZeroValues.slice(0, 3);
+        
+        // Update all values
+        countdownValues.forEach(({ value, element }) => {
+            if (element) {
+                element.textContent = String(value).padStart(2, '0');
+            }
+        });
+        
+        // Show/hide items based on whether they should be displayed
+        countdownValues.forEach(({ item, value }) => {
+            if (item) {
+                const shouldDisplay = displayItems.some(displayItem => displayItem.item === item);
+                item.style.display = shouldDisplay ? '' : 'none';
+            }
+        });
     }
     
-    // Update immediately and then every minute
+    // Update immediately and then every second
     updateCountdown();
-    setInterval(updateCountdown, 60000);
+    setInterval(updateCountdown, 1000);
 })();
 

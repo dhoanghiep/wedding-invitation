@@ -16,9 +16,15 @@
             // Hero Section
             hero: {
                 title: "June \n & \n Hiep",
-                subtitle: 'We are getting married!',
                 date: 'January 1, 2026',
-            },           
+            },
+            // Bride and Groom Section
+            brideGroom: {
+                title: 'Bride & Groom',
+                subtitle: 'Hello! We\’re the happy couple at the center of all this, and we\’re so excited you\'re here!',
+                intro: 'Come see how we met and followed the path all the way to "I do"!',
+                button: 'Explore'
+            },
             // Gallery Section
             gallery: {
                 title: 'Our Gallery',
@@ -72,11 +78,17 @@
             },
             // Timeline Section
             timeline: {
-                title: 'Wedding Timeline',
-                subtitle: 'Join us for our special day',
+                title: 'Wedding schedule',
+                subtitle: 'Here\'s the plan for our celebration! We can\'t wait to see you there.',
                 ceremony: 'Ceremony',
                 ceremonyDate: 'Date & Time',
                 ceremonyLocation: 'Location',
+                preWedding: 'Pre-wedding party',
+                preWeddingDate: 'Date & Time',
+                preWeddingLocation: 'Location',
+                wedding: 'Wedding',
+                weddingDate: 'Date & Time',
+                weddingLocation: 'Location',
                 party: 'Party/Reception',
                 partyDate: 'Date & Time',
                 partyLocation: 'Location',
@@ -116,7 +128,7 @@
             nav: {
                 home: 'Trang chủ',
                 location: 'Địa điểm',
-                story: 'Câu chuyện của chúng tôi',
+                story: 'Câu chuyện',
                 album: 'Album',
                 rsvp: 'Xác nhận',
                 contact: 'Liên hệ'
@@ -124,8 +136,14 @@
             // Hero Section
             hero: {
                 title: 'Minh Anh \n & \n Hoàng Hiệp',
-                subtitle: 'We are getting married!',
                 date: 'Ngày 1 tháng 1, 2026',
+            },
+            // Bride and Groom Section
+            brideGroom: {
+                title: 'Cô dâu & Chú rể',
+                subtitle: 'Xin chào! Tụi mình là cặp đôi hạnh phúc (và là nhân vật chính) của buổi tiệc này, và tụi mình rất vui khi các bạn có mặt!',
+                intro: 'Cùng xem tụi mình đã gặp nhau thế nào và cùng đi trên hành trình đến ngày chung đôi ra sao nhé!',
+                button: 'khám phá'
             },
             // Gallery Section
             gallery: {
@@ -178,17 +196,20 @@
                 fillFields: 'Vui lòng điền vào tất cả các trường bắt buộc.',
                 validEmail: 'Vui lòng nhập địa chỉ email hợp lệ.'
             },
-            // Footer
-            footer: {
-                text: '© 2025 Hoàng Hiệp & Minh Anh. Được tạo bằng ❤️'
             },
             // Timeline Section
             timeline: {
-                title: 'Lịch trình đám cưới',
-                subtitle: 'Hãy cùng chúng tôi chúc mừng ngày đặc biệt',
+                title: 'Lịch trình ngày cưới',
+                subtitle: 'Đây là kế hoạch cho ngày vui của tụi mình! Rất mong được gặp các bạn ở đó.',
                 ceremony: 'Lễ cưới',
                 ceremonyDate: 'Ngày & Giờ',
                 ceremonyLocation: 'Địa điểm',
+                preWedding: 'Tiệc trước đám cưới',
+                preWeddingDate: 'Ngày & Giờ',
+                preWeddingLocation: 'Địa điểm',
+                wedding: 'Đám cưới',
+                weddingDate: 'Ngày & Giờ',
+                weddingLocation: 'Địa điểm',
                 party: 'Tiệc/Đón khách',
                 partyDate: 'Ngày & Giờ',
                 partyLocation: 'Địa điểm',
@@ -259,6 +280,12 @@
         updateText('[data-i18n="hero.date"]', t.hero.date);
         updateText('[data-i18n="hero.button"]', t.hero.button);
 
+        // Update bride and groom section
+        updateText('[data-i18n="brideGroom.title"]', t.brideGroom.title);
+        updateText('[data-i18n="brideGroom.subtitle"]', t.brideGroom.subtitle);
+        updateText('[data-i18n="brideGroom.intro"]', t.brideGroom.intro);
+        updateText('[data-i18n="brideGroom.button"]', t.brideGroom.button);
+
         // Update invitation section
         updateText('[data-i18n="invitation.title"]', t.invitation.title);
         updateText('[data-i18n="invitation.subtitle"]', t.invitation.subtitle);
@@ -318,6 +345,12 @@
         updateText('[data-i18n="timeline.ceremony"]', t.timeline.ceremony);
         updateText('[data-i18n="timeline.ceremonyDate"]', t.timeline.ceremonyDate);
         updateText('[data-i18n="timeline.ceremonyLocation"]', t.timeline.ceremonyLocation);
+        updateText('[data-i18n="timeline.preWedding"]', t.timeline.preWedding);
+        updateText('[data-i18n="timeline.preWeddingDate"]', t.timeline.preWeddingDate);
+        updateText('[data-i18n="timeline.preWeddingLocation"]', t.timeline.preWeddingLocation);
+        updateText('[data-i18n="timeline.wedding"]', t.timeline.wedding);
+        updateText('[data-i18n="timeline.weddingDate"]', t.timeline.weddingDate);
+        updateText('[data-i18n="timeline.weddingLocation"]', t.timeline.weddingLocation);
         updateText('[data-i18n="timeline.party"]', t.timeline.party);
         updateText('[data-i18n="timeline.partyDate"]', t.timeline.partyDate);
         updateText('[data-i18n="timeline.partyLocation"]', t.timeline.partyLocation);
