@@ -80,15 +80,27 @@
             timeline: {
                 title: 'Wedding schedule',
                 subtitle: 'Here\'s the plan for our celebration! We can\'t wait to see you there.',
-                ceremony: 'Ceremony',
-                ceremonyDate: 'Date & Time',
-                ceremonyLocation: 'Location',
-                preWedding: 'Pre-wedding party',
-                preWeddingDate: 'Date & Time',
-                preWeddingLocation: 'Location',
-                wedding: 'Wedding',
-                weddingDate: 'Date & Time',
-                weddingLocation: 'Location'
+                ceremony: 'Vu Quy Ceremony',
+                ceremonyDate: '9:30 AM, 31/12/2025',
+                ceremonyLocation: '332/18 Cach Mang Thang 8, \n Nhieu Loc \n Ho Chi Minh City',
+                preWedding: 'Pre-wedding Party',
+                preWeddingDate: '5:00 PM, 31/12/2025',
+                preWeddingLocation: 'Siha cafe \n 58 Nguyen Dinh Chinh, Phu Nhuan \n Ho Chi Minh City',
+                wedding: 'Wedding Ceremony',
+                weddingDate: '5:00 PM, 1/1/2026',
+                weddingLocation: 'Chloe Gallery \n 06 Phan Van Chuong, Tan My \n Ho Chi Minh City',
+                timeLabel: 'Date & Time:',
+                locationLabel: 'Location:',
+                addressLabel: 'Address:',
+                ceremonyTime: '9:30 AM 31/12/2025',
+                ceremonyLocationName: 'The Bride\'s Family Home',
+                ceremonyAddress: '332/18 Cach Mang Thang 8,\n Nhieu Loc, Ho Chi Minh City',
+                preWeddingTime: '5:00 PM 31/12/2025',
+                preWeddingLocationName: 'Siha Cafe',
+                preWeddingAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
+                weddingTime: '5:00 PM 1/1/2026',
+                weddingLocationName: 'Chloe Gallery',
+                weddingAddress: '06 Phan Van Chuong\n Tan My, Ho Chi Minh City'
             }
         },
         vi: {
@@ -168,15 +180,27 @@
             timeline: {
                 title: 'Lịch trình ngày cưới',
                 subtitle: 'Đây là kế hoạch cho ngày vui của tụi mình! Rất mong được gặp các bạn ở đó.',
-                ceremony: 'Lễ cưới',
+                ceremony: 'Lễ Vu Quy',
                 ceremonyDate: 'Ngày & Giờ',
                 ceremonyLocation: 'Địa điểm',
-                preWedding: 'Tiệc trước đám cưới',
+                preWedding: 'Tiệc Trước Ngày Cưới',
                 preWeddingDate: 'Ngày & Giờ',
                 preWeddingLocation: 'Địa điểm',
-                wedding: 'Đám cưới',
+                wedding: 'Lễ Cưới',
                 weddingDate: 'Ngày & Giờ',
-                weddingLocation: 'Địa điểm'
+                weddingLocation: 'Địa điểm',
+                timeLabel: 'Ngày & Giờ:',
+                locationLabel: 'Địa điểm:',
+                addressLabel: 'Địa chỉ:',
+                ceremonyTime: '9:30 SA 31/12/2025',
+                ceremonyLocationName: 'Tư gia nhà gái',
+                ceremonyAddress: '332/18 Cách Mạng Tháng 8\n Nhiêu Lộc, TP. Hồ Chí Minh',
+                preWeddingTime: '5:00 CH 31/12/2025',
+                preWeddingLocationName: 'Siha Cafe',
+                preWeddingAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
+                weddingTime: '5:00 CH 1/1/2026',
+                weddingLocationName: 'Chloe Gallery',
+                weddingAddress: '06 Phan Văn Chương\n Tân Mỹ, TP. Hồ Chí Minh'
             }
         }
     };
@@ -273,6 +297,18 @@
         updateText('[data-i18n="timeline.wedding"]', t.timeline.wedding);
         updateText('[data-i18n="timeline.weddingDate"]', t.timeline.weddingDate);
         updateText('[data-i18n="timeline.weddingLocation"]', t.timeline.weddingLocation);
+        updateText('[data-i18n="timeline.timeLabel"]', t.timeline.timeLabel);
+        updateText('[data-i18n="timeline.locationLabel"]', t.timeline.locationLabel);
+        updateText('[data-i18n="timeline.addressLabel"]', t.timeline.addressLabel);
+        updateText('[data-i18n="timeline.ceremonyTime"]', t.timeline.ceremonyTime);
+        updateText('[data-i18n="timeline.ceremonyLocationName"]', t.timeline.ceremonyLocationName);
+        updateText('[data-i18n="timeline.ceremonyAddress"]', t.timeline.ceremonyAddress);
+        updateText('[data-i18n="timeline.preWeddingTime"]', t.timeline.preWeddingTime);
+        updateText('[data-i18n="timeline.preWeddingLocationName"]', t.timeline.preWeddingLocationName);
+        updateText('[data-i18n="timeline.preWeddingAddress"]', t.timeline.preWeddingAddress);
+        updateText('[data-i18n="timeline.weddingTime"]', t.timeline.weddingTime);
+        updateText('[data-i18n="timeline.weddingLocationName"]', t.timeline.weddingLocationName);
+        updateText('[data-i18n="timeline.weddingAddress"]', t.timeline.weddingAddress);
 
         // Update language toggle button
         const langToggle = document.getElementById('language-toggle');

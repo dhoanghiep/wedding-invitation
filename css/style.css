@@ -804,11 +804,22 @@ section {
 .timeline-date {
     color: var(--primary-color);
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: normal;
     letter-spacing: 1px;
     font-family: 'Georgia', 'Times New Roman', serif;
     text-align: center;
+}
+
+.timeline-info {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    text-align: center;
+    line-height: 1.8;
 }
 
 .timeline-location-name,
@@ -816,7 +827,7 @@ section {
 .timeline-city {
     color: var(--primary-color);
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.25em;
     font-weight: normal;
     letter-spacing: 1px;
     font-family: 'Georgia', 'Times New Roman', serif;
@@ -827,7 +838,7 @@ section {
     color: var(--primary-color);
     text-decoration: underline;
     margin-top: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: normal;
     letter-spacing: 1px;
     font-family: 'Georgia', 'Times New Roman', serif;
@@ -836,6 +847,21 @@ section {
 
 .timeline-map-link:hover {
     opacity: 0.7;
+}
+
+.timeline-address-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-address-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
 }
 
 .timeline-image {
@@ -1498,11 +1524,13 @@ section {
     }
     
     .timeline-date,
+    .timeline-info,
     .timeline-location-name,
     .timeline-address,
     .timeline-city,
-    .timeline-map-link {
-        font-size: 1rem;
+    .timeline-map-link,
+    .timeline-address-link {
+        font-size: 1.5rem;
     }
     
     .timeline .container {
