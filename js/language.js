@@ -9,7 +9,7 @@
                 home: 'Home',
                 location: 'Location',
                 story: 'Our Story',
-                album: 'Album',
+                gallery: 'Gallery',
                 rsvp: 'RSVP',
                 contact: 'Contact'
             },
@@ -30,7 +30,15 @@
                 title: 'Our Gallery',
                 subtitle: 'Memories we\'ve shared together',
                 photos: 'Photos',
-                videos: 'Videos'
+                videos: 'Videos',
+                journey: 'Journey',
+                preWedding: 'Pre-wedding',
+                weddingPhotos: 'Wedding Photos',
+                guestUploads: 'Guest Uploads',
+                comingSoon: 'Photos coming soon...',
+                uploadTitle: 'Share Your Photos',
+                uploadDesc: 'Upload your favorite moments from our wedding',
+                uploadButton: 'Upload Photos'
             },
             // Countdown Section
             countdown: {
@@ -45,6 +53,9 @@
             rsvp: {
                 title: 'RSVP',
                 subtitle: 'Please let us know if you\'ll be joining us',
+                bannerTitle: 'We hope you can join us!',
+                bannerSubtitle: 'We\'re counting down the days and really hope you can be there to celebrate with us!',
+                bannerCta: 'Ready to party? Click below to let us know.',
                 fullName: 'Full Name *',
                 email: 'Email Address *',
                 attendance: 'Will you be attending? *',
@@ -101,6 +112,29 @@
                 weddingTime: '5:00 PM 1/1/2026',
                 weddingLocationName: 'Chloe Gallery',
                 weddingAddress: '06 Phan Van Chuong\n Tan My, Ho Chi Minh City'
+            },
+            // Location Section
+            location: {
+                title: 'Wedding Venues',
+                subtitle: 'Find all our wedding venues',
+                ceremony: 'Vu Quy Ceremony',
+                ceremonyVenue: 'The Bride\'s Family Home',
+                ceremonyAddress: '332/18 Cach Mang Thang 8,\n Nhieu Loc, Ho Chi Minh City',
+                ceremonyTime: '9:30 AM 31/12/2025',
+                preWedding: 'Pre-wedding Party',
+                preWeddingVenue: 'Siha Cafe',
+                preWeddingAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
+                preWeddingTime: '5:00 PM 31/12/2025',
+                wedding: 'Wedding Ceremony',
+                weddingVenue: 'Chloe Gallery',
+                weddingAddress: '06 Phan Van Chuong\n Tan My, Ho Chi Minh City',
+                weddingTime: '5:00 PM 1/1/2026',
+                timeLabel: 'Date & Time:',
+                locationLabel: 'Location:',
+                addressLabel: 'Address:',
+                viewMap: 'View on Google Maps',
+                accommodationTitle: 'Accommodations',
+                accommodationSubtitle: 'Recommended places to stay'
             }
         },
         vi: {
@@ -109,7 +143,7 @@
                 home: 'Trang chủ',
                 location: 'Địa điểm',
                 story: 'Câu chuyện',
-                album: 'Album',
+                gallery: 'Thư viện ảnh',
                 rsvp: 'Xác nhận',
                 contact: 'Liên hệ'
             },
@@ -121,8 +155,8 @@
             // Bride and Groom Section
             brideGroom: {
                 title: 'Cô dâu & Chú rể',
-                subtitle: 'Xin chào! Tụi mình là cặp đôi hạnh phúc (và là nhân vật chính) của buổi tiệc này, và tụi mình rất vui khi các bạn có mặt!',
-                intro: 'Cùng xem tụi mình đã gặp nhau thế nào và cùng đi trên hành trình đến ngày chung đôi ra sao nhé!',
+                subtitle: 'Xin chào! Chúng mình là cặp đôi hạnh phúc (và là nhân vật chính) của buổi tiệc này, và chúng mình rất vui khi các bạn có mặt!',
+                intro: 'Cùng xem chúng mình đã gặp nhau thế nào và cùng đi trên hành trình đến ngày chung đôi ra sao nhé!',
                 button: 'khám phá'
             },
             // Gallery Section
@@ -130,7 +164,15 @@
                 title: 'Thư viện ảnh',
                 subtitle: 'Những kỷ niệm chúng tôi đã chia sẻ',
                 photos: 'Ảnh',
-                videos: 'Video'
+                videos: 'Video',
+                journey: 'Hành trình',
+                preWedding: 'Trước ngày cưới',
+                weddingPhotos: 'Ảnh cưới',
+                guestUploads: 'Ảnh khách mời',
+                comingSoon: 'Ảnh sắp có...',
+                uploadTitle: 'Chia sẻ ảnh của bạn',
+                uploadDesc: 'Tải lên những khoảnh khắc yêu thích của bạn từ đám cưới của chúng mình',
+                uploadButton: 'Tải ảnh lên'
             },
             // Countdown Section
             countdown: {
@@ -145,6 +187,9 @@
             rsvp: {
                 title: 'Xác nhận tham dự',
                 subtitle: 'Vui lòng cho chúng tôi biết bạn có tham dự không',
+                bannerTitle: 'Hy vọng bạn sẽ đến!',
+                bannerSubtitle: 'Chúng mình đang đếm ngược từng ngày và rất hy vọng bạn có thể ở đó để chung vui cùng chúng mình!',
+                bannerCta: 'Sẵn sàng "quẩy" chưa? Bấm vào bên dưới để cho chúng mình biết nhé.',
                 fullName: 'Họ và tên *',
                 email: 'Địa chỉ email *',
                 attendance: 'Bạn có tham dự không? *',
@@ -179,7 +224,7 @@
             // Timeline Section
             timeline: {
                 title: 'Lịch trình ngày cưới',
-                subtitle: 'Đây là kế hoạch cho ngày vui của tụi mình! Rất mong được gặp các bạn ở đó.',
+                subtitle: 'Đây là kế hoạch cho ngày vui của chúng mình! Rất mong được gặp các bạn ở đó.',
                 ceremony: 'Lễ Vu Quy',
                 ceremonyDate: 'Ngày & Giờ',
                 ceremonyLocation: 'Địa điểm',
@@ -201,6 +246,29 @@
                 weddingTime: '5:00 CH 1/1/2026',
                 weddingLocationName: 'Chloe Gallery',
                 weddingAddress: '06 Phan Văn Chương\n Tân Mỹ, TP. Hồ Chí Minh'
+            },
+            // Location Section
+            location: {
+                title: 'Địa điểm tổ chức',
+                subtitle: 'Tìm tất cả các địa điểm tổ chức tiệc cưới của chúng mình',
+                ceremony: 'Lễ Vu Quy',
+                ceremonyVenue: 'Tư gia nhà gái',
+                ceremonyAddress: '332/18 Cách Mạng Tháng 8\n Nhiêu Lộc, TP. Hồ Chí Minh',
+                ceremonyTime: '9:30 SA 31/12/2025',
+                preWedding: 'Tiệc Trước Ngày Cưới',
+                preWeddingVenue: 'Siha Cafe',
+                preWeddingAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
+                preWeddingTime: '5:00 CH 31/12/2025',
+                wedding: 'Lễ Cưới',
+                weddingVenue: 'Chloe Gallery',
+                weddingAddress: '06 Phan Văn Chương\n Tân Mỹ, TP. Hồ Chí Minh',
+                weddingTime: '5:00 CH 1/1/2026',
+                timeLabel: 'Ngày & Giờ:',
+                locationLabel: 'Địa điểm:',
+                addressLabel: 'Địa chỉ:',
+                viewMap: 'Xem trên Google Maps',
+                accommodationTitle: 'Nơi ở',
+                accommodationSubtitle: 'Các địa điểm lưu trú được đề xuất'
             }
         }
     };
@@ -230,7 +298,7 @@
         updateText('[data-i18n="nav.home"]', t.nav.home);
         updateText('[data-i18n="nav.location"]', t.nav.location);
         updateText('[data-i18n="nav.story"]', t.nav.story);
-        updateText('[data-i18n="nav.album"]', t.nav.album);
+        updateText('[data-i18n="nav.gallery"]', t.nav.gallery);
         updateText('[data-i18n="nav.rsvp"]', t.nav.rsvp);
         updateText('[data-i18n="nav.contact"]', t.nav.contact);
 
@@ -249,6 +317,14 @@
         updateText('[data-i18n="gallery.subtitle"]', t.gallery.subtitle);
         updateText('[data-i18n="gallery.photos"]', t.gallery.photos);
         updateText('[data-i18n="gallery.videos"]', t.gallery.videos);
+        updateText('[data-i18n="gallery.journey"]', t.gallery.journey);
+        updateText('[data-i18n="gallery.preWedding"]', t.gallery.preWedding);
+        updateText('[data-i18n="gallery.weddingPhotos"]', t.gallery.weddingPhotos);
+        updateText('[data-i18n="gallery.guestUploads"]', t.gallery.guestUploads);
+        updateText('[data-i18n="gallery.comingSoon"]', t.gallery.comingSoon);
+        updateText('[data-i18n="gallery.uploadTitle"]', t.gallery.uploadTitle);
+        updateText('[data-i18n="gallery.uploadDesc"]', t.gallery.uploadDesc);
+        updateText('[data-i18n="gallery.uploadButton"]', t.gallery.uploadButton);
 
         // Update countdown section
         updateText('[data-i18n="countdown.title"]', t.countdown.title);
@@ -261,6 +337,9 @@
         // Update RSVP section
         updateText('[data-i18n="rsvp.title"]', t.rsvp.title);
         updateText('[data-i18n="rsvp.subtitle"]', t.rsvp.subtitle);
+        updateText('[data-i18n="rsvp.bannerTitle"]', t.rsvp.bannerTitle);
+        updateText('[data-i18n="rsvp.bannerSubtitle"]', t.rsvp.bannerSubtitle);
+        updateText('[data-i18n="rsvp.bannerCta"]', t.rsvp.bannerCta);
         updateText('[data-i18n="rsvp.fullName"]', t.rsvp.fullName);
         updateText('[data-i18n="rsvp.email"]', t.rsvp.email);
         updateText('[data-i18n="rsvp.attendance"]', t.rsvp.attendance);
@@ -310,6 +389,28 @@
         updateText('[data-i18n="timeline.weddingLocationName"]', t.timeline.weddingLocationName);
         updateText('[data-i18n="timeline.weddingAddress"]', t.timeline.weddingAddress);
 
+        // Update location section
+        updateText('[data-i18n="location.title"]', t.location.title);
+        updateText('[data-i18n="location.subtitle"]', t.location.subtitle);
+        updateText('[data-i18n="location.ceremony"]', t.location.ceremony);
+        updateText('[data-i18n="location.ceremonyVenue"]', t.location.ceremonyVenue);
+        updateText('[data-i18n="location.ceremonyAddress"]', t.location.ceremonyAddress);
+        updateText('[data-i18n="location.ceremonyTime"]', t.location.ceremonyTime);
+        updateText('[data-i18n="location.preWedding"]', t.location.preWedding);
+        updateText('[data-i18n="location.preWeddingVenue"]', t.location.preWeddingVenue);
+        updateText('[data-i18n="location.preWeddingAddress"]', t.location.preWeddingAddress);
+        updateText('[data-i18n="location.preWeddingTime"]', t.location.preWeddingTime);
+        updateText('[data-i18n="location.wedding"]', t.location.wedding);
+        updateText('[data-i18n="location.weddingVenue"]', t.location.weddingVenue);
+        updateText('[data-i18n="location.weddingAddress"]', t.location.weddingAddress);
+        updateText('[data-i18n="location.weddingTime"]', t.location.weddingTime);
+        updateText('[data-i18n="location.timeLabel"]', t.location.timeLabel);
+        updateText('[data-i18n="location.locationLabel"]', t.location.locationLabel);
+        updateText('[data-i18n="location.addressLabel"]', t.location.addressLabel);
+        updateText('[data-i18n="location.viewMap"]', t.location.viewMap);
+        updateText('[data-i18n="location.accommodationTitle"]', t.location.accommodationTitle);
+        updateText('[data-i18n="location.accommodationSubtitle"]', t.location.accommodationSubtitle);
+
         // Update language toggle button
         const langToggle = document.getElementById('language-toggle');
         if (langToggle) {
@@ -322,7 +423,13 @@
     function updateText(selector, text) {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
-            el.textContent = text;
+            // Check if this is an address element that should preserve line breaks
+            if (selector.includes('Address') || el.classList.contains('venue-info') || el.classList.contains('address')) {
+                // Convert \n to <br> for addresses
+                el.innerHTML = text.replace(/\n/g, '<br>');
+            } else {
+                el.textContent = text;
+            }
         });
     }
 
@@ -392,6 +499,8 @@
         if (e.detail && e.detail.component === 'header-placeholder') {
             // Wait a bit for the DOM to update
             setTimeout(() => {
+                // Re-apply language to update header text
+                setLanguage(currentLanguage);
                 setupLanguageToggle();
             }, 100);
         }
@@ -400,6 +509,8 @@
     // Also listen for componentsReady event as fallback
     document.addEventListener('componentsReady', () => {
         setTimeout(() => {
+            // Re-apply language to update header text
+            setLanguage(currentLanguage);
             setupLanguageToggle();
         }, 100);
     });

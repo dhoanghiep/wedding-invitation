@@ -26,43 +26,87 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="location.title">Wedding Venues</h2>
-                    <p class="section-subtitle" data-i18n="location.subtitle">Find all our wedding venues</p>
                 </div>
                 
                 <!-- Ceremony Venue -->
-                <div class="venue-card">
-                    <h3 data-i18n="location.ceremony">Ceremony</h3>
-                    <div class="venue-details">
-                        <p class="venue-name" data-i18n="location.ceremonyVenue">Venue Name</p>
-                        <p class="venue-address" data-i18n="location.ceremonyAddress">Address</p>
-                        <p class="venue-time" data-i18n="location.ceremonyTime">Date & Time</p>
+                <div class="venue-card" id="ceremony-venue">
+                    <div class="venue-content">
+                        <div class="venue-text">
+                            <h3 data-i18n="location.ceremony">Vu Quy Ceremony</h3>
+                            <div class="venue-details">
+                                <p class="venue-info">
+                                    <strong data-i18n="location.timeLabel">Date & Time:</strong> 
+                                    <span data-i18n="location.ceremonyTime">9:30 AM 31/12/2025</span>
+                                </p>
+                                <p class="venue-info">
+                                    <strong data-i18n="location.locationLabel">Location:</strong> 
+                                    <span data-i18n="location.ceremonyVenue">The Bride's Family Home</span>
+                                </p>
+                                <p class="venue-info">
+                                    <strong data-i18n="location.addressLabel">Address:</strong> 
+                                    <span data-i18n="location.ceremonyAddress">332/18 Cach Mang Thang 8,\n Nhieu Loc, Ho Chi Minh City</span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Google Maps Embed -->
+                        <div class="venue-map" id="ceremony-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.388099023619!2d106.67236947571914!3d10.781558389367472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed7c7a4d7f5%3A0x35d38563baf07aaf!2zMzMyIEPDoWNoIE3huqFuZyBUaMOhbmcgVMOhbSwgUGjGsOG7nW5nIDksIFF14bqtbiAzLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2sau!4v1762486329135!5m2!1sen!2sau" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
-                    <div class="venue-map" id="ceremony-map"></div>
-                    <a href="#" id="ceremony-map-link" target="_blank" class="map-link" data-i18n="location.viewMap">View on Google Maps</a>
                 </div>
                 
-                <!-- Party/Reception Venue -->
-                <div class="venue-card">
-                    <h3 data-i18n="location.party">Party/Reception</h3>
-                    <div class="venue-details">
-                        <p class="venue-name" data-i18n="location.partyVenue">Venue Name</p>
-                        <p class="venue-address" data-i18n="location.partyAddress">Address</p>
-                        <p class="venue-time" data-i18n="location.partyTime">Date & Time</p>
+                <!-- Pre-wedding Party Venue -->
+                <div class="venue-card" id="pre-wedding-venue">
+                    <div class="venue-content">
+                        <div class="venue-text">
+                            <h3 data-i18n="location.preWedding">Pre-wedding Party</h3>
+                            <div class="venue-details">
+                                <p class="venue-info">
+                                    <strong data-i18n="location.timeLabel">Date & Time:</strong> 
+                                    <span data-i18n="location.preWeddingTime">5:00 PM 31/12/2025</span>
+                                </p>
+                                <p class="venue-info">
+                                    <strong data-i18n="location.locationLabel">Location:</strong> 
+                                    <span data-i18n="location.preWeddingVenue">Siha Cafe</span>
+                                </p>
+                                <p class="venue-info">
+                                    <strong data-i18n="location.addressLabel">Address:</strong> 
+                                    <span data-i18n="location.preWeddingAddress">158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City</span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Google Maps Embed -->
+                        <div class="venue-map" id="pre-wedding-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1996962634835!2d106.67583099999999!3d10.796011999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529a53b8b2fa9%3A0x737b14bc23a25896!2sSiha%20-%20Cafe%2C%20Bar%20%26%20Eatery!5e0!3m2!1sen!2sau!4v1762486234744!5m2!1sen!2sau" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
-                    <div class="venue-map" id="party-map"></div>
-                    <a href="#" id="party-map-link" target="_blank" class="map-link" data-i18n="location.viewMap">View on Google Maps</a>
                 </div>
                 
-                <!-- Main Wedding Venue -->
-                <div class="venue-card">
-                    <h3 data-i18n="location.mainWedding">Main Wedding</h3>
-                    <div class="venue-details">
-                        <p class="venue-name" data-i18n="location.mainWeddingVenue">Venue Name</p>
-                        <p class="venue-address" data-i18n="location.mainWeddingAddress">Address</p>
-                        <p class="venue-time" data-i18n="location.mainWeddingTime">Date & Time</p>
+                <!-- Wedding Ceremony Venue -->
+                <div class="venue-card" id="wedding-venue">
+                    <div class="venue-content">
+                        <div class="venue-text">
+                            <h3 data-i18n="location.wedding">Wedding Ceremony</h3>
+                            <div class="venue-details">
+                                <p class="venue-info">
+                                    <strong data-i18n="location.timeLabel">Date & Time:</strong> 
+                                    <span data-i18n="location.weddingTime">5:00 PM 1/1/2026</span>
+                                </p>
+                                <p class="venue-info">
+                                    <strong data-i18n="location.locationLabel">Location:</strong> 
+                                    <span data-i18n="location.weddingVenue">Chloe Gallery</span>
+                                </p>
+                                <p class="venue-info">
+                                    <strong data-i18n="location.addressLabel">Address:</strong> 
+                                    <span data-i18n="location.weddingAddress">06 Phan Van Chuong\n Tan My, Ho Chi Minh City</span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Google Maps Embed -->
+                        <div class="venue-map" id="wedding-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.135552138071!2d106.71751137571864!3d10.724026689421612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fbb29971e37%3A0xb0b4ad40301a6dfc!2sChloe%20Gallery!5e0!3m2!1sen!2sau!4v1762486275834!5m2!1sen!2sau" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
-                    <div class="venue-map" id="main-wedding-map"></div>
-                    <a href="#" id="main-wedding-map-link" target="_blank" class="map-link" data-i18n="location.viewMap">View on Google Maps</a>
                 </div>
             </div>
         </section>
@@ -71,18 +115,12 @@
         <section class="accommodation" id="accommodation">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="location.accommodationTitle">Where to Stay</h2>
-                    <p class="section-subtitle" data-i18n="location.accommodationSubtitle">Recommended accommodations</p>
+                    <h2 class="section-title" data-i18n="location.accommodationTitle">Accommodations</h2>
+                    <p class="section-subtitle" data-i18n="location.accommodationSubtitle">Recommended places to stay</p>
                 </div>
                 
                 <div class="accommodation-grid">
                     <!-- Accommodation cards will be added here -->
-                    <div class="accommodation-card">
-                        <h3 data-i18n="location.hotel1">Hotel Name</h3>
-                        <p class="accommodation-address" data-i18n="location.hotel1Address">Address</p>
-                        <p class="accommodation-distance" data-i18n="location.hotel1Distance">Distance from venues</p>
-                        <a href="#" class="btn btn-secondary" data-i18n="location.bookNow">Book Now</a>
-                    </div>
                 </div>
             </div>
         </section>

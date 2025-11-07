@@ -204,7 +204,7 @@
             if (category === 'wedding-photos') {
                 // Keep existing placeholder if it exists, otherwise add one
                 if (!existingPlaceholder) {
-                    gridElement.innerHTML = '<p data-i18n="album.comingSoon">Photos coming soon...</p>';
+                    gridElement.innerHTML = '<p data-i18n="gallery.comingSoon">Photos coming soon...</p>';
                 }
             } else {
                 // For other categories, clear if empty
