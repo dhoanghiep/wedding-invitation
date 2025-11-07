@@ -157,6 +157,39 @@
                 viewMap: 'View on Google Maps',
                 accommodationTitle: 'Accommodations',
                 accommodationSubtitle: 'Recommended places to stay'
+            },
+            // Story Section
+            story: {
+                title: 'Our Story',
+                subtitle: 'Welcome to our story! It\'s our favorite one, and it\'s all led to this amazing day.',
+                meetTitle: 'First, Meet the Bride & Groom',
+                meetBride: 'Meet Nheo 😼 (The Bride)',
+                brideBio: 'Intro bé Ti',
+                brideQuote: '"Quote bé Ti"',
+                brideQuote: '"Looks like she could kill you & actually could kill you."',
+                meetGroom: 'Meet Hoàng Hiệp (The Groom)',
+                groomBio: 'Intro Hiệp',
+                groomQuote: '"Quote Hiệp"',
+                howWeMet: 'How We Met',
+                howWeMetSubtitle: 'How we met subtitle',
+                howWeMetIntro: 'Our story began in [Year] at [Place where you met, e.g., "a friend\'s birthday party," "the office," "Hanoi Old Quarter"].',
+                bridePerspective: 'Góc nhìn của Ti:',
+                bridePerspectiveStory: 'Story bé Ti',
+                groomPerspective: 'Góc nhìn của Hiệp:',
+                groomPerspectiveStory: 'Story Hiệp',
+                firstDate: 'First date',
+                tripsTitle: 'Our Trips',
+                tripsIntro: 'Trips intro',
+                tripsMemories: 'Trips memories',
+                tripsConclusion: 'Trips conclusion',
+                proposalTitle: 'The Proposal',
+                proposalIntro: 'Proposal intro',
+                proposalStory: 'Proposal story',
+                proposalConclusion: 'Proposal conclusion',
+                everAfterTitle: 'And Ever After...',
+                everAfterIntro: 'Ever after intro',
+                everAfterStory: 'Ever after story',
+                everAfterClosing: 'Ever after closing'
             }
         },
         vi: {
@@ -313,6 +346,38 @@
                 viewMap: 'Xem trên Google Maps',
                 accommodationTitle: 'Nơi ở',
                 accommodationSubtitle: 'Các địa điểm lưu trú được đề xuất'
+            },
+            // Story Section
+            story: {
+                title: 'Câu Chuyện Của Tụi Mình',
+                subtitle: 'Chào mừng đến với câu chuyện của tụi mình! Đây là câu chuyện tụi mình yêu thích nhất, và nó đã dẫn đến ngày tuyệt vời này.',
+                meetTitle: 'Đầu Tiên, Gặp Gỡ Cô Dâu & Chú Rể',
+                meetBride: 'Gặp Gỡ Minh Anh (Cô Dâu)',
+                brideBio: 'Intro bé Ti',
+                brideQuote: '"Quote bé Ti"',
+                meetGroom: 'Gặp Gỡ Hoàng Hiệp (Chú Rể)',
+                groomBio: 'Intro Hiệp',
+                groomQuote: '"Quote Hiệp"',
+                howWeMet: 'Tụi Mình Gặp Nhau Thế Nào',
+                howWeMetSubtitle: 'Met subtitle',
+                howWeMetIntro: 'How we met intro',
+                bridePerspective: 'Góc nhìn của Ti:',
+                bridePerspectiveStory: 'Story bé Ti',
+                groomPerspective: 'Góc nhìn của Hiệp:',
+                groomPerspectiveStory: 'Story Hiệp',
+                firstDate: 'First date',
+                tripsTitle: 'Những Chuyến Đi',
+                tripsIntro: 'Trips intro',
+                tripsMemories: 'Trips memories',
+                tripsConclusion: 'Trips conclusion',
+                proposalTitle: 'Màn Cầu Hôn',
+                proposalIntro: 'Proposal intro',
+                proposalStory: 'Proposal story',
+                proposalConclusion: 'Proposal conclusion',
+                everAfterTitle: 'Ever after title',
+                everAfterIntro: 'Ever after intro',
+                everAfterStory: 'Ever after story',
+                everAfterClosing: 'Ever after closing'
             }
         }
     };
@@ -468,6 +533,37 @@
         updateText('[data-i18n="location.viewMap"]', t.location.viewMap);
         updateText('[data-i18n="location.accommodationTitle"]', t.location.accommodationTitle);
         updateText('[data-i18n="location.accommodationSubtitle"]', t.location.accommodationSubtitle);
+
+        // Update story section
+        updateText('[data-i18n="story.title"]', t.story.title);
+        updateText('[data-i18n="story.subtitle"]', t.story.subtitle);
+        updateText('[data-i18n="story.meetTitle"]', t.story.meetTitle);
+        updateText('[data-i18n="story.meetBride"]', t.story.meetBride);
+        updateText('[data-i18n="story.brideBio"]', t.story.brideBio);
+        updateText('[data-i18n="story.brideQuote"]', t.story.brideQuote);
+        updateText('[data-i18n="story.meetGroom"]', t.story.meetGroom);
+        updateText('[data-i18n="story.groomBio"]', t.story.groomBio);
+        updateText('[data-i18n="story.groomQuote"]', t.story.groomQuote);
+        updateText('[data-i18n="story.howWeMet"]', t.story.howWeMet);
+        updateText('[data-i18n="story.howWeMetSubtitle"]', t.story.howWeMetSubtitle);
+        updateText('[data-i18n="story.howWeMetIntro"]', t.story.howWeMetIntro);
+        updateText('[data-i18n="story.bridePerspective"]', t.story.bridePerspective);
+        updateText('[data-i18n="story.bridePerspectiveStory"]', t.story.bridePerspectiveStory);
+        updateText('[data-i18n="story.groomPerspective"]', t.story.groomPerspective);
+        updateText('[data-i18n="story.groomPerspectiveStory"]', t.story.groomPerspectiveStory);
+        updateText('[data-i18n="story.firstDate"]', t.story.firstDate);
+        updateText('[data-i18n="story.tripsTitle"]', t.story.tripsTitle);
+        updateText('[data-i18n="story.tripsIntro"]', t.story.tripsIntro);
+        updateText('[data-i18n="story.tripsMemories"]', t.story.tripsMemories);
+        updateText('[data-i18n="story.tripsConclusion"]', t.story.tripsConclusion);
+        updateText('[data-i18n="story.proposalTitle"]', t.story.proposalTitle);
+        updateText('[data-i18n="story.proposalIntro"]', t.story.proposalIntro);
+        updateText('[data-i18n="story.proposalStory"]', t.story.proposalStory);
+        updateText('[data-i18n="story.proposalConclusion"]', t.story.proposalConclusion);
+        updateText('[data-i18n="story.everAfterTitle"]', t.story.everAfterTitle);
+        updateText('[data-i18n="story.everAfterIntro"]', t.story.everAfterIntro);
+        updateText('[data-i18n="story.everAfterStory"]', t.story.everAfterStory);
+        updateText('[data-i18n="story.everAfterClosing"]', t.story.everAfterClosing);
 
         // Update language toggle button
         const langToggle = document.getElementById('language-toggle');
