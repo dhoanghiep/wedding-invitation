@@ -36,6 +36,18 @@ body {
     overflow-x: hidden;
 }
 
+/* Prevent scrolling when lightbox is open without affecting fixed positioning */
+body.lightbox-open {
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+}
+
+html.lightbox-open {
+    overflow: hidden;
+    height: 100vh;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -507,25 +519,133 @@ section {
 /* Lightbox */
 .lightbox {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
     background: rgba(0, 0, 0, 0.9);
     z-index: 2000;
-    align-items: center;
-    justify-content: center;
+    box-sizing: border-box;
+    /* Ensure lightbox is always at viewport origin */
+    margin: 0 !important;
+    padding: 0;
+    /* Ensure lightbox is always relative to viewport, not document */
+    transform: translate(0, 0) !important;
+    will-change: transform;
+    /* Force viewport positioning */
+    position: fixed;
 }
 
 .lightbox.active {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 80px 100px 80px; /* More bottom padding */
+    box-sizing: border-box;
 }
 
 .lightbox-image {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: calc(100vw - 160px);
+    max-height: calc(100vh - 180px); /* More bottom padding */
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
     border-radius: 10px;
+    display: block;
+    margin: 0;
+    /* Ensure image respects both constraints simultaneously */
+    box-sizing: border-box;
+    /* Force image to fit within constraints */
+    image-rendering: auto;
+    /* Ensure image fits within viewport */
+    object-position: center;
+    /* Prevent image from overflowing */
+    overflow: hidden;
+    /* Allow clicks to pass through to navigation buttons */
+    pointer-events: none;
+    position: relative;
+    z-index: 2000;
+}
+
+/* Ensure image fits within viewport on all screen sizes */
+@media (max-width: 768px) {
+    .lightbox.active {
+        padding: 50px 50px 80px 50px; /* More bottom padding */
+    }
+    
+    .lightbox-image {
+        max-width: calc(100vw - 100px) !important;
+        max-height: calc(100vh - 160px) !important; /* More bottom padding */
+    }
+    
+    .lightbox-close {
+        top: 15px;
+        right: 20px;
+        font-size: 2.5rem;
+    }
+    
+    .lightbox-prev {
+        left: 0;
+        width: 33.33%;
+        padding-left: 20px;
+    }
+    
+    .lightbox-prev::before {
+        font-size: 2.5rem;
+    }
+    
+    .lightbox-next {
+        right: 0;
+        width: 66.67%;
+        padding-right: 20px;
+    }
+    
+    .lightbox-next::before {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .lightbox.active {
+        padding: 40px 40px 80px 40px; /* More bottom padding */
+    }
+    
+    .lightbox-image {
+        max-width: calc(100vw - 80px) !important;
+        max-height: calc(100vh - 140px) !important; /* More bottom padding */
+    }
+    
+    .lightbox-close {
+        top: 10px;
+        right: 15px;
+        font-size: 2rem;
+    }
+    
+    .lightbox-prev {
+        left: 0;
+        width: 33.33%;
+        padding-left: 15px;
+    }
+    
+    .lightbox-prev::before {
+        font-size: 2rem;
+    }
+    
+    .lightbox-next {
+        right: 0;
+        width: 66.67%;
+        padding-right: 15px;
+    }
+    
+    .lightbox-next::before {
+        font-size: 2rem;
+    }
 }
 
 .lightbox-close,
@@ -542,18 +662,58 @@ section {
 .lightbox-close {
     top: 20px;
     right: 30px;
+    z-index: 2002; /* Higher z-index to be above navigation buttons */
+    pointer-events: auto; /* Ensure it's clickable */
 }
 
 .lightbox-prev {
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 0;
+    top: 0;
+    width: 33.33%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to left */
+    padding-left: 30px;
+    transform: none;
+    font-size: 0; /* Hide text content */
+}
+
+.lightbox-prev::before {
+    content: '<';
+    font-size: 3rem;
+    color: var(--white);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-prev:hover::before {
+    opacity: 1;
 }
 
 .lightbox-next {
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 0;
+    top: 0;
+    width: 66.67%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 30px;
+    transform: none;
+    font-size: 0; /* Hide text content */
+}
+
+.lightbox-next::before {
+    content: '>';
+    font-size: 3rem;
+    color: var(--white);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-next:hover::before {
+    opacity: 1;
 }
 
 .lightbox-close:hover,
