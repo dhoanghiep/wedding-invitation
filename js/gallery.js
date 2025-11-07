@@ -403,13 +403,10 @@
             return;
         }
         
-        // Save current scroll position BEFORE any changes
-        savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
-        console.log('Opening lightbox - saved scroll position:', savedScrollPosition);
-        console.log('Viewport dimensions:', window.innerWidth, 'x', window.innerHeight);
-        console.log('Current scroll:', window.pageYOffset, document.documentElement.scrollTop);
-        
         currentPhotoIndex = index;
+        
+        // Save current scroll position before opening the popup
+        savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
         
         // Reset image styles to ensure proper sizing
         lightboxImage.style.width = 'auto';
@@ -417,76 +414,55 @@
         lightboxImage.style.maxWidth = '';
         lightboxImage.style.maxHeight = '';
         
-        // Show lightbox FIRST before any body manipulation
-        // This ensures it's positioned relative to the current viewport
-        lightbox.classList.add('active');
+        // Lock body position to prevent scroll jump when scrollbar disappears
+        // This keeps the current view visible as background
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollPosition}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        document.body.classList.add('lightbox-open');
         
-        // Ensure lightbox is positioned correctly in viewport
-        // Force it to viewport origin - use !important to override any styles
+        // Move lightbox to body if it's not already there to ensure proper positioning
+        if (lightbox.parentElement !== document.body) {
+            document.body.appendChild(lightbox);
+        }
+        
+        // Position lightbox as fixed to viewport - use setProperty with important to override any CSS
+        lightbox.style.setProperty('position', 'fixed', 'important');
         lightbox.style.setProperty('top', '0', 'important');
         lightbox.style.setProperty('left', '0', 'important');
         lightbox.style.setProperty('right', '0', 'important');
         lightbox.style.setProperty('bottom', '0', 'important');
-        lightbox.style.setProperty('position', 'fixed', 'important');
+        lightbox.style.setProperty('width', '100%', 'important');
+        lightbox.style.setProperty('height', '100%', 'important');
         lightbox.style.setProperty('margin', '0', 'important');
         lightbox.style.setProperty('padding', '0', 'important');
-        lightbox.style.setProperty('transform', 'translate(0, 0)', 'important');
+        lightbox.style.setProperty('transform', 'none', 'important');
+        lightbox.style.setProperty('z-index', '2000', 'important');
         
-        console.log('Lightbox position:', lightbox.style.position, lightbox.style.top, lightbox.style.left);
-        console.log('Lightbox computed style:', window.getComputedStyle(lightbox).position);
+        // Show lightbox as full-screen popup - overlays the current scroll view
+        lightbox.classList.add('active');
         
-        // Prevent body scroll WITHOUT using position: fixed on body
-        // This avoids creating a new containing block that affects fixed positioning
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
-        
-        // Store scroll position and prevent scrolling by setting scrollTop
-        // But don't use position: fixed on body as it affects viewport
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Use a wrapper approach - add a class to body that prevents scroll
-        // but doesn't affect fixed positioning
-        document.body.classList.add('lightbox-open');
-        
-        // After showing, check if it's visible and fix if needed
+        // Check after showing and fix position if needed
         requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                const rect = lightbox.getBoundingClientRect();
-                console.log('Lightbox bounding rect:', rect);
-                console.log('Lightbox visible:', rect.top >= 0 && rect.left >= 0 && rect.bottom <= window.innerHeight && rect.right <= window.innerWidth);
-                console.log('Window innerHeight:', window.innerHeight);
-                console.log('Window innerWidth:', window.innerWidth);
-                
-                // If lightbox is not at viewport origin, force it there
-                if (rect.top !== 0 || rect.left !== 0) {
-                    console.log('Lightbox not at viewport origin, forcing position...');
-                    console.log('Current top:', rect.top, 'Expected: 0');
-                    lightbox.style.setProperty('top', '0', 'important');
-                    lightbox.style.setProperty('left', '0', 'important');
-                    lightbox.style.setProperty('right', '0', 'important');
-                    lightbox.style.setProperty('bottom', '0', 'important');
-                    lightbox.style.setProperty('position', 'fixed', 'important');
-                    lightbox.style.setProperty('transform', 'translate(0, 0)', 'important');
-                    lightbox.style.setProperty('margin', '0', 'important');
-                    lightbox.style.setProperty('padding', '0', 'important');
-                }
-            });
+            const rect = lightbox.getBoundingClientRect();
+            if (rect.top !== 0) {
+                lightbox.style.setProperty('top', '0', 'important');
+                lightbox.style.setProperty('transform', 'translateY(0)', 'important');
+            }
         });
         
-        // Set image source AFTER lightbox is shown
-        // This ensures the lightbox is rendered before we try to size the image
+        // Set image source
         lightboxImage.src = allPhotos[index];
         
-        // Function to size image when ready - ensure it works on first click
+        // Function to size image when ready
         const sizeImageWhenReady = () => {
-            // Wait for lightbox to be fully rendered
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    // Check if image has dimensions
                     if (lightboxImage.complete && lightboxImage.naturalWidth > 0 && lightboxImage.naturalHeight > 0) {
                         sizeLightboxImage(lightboxImage);
                     } else {
-                        // If not ready yet, wait a bit more
                         setTimeout(() => {
                             if (lightboxImage.complete && lightboxImage.naturalWidth > 0 && lightboxImage.naturalHeight > 0) {
                                 sizeLightboxImage(lightboxImage);
@@ -497,14 +473,11 @@
             });
         };
         
-        // Set up load handler BEFORE checking if image is complete
-        // This ensures we catch the load event even for cached images
+        // Set up load handler
         const handleLoad = function() {
-            // Wait for dimensions to be available
             requestAnimationFrame(() => {
                 if (this.naturalWidth > 0 && this.naturalHeight > 0) {
                     sizeLightboxImage(this);
-                    // Size again after a short delay to ensure viewport is correct
                     setTimeout(() => {
                         if (this.naturalWidth > 0 && this.naturalHeight > 0) {
                             sizeLightboxImage(this);
@@ -514,7 +487,6 @@
             });
         };
         
-        // Remove any existing load handler to avoid duplicates
         lightboxImage.onload = null;
         lightboxImage.onload = handleLoad;
         
@@ -523,15 +495,11 @@
         };
         
         // Handle both cached and new images
-        // Check if image is already loaded (cached)
         if (lightboxImage.complete && lightboxImage.naturalWidth > 0 && lightboxImage.naturalHeight > 0) {
-            // Image is already loaded (cached) - size immediately but wait for lightbox render
             sizeImageWhenReady();
         }
-        // For new images, the onload handler will be called
         
         // Force resize after delays to ensure viewport is correct
-        // Use multiple attempts to catch any timing issues
         setTimeout(() => {
             if (lightboxImage.complete && lightboxImage.naturalWidth > 0 && lightboxImage.naturalHeight > 0) {
                 sizeLightboxImage(lightboxImage);
@@ -548,56 +516,38 @@
     // Close lightbox
     function closeLightbox() {
         if (!lightbox) return;
-        console.log('Closing lightbox - restoring scroll position:', savedScrollPosition);
         
-        // Get the saved scroll position before any changes
-        const scrollY = savedScrollPosition;
-        
+        // Hide lightbox popup
         lightbox.classList.remove('active');
         
-        // Reset lightbox position
-        lightbox.style.top = '';
-        lightbox.style.left = '';
-        lightbox.style.right = '';
-        lightbox.style.bottom = '';
-        lightbox.style.position = '';
-        lightbox.style.margin = '';
-        lightbox.style.padding = '';
+        // Reset lightbox positioning - remove all inline styles
+        lightbox.style.removeProperty('position');
+        lightbox.style.removeProperty('top');
+        lightbox.style.removeProperty('left');
+        lightbox.style.removeProperty('right');
+        lightbox.style.removeProperty('bottom');
+        lightbox.style.removeProperty('width');
+        lightbox.style.removeProperty('height');
+        lightbox.style.removeProperty('margin');
+        lightbox.style.removeProperty('padding');
+        lightbox.style.removeProperty('transform');
+        lightbox.style.removeProperty('z-index');
         
-        // Remove lightbox-open classes FIRST
+        // Restore body positioning and scroll
         document.body.classList.remove('lightbox-open');
         document.documentElement.classList.remove('lightbox-open');
-        
-        // Restore body and documentElement styles
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
-        document.documentElement.style.position = '';
         
-        // Restore scroll position IMMEDIATELY without animation
-        // Do this synchronously to prevent any layout shifts
-        document.documentElement.scrollTop = scrollY;
-        document.body.scrollTop = scrollY;
-        
-        // Also use scrollTo with instant behavior
+        // Restore scroll position to return to the current view
         window.scrollTo({
-            top: scrollY,
+            top: savedScrollPosition,
             left: 0,
-            behavior: 'instant' // Instant scroll, no animation
+            behavior: 'instant'
         });
-        
-        // Force scroll position again after a microtask to ensure it sticks
-        requestAnimationFrame(() => {
-            document.documentElement.scrollTop = scrollY;
-            document.body.scrollTop = scrollY;
-            window.scrollTo({
-                top: scrollY,
-                left: 0,
-                behavior: 'instant'
-            });
-        });
-        
-        console.log('Scroll position restored to:', scrollY);
-        console.log('Actual scroll position:', window.pageYOffset, document.documentElement.scrollTop);
     }
     
     // Show previous photo

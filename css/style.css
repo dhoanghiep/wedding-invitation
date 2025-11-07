@@ -36,16 +36,13 @@ body {
     overflow-x: hidden;
 }
 
-/* Prevent scrolling when lightbox is open without affecting fixed positioning */
+/* Prevent scrolling when lightbox is open - position is handled by JS to maintain scroll view */
 body.lightbox-open {
     overflow: hidden;
-    position: relative;
-    height: 100vh;
 }
 
 html.lightbox-open {
     overflow: hidden;
-    height: 100vh;
 }
 
 .container {
@@ -519,11 +516,11 @@ section {
 /* Lightbox */
 .lightbox {
     display: none;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100vw;
     height: 100vh;
     max-width: 100vw;
@@ -532,14 +529,8 @@ section {
     background: rgba(0, 0, 0, 0.9);
     z-index: 2000;
     box-sizing: border-box;
-    /* Ensure lightbox is always at viewport origin */
-    margin: 0 !important;
+    margin: 0;
     padding: 0;
-    /* Ensure lightbox is always relative to viewport, not document */
-    transform: translate(0, 0) !important;
-    will-change: transform;
-    /* Force viewport positioning */
-    position: fixed;
 }
 
 .lightbox.active {
