@@ -413,20 +413,6 @@
         });
     }
 
-    // Helper function to show messages
-    function showMessage(element, message, type) {
-        element.textContent = message;
-        element.className = `form-message ${type}`;
-
-        // Scroll to message
-        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-            element.classList.remove('success', 'error');
-        }, 5000);
-    }
-
     // Fade in animation on scroll
     const observerOptions = {
         threshold: 0.1,

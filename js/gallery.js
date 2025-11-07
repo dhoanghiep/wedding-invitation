@@ -254,13 +254,6 @@
         });
     }
     
-    // Load photos into grid with error handling (legacy function for backward compatibility)
-    function loadPhotos() {
-        if (journeyGrid) {
-            loadCategoryPhotosToGrid('journey');
-        }
-    }
-    
     // Load image with retry logic for rate limiting
     async function loadImageWithRetry(img, originalUrl, index, retryCount = 0) {
         const maxRetries = 3;

@@ -88,39 +88,7 @@
                 preWeddingLocation: 'Location',
                 wedding: 'Wedding',
                 weddingDate: 'Date & Time',
-                weddingLocation: 'Location',
-                party: 'Party/Reception',
-                partyDate: 'Date & Time',
-                partyLocation: 'Location',
-                mainWedding: 'Main Wedding',
-                mainWeddingDate: 'Date & Time',
-                mainWeddingLocation: 'Location'
-            },
-            // Schedule Section
-            schedule: {
-                title: 'Wedding Schedule',
-                ceremony: 'Ceremony',
-                ceremonyDate: 'Date & Time',
-                ceremonyLocation: 'Location',
-                party: 'Party/Reception',
-                partyDate: 'Date & Time',
-                partyLocation: 'Location',
-                mainWedding: 'Main Wedding',
-                mainWeddingDate: 'Date & Time',
-                mainWeddingLocation: 'Location',
-                viewLocation: 'View Location'
-            },
-            // Quick Links Section
-            quickLinks: {
-                title: 'Explore More',
-                rsvp: 'RSVP',
-                rsvpDesc: 'Let us know if you\'ll be joining us',
-                location: 'Location',
-                locationDesc: 'Find venues and accommodations',
-                album: 'Album',
-                albumDesc: 'View our photos and memories',
-                story: 'Our Story',
-                storyDesc: 'Learn how we met'
+                weddingLocation: 'Location'
             }
         },
         vi: {
@@ -196,7 +164,6 @@
                 fillFields: 'Vui lòng điền vào tất cả các trường bắt buộc.',
                 validEmail: 'Vui lòng nhập địa chỉ email hợp lệ.'
             },
-            },
             // Timeline Section
             timeline: {
                 title: 'Lịch trình ngày cưới',
@@ -209,39 +176,7 @@
                 preWeddingLocation: 'Địa điểm',
                 wedding: 'Đám cưới',
                 weddingDate: 'Ngày & Giờ',
-                weddingLocation: 'Địa điểm',
-                party: 'Tiệc/Đón khách',
-                partyDate: 'Ngày & Giờ',
-                partyLocation: 'Địa điểm',
-                mainWedding: 'Đám cưới chính',
-                mainWeddingDate: 'Ngày & Giờ',
-                mainWeddingLocation: 'Địa điểm'
-            },
-            // Schedule Section
-            schedule: {
-                title: 'Lịch trình đám cưới',
-                ceremony: 'Lễ cưới',
-                ceremonyDate: 'Ngày & Giờ',
-                ceremonyLocation: 'Địa điểm',
-                party: 'Tiệc/Đón khách',
-                partyDate: 'Ngày & Giờ',
-                partyLocation: 'Địa điểm',
-                mainWedding: 'Đám cưới chính',
-                mainWeddingDate: 'Ngày & Giờ',
-                mainWeddingLocation: 'Địa điểm',
-                viewLocation: 'Xem địa điểm'
-            },
-            // Quick Links Section
-            quickLinks: {
-                title: 'Khám phá thêm',
-                rsvp: 'Xác nhận',
-                rsvpDesc: 'Cho chúng tôi biết bạn có tham dự không',
-                location: 'Địa điểm',
-                locationDesc: 'Tìm địa điểm và chỗ ở',
-                album: 'Album',
-                albumDesc: 'Xem ảnh và kỷ niệm của chúng tôi',
-                story: 'Câu chuyện của chúng tôi',
-                storyDesc: 'Tìm hiểu cách chúng tôi gặp nhau'
+                weddingLocation: 'Địa điểm'
             }
         }
     };
@@ -278,22 +213,12 @@
         // Update hero section
         updateText('[data-i18n="hero.title"]', t.hero.title);
         updateText('[data-i18n="hero.date"]', t.hero.date);
-        updateText('[data-i18n="hero.button"]', t.hero.button);
 
         // Update bride and groom section
         updateText('[data-i18n="brideGroom.title"]', t.brideGroom.title);
         updateText('[data-i18n="brideGroom.subtitle"]', t.brideGroom.subtitle);
         updateText('[data-i18n="brideGroom.intro"]', t.brideGroom.intro);
         updateText('[data-i18n="brideGroom.button"]', t.brideGroom.button);
-
-        // Update invitation section
-        updateText('[data-i18n="invitation.title"]', t.invitation.title);
-        updateText('[data-i18n="invitation.subtitle"]', t.invitation.subtitle);
-        updateText('[data-i18n="invitation.dateTime"]', t.invitation.dateTime);
-        updateText('[data-i18n="invitation.date"]', t.invitation.date);
-        updateText('[data-i18n="invitation.time"]', t.invitation.time);
-        updateText('[data-i18n="invitation.location"]', t.invitation.location);
-        updateText('[data-i18n="invitation.mapLink"]', t.invitation.mapLink);
 
         // Update gallery section
         updateText('[data-i18n="gallery.title"]', t.gallery.title);
@@ -336,9 +261,6 @@
         updateText('[data-i18n="contact.message"]', t.contact.message);
         updateText('[data-i18n="contact.send"]', t.contact.send);
 
-        // Update footer
-        updateText('[data-i18n="footer.text"]', t.footer.text);
-
         // Update timeline section
         updateText('[data-i18n="timeline.title"]', t.timeline.title);
         updateText('[data-i18n="timeline.subtitle"]', t.timeline.subtitle);
@@ -351,36 +273,6 @@
         updateText('[data-i18n="timeline.wedding"]', t.timeline.wedding);
         updateText('[data-i18n="timeline.weddingDate"]', t.timeline.weddingDate);
         updateText('[data-i18n="timeline.weddingLocation"]', t.timeline.weddingLocation);
-        updateText('[data-i18n="timeline.party"]', t.timeline.party);
-        updateText('[data-i18n="timeline.partyDate"]', t.timeline.partyDate);
-        updateText('[data-i18n="timeline.partyLocation"]', t.timeline.partyLocation);
-        updateText('[data-i18n="timeline.mainWedding"]', t.timeline.mainWedding);
-        updateText('[data-i18n="timeline.mainWeddingDate"]', t.timeline.mainWeddingDate);
-        updateText('[data-i18n="timeline.mainWeddingLocation"]', t.timeline.mainWeddingLocation);
-
-        // Update schedule section
-        updateText('[data-i18n="schedule.title"]', t.schedule.title);
-        updateText('[data-i18n="schedule.ceremony"]', t.schedule.ceremony);
-        updateText('[data-i18n="schedule.ceremonyDate"]', t.schedule.ceremonyDate);
-        updateText('[data-i18n="schedule.ceremonyLocation"]', t.schedule.ceremonyLocation);
-        updateText('[data-i18n="schedule.party"]', t.schedule.party);
-        updateText('[data-i18n="schedule.partyDate"]', t.schedule.partyDate);
-        updateText('[data-i18n="schedule.partyLocation"]', t.schedule.partyLocation);
-        updateText('[data-i18n="schedule.mainWedding"]', t.schedule.mainWedding);
-        updateText('[data-i18n="schedule.mainWeddingDate"]', t.schedule.mainWeddingDate);
-        updateText('[data-i18n="schedule.mainWeddingLocation"]', t.schedule.mainWeddingLocation);
-        updateText('[data-i18n="schedule.viewLocation"]', t.schedule.viewLocation);
-
-        // Update quick links section
-        updateText('[data-i18n="quickLinks.title"]', t.quickLinks.title);
-        updateText('[data-i18n="quickLinks.rsvp"]', t.quickLinks.rsvp);
-        updateText('[data-i18n="quickLinks.rsvpDesc"]', t.quickLinks.rsvpDesc);
-        updateText('[data-i18n="quickLinks.location"]', t.quickLinks.location);
-        updateText('[data-i18n="quickLinks.locationDesc"]', t.quickLinks.locationDesc);
-        updateText('[data-i18n="quickLinks.album"]', t.quickLinks.album);
-        updateText('[data-i18n="quickLinks.albumDesc"]', t.quickLinks.albumDesc);
-        updateText('[data-i18n="quickLinks.story"]', t.quickLinks.story);
-        updateText('[data-i18n="quickLinks.storyDesc"]', t.quickLinks.storyDesc);
 
         // Update language toggle button
         const langToggle = document.getElementById('language-toggle');
