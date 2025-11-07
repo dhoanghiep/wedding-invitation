@@ -417,7 +417,11 @@
     function setupLanguageToggle() {
         const langToggle = document.getElementById('language-toggle');
         if (langToggle) {
-            langToggle.addEventListener('click', () => {
+            // Remove existing event listeners by cloning the element
+            const newToggle = langToggle.cloneNode(true);
+            langToggle.parentNode.replaceChild(newToggle, langToggle);
+            
+            newToggle.addEventListener('click', () => {
                 const newLang = currentLanguage === 'en' ? 'vi' : 'en';
                 setLanguage(newLang);
             });
@@ -453,5 +457,22 @@
     } else {
         init();
     }
+
+    // Setup language toggle when header component is loaded
+    document.addEventListener('componentLoaded', (e) => {
+        if (e.detail && e.detail.component === 'header-placeholder') {
+            // Wait a bit for the DOM to update
+            setTimeout(() => {
+                setupLanguageToggle();
+            }, 100);
+        }
+    });
+
+    // Also listen for componentsReady event as fallback
+    document.addEventListener('componentsReady', () => {
+        setTimeout(() => {
+            setupLanguageToggle();
+        }, 100);
+    });
 })();
 
