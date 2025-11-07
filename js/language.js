@@ -8,7 +8,7 @@
             nav: {
                 home: 'Home',
                 location: 'Location',
-                story: 'Our Story',
+                story: 'Love Story',
                 gallery: 'Gallery',
                 rsvp: 'RSVP',
                 contact: 'Contact'
@@ -49,8 +49,7 @@
                 weddingPhotos: 'Wedding photos',
                 weddingPhotosDesc: 'Coming Soon! Our official wedding photos will be uploaded here after the big day. We can\'t wait to share them!',
                 weddingPhotosSubsections: {
-                    vuQuy: 'Vu Quy Ceremony',
-                    theParty: 'The party',
+                    theParty: 'Welcome Party',
                     reception: 'Reception',
                     wedding: 'Wedding'
                 },
@@ -84,7 +83,7 @@
                 guestOf: 'You are a guest of: *',
                 guestOfBride: 'The Bride',
                 guestOfGroom: 'The Groom',
-                guestOfBoth: 'Both!',
+                guestOfBoth: 'Both',
                 phone: 'Phone Number',
                 phoneOptional: '(Optional)',
                 guests: 'Number of Guests *',
@@ -94,8 +93,7 @@
                 no: 'No, sorry, I can\'t make it.',
                 maybe: 'Maybe',
                 eventsAttending: 'That\'s great! Please check all the events you\'ll be attending:',
-                vuQuyCeremony: 'Vu Quy Ceremony (Lễ Vu Quy)',
-                preWeddingParty: 'Pre-Wedding Party',
+                welcomeParty: 'Welcome Party',
                 mainWedding: 'Main Wedding (Ceremony & Reception)',
                 message: 'Message to Us',
                 messagePlaceholder: 'e.g., a song request, a sweet note!',
@@ -126,24 +124,18 @@
             timeline: {
                 title: 'Wedding schedule',
                 subtitle: 'Here\'s the plan for our celebration! We can\'t wait to see you there.',
-                ceremony: 'Vu Quy Ceremony',
-                ceremonyDate: '9:30 AM, 31/12/2025',
-                ceremonyLocation: '332/18 Cach Mang Thang 8, \n Nhieu Loc \n Ho Chi Minh City',
-                preWedding: 'Pre-wedding Party',
-                preWeddingDate: '5:00 PM, 31/12/2025',
-                preWeddingLocation: 'Siha cafe \n 58 Nguyen Dinh Chinh, Phu Nhuan \n Ho Chi Minh City',
+                welcomeParty: 'Welcome Party',
+                welcomePartyDate: '5:00 PM, 31/12/2025',
+                welcomePartyLocation: 'Siha cafe \n 58 Nguyen Dinh Chinh, Phu Nhuan \n Ho Chi Minh City',
                 wedding: 'Wedding Ceremony',
                 weddingDate: '5:00 PM, 1/1/2026',
                 weddingLocation: 'Chloe Gallery \n 06 Phan Van Chuong, Tan My \n Ho Chi Minh City',
                 timeLabel: 'Date & Time:',
                 locationLabel: 'Location:',
                 addressLabel: 'Address:',
-                ceremonyTime: '9:30 AM 31/12/2025',
-                ceremonyLocationName: 'The Bride\'s Family Home',
-                ceremonyAddress: '332/18 Cach Mang Thang 8,\n Nhieu Loc, Ho Chi Minh City',
-                preWeddingTime: '5:00 PM 31/12/2025',
-                preWeddingLocationName: 'Siha Cafe',
-                preWeddingAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
+                welcomePartyTime: '5:00 PM 31/12/2025',
+                welcomePartyLocationName: 'Siha Cafe',
+                welcomePartyAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
                 weddingTime: '5:00 PM 1/1/2026',
                 weddingLocationName: 'Chloe Gallery',
                 weddingAddress: '06 Phan Van Chuong\n Tan My, Ho Chi Minh City'
@@ -152,14 +144,10 @@
             location: {
                 title: 'Wedding Venues',
                 subtitle: 'Find all our wedding venues',
-                ceremony: 'Vu Quy Ceremony',
-                ceremonyVenue: 'The Bride\'s Family Home',
-                ceremonyAddress: '332/18 Cach Mang Thang 8,\n Nhieu Loc, Ho Chi Minh City',
-                ceremonyTime: '9:30 AM 31/12/2025',
-                preWedding: 'Pre-wedding Party',
-                preWeddingVenue: 'Siha Cafe',
-                preWeddingAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
-                preWeddingTime: '5:00 PM 31/12/2025',
+                welcomeParty: 'Welcome Party',
+                welcomePartyVenue: 'Siha Cafe',
+                welcomePartyAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
+                welcomePartyTime: '5:00 PM 31/12/2025',
                 wedding: 'Wedding Ceremony',
                 weddingVenue: 'Chloe Gallery',
                 weddingAddress: '06 Phan Van Chuong\n Tan My, Ho Chi Minh City',
@@ -174,16 +162,21 @@
             // Story Section
             story: {
                 title: 'Our Story',
-                subtitle: 'Welcome to our story! It\'s our favorite one, and it\'s all led to this amazing day.',
+                subtitle: 'Welcome to our love story! Please read through some fun facts prior the party so you can win some games at our wedding!',
                 meetTitle: 'First, Meet the Bride & Groom',
-                meetBride: 'Meet Minh Anh (The Bride)',
-                brideBio: 'Intro bé Ti',
-                brideQuote: '"Quote bé Ti"',
-                brideQuote: '"Looks like she could kill you & actually could kill you."',
-                meetGroom: 'Meet Hoàng Hiệp (The Groom)',
-                groomBio: 'Intro Hiệp',
-                groomQuote: '"Quote Hiệp"',
-                howWeMet: 'How We Met',
+                brideTitle: 'Our Bride ',
+                brideSubtitle: 'A chill girl who wanna be young & rich 🤑',
+                bridePersonalityLabel: 'Personality:',
+                bridePersonality: '"Looks like they could kill you, would kill you." 🔪😂',
+                brideDescriptionLabel: 'Description:',
+                brideDescription: 'Is the Buddha in Wukong and Buddha series - the one who always cause troubles & challenge themselves. Is an excellent problem solver so she always make irrational decisions & cause more problems (to solve & become more experience).',
+                groomTitle: 'Our Groom',
+                groomSubtitle: 'A talented actor from Hà Nội acting school since 1998 - "You are who are you!"',
+                groomPersonalityLabel: 'Personality:',
+                groomPersonality: '"Looks like a cinnamon roll, is a cinnamon roll... or maybe not?" 🤔',
+                groomDescriptionLabel: 'Description:',
+                groomDescription: 'Is a typical straight man who is always calm, non-confrontational but date June - weird choice huh?! Is the Wukong in the relationship with a powerful magic wand who can solve 99% of June\'s problems. Is an almost professional badminton player at Peter MacCallum Cancer Centre.',
+                howWeMet: 'How we met',
                 howWeMetSubtitle: 'How we met subtitle',
                 howWeMetIntro: 'Our story began in [Year] at [Place where you met, e.g., "a friend\'s birthday party," "the office," "Hanoi Old Quarter"].',
                 bridePerspective: 'Góc nhìn của Ti:',
@@ -203,6 +196,12 @@
                 everAfterIntro: 'Ever after intro',
                 everAfterStory: 'Ever after story',
                 everAfterClosing: 'Ever after closing'
+            },
+            // Explore Section
+            explore: {
+                text: 'Learn more about our story and see our favorite memories so far.',
+                storyButton: 'Explore Our Love Story',
+                galleryButton: 'View Our Gallery'
             }
         },
         vi: {
@@ -210,7 +209,7 @@
             nav: {
                 home: 'Trang chủ',
                 location: 'Địa điểm',
-                story: 'Câu chuyện',
+                story: 'Chuyện tình',
                 gallery: 'Thư viện ảnh',
                 rsvp: 'Phản hồi',
                 contact: 'Liên hệ'
@@ -249,15 +248,14 @@
                     dalat: 'Đà Lạt'
                 },
                 weddingPhotos: 'Ảnh cưới',
-                weddingPhotosDesc: 'Sắp có nhé! Ảnh cưới chính thức sẽ được tụi mình đăng lên đây sau ngày trọng đại. Chúng mình rất mong được chia sẻ chúng!',
+                weddingPhotosDesc: 'Sắp có nhé! Ảnh cưới chính thức sẽ được chúng mình đăng lên đây sau ngày trọng đại. Chúng mình rất mong được chia sẻ chúng!',
                 weddingPhotosSubsections: {
-                    vuQuy: 'Lễ Vu Quy',
-                    theParty: 'Tiệc trước đám cưới',
+                    theParty: 'Tiệc thân mật',
                     reception: 'Đón khách',
                     wedding: 'Lễ cưới'
                 },
                 guestUploads: 'Ảnh từ khách mời',
-                guestUploadsDesc: 'Các bạn chính là những nhiếp ảnh gia xịn nhất! Nếu bạn có bất kỳ khoảnh khắc nào trong ngày cưới (hoặc bất kỳ kỷ niệm vui nào với tụi mình), hãy chia sẻ tại đây nhé. Chúng mình rất muốn nhìn thấy ngày vui qua lăng kính của các bạn.',
+                guestUploadsDesc: 'Các bạn chính là những nhiếp ảnh gia xịn nhất! Nếu bạn có bất kỳ khoảnh khắc nào trong ngày cưới (hoặc bất kỳ kỷ niệm vui nào với chúng mình), hãy chia sẻ tại đây nhé. Chúng mình rất muốn nhìn thấy ngày vui qua lăng kính của các bạn.',
                 videosDesc: 'Một vài khoảnh khắc yêu thích nhất của chúng mình qua những thước phim.',
                 comingSoon: 'Ảnh sắp có...',
                 uploadTitle: 'Chia sẻ ảnh của bạn',
@@ -286,20 +284,19 @@
                 guestOf: 'Bạn là khách mời của: *',
                 guestOfBride: 'Cô dâu',
                 guestOfGroom: 'Chú rể',
-                guestOfBoth: 'Cả hai!',
+                guestOfBoth: 'Cả hai',
                 phone: 'Số điện thoại',
                 phoneOptional: '(Không bắt buộc)',
                 guests: 'Số lượng khách tham dự *',
-                attendance: 'Bạn có tham dự cùng tụi mình không? *',
+                attendance: 'Bạn có tham dự cùng chúng mình không? *',
                 selectOption: 'Vui lòng chọn...',
                 yes: 'Có, mình sẽ đến!',
                 no: 'Rất tiếc, mình không đến được.',
                 maybe: 'Có thể',
                 eventsAttending: 'Tuyệt vời! Vui lòng chọn các sự kiện bạn sẽ tham dự:',
-                vuQuyCeremony: 'Lễ Vu Quy',
-                preWeddingParty: 'Tiệc trước ngày cưới',
+                welcomeParty: 'Tiệc thân mật',
                 mainWedding: 'Lễ cưới',
-                message: 'Lời nhắn cho tụi mình',
+                message: 'Lời nhắn cho chúng mình',
                 messagePlaceholder: 'vd: yêu cầu bài hát, một lời chúc dễ thương!',
                 otherRequests: 'Yêu cầu khác',
                 otherRequestsPlaceholder: 'vd: dị ứng đồ ăn, cần hỗ trợ di chuyển',
@@ -328,24 +325,18 @@
             timeline: {
                 title: 'Lịch trình ngày cưới',
                 subtitle: 'Đây là kế hoạch cho ngày vui của chúng mình! Rất mong được gặp các bạn ở đó.',
-                ceremony: 'Lễ Vu Quy',
-                ceremonyDate: 'Ngày & Giờ',
-                ceremonyLocation: 'Địa điểm',
-                preWedding: 'Tiệc Trước Ngày Cưới',
-                preWeddingDate: 'Ngày & Giờ',
-                preWeddingLocation: 'Địa điểm',
+                welcomeParty: 'Tiệc thân mật',
+                welcomePartyDate: 'Ngày & Giờ',
+                welcomePartyLocation: 'Địa điểm',
                 wedding: 'Lễ Cưới',
                 weddingDate: 'Ngày & Giờ',
                 weddingLocation: 'Địa điểm',
                 timeLabel: 'Ngày & Giờ:',
                 locationLabel: 'Địa điểm:',
                 addressLabel: 'Địa chỉ:',
-                ceremonyTime: '9:30 SA 31/12/2025',
-                ceremonyLocationName: 'Tư gia nhà gái',
-                ceremonyAddress: '332/18 Cách Mạng Tháng 8\n Nhiêu Lộc, TP. Hồ Chí Minh',
-                preWeddingTime: '5:00 CH 31/12/2025',
-                preWeddingLocationName: 'Siha Cafe',
-                preWeddingAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
+                welcomePartyTime: '5:00 CH 31/12/2025',
+                welcomePartyLocationName: 'Siha Cafe',
+                welcomePartyAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
                 weddingTime: '5:00 CH 1/1/2026',
                 weddingLocationName: 'Chloe Gallery',
                 weddingAddress: '06 Phan Văn Chương\n Tân Mỹ, TP. Hồ Chí Minh'
@@ -354,14 +345,10 @@
             location: {
                 title: 'Địa điểm tổ chức',
                 subtitle: 'Tìm tất cả các địa điểm tổ chức tiệc cưới của chúng mình',
-                ceremony: 'Lễ Vu Quy',
-                ceremonyVenue: 'Tư gia nhà gái',
-                ceremonyAddress: '332/18 Cách Mạng Tháng 8\n Nhiêu Lộc, TP. Hồ Chí Minh',
-                ceremonyTime: '9:30 SA 31/12/2025',
-                preWedding: 'Tiệc Trước Ngày Cưới',
-                preWeddingVenue: 'Siha Cafe',
-                preWeddingAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
-                preWeddingTime: '5:00 CH 31/12/2025',
+                welcomeParty: 'Tiệc thân mật',
+                welcomePartyVenue: 'Siha Cafe',
+                welcomePartyAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
+                welcomePartyTime: '5:00 CH 31/12/2025',
                 wedding: 'Lễ Cưới',
                 weddingVenue: 'Chloe Gallery',
                 weddingAddress: '06 Phan Văn Chương\n Tân Mỹ, TP. Hồ Chí Minh',
@@ -375,16 +362,22 @@
             },
             // Story Section
             story: {
-                title: 'Câu Chuyện Của Tụi Mình',
-                subtitle: 'Chào mừng đến với câu chuyện của tụi mình! Đây là câu chuyện tụi mình yêu thích nhất, và nó đã dẫn đến ngày tuyệt vời này.',
-                meetTitle: 'Đầu Tiên, Gặp Gỡ Cô Dâu & Chú Rể',
-                meetBride: 'Gặp Gỡ Minh Anh (Cô Dâu)',
-                brideBio: 'Intro bé Ti',
-                brideQuote: '"Quote bé Ti"',
-                meetGroom: 'Gặp Gỡ Hoàng Hiệp (Chú Rể)',
-                groomBio: 'Intro Hiệp',
-                groomQuote: '"Quote Hiệp"',
-                howWeMet: 'Tụi Mình Gặp Nhau Thế Nào',
+                title: 'Chuyện tình yêu của chúng mình',
+                subtitle: '"Chào mừng đến với câu chuyện của tụi mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè',
+                meetTitle: 'Cùng gặp Cô dâu và Chú rể',
+                brideTitle: 'Cô dâu Minh Anh',
+                brideSubtitle: 'Giao diện đồng hành với hệ điều hành - luôn "chiến"! 🤑',
+                bridePersonalityLabel: 'Tính cách:',
+                bridePersonality: 'Nhìn như thể có thể giết bạn, và sẽ giết bạn. 🔪😂',
+                brideDescriptionLabel: 'Mô tả:',
+                brideDescription: 'Là "Đường Tăng" trong mối quan hệ - thích "kiếm chuyện" & va vào rắc rối - khi không giải quyết được thì alo chú rể aka Ngộ Không Hoàng Hiệp. Là problem solver siêu đỉnh nên rất hay gặp problem - Ủa?!. Là 1 chill girl chính hiệu nhưng không muốn ngồi chill quá lâu.',
+                groomTitle: 'Chú rể Hoàng Hiệp',
+                groomSubtitle: 'Diễn viên chuyên nghiệp từ trường sân khấu điện ảnh Hà Nội since 1998 - "Muốn vai nào anh diễn trọn vai đó cho em!" 👶',
+                groomPersonalityLabel: 'Tính cách:',
+                groomPersonality: '"Looks like a cinnamon roll, is a cinnamon roll... or maybe not?" 🤔',
+                groomDescriptionLabel: 'Mô tả:',
+                groomDescription: 'Là thẳng nam chính hiệu, luôn điềm tĩnh và né xa rắc rối nhưng lại dính vào Minh Anh - Ủa?! Là Ngộ Không đa tài đa năng có 7749 phép thần thông để làm dịu chill girl. Là vận động viên cầu lông bán chuyên nghiệp tại Peter Maccallum Cancer Centre',
+                howWeMet: 'chúng Mình Gặp Nhau Thế Nào',
                 howWeMetSubtitle: 'Met subtitle',
                 howWeMetIntro: 'How we met intro',
                 bridePerspective: 'Góc nhìn của Ti:',
@@ -404,6 +397,12 @@
                 everAfterIntro: 'Ever after intro',
                 everAfterStory: 'Ever after story',
                 everAfterClosing: 'Ever after closing'
+            },
+            // Explore Section
+            explore: {
+                text: 'Đọc thêm về câu chuyện của chúng mình và xem những kỷ niệm yêu thích nhất nhé.',
+                storyButton: 'Khám Phá Câu Chuyện Tình Yêu',
+                galleryButton: 'Xem Thư Viện Ảnh'
             }
         }
     };
@@ -463,7 +462,6 @@
         updateText('[data-i18n="gallery.preWeddingSubsections.dalat"]', t.gallery.preWeddingSubsections.dalat);
         updateText('[data-i18n="gallery.weddingPhotos"]', t.gallery.weddingPhotos);
         updateText('[data-i18n="gallery.weddingPhotosDesc"]', t.gallery.weddingPhotosDesc);
-        updateText('[data-i18n="gallery.weddingPhotosSubsections.vuQuy"]', t.gallery.weddingPhotosSubsections.vuQuy);
         updateText('[data-i18n="gallery.weddingPhotosSubsections.theParty"]', t.gallery.weddingPhotosSubsections.theParty);
         updateText('[data-i18n="gallery.weddingPhotosSubsections.reception"]', t.gallery.weddingPhotosSubsections.reception);
         updateText('[data-i18n="gallery.weddingPhotosSubsections.wedding"]', t.gallery.weddingPhotosSubsections.wedding);
@@ -500,8 +498,7 @@
         updateText('[data-i18n="rsvp.yes"]', t.rsvp.yes);
         updateText('[data-i18n="rsvp.no"]', t.rsvp.no);
         updateText('[data-i18n="rsvp.eventsAttending"]', t.rsvp.eventsAttending);
-        updateText('[data-i18n="rsvp.vuQuyCeremony"]', t.rsvp.vuQuyCeremony);
-        updateText('[data-i18n="rsvp.preWeddingParty"]', t.rsvp.preWeddingParty);
+        updateText('[data-i18n="rsvp.welcomeParty"]', t.rsvp.welcomeParty);
         updateText('[data-i18n="rsvp.mainWedding"]', t.rsvp.mainWedding);
         updateText('[data-i18n="rsvp.message"]', t.rsvp.message);
         updateText('[data-i18n="rsvp.otherRequests"]', t.rsvp.otherRequests);
@@ -522,24 +519,18 @@
         // Update timeline section
         updateText('[data-i18n="timeline.title"]', t.timeline.title);
         updateText('[data-i18n="timeline.subtitle"]', t.timeline.subtitle);
-        updateText('[data-i18n="timeline.ceremony"]', t.timeline.ceremony);
-        updateText('[data-i18n="timeline.ceremonyDate"]', t.timeline.ceremonyDate);
-        updateText('[data-i18n="timeline.ceremonyLocation"]', t.timeline.ceremonyLocation);
-        updateText('[data-i18n="timeline.preWedding"]', t.timeline.preWedding);
-        updateText('[data-i18n="timeline.preWeddingDate"]', t.timeline.preWeddingDate);
-        updateText('[data-i18n="timeline.preWeddingLocation"]', t.timeline.preWeddingLocation);
+        updateText('[data-i18n="timeline.welcomeParty"]', t.timeline.welcomeParty);
+        updateText('[data-i18n="timeline.welcomePartyDate"]', t.timeline.welcomePartyDate);
+        updateText('[data-i18n="timeline.welcomePartyLocation"]', t.timeline.welcomePartyLocation);
         updateText('[data-i18n="timeline.wedding"]', t.timeline.wedding);
         updateText('[data-i18n="timeline.weddingDate"]', t.timeline.weddingDate);
         updateText('[data-i18n="timeline.weddingLocation"]', t.timeline.weddingLocation);
         updateText('[data-i18n="timeline.timeLabel"]', t.timeline.timeLabel);
         updateText('[data-i18n="timeline.locationLabel"]', t.timeline.locationLabel);
         updateText('[data-i18n="timeline.addressLabel"]', t.timeline.addressLabel);
-        updateText('[data-i18n="timeline.ceremonyTime"]', t.timeline.ceremonyTime);
-        updateText('[data-i18n="timeline.ceremonyLocationName"]', t.timeline.ceremonyLocationName);
-        updateText('[data-i18n="timeline.ceremonyAddress"]', t.timeline.ceremonyAddress);
-        updateText('[data-i18n="timeline.preWeddingTime"]', t.timeline.preWeddingTime);
-        updateText('[data-i18n="timeline.preWeddingLocationName"]', t.timeline.preWeddingLocationName);
-        updateText('[data-i18n="timeline.preWeddingAddress"]', t.timeline.preWeddingAddress);
+        updateText('[data-i18n="timeline.welcomePartyTime"]', t.timeline.welcomePartyTime);
+        updateText('[data-i18n="timeline.welcomePartyLocationName"]', t.timeline.welcomePartyLocationName);
+        updateText('[data-i18n="timeline.welcomePartyAddress"]', t.timeline.welcomePartyAddress);
         updateText('[data-i18n="timeline.weddingTime"]', t.timeline.weddingTime);
         updateText('[data-i18n="timeline.weddingLocationName"]', t.timeline.weddingLocationName);
         updateText('[data-i18n="timeline.weddingAddress"]', t.timeline.weddingAddress);
@@ -547,14 +538,10 @@
         // Update location section
         updateText('[data-i18n="location.title"]', t.location.title);
         updateText('[data-i18n="location.subtitle"]', t.location.subtitle);
-        updateText('[data-i18n="location.ceremony"]', t.location.ceremony);
-        updateText('[data-i18n="location.ceremonyVenue"]', t.location.ceremonyVenue);
-        updateText('[data-i18n="location.ceremonyAddress"]', t.location.ceremonyAddress);
-        updateText('[data-i18n="location.ceremonyTime"]', t.location.ceremonyTime);
-        updateText('[data-i18n="location.preWedding"]', t.location.preWedding);
-        updateText('[data-i18n="location.preWeddingVenue"]', t.location.preWeddingVenue);
-        updateText('[data-i18n="location.preWeddingAddress"]', t.location.preWeddingAddress);
-        updateText('[data-i18n="location.preWeddingTime"]', t.location.preWeddingTime);
+        updateText('[data-i18n="location.welcomeParty"]', t.location.welcomeParty);
+        updateText('[data-i18n="location.welcomePartyVenue"]', t.location.welcomePartyVenue);
+        updateText('[data-i18n="location.welcomePartyAddress"]', t.location.welcomePartyAddress);
+        updateText('[data-i18n="location.welcomePartyTime"]', t.location.welcomePartyTime);
         updateText('[data-i18n="location.wedding"]', t.location.wedding);
         updateText('[data-i18n="location.weddingVenue"]', t.location.weddingVenue);
         updateText('[data-i18n="location.weddingAddress"]', t.location.weddingAddress);
@@ -570,12 +557,18 @@
         updateText('[data-i18n="story.title"]', t.story.title);
         updateText('[data-i18n="story.subtitle"]', t.story.subtitle);
         updateText('[data-i18n="story.meetTitle"]', t.story.meetTitle);
-        updateText('[data-i18n="story.meetBride"]', t.story.meetBride);
-        updateText('[data-i18n="story.brideBio"]', t.story.brideBio);
-        updateText('[data-i18n="story.brideQuote"]', t.story.brideQuote);
-        updateText('[data-i18n="story.meetGroom"]', t.story.meetGroom);
-        updateText('[data-i18n="story.groomBio"]', t.story.groomBio);
-        updateText('[data-i18n="story.groomQuote"]', t.story.groomQuote);
+        updateText('[data-i18n="story.brideTitle"]', t.story.brideTitle);
+        updateText('[data-i18n="story.brideSubtitle"]', t.story.brideSubtitle);
+        updateText('[data-i18n="story.bridePersonalityLabel"]', t.story.bridePersonalityLabel);
+        updateText('[data-i18n="story.bridePersonality"]', t.story.bridePersonality);
+        updateText('[data-i18n="story.brideDescriptionLabel"]', t.story.brideDescriptionLabel);
+        updateText('[data-i18n="story.brideDescription"]', t.story.brideDescription);
+        updateText('[data-i18n="story.groomTitle"]', t.story.groomTitle);
+        updateText('[data-i18n="story.groomSubtitle"]', t.story.groomSubtitle);
+        updateText('[data-i18n="story.groomPersonalityLabel"]', t.story.groomPersonalityLabel);
+        updateText('[data-i18n="story.groomPersonality"]', t.story.groomPersonality);
+        updateText('[data-i18n="story.groomDescriptionLabel"]', t.story.groomDescriptionLabel);
+        updateText('[data-i18n="story.groomDescription"]', t.story.groomDescription);
         updateText('[data-i18n="story.howWeMet"]', t.story.howWeMet);
         updateText('[data-i18n="story.howWeMetSubtitle"]', t.story.howWeMetSubtitle);
         updateText('[data-i18n="story.howWeMetIntro"]', t.story.howWeMetIntro);
@@ -596,6 +589,11 @@
         updateText('[data-i18n="story.everAfterIntro"]', t.story.everAfterIntro);
         updateText('[data-i18n="story.everAfterStory"]', t.story.everAfterStory);
         updateText('[data-i18n="story.everAfterClosing"]', t.story.everAfterClosing);
+
+        // Update explore section
+        updateText('[data-i18n="explore.text"]', t.explore.text);
+        updateText('[data-i18n="explore.storyButton"]', t.explore.storyButton);
+        updateText('[data-i18n="explore.galleryButton"]', t.explore.galleryButton);
 
         // Update language toggle button
         const langToggle = document.getElementById('language-toggle');

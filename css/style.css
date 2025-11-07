@@ -1107,14 +1107,10 @@ section {
 }
 
 .timeline-item:nth-child(1) {
-    background: transparent;
-}
-
-.timeline-item:nth-child(2) {
     background: #FFF8E7;
 }
 
-.timeline-item:nth-child(3) {
+.timeline-item:nth-child(2) {
     background: transparent;
 }
 
@@ -1296,10 +1292,39 @@ section {
 .story-person-content h3 {
     font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-family: 'Georgia', 'Times New Roman', serif;
     font-weight: normal;
     letter-spacing: 1px;
+}
+
+.story-person-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+}
+
+.story-person-section {
+    margin-bottom: 25px;
+}
+
+.story-person-section h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.story-person-section .story-person-quote {
+    font-style: normal;
+    border-left: none;
+    padding-left: 0;
 }
 
 .story-person-bio {
@@ -1741,6 +1766,55 @@ section {
 }
 
 /* ============================================
+   Explore Section
+   ============================================ */
+.explore-section {
+    padding: 80px 0;
+    background: var(--bg-light);
+    text-align: center;
+}
+
+.explore-text {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+}
+
+.explore-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-explore {
+    background: #000000;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: normal;
+    font-family: 'Arial', sans-serif;
+    padding: 12px 40px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-explore:hover {
+    background: var(--primary-color);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
    Footer
    ============================================ */
 .footer {
@@ -1939,6 +2013,19 @@ section {
         font-size: 1.75rem;
     }
     
+    .story-person-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
+    
+    .story-person-section {
+        margin-bottom: 20px;
+    }
+    
+    .story-person-section h4 {
+        font-size: 1rem;
+    }
+    
     .story-person-bio {
         font-size: 1rem;
     }
@@ -2019,6 +2106,26 @@ section {
     .rsvp-banner-cta {
         font-size: 1rem;
         margin: 1.5rem 0 1rem 0;
+    }
+    
+    .explore-section {
+        padding: 60px 0;
+    }
+    
+    .explore-text {
+        font-size: 1.1rem;
+        padding: 0 20px;
+    }
+    
+    .explore-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .btn-explore {
+        width: 100%;
+        max-width: 300px;
     }
     
     .rsvp-header-line {
@@ -2180,6 +2287,19 @@ section {
         font-size: 1.5rem;
     }
     
+    .story-person-subtitle {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    
+    .story-person-section {
+        margin-bottom: 15px;
+    }
+    
+    .story-person-section h4 {
+        font-size: 0.95rem;
+    }
+    
     .story-person-bio {
         font-size: 0.95rem;
     }
@@ -2264,6 +2384,20 @@ section {
     .rsvp-banner-cta {
         font-size: 0.9rem;
         margin: 1.5rem 0 1rem 0;
+    }
+    
+    .explore-section {
+        padding: 50px 0;
+    }
+    
+    .explore-text {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
+    .btn-explore {
+        padding: 10px 30px;
+        font-size: 0.9rem;
     }
     
     .btn-rsvp-banner {
