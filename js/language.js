@@ -15,24 +15,10 @@
             },
             // Hero Section
             hero: {
-                title: "We're Getting Married!",
-                subtitle: 'Hoàng Hiệp & Minh Anh',
-                date: 'January 01, 2026',
-                button: 'View Invitation'
-            },
-            // Invitation Section
-            invitation: {
-                title: "You're Invited",
-                subtitle: 'Join us as we celebrate our special day',
-                dateTime: 'Date & Time',
-                date: 'January 01, 2026',
-                time: 'Reception: 5:00 PM',
-                location: 'Location',
-                venue: 'Siha',
-                address: 'Phạm Đình Chính',
-                city: 'Ho Chi Minh City',
-                mapLink: 'View on Google Maps'
-            },
+                title: "June \n & \n Hiep",
+                subtitle: 'We are getting married!',
+                date: 'January 1, 2026',
+            },           
             // Gallery Section
             gallery: {
                 title: 'Our Gallery',
@@ -83,10 +69,6 @@
                 success: 'Thank you for your message! We will get back to you soon.',
                 fillFields: 'Please fill in all required fields.',
                 validEmail: 'Please enter a valid email address.'
-            },
-            // Footer
-            footer: {
-                text: '© 2025 Hoàng Hiệp & Minh Anh. Made with ❤️'
             },
             // Timeline Section
             timeline: {
@@ -141,23 +123,9 @@
             },
             // Hero Section
             hero: {
-                title: 'Chúng tôi sắp kết hôn!',
-                subtitle: 'Hoàng Hiệp & Minh Anh',
-                date: 'Ngày 01 tháng 01 năm 2026',
-                button: 'Xem thiệp mời'
-            },
-            // Invitation Section
-            invitation: {
-                title: 'Bạn được mời',
-                subtitle: 'Hãy cùng chúng tôi chúc mừng ngày đặc biệt',
-                dateTime: 'Ngày & Giờ',
-                date: 'Ngày 01 tháng 01 năm 2026',
-                time: 'Đón khách: 05:00 chiều',
-                location: 'Địa điểm',
-                venue: 'Siha',
-                address: 'Phạm Đình Chính',
-                city: 'TP. Hồ Chí Minh',
-                mapLink: 'Xem trên Google Maps'
+                title: 'Minh Anh \n & \n Hoàng Hiệp',
+                subtitle: 'We are getting married!',
+                date: 'Ngày 1 tháng 1, 2026',
             },
             // Gallery Section
             gallery: {
