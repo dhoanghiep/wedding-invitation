@@ -568,7 +568,11 @@
         // Update language toggle button
         const langToggle = document.getElementById('language-toggle');
         if (langToggle) {
-            langToggle.textContent = lang === 'en' ? 'VI' : 'EN';
+            if (lang === 'en') {
+                langToggle.innerHTML = '<span class="lang-current">EN</span>/<span class="lang-other">VI</span>';
+            } else {
+                langToggle.innerHTML = '<span class="lang-current">VI</span>/<span class="lang-other">EN</span>';
+            }
             langToggle.setAttribute('aria-label', lang === 'en' ? 'Switch to Vietnamese' : 'Switch to English');
         }
     }
