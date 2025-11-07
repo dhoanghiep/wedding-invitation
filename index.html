@@ -28,13 +28,49 @@
         </div>
     </section>
 
+    <!-- Bride and Groom Section -->
+    <section class="bride-groom-section" id="bride-groom">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Bride and Groom</h2>
+                <p class="section-subtitle">A journey of love and togetherness</p>
+            </div>
+            <div class="bride-groom-content">
+                <div class="bride-groom-photos">
+                    <div class="bride-groom-photo">
+                        <div class="photo-placeholder">
+                            <p>Bride Photo</p>
+                        </div>
+                        <h3 class="person-name">Minh Anh</h3>
+                    </div>
+                    <div class="bride-groom-photo">
+                        <div class="photo-placeholder">
+                            <p>Groom Photo</p>
+                        </div>
+                        <h3 class="person-name">Hoàng Hiệp</h3>
+                    </div>
+                </div>
+                <div class="bride-groom-intro">
+                    <p class="intro-text">Two hearts, one love story. Join us as we celebrate the beginning of our forever together.</p>
+                </div>
+                <a href="/story.html" class="btn btn-story" data-i18n="nav.story">Read Our Story</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Timeline Section -->
     <section class="timeline" id="timeline">
         <div class="container">
-            <div class="timeline-container">
+            <div class="timeline-separator"></div>
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="timeline.title">Timeline</h2>
+                <p class="section-subtitle" data-i18n="timeline.subtitle">Our Wedding Events</p>
+            </div>
+        </div>
+        <div class="timeline-container">
                 <div class="timeline-item">
                     <div class="timeline-image">
-                        <img src="https://i.imgur.com/M6qpe4S.jpeg" alt="Ceremony" style="transform: translateY(-90px) scale(1.4);" />
+                        <img src="https://i.imgur.com/M6qpe4S.jpeg" alt="Ceremony" style="transform: translateY(-50px) scale(1.4);" />
                     </div>
                     <div class="timeline-content">
                         <h3 class="timeline-title" data-i18n="timeline.ceremony">Ceremony</h3>
@@ -72,24 +108,17 @@
                         <a href="/location.html" class="timeline-map-link">Map</a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="story-section">
-                <div class="story-divider"></div>
-                <p class="story-text">See how it all started</p>
-                <div class="story-divider"></div>
-                <a href="/story.html" class="btn btn-story" data-i18n="nav.story">Our Story</a>
-            </div>
         </div>
     </section>
 
-    <!-- Countdown Section -->
-    <section class="countdown" id="countdown">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="countdown.title">Countdown to Our Special Day</h2>
-            </div>
+    <!-- RSVP Banner Section with Countdown -->
+    <section class="rsvp-banner" id="rsvp-banner">
+        <div class="rsvp-banner-overlay"></div>
+        <div class="rsvp-banner-content">
+            <p class="rsvp-banner-subtitle">Join Us</p>
+            <h2 class="rsvp-banner-title">We hope you can make it!</h2>
             
+            <!-- Countdown inside RSVP Banner -->
             <div class="countdown-container">
                 <div class="countdown-item">
                     <div class="countdown-number" id="months">00</div>
@@ -108,15 +137,7 @@
                     <div class="countdown-label" data-i18n="countdown.minutes">Minutes</div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- RSVP Banner Section -->
-    <section class="rsvp-banner" id="rsvp-banner">
-        <div class="rsvp-banner-overlay"></div>
-        <div class="rsvp-banner-content">
-            <p class="rsvp-banner-subtitle">Join Us</p>
-            <h2 class="rsvp-banner-title">We hope you can make it!</h2>
+            
             <a href="/rsvp.html" class="btn btn-rsvp-banner" data-i18n="nav.rsvp">RSVP</a>
         </div>
     </section>

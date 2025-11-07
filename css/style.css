@@ -735,8 +735,15 @@ section {
 }
 
 .timeline .container {
-    padding: 0;
-    max-width: none;
+    padding: 60px 20px 0;
+    max-width: 1200px;
+}
+
+.timeline-separator {
+    width: 100%;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 0 0 60px 0;
 }
 
 .timeline-container {
@@ -760,15 +767,15 @@ section {
 }
 
 .timeline-item:nth-child(1) {
-    background: #FFF8E7;
-}
-
-.timeline-item:nth-child(2) {
     background: transparent;
 }
 
-.timeline-item:nth-child(3) {
+.timeline-item:nth-child(2) {
     background: #FFF8E7;
+}
+
+.timeline-item:nth-child(3) {
+    background: transparent;
 }
 
 .timeline-content {
@@ -855,12 +862,105 @@ section {
 }
 
 .story-section {
+    padding: 100px 0;
+    background: var(--bg-light);
+}
+
+.story-preview {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    margin-top: 100px;
-    padding: 0 20px;
+}
+
+/* ============================================
+   Bride and Groom Section
+   ============================================ */
+.bride-groom-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.bride-groom-section .section-header {
+    margin-bottom: 40px;
+}
+
+.bride-groom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.bride-groom-photos {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.bride-groom-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 200px;
+    max-width: 350px;
+}
+
+.photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #f0f0f0;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.photo-placeholder p {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-align: center;
+    opacity: 0.6;
+}
+
+.person-name {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: normal;
+    letter-spacing: 2px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    text-align: center;
+    margin: 0;
+}
+
+.bride-groom-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    margin: 0;
 }
 
 .story-divider {
@@ -1078,6 +1178,19 @@ section {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Countdown inside RSVP Banner */
+.rsvp-banner-content .countdown-container {
+    margin: 2rem 0;
+}
+
+.rsvp-banner-content .countdown-number {
+    color: #FFFFFF;
+}
+
+.rsvp-banner-content .countdown-label {
+    color: #FFFFFF;
+}
+
 /* ============================================
    Footer
    ============================================ */
@@ -1190,6 +1303,15 @@ section {
         font-size: 2rem;
     }
     
+    .timeline .container {
+        padding: 40px 20px 0;
+    }
+    
+    .timeline-separator {
+        margin: 0 0 40px 0;
+        height: 2px;
+    }
+    
     .timeline-item {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1205,7 +1327,37 @@ section {
     }
     
     .story-section {
-        margin-top: 60px;
+        padding: 60px 0;
+    }
+    
+    .bride-groom-section {
+        min-height: 100vh;
+        padding: 60px 0;
+    }
+    
+    .bride-groom-section .section-header {
+        margin-bottom: 30px;
+    }
+    
+    .bride-groom-content {
+        gap: 1.5rem;
+    }
+    
+    .bride-groom-photos {
+        gap: 30px;
+    }
+    
+    .bride-groom-photo {
+        min-width: 180px;
+        max-width: 280px;
+    }
+    
+    .person-name {
+        font-size: 1.5rem;
+    }
+    
+    .intro-text {
+        font-size: 1rem;
     }
     
     .story-divider {
@@ -1302,12 +1454,54 @@ section {
         font-size: 1rem;
     }
     
+    .timeline .container {
+        padding: 30px 15px 0;
+    }
+    
+    .timeline-separator {
+        margin: 0 0 30px 0;
+        height: 2px;
+    }
+    
     .timeline-image {
         min-height: 250px;
     }
     
     .story-text {
         font-size: 1.2rem;
+    }
+    
+    .bride-groom-section {
+        min-height: 100vh;
+        padding: 40px 0;
+    }
+    
+    .bride-groom-section .section-header {
+        margin-bottom: 20px;
+    }
+    
+    .bride-groom-content {
+        gap: 1.2rem;
+    }
+    
+    .bride-groom-photos {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .bride-groom-photo {
+        min-width: 200px;
+        max-width: 250px;
+        width: 100%;
+    }
+    
+    .person-name {
+        font-size: 1.3rem;
+    }
+    
+    .intro-text {
+        font-size: 0.95rem;
     }
     
     .story-divider {
