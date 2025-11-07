@@ -74,22 +74,35 @@
             // RSVP Section
             rsvp: {
                 title: 'RSVP',
+                intro: 'Please let us know your plans so we can make our arrangements. We can\'t wait to celebrate with you!',
                 subtitle: 'Please let us know if you\'ll be joining us',
                 bannerTitle: 'We hope you can join us!',
                 bannerSubtitle: 'We\'re counting down the days and really hope you can be there to celebrate with us!',
                 bannerCta: 'Ready to party? Click below to let us know.',
-                fullName: 'Full Name *',
-                email: 'Email Address *',
-                attendance: 'Will you be attending? *',
+                fullName: 'Name *',
+                email: 'Email *',
+                guestOf: 'You are a guest of: *',
+                guestOfBride: 'The Bride',
+                guestOfGroom: 'The Groom',
+                guestOfBoth: 'Both!',
+                phone: 'Phone Number',
+                phoneOptional: '(Optional)',
+                guests: 'Number of Guests *',
+                attendance: 'Will you be celebrating with us? *',
                 selectOption: 'Please select...',
                 yes: 'Yes, I\'ll be there!',
-                no: 'Sorry, I can\'t make it',
+                no: 'No, sorry, I can\'t make it.',
                 maybe: 'Maybe',
-                guests: 'Number of Guests',
+                eventsAttending: 'That\'s great! Please check all the events you\'ll be attending:',
+                vuQuyCeremony: 'Vu Quy Ceremony (Lễ Vu Quy)',
+                preWeddingParty: 'Pre-Wedding Party',
+                mainWedding: 'Main Wedding (Ceremony & Reception)',
+                message: 'Message to Us',
+                messagePlaceholder: 'e.g., a song request, a sweet note!',
+                otherRequests: 'Other Requests',
+                otherRequestsPlaceholder: 'e.g., dietary allergies, accessibility needs',
                 dietary: 'Dietary Restrictions or Allergies',
                 dietaryPlaceholder: 'Please let us know of any dietary restrictions or allergies',
-                message: 'Message (Optional)',
-                messagePlaceholder: 'Any additional notes or messages',
                 submit: 'Submit RSVP',
                 submitting: 'Submitting...',
                 success: 'Thank you for your RSVP! We look forward to seeing you.',
@@ -199,7 +212,7 @@
                 location: 'Địa điểm',
                 story: 'Câu chuyện',
                 gallery: 'Thư viện ảnh',
-                rsvp: 'Xác nhận',
+                rsvp: 'Phản hồi',
                 contact: 'Liên hệ'
             },
             // Hero Section
@@ -262,24 +275,37 @@
             },
             // RSVP Section
             rsvp: {
-                title: 'Xác nhận tham dự',
+                title: 'Phản hồi',
+                intro: 'Vui lòng cho chúng mình biết kế hoạch của bạn để chúng mình tiện sắp xếp nhé. Rất mong được chung vui cùng bạn!',
                 subtitle: 'Vui lòng cho chúng tôi biết bạn có tham dự không',
                 bannerTitle: 'Hy vọng bạn sẽ đến!',
                 bannerSubtitle: 'Chúng mình đang đếm ngược từng ngày và rất hy vọng bạn có thể ở đó để chung vui cùng chúng mình!',
                 bannerCta: 'Sẵn sàng "quẩy" chưa? Bấm vào bên dưới để cho chúng mình biết nhé.',
-                fullName: 'Họ và tên *',
-                email: 'Địa chỉ email *',
-                attendance: 'Bạn có tham dự không? *',
+                fullName: 'Tên của bạn *',
+                email: 'Email *',
+                guestOf: 'Bạn là khách mời của: *',
+                guestOfBride: 'Cô dâu',
+                guestOfGroom: 'Chú rể',
+                guestOfBoth: 'Cả hai!',
+                phone: 'Số điện thoại',
+                phoneOptional: '(Không bắt buộc)',
+                guests: 'Số lượng khách tham dự *',
+                attendance: 'Bạn có tham dự cùng tụi mình không? *',
                 selectOption: 'Vui lòng chọn...',
-                yes: 'Có, tôi sẽ tham dự!',
-                no: 'Xin lỗi, tôi không thể tham dự',
+                yes: 'Có, mình sẽ đến!',
+                no: 'Rất tiếc, mình không đến được.',
                 maybe: 'Có thể',
-                guests: 'Số lượng khách',
+                eventsAttending: 'Tuyệt vời! Vui lòng chọn các sự kiện bạn sẽ tham dự:',
+                vuQuyCeremony: 'Lễ Vu Quy',
+                preWeddingParty: 'Tiệc trước ngày cưới',
+                mainWedding: 'Lễ cưới',
+                message: 'Lời nhắn cho tụi mình',
+                messagePlaceholder: 'vd: yêu cầu bài hát, một lời chúc dễ thương!',
+                otherRequests: 'Yêu cầu khác',
+                otherRequestsPlaceholder: 'vd: dị ứng đồ ăn, cần hỗ trợ di chuyển',
                 dietary: 'Hạn chế về chế độ ăn uống hoặc dị ứng',
                 dietaryPlaceholder: 'Vui lòng cho chúng tôi biết về bất kỳ hạn chế về chế độ ăn uống hoặc dị ứng',
-                message: 'Lời nhắn (Tùy chọn)',
-                messagePlaceholder: 'Bất kỳ ghi chú hoặc lời nhắn bổ sung',
-                submit: 'Gửi xác nhận',
+                submit: 'Gửi Phản Hồi',
                 submitting: 'Đang gửi...',
                 success: 'Cảm ơn bạn đã xác nhận! Chúng tôi rất mong được gặp bạn.',
                 error: 'Xin lỗi, đã có lỗi khi gửi xác nhận. Vui lòng thử lại sau hoặc liên hệ trực tiếp với chúng tôi.',
@@ -459,25 +485,33 @@
 
         // Update RSVP section
         updateText('[data-i18n="rsvp.title"]', t.rsvp.title);
+        updateText('[data-i18n="rsvp.intro"]', t.rsvp.intro);
         updateText('[data-i18n="rsvp.subtitle"]', t.rsvp.subtitle);
         updateText('[data-i18n="rsvp.bannerTitle"]', t.rsvp.bannerTitle);
         updateText('[data-i18n="rsvp.bannerSubtitle"]', t.rsvp.bannerSubtitle);
         updateText('[data-i18n="rsvp.bannerCta"]', t.rsvp.bannerCta);
         updateText('[data-i18n="rsvp.fullName"]', t.rsvp.fullName);
         updateText('[data-i18n="rsvp.email"]', t.rsvp.email);
-        updateText('[data-i18n="rsvp.attendance"]', t.rsvp.attendance);
-        updateSelectOptions('[data-i18n="rsvp.selectOption"]', t.rsvp.selectOption);
-        updateSelectOptions('[data-i18n="rsvp.yes"]', t.rsvp.yes);
-        updateSelectOptions('[data-i18n="rsvp.no"]', t.rsvp.no);
-        updateSelectOptions('[data-i18n="rsvp.maybe"]', t.rsvp.maybe);
+        updateText('[data-i18n="rsvp.guestOf"]', t.rsvp.guestOf);
+        updateText('[data-i18n="rsvp.guestOfBride"]', t.rsvp.guestOfBride);
+        updateText('[data-i18n="rsvp.guestOfGroom"]', t.rsvp.guestOfGroom);
+        updateText('[data-i18n="rsvp.guestOfBoth"]', t.rsvp.guestOfBoth);
+        updateText('[data-i18n="rsvp.phone"]', t.rsvp.phone);
         updateText('[data-i18n="rsvp.guests"]', t.rsvp.guests);
-        updateText('[data-i18n="rsvp.dietary"]', t.rsvp.dietary);
+        updateText('[data-i18n="rsvp.attendance"]', t.rsvp.attendance);
+        updateText('[data-i18n="rsvp.yes"]', t.rsvp.yes);
+        updateText('[data-i18n="rsvp.no"]', t.rsvp.no);
+        updateText('[data-i18n="rsvp.eventsAttending"]', t.rsvp.eventsAttending);
+        updateText('[data-i18n="rsvp.vuQuyCeremony"]', t.rsvp.vuQuyCeremony);
+        updateText('[data-i18n="rsvp.preWeddingParty"]', t.rsvp.preWeddingParty);
+        updateText('[data-i18n="rsvp.mainWedding"]', t.rsvp.mainWedding);
         updateText('[data-i18n="rsvp.message"]', t.rsvp.message);
+        updateText('[data-i18n="rsvp.otherRequests"]', t.rsvp.otherRequests);
         updateText('[data-i18n="rsvp.submit"]', t.rsvp.submit);
 
         // Update placeholders
-        updatePlaceholder('[data-i18n-placeholder="rsvp.dietary"]', t.rsvp.dietaryPlaceholder);
-        updatePlaceholder('[data-i18n-placeholder="rsvp.message"]', t.rsvp.messagePlaceholder);
+        updatePlaceholder('[data-i18n-placeholder="rsvp.messagePlaceholder"]', t.rsvp.messagePlaceholder);
+        updatePlaceholder('[data-i18n-placeholder="rsvp.otherRequestsPlaceholder"]', t.rsvp.otherRequestsPlaceholder);
 
         // Update contact section
         updateText('[data-i18n="contact.title"]', t.contact.title);

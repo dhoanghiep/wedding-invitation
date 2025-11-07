@@ -22,7 +22,7 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="rsvp.title"></h2>
-                    <p class="section-subtitle" data-i18n="rsvp.subtitle"></p>
+                    <p class="section-subtitle" data-i18n="rsvp.intro"></p>
                 </div>
                 
                 <form class="rsvp-form" id="rsvp-form">
@@ -37,47 +37,76 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="phone" data-i18n="rsvp.phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="guests" data-i18n="rsvp.guests"></label>
-                        <input type="number" id="guests" name="guests" min="1" value="1" required>
-                    </div>
-                    
-                    <!-- Ceremony Selection -->
-                    <div class="form-group">
-                        <label data-i18n="rsvp.ceremonySelection">Which ceremonies will you attend? *</label>
-                        <div class="ceremony-checkboxes">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="ceremonies" value="ceremony" data-i18n="rsvp.ceremony">
-                                <span data-i18n="rsvp.ceremony">Ceremony</span>
+                        <label data-i18n="rsvp.guestOf"></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="guestOf" value="bride" required>
+                                <span data-i18n="rsvp.guestOfBride"></span>
                             </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="ceremonies" value="party" data-i18n="rsvp.party">
-                                <span data-i18n="rsvp.party">Party/Reception</span>
+                            <label class="radio-label">
+                                <input type="radio" name="guestOf" value="groom" required>
+                                <span data-i18n="rsvp.guestOfGroom"></span>
                             </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="ceremonies" value="main-wedding" data-i18n="rsvp.mainWedding">
-                                <span data-i18n="rsvp.mainWedding">Main Wedding</span>
+                            <label class="radio-label">
+                                <input type="radio" name="guestOf" value="both" required>
+                                <span data-i18n="rsvp.guestOfBoth"></span>
                             </label>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="dietary" data-i18n="rsvp.dietary"></label>
-                        <textarea id="dietary" name="dietary" rows="3" data-i18n-placeholder="rsvp.dietaryPlaceholder"></textarea>
+                        <label for="phone" data-i18n="rsvp.phone"></label>
+                        <input type="tel" id="phone" name="phone">
                     </div>
                     
                     <div class="form-group">
-                        <label for="accommodations" data-i18n="rsvp.accommodations">Special Accommodations</label>
-                        <textarea id="accommodations" name="accommodations" rows="3" data-i18n-placeholder="rsvp.accommodations" placeholder="Any special accommodations needed"></textarea>
+                        <label for="guests" data-i18n="rsvp.guests"></label>
+                        <input type="number" id="guests" name="guests" min="1" max="5" value="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-i18n="rsvp.attendance"></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="yes" id="attendance-yes" required>
+                                <span data-i18n="rsvp.yes"></span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="no" id="attendance-no" required>
+                                <span data-i18n="rsvp.no"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Conditional Fields - Only show if user clicks "Yes" -->
+                    <div class="conditional-fields" id="conditional-fields" style="display: none;">
+                        <div class="form-group">
+                            <label data-i18n="rsvp.eventsAttending"></label>
+                            <div class="ceremony-checkboxes">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="ceremonies" value="vu-quy">
+                                    <span data-i18n="rsvp.vuQuyCeremony"></span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="ceremonies" value="pre-wedding-party">
+                                    <span data-i18n="rsvp.preWeddingParty"></span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="ceremonies" value="main-wedding">
+                                    <span data-i18n="rsvp.mainWedding"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="otherRequests" data-i18n="rsvp.otherRequests"></label>
+                            <textarea id="otherRequests" name="otherRequests" rows="3" data-i18n-placeholder="rsvp.otherRequestsPlaceholder"></textarea>
+                        </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="message" data-i18n="rsvp.message"></label>
-                        <textarea id="message" name="message" rows="3" data-i18n-placeholder="rsvp.messagePlaceholder"></textarea>
+                        <textarea id="message" name="message" rows="4" data-i18n-placeholder="rsvp.messagePlaceholder"></textarea>
                     </div>
                     
                     <button type="submit" class="btn btn-primary" data-i18n="rsvp.submit"></button>

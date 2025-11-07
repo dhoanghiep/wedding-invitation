@@ -902,6 +902,80 @@ section {
     display: block;
 }
 
+/* Radio Group Styles */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.radio-label input[type="radio"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.radio-label span {
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+/* Checkbox Group Styles */
+.ceremony-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-label span {
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+/* Field Note Styles */
+.field-note {
+    display: block;
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+/* Conditional Fields */
+.conditional-fields {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(139, 74, 74, 0.2);
+}
+
 /* ============================================
    Contact Section
    ============================================ */

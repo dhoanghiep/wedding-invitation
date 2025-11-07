@@ -267,15 +267,71 @@
     // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
     const GOOGLE_SCRIPT_URL = CONFIG.GOOGLE_SCRIPT_URL;
 
+    // Handle conditional fields visibility based on attendance selection
+    function handleAttendanceChange() {
+        const attendanceYes = document.getElementById('attendance-yes');
+        const attendanceNo = document.getElementById('attendance-no');
+        const conditionalFields = document.getElementById('conditional-fields');
+        
+        if (attendanceYes && attendanceNo && conditionalFields) {
+            const toggleFields = () => {
+                if (attendanceYes.checked) {
+                    conditionalFields.style.display = 'block';
+                } else {
+                    conditionalFields.style.display = 'none';
+                }
+            };
+            
+            // Set initial state
+            toggleFields();
+            
+            // Add event listeners
+            attendanceYes.addEventListener('change', toggleFields);
+            attendanceNo.addEventListener('change', toggleFields);
+        }
+    }
+
+    // Initialize attendance change handler when DOM is ready
+    function initAttendanceHandler() {
+        handleAttendanceChange();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAttendanceHandler);
+    } else {
+        initAttendanceHandler();
+    }
+
+    // Also initialize after components are loaded (in case form is loaded dynamically)
+    document.addEventListener('componentsReady', () => {
+        setTimeout(initAttendanceHandler, 100);
+    });
+
     if (rsvpForm) {
         rsvpForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const formData = new FormData(rsvpForm);
-            const data = Object.fromEntries(formData);
+            
+            // Handle multiple checkbox values (ceremonies)
+            const data = {};
+            const ceremonies = [];
+            
+            for (const [key, value] of formData.entries()) {
+                if (key === 'ceremonies') {
+                    ceremonies.push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Add ceremonies as comma-separated string if any are selected
+            if (ceremonies.length > 0) {
+                data.ceremonies = ceremonies.join(', ');
+            }
 
             // Form validation
-            if (!data.name || !data.email || !data.attendance) {
+            if (!data.name || !data.email || !data.guestOf || !data.attendance) {
                 const msg = window.Language ? window.Language.t('rsvp.fillFields') : 'Please fill in all required fields.';
                 showMessage(rsvpMessage, msg, 'error');
                 return;
@@ -322,11 +378,12 @@
 
                 // Add form fields
                 Object.keys(data).forEach(key => {
-                    if (data[key]) {
+                    // Include empty strings and zero values, but skip undefined/null
+                    if (data[key] !== undefined && data[key] !== null) {
                         const input = document.createElement('input');
                         input.type = 'hidden';
                         input.name = key;
-                        input.value = data[key];
+                        input.value = data[key] || '';
                         tempForm.appendChild(input);
                     }
                 });
