@@ -1843,7 +1843,7 @@ section {
 .venue-map {
     flex: 1;
     min-width: 0;
-    height: 400px;
+    min-height: 350px;
     border-radius: 15px;
     overflow: hidden;
     position: relative;
@@ -1864,6 +1864,9 @@ section {
     border: none;
     pointer-events: auto;
     transition: transform 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .venue-map:hover iframe {
@@ -1871,29 +1874,19 @@ section {
 }
 
 /* Responsive Design for Venue Cards */
-@media (max-width: 968px) {
+@media (max-width: 768px) {
     .venue-content {
         flex-direction: column;
         gap: 30px;
     }
-    
-    .venue-map {
-        height: 300px;
-        order: -1; /* Map appears first on mobile */
-    }
-    
-    .venue-text h3 {
-        font-size: 1.75rem;
-    }
-}
 
-@media (max-width: 768px) {
     .venue-card {
         margin-bottom: 40px;
     }
     
     .venue-map {
-        height: 250px;
+        height: 350px;
+        order: -1; /* Map appears first on mobile */
     }
     
     .venue-text h3 {
