@@ -15,7 +15,7 @@
             },
             // Hero Section
             hero: {
-                title: "June \n & \n Hiep",
+                title: "Minh Anh \n & \n Hoàng Hiệp",
                 date: 'January 1, 2026',
             },
             // Bride and Groom Section
@@ -27,14 +27,36 @@
             },
             // Gallery Section
             gallery: {
-                title: 'Our Gallery',
+                title: 'Memories we\'ve shared together',
                 subtitle: 'Memories we\'ve shared together',
+                welcome: 'Welcome to our photo album! Here are a few of our favorite moments from our journey so far.',
                 photos: 'Photos',
                 videos: 'Videos',
-                journey: 'Journey',
-                preWedding: 'Pre-wedding',
-                weddingPhotos: 'Wedding Photos',
-                guestUploads: 'Guest Uploads',
+                journey: 'Our Journey',
+                journeyDesc: 'A little look back at our adventure, from our first photos together to becoming fiancés!',
+                journeySubsections: {
+                    firstDays: 'First Days',
+                    trips: 'Trips',
+                    proposal: 'Proposal',
+                    andSoOn: 'And So On...'
+                },
+                preWedding: 'Pre-Wedding Photos',
+                preWeddingDesc: 'We had so much fun at our pre-wedding shoot at Hanoi and Dalat. Here are some of our favorite shots!',
+                preWeddingSubsections: {
+                    hanoi: 'Hanoi',
+                    dalat: 'Dalat'
+                },
+                weddingPhotos: 'Wedding photos',
+                weddingPhotosDesc: 'Coming Soon! Our official wedding photos will be uploaded here after the big day. We can\'t wait to share them!',
+                weddingPhotosSubsections: {
+                    vuQuy: 'Vu Quy Ceremony',
+                    theParty: 'The party',
+                    reception: 'Reception',
+                    wedding: 'Wedding'
+                },
+                guestUploads: 'Guest uploads',
+                guestUploadsDesc: 'You\'re our best photographers! If you have any moments from the wedding day (or any fun memories with us), please share them here. We\'d love to see the day through your eyes.',
+                videosDesc: 'A few of our favorite moments, in motion.',
                 comingSoon: 'Photos coming soon...',
                 uploadTitle: 'Share Your Photos',
                 uploadDesc: 'Upload your favorite moments from our wedding',
@@ -161,14 +183,36 @@
             },
             // Gallery Section
             gallery: {
-                title: 'Thư viện ảnh',
-                subtitle: 'Những kỷ niệm chúng tôi đã chia sẻ',
+                title: 'Những Kỷ Niệm của chúng mình',
+                subtitle: 'Những Kỷ Niệm của chúng mình',
+                welcome: 'Chào mừng đến với album ảnh của chúng mình! Đây là một vài khoảnh khắc yêu thích trong suốt hành trình của cả hai.',
                 photos: 'Ảnh',
                 videos: 'Video',
-                journey: 'Hành trình',
-                preWedding: 'Trước ngày cưới',
+                journey: 'Hành trình của chúng mình',
+                journeyDesc: 'Cùng nhìn lại một chút về cuộc phiêu lưu của chúng mình, từ những bức ảnh đầu tiên chụp chung cho đến khi đính hôn!',
+                journeySubsections: {
+                    firstDays: 'Những ngày đầu tiên',
+                    trips: 'Chuyến đi',
+                    proposal: 'Lời cầu hôn',
+                    andSoOn: 'và sau đó...'
+                },
+                preWedding: 'Ảnh Pre-Wedding',
+                preWeddingDesc: 'Chúng mình đã có một buổi chụp hình pre-wedding rất vui ở Hà Nội và Đà Lạt. Đây là một vài tấm chúng mình ưng ý nhất!',
+                preWeddingSubsections: {
+                    hanoi: 'Hà Nội',
+                    dalat: 'Đà Lạt'
+                },
                 weddingPhotos: 'Ảnh cưới',
-                guestUploads: 'Ảnh khách mời',
+                weddingPhotosDesc: 'Sắp có nhé! Ảnh cưới chính thức sẽ được tụi mình đăng lên đây sau ngày trọng đại. Chúng mình rất mong được chia sẻ chúng!',
+                weddingPhotosSubsections: {
+                    vuQuy: 'Lễ Vu Quy',
+                    theParty: 'Tiệc trước đám cưới',
+                    reception: 'Đón khách',
+                    wedding: 'Lễ cưới'
+                },
+                guestUploads: 'Ảnh từ khách mời',
+                guestUploadsDesc: 'Các bạn chính là những nhiếp ảnh gia xịn nhất! Nếu bạn có bất kỳ khoảnh khắc nào trong ngày cưới (hoặc bất kỳ kỷ niệm vui nào với tụi mình), hãy chia sẻ tại đây nhé. Chúng mình rất muốn nhìn thấy ngày vui qua lăng kính của các bạn.',
+                videosDesc: 'Một vài khoảnh khắc yêu thích nhất của chúng mình qua những thước phim.',
                 comingSoon: 'Ảnh sắp có...',
                 uploadTitle: 'Chia sẻ ảnh của bạn',
                 uploadDesc: 'Tải lên những khoảnh khắc yêu thích của bạn từ đám cưới của chúng mình',
@@ -314,13 +358,27 @@
 
         // Update gallery section
         updateText('[data-i18n="gallery.title"]', t.gallery.title);
-        updateText('[data-i18n="gallery.subtitle"]', t.gallery.subtitle);
         updateText('[data-i18n="gallery.photos"]', t.gallery.photos);
         updateText('[data-i18n="gallery.videos"]', t.gallery.videos);
         updateText('[data-i18n="gallery.journey"]', t.gallery.journey);
+        updateText('[data-i18n="gallery.journeyDesc"]', t.gallery.journeyDesc);
+        updateText('[data-i18n="gallery.journeySubsections.firstDays"]', t.gallery.journeySubsections.firstDays);
+        updateText('[data-i18n="gallery.journeySubsections.trips"]', t.gallery.journeySubsections.trips);
+        updateText('[data-i18n="gallery.journeySubsections.proposal"]', t.gallery.journeySubsections.proposal);
+        updateText('[data-i18n="gallery.journeySubsections.andSoOn"]', t.gallery.journeySubsections.andSoOn);
         updateText('[data-i18n="gallery.preWedding"]', t.gallery.preWedding);
+        updateText('[data-i18n="gallery.preWeddingDesc"]', t.gallery.preWeddingDesc);
+        updateText('[data-i18n="gallery.preWeddingSubsections.hanoi"]', t.gallery.preWeddingSubsections.hanoi);
+        updateText('[data-i18n="gallery.preWeddingSubsections.dalat"]', t.gallery.preWeddingSubsections.dalat);
         updateText('[data-i18n="gallery.weddingPhotos"]', t.gallery.weddingPhotos);
+        updateText('[data-i18n="gallery.weddingPhotosDesc"]', t.gallery.weddingPhotosDesc);
+        updateText('[data-i18n="gallery.weddingPhotosSubsections.vuQuy"]', t.gallery.weddingPhotosSubsections.vuQuy);
+        updateText('[data-i18n="gallery.weddingPhotosSubsections.theParty"]', t.gallery.weddingPhotosSubsections.theParty);
+        updateText('[data-i18n="gallery.weddingPhotosSubsections.reception"]', t.gallery.weddingPhotosSubsections.reception);
+        updateText('[data-i18n="gallery.weddingPhotosSubsections.wedding"]', t.gallery.weddingPhotosSubsections.wedding);
         updateText('[data-i18n="gallery.guestUploads"]', t.gallery.guestUploads);
+        updateText('[data-i18n="gallery.guestUploadsDesc"]', t.gallery.guestUploadsDesc);
+        updateText('[data-i18n="gallery.videosDesc"]', t.gallery.videosDesc);
         updateText('[data-i18n="gallery.comingSoon"]', t.gallery.comingSoon);
         updateText('[data-i18n="gallery.uploadTitle"]', t.gallery.uploadTitle);
         updateText('[data-i18n="gallery.uploadDesc"]', t.gallery.uploadDesc);

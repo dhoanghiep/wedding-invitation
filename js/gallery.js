@@ -168,10 +168,99 @@
     // Initialize galleries
     async function initGalleries() {
         await loadPhotoUrls();
-        loadCategoryPhotosToGrid('journey');
-        loadCategoryPhotosToGrid('pre-wedding');
-        loadCategoryPhotosToGrid('wedding-photos');
+        loadSubsections();
         loadVideos();
+    }
+    
+    // Load photos for all subsections
+    async function loadSubsections() {
+        const subsectionGrids = document.querySelectorAll('[data-subsection][data-album-id]');
+        
+        for (const grid of subsectionGrids) {
+            const subsection = grid.getAttribute('data-subsection');
+            const albumId = grid.getAttribute('data-album-id');
+            
+            // Skip if already has content (like "coming soon" messages)
+            if (grid.querySelector('p[data-i18n="gallery.comingSoon"]')) {
+                continue;
+            }
+            
+            // Load photos for this subsection
+            await loadSubsectionPhotos(grid, subsection, albumId);
+        }
+    }
+    
+    // Load photos for a specific subsection
+    async function loadSubsectionPhotos(gridElement, subsection, albumId) {
+        if (!gridElement) {
+            console.warn(`Grid element not found for subsection: ${subsection}`);
+            return;
+        }
+        
+        let photoList = [];
+        
+        // Check if CONFIG exists and has subsection-specific albums
+        if (typeof CONFIG !== 'undefined' && CONFIG.SUBSECTION_ALBUMS && CONFIG.SUBSECTION_ALBUMS[albumId]) {
+            const source = CONFIG.PHOTO_SOURCE || 'static';
+            
+            switch (source) {
+                case 'static':
+                    photoList = CONFIG.SUBSECTION_ALBUMS[albumId] || [];
+                    break;
+                case 'imgur':
+                    const imgurAlbumId = CONFIG.SUBSECTION_ALBUMS[albumId];
+                    if (imgurAlbumId) {
+                        photoList = await loadImgurAlbum(imgurAlbumId);
+                    }
+                    break;
+                case 'cloudinary':
+                    // Handle cloudinary if needed
+                    break;
+            }
+        }
+        
+        // If no photos found, use default photos for non-wedding subsections
+        if (photoList.length === 0 && !albumId.startsWith('wedding-')) {
+            photoList = getDefaultPhotos();
+        }
+        
+        // Clear existing content (except "coming soon" messages)
+        const comingSoon = gridElement.querySelector('p[data-i18n="gallery.comingSoon"]');
+        if (!comingSoon) {
+            gridElement.innerHTML = '';
+        }
+        
+        // Load photos into grid
+        photoList.forEach((photoUrl, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            const img = document.createElement('img');
+            img.alt = `Photo ${index + 1}`;
+            img.loading = 'lazy';
+            
+            img.addEventListener('error', function() {
+                console.warn(`Failed to load image ${index + 1} after all retries:`, photoUrl);
+                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300"%3E%3Crect fill="%23ddd" width="300" height="300"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="16" dy="10.5" font-weight="bold" x="50%25" y="50%25" text-anchor="middle"%3EImage not available%3C/text%3E%3C/svg%3E';
+                galleryItem.classList.add('error');
+            }, { once: true });
+            
+            img.addEventListener('load', function() {
+                galleryItem.classList.remove('error');
+            });
+            
+            loadImageWithRetry(img, photoUrl, index);
+            
+            galleryItem.appendChild(img);
+            
+            // Store all photos for this subsection for lightbox navigation
+            const allSubsectionPhotos = photoList;
+            galleryItem.addEventListener('click', () => {
+                openLightbox(index, subsection, allSubsectionPhotos);
+            });
+            
+            gridElement.appendChild(galleryItem);
+        });
     }
     
     // Load photos for a specific category into its grid
@@ -390,14 +479,22 @@
     }
     
     // Open lightbox with photo
-    function openLightbox(index, category) {
+    function openLightbox(index, categoryOrSubsection, photosArray) {
         if (!lightbox || !lightboxImage) {
             console.warn('Lightbox elements not found');
             return;
         }
         
-        currentCategory = category || 'journey';
-        allPhotos = categoryPhotos[currentCategory] || [];
+        // If photosArray is provided, use it (for subsections)
+        if (photosArray && Array.isArray(photosArray)) {
+            allPhotos = photosArray;
+            currentCategory = categoryOrSubsection || 'journey';
+        } else {
+            // Legacy support for category-based photos
+            currentCategory = categoryOrSubsection || 'journey';
+            allPhotos = categoryPhotos[currentCategory] || [];
+        }
+        
         if (allPhotos.length === 0 || index >= allPhotos.length) {
             console.warn('Invalid photo index or empty photo list');
             return;
@@ -614,12 +711,26 @@
         const guestUploadsGallery = document.getElementById('guest-uploads-gallery');
         const videosGallery = document.getElementById('videos-gallery');
         
+        // Get description elements
+        const journeyDesc = document.getElementById('journey-desc');
+        const preWeddingDesc = document.getElementById('pre-wedding-desc');
+        const weddingPhotosDesc = document.getElementById('wedding-photos-desc');
+        const guestUploadsDesc = document.getElementById('guest-uploads-desc');
+        const videosDesc = document.getElementById('videos-desc');
+        
         tabBtns.forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.tab === tabName) {
                 btn.classList.add('active');
             }
         });
+        
+        // Hide all descriptions
+        if (journeyDesc) journeyDesc.classList.remove('active');
+        if (preWeddingDesc) preWeddingDesc.classList.remove('active');
+        if (weddingPhotosDesc) weddingPhotosDesc.classList.remove('active');
+        if (guestUploadsDesc) guestUploadsDesc.classList.remove('active');
+        if (videosDesc) videosDesc.classList.remove('active');
         
         // Hide all galleries
         if (journeyGallery) journeyGallery.classList.remove('active');
@@ -628,22 +739,27 @@
         if (guestUploadsGallery) guestUploadsGallery.classList.remove('active');
         if (videosGallery) videosGallery.classList.remove('active');
         
-        // Show selected gallery
+        // Show selected gallery and description
         switch (tabName) {
             case 'journey':
                 if (journeyGallery) journeyGallery.classList.add('active');
+                if (journeyDesc) journeyDesc.classList.add('active');
                 break;
             case 'pre-wedding':
                 if (preWeddingGallery) preWeddingGallery.classList.add('active');
+                if (preWeddingDesc) preWeddingDesc.classList.add('active');
                 break;
             case 'wedding-photos':
                 if (weddingPhotosGallery) weddingPhotosGallery.classList.add('active');
+                if (weddingPhotosDesc) weddingPhotosDesc.classList.add('active');
                 break;
             case 'guest-uploads':
                 if (guestUploadsGallery) guestUploadsGallery.classList.add('active');
+                if (guestUploadsDesc) guestUploadsDesc.classList.add('active');
                 break;
             case 'videos':
                 if (videosGallery) videosGallery.classList.add('active');
+                if (videosDesc) videosDesc.classList.add('active');
                 break;
         }
     }

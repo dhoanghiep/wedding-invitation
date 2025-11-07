@@ -21,8 +21,16 @@
         <section class="album" id="gallery">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="gallery.title">Our Gallery</h2>
-                    <p class="section-subtitle" data-i18n="gallery.subtitle">Memories we've shared together</p>
+                    <h2 class="section-title" data-i18n="gallery.title">Memories we've shared together</h2>
+                </div>
+                
+                <!-- Gallery Description (above tabs) -->
+                <div class="gallery-description-container">
+                    <p class="gallery-description active" id="journey-desc" data-i18n="gallery.journeyDesc">A little look back at our adventure, from our first photos together to becoming fiancés!</p>
+                    <p class="gallery-description" id="pre-wedding-desc" data-i18n="gallery.preWeddingDesc">We had so much fun at our pre-wedding shoot at Hanoi and Dalat. Here are some of our favorite shots!</p>
+                    <p class="gallery-description" id="wedding-photos-desc" data-i18n="gallery.weddingPhotosDesc">Coming Soon! Our official wedding photos will be uploaded here after the big day. We can't wait to share them!</p>
+                    <p class="gallery-description" id="guest-uploads-desc" data-i18n="gallery.guestUploadsDesc">You're our best photographers! If you have any moments from the wedding day (or any fun memories with us), please share them here. We'd love to see the day through your eyes.</p>
+                    <p class="gallery-description" id="videos-desc" data-i18n="gallery.videosDesc">A few of our favorite moments, in motion.</p>
                 </div>
                 
                 <!-- Gallery Tabs -->
@@ -36,22 +44,73 @@
                 
                 <!-- Journey Gallery -->
                 <div class="gallery-content active" id="journey-gallery">
-                    <div class="gallery-grid" id="journey-grid">
-                        <!-- Journey photos will be loaded here -->
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.journeySubsections.firstDays">First Days</h3>
+                        <div class="gallery-grid" data-subsection="journey-first-days" data-album-id="journey-001">
+                            <!-- Photos will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.journeySubsections.trips">Trips</h3>
+                        <div class="gallery-grid" data-subsection="journey-trips" data-album-id="journey-002">
+                            <!-- Photos will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.journeySubsections.proposal">Proposal</h3>
+                        <div class="gallery-grid" data-subsection="journey-proposal" data-album-id="journey-003">
+                            <!-- Photos will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.journeySubsections.andSoOn">And So On...</h3>
+                        <div class="gallery-grid" data-subsection="journey-and-so-on" data-album-id="journey-004">
+                            <!-- Photos will be loaded here -->
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Pre-wedding Gallery -->
                 <div class="gallery-content" id="pre-wedding-gallery">
-                    <div class="gallery-grid" id="pre-wedding-grid">
-                        <!-- Pre-wedding photos will be loaded here -->
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.preWeddingSubsections.hanoi">Hanoi</h3>
+                        <div class="gallery-grid" data-subsection="pre-wedding-hanoi" data-album-id="prewedding-001">
+                            <!-- Photos will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.preWeddingSubsections.dalat">Dalat</h3>
+                        <div class="gallery-grid" data-subsection="pre-wedding-dalat" data-album-id="prewedding-002">
+                            <!-- Photos will be loaded here -->
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Wedding Photos Gallery -->
                 <div class="gallery-content" id="wedding-photos-gallery">
-                    <div class="gallery-grid" id="wedding-photos-grid">
-                        <p data-i18n="gallery.comingSoon">Photos coming soon...</p>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.weddingPhotosSubsections.vuQuy">Vu Quy Ceremony</h3>
+                        <div class="gallery-grid" data-subsection="wedding-vu-quy" data-album-id="wedding-001">
+                            <p data-i18n="gallery.comingSoon">Photos coming soon...</p>
+                        </div>
+                    </div>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.weddingPhotosSubsections.theParty">The party</h3>
+                        <div class="gallery-grid" data-subsection="wedding-the-party" data-album-id="wedding-002">
+                            <p data-i18n="gallery.comingSoon">Photos coming soon...</p>
+                        </div>
+                    </div>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.weddingPhotosSubsections.reception">Reception</h3>
+                        <div class="gallery-grid" data-subsection="wedding-reception" data-album-id="wedding-003">
+                            <p data-i18n="gallery.comingSoon">Photos coming soon...</p>
+                        </div>
+                    </div>
+                    <div class="gallery-subsection">
+                        <h3 class="subsection-title" data-i18n="gallery.weddingPhotosSubsections.wedding">Wedding</h3>
+                        <div class="gallery-grid" data-subsection="wedding-wedding" data-album-id="wedding-004">
+                            <p data-i18n="gallery.comingSoon">Photos coming soon...</p>
+                        </div>
                     </div>
                 </div>
                 
