@@ -176,7 +176,7 @@
                 title: 'Our Story',
                 subtitle: 'Welcome to our story! It\'s our favorite one, and it\'s all led to this amazing day.',
                 meetTitle: 'First, Meet the Bride & Groom',
-                meetBride: 'Meet Nheo 😼 (The Bride)',
+                meetBride: 'Meet Minh Anh (The Bride)',
                 brideBio: 'Intro bé Ti',
                 brideQuote: '"Quote bé Ti"',
                 brideQuote: '"Looks like she could kill you & actually could kill you."',
@@ -471,8 +471,6 @@
         updateText('[data-i18n="gallery.guestUploadsDesc"]', t.gallery.guestUploadsDesc);
         updateText('[data-i18n="gallery.videosDesc"]', t.gallery.videosDesc);
         updateText('[data-i18n="gallery.comingSoon"]', t.gallery.comingSoon);
-        updateText('[data-i18n="gallery.uploadTitle"]', t.gallery.uploadTitle);
-        updateText('[data-i18n="gallery.uploadDesc"]', t.gallery.uploadDesc);
         updateText('[data-i18n="gallery.uploadButton"]', t.gallery.uploadButton);
 
         // Update countdown section

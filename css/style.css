@@ -537,6 +537,39 @@ section {
     max-width: 100%;
 }
 
+/* Guest Upload Section */
+.guest-upload-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    min-height: 200px;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.upload-form input[type="file"] {
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 0;
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--bg-light);
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.upload-form input[type="file"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    border-width: 2px;
+}
+
 .gallery-item {
     position: relative;
     overflow: hidden;
