@@ -22,14 +22,20 @@ const CONFIG = {
     // How to get:
     // 1. Upload photos to Imgur (imgur.com) and create an album
     // 2. Get the album ID from the URL: https://imgur.com/a/ABC123 → ID is 'ABC123'
-    IMGUR_ALBUM_ID: 'xtDiBLB', // Add your Imgur album ID here (legacy, use IMGUR_ALBUMS for categories)
+    IMGUR_ALBUM_ID: null, // Add your Imgur album ID here (legacy, use IMGUR_ALBUMS for categories)
     
     // Category-based Imgur Album IDs
     // Each category can have its own Imgur album ID
     IMGUR_ALBUMS: {
-        'pre-wedding': 'xtDiBLB', // Pre-wedding photos
-        'journey': null, // Journey photos (set to null or album ID)
+        'journey': '4we1Kr6', // Journey photos (set to null or album ID)
         'wedding-photos': null // Wedding photos (set to null or album ID)
+    },
+    
+    // Subsection-specific Imgur Album IDs
+    // Maps data-album-id values to actual Imgur album IDs
+    SUBSECTION_ALBUMS: {
+        'pre-wedding-hanoi': 'YoeyRCu', // Pre-wedding Hanoi
+        'pre-wedding-dalat': 'wQ7BMiF', // Pre-wedding Dalat
     },
     
     // Cloudinary Configuration (used when PHOTO_SOURCE is 'cloudinary')

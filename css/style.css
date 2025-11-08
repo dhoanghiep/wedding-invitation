@@ -57,6 +57,16 @@ html.lightbox-open {
     max-width: 1200px;
 }
 
+/* Story page containers - keep max-width 1200px */
+.story-intro .container,
+.story-meet .container,
+.story-how-we-met .container,
+.story-trips .container,
+.story-proposal .container,
+.story-ever-after .container {
+    max-width: 1200px;
+}
+
 /* ============================================
    Header & Navigation
    ============================================ */
@@ -1238,7 +1248,56 @@ section {
 /* ============================================
    Story Page Sections
    ============================================ */
-.story-intro,
+.story-intro {
+    height: 80vh;
+    min-height: 600px;
+    background-image: url('https://i.imgur.com/M6qpe4S.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+
+.story-intro-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.story-intro .container {
+    position: relative;
+    z-index: 2;
+}
+
+.story-intro-header {
+    margin-bottom: 0;
+}
+
+.story-intro-title {
+    color: #FFFFFF;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease;
+}
+
+.story-intro-subtitle {
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease 0.2s both;
+}
+
 .story-meet,
 .story-how-we-met,
 .story-trips,
@@ -1299,12 +1358,11 @@ section {
 }
 
 .story-person-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-light);
     line-height: 1.6;
     margin-bottom: 25px;
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-style: italic;
 }
 
 .story-person-section {
@@ -1322,9 +1380,14 @@ section {
 }
 
 .story-person-section .story-person-quote {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.8;
     font-style: normal;
     border-left: none;
     padding-left: 0;
+    margin-bottom: 15px;
+    font-family: 'Georgia', 'Times New Roman', serif;
 }
 
 .story-person-bio {
@@ -1979,7 +2042,19 @@ section {
         padding: 60px 0;
     }
     
-    .story-intro,
+    .story-intro {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .story-intro-title {
+        font-size: 3rem;
+    }
+    
+    .story-intro-subtitle {
+        font-size: 1.3rem;
+    }
+    
     .story-meet,
     .story-how-we-met,
     .story-trips,
@@ -2014,7 +2089,7 @@ section {
     }
     
     .story-person-subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
         margin-bottom: 20px;
     }
     
@@ -2268,7 +2343,19 @@ section {
         font-size: 1.2rem;
     }
     
-    .story-intro,
+    .story-intro {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .story-intro-title {
+        font-size: 2.5rem;
+    }
+    
+    .story-intro-subtitle {
+        font-size: 1.1rem;
+    }
+    
     .story-meet,
     .story-how-we-met,
     .story-trips,
@@ -2288,7 +2375,7 @@ section {
     }
     
     .story-person-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
         margin-bottom: 15px;
     }
     

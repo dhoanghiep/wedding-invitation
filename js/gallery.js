@@ -88,46 +88,48 @@
         categoryPhotos['pre-wedding'] = await loadCategoryPhotos('pre-wedding');
         categoryPhotos['wedding-photos'] = await loadCategoryPhotos('wedding-photos');
         
-        // Set default photos to journey for backward compatibility
-        photos = categoryPhotos['journey'];
+        // Set default photos to pre-wedding
+        photos = categoryPhotos['pre-wedding'];
         console.log('[Gallery] loadPhotoUrls: Completed loading photos for all categories');
     }
     
     // Default sample photos (fallback)
     function getDefaultPhotos() {
-        return [
-            'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1519608487953-ecec6274facc?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1519452575417-564c1401ecc0?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=800&fit=crop',
-            'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=800&fit=crop'
-        ];
+        return [];
     }
     
     // Load photos from Imgur album
     async function loadImgurAlbum(albumId) {
         try {
-            const response = await fetch(`https://api.imgur.com/3/album/${albumId}/images`, {
+            console.log(`[Gallery] Loading Imgur album: ${albumId}`);
+            // Try the album endpoint first (returns album with images array)
+            const response = await fetch(`https://api.imgur.com/3/album/${albumId}`, {
                 headers: {
                     'Authorization': 'Client-ID 546c25a59c58ad7' // Public client ID for anonymous access
                 }
             });
             
             if (!response.ok) {
-                throw new Error(`Imgur API error: ${response.status}`);
+                const errorText = await response.text();
+                console.error(`[Gallery] Imgur API error (${response.status}):`, errorText);
+                throw new Error(`Imgur API error: ${response.status} - ${errorText}`);
             }
             
             const data = await response.json();
+            console.log(`[Gallery] Imgur API response:`, data);
+            
             if (data.success && data.data) {
-                return data.data.map(image => image.link);
+                // Check if data.data has an images array (album response)
+                const images = data.data.images || (Array.isArray(data.data) ? data.data : []);
+                const imageLinks = images.map(image => image.link || image);
+                console.log(`[Gallery] Loaded ${imageLinks.length} images from Imgur album ${albumId}`);
+                return imageLinks;
+            } else {
+                console.warn(`[Gallery] Imgur API returned unsuccessful response:`, data);
+                return [];
             }
-            return [];
         } catch (error) {
-            console.error('Error loading Imgur album:', error);
+            console.error(`[Gallery] Error loading Imgur album ${albumId}:`, error);
             return [];
         }
     }
@@ -177,7 +179,7 @@
     const tabBtns = document.querySelectorAll('.tab-btn');
     
     let currentPhotoIndex = 0;
-    let currentCategory = 'journey';
+    let currentCategory = 'pre-wedding';
     let allPhotos = []; // All photos from current category for lightbox navigation
     let savedScrollPosition = 0; // Save scroll position before opening lightbox
     
@@ -256,8 +258,15 @@
                     // Handle cloudinary if needed
                     break;
             }
+        } else if (typeof CONFIG !== 'undefined' && CONFIG.PHOTO_SOURCE === 'imgur' && CONFIG.IMGUR_ALBUMS && CONFIG.IMGUR_ALBUMS[albumId]) {
+            // Fall back to category-level album if subsection-specific not found
+            console.log(`[Gallery] Using category-level album config for ${albumId}`);
+            const imgurAlbumId = CONFIG.IMGUR_ALBUMS[albumId];
+            if (imgurAlbumId) {
+                photoList = await loadImgurAlbum(imgurAlbumId);
+            }
         } else {
-            console.log(`[Gallery] No subsection-specific album config found for ${albumId}`);
+            console.log(`[Gallery] No subsection-specific or category-level album config found for ${albumId}`);
         }
         
         // If no photos found, use default photos for non-wedding subsections

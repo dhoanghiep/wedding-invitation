@@ -65,10 +65,15 @@
             countdown: {
                 title: 'Countdown to Our Special Day',
                 months: 'Months',
+                month: 'Month',
                 days: 'Days',
+                day: 'Day',
                 hours: 'Hours',
+                hour: 'Hour',
                 minutes: 'Minutes',
-                seconds: 'Seconds'
+                minute: 'Minute',
+                seconds: 'Seconds',
+                second: 'Second'
             },
             // RSVP Section
             rsvp: {
@@ -161,41 +166,53 @@
             },
             // Story Section
             story: {
-                title: 'Our Story',
+                title: 'Our love story',
                 subtitle: 'Welcome to our love story! Please read through some fun facts prior the party so you can win some games at our wedding!',
-                meetTitle: 'First, Meet the Bride & Groom',
-                brideTitle: 'Our Bride ',
+                meetTitle: 'First, meet the bride & groom',
+                brideTitle: 'Our bride ',
                 brideSubtitle: 'A chill girl who wanna be young & rich 🤑',
                 bridePersonalityLabel: 'Personality:',
                 bridePersonality: '"Looks like they could kill you, would kill you." 🔪😂',
                 brideDescriptionLabel: 'Description:',
-                brideDescription: 'Is the Buddha in Wukong and Buddha series - the one who always cause troubles & challenge themselves. Is an excellent problem solver so she always make irrational decisions & cause more problems (to solve & become more experience).',
-                groomTitle: 'Our Groom',
+                brideDescription: 'Is the Buddha in Journey to the West series - the one who always cause troubles & challenge themselves. Is an excellent problem solver so she always make irrational decisions & cause more problems (to solve & become more experience).',
+                groomTitle: 'Our groom',
                 groomSubtitle: 'A talented actor from Hà Nội acting school since 1998 - "You are who are you!"',
                 groomPersonalityLabel: 'Personality:',
                 groomPersonality: '"Looks like a cinnamon roll, is a cinnamon roll... or maybe not?" 🤔',
                 groomDescriptionLabel: 'Description:',
                 groomDescription: 'Is a typical straight man who is always calm, non-confrontational but date June - weird choice huh?! Is the Wukong in the relationship with a powerful magic wand who can solve 99% of June\'s problems. Is an almost professional badminton player at Peter MacCallum Cancer Centre.',
-                howWeMet: 'How we met',
-                howWeMetSubtitle: 'How we met subtitle',
-                howWeMetIntro: 'Our story began in [Year] at [Place where you met, e.g., "a friend\'s birthday party," "the office," "Hanoi Old Quarter"].',
-                bridePerspective: 'Góc nhìn của Ti:',
-                bridePerspectiveStory: 'Story bé Ti',
-                groomPerspective: 'Góc nhìn của Hiệp:',
-                groomPerspectiveStory: 'Story Hiệp',
-                firstDate: 'First date',
-                tripsTitle: 'Our Trips',
-                tripsIntro: 'Trips intro',
-                tripsMemories: 'Trips memories',
-                tripsConclusion: 'Trips conclusion',
+                howWeMet: 'How We Met',
+                howWeMetIntro: 'It all started with a classic case of "right place, right time" (and a global pandemic, weirdly enough).',
+                howWeMetParagraph1: 'The Groom, a Hanoi native, decided to take a chance and move to Ho Chi Minh City for work. At the same time, the Bride, still a student, insisted on getting her very first job.',
+                howWeMetParagraph2: 'By pure (or was it planned?) coincidence, we both ended up at the same company... a company developing COVID vaccines during the peak of the pandemic. We were work buddies first, navigating the chaos of lockdowns and projects together.',
+                howWeMetImage1Alt: 'Us at work, looking professional (or trying to!)',
+                howWeMetImage1Caption: 'Us at work, looking professional (or trying to!)',
+                howWeMetParagraph3: 'After the lockdowns lifted, the Bride (being the "Đường Tăng" who loves to explore) took the Groom on tours around the city. The Groom\'s "lời tỏ tình" (his big confession) was to finally take her somewhere new. And what\'s more romantic than... a drawing class?',
+                howWeMetImage2Alt: 'Our artistic masterpieces (or failures) at the drawing activity',
+                howWeMetImage2Caption: 'Our artistic masterpieces (or failures) at the drawing activity',
+                journeyTitle: 'Our Journey',
+                journeyIntro: 'From colleagues to a couple, we started to grow together. We celebrated the big wins...',
+                journeyImage1Alt: 'Graduation day! We made it!',
+                journeyImage1Caption: 'Graduation day! We made it!',
+                journeyParagraph1: '...and we started exploring the world, just the two of us. This is where the "Đường Tăng" really put "Ngộ Không" to the test.',
+                journeyImage2Alt: 'Us on one of our many trips!',
+                journeyImage2Caption: 'Us on one of our many trips!',
                 proposalTitle: 'The Proposal',
-                proposalIntro: 'Proposal intro',
-                proposalStory: 'Proposal story',
-                proposalConclusion: 'Proposal conclusion',
-                everAfterTitle: 'And Ever After...',
-                everAfterIntro: 'Ever after intro',
-                everAfterStory: 'Ever after story',
-                everAfterClosing: 'Ever after closing'
+                proposalIntro: 'This part really sums up our dynamic.',
+                proposalGroomLabel: 'Groom:',
+                proposalGroomQuote: '"I tried to prepare a surprise with a detailed, secret plan."',
+                proposalBrideLabel: 'Bride:',
+                proposalBrideQuote: '"I already knew. And honestly, I didn\'t want to accept it at first."',
+                proposalImage1Alt: 'The actual \'Will you marry me?\' moment (Nheo finally gave in)',
+                proposalImage1Caption: 'The actual \'Will you marry me?\' moment (Nheo finally gave in)',
+                proposalConclusion: 'But let\'s be real... a surprise is a surprise, and good food = an undeniable \'Yes\'.',
+                proposalImage2Alt: 'The celebration dinner (and the food that sealed the deal)',
+                proposalImage2Caption: 'The celebration dinner (and the food that sealed the deal)',
+                everAfterTitle: '...And Ever After',
+                everAfterIntro: 'And now, our adventure continues! We\'ve packed up our lives (and our "killer" / "cinnamon roll" dynamic) and are building our next chapter together in Australia.',
+                everAfterParagraph1: 'We\'re so excited to see where this journey takes us, and even more excited to have you all be a part of the official starting line.',
+                everAfterImage1Alt: 'A few snaps of our new life in Australia!',
+                everAfterImage1Caption: 'A few snaps of our new life in Australia!'
             },
             // Explore Section
             explore: {
@@ -228,7 +245,7 @@
             },
             // Gallery Section
             gallery: {
-                title: 'Những Kỷ Niệm của chúng mình',
+                title: 'Những kỷ niệm của chúng mình',
                 subtitle: 'Những Kỷ Niệm của chúng mình',
                 welcome: 'Chào mừng đến với album ảnh của chúng mình! Đây là một vài khoảnh khắc yêu thích trong suốt hành trình của cả hai.',
                 photos: 'Ảnh',
@@ -266,10 +283,15 @@
             countdown: {
                 title: 'Đếm ngược đến ngày đặc biệt',
                 months: 'Tháng',
+                month: 'Tháng',
                 days: 'Ngày',
+                day: 'Ngày',
                 hours: 'Giờ',
+                hour: 'Giờ',
                 minutes: 'Phút',
-                seconds: 'Giây'
+                minute: 'Phút',
+                seconds: 'Giây',
+                second: 'Giây'
             },
             // RSVP Section
             rsvp: {
@@ -328,7 +350,7 @@
                 welcomeParty: 'Tiệc thân mật',
                 welcomePartyDate: 'Ngày & Giờ',
                 welcomePartyLocation: 'Địa điểm',
-                wedding: 'Lễ Cưới',
+                wedding: 'Lễ cưới',
                 weddingDate: 'Ngày & Giờ',
                 weddingLocation: 'Địa điểm',
                 timeLabel: 'Ngày & Giờ:',
@@ -349,7 +371,7 @@
                 welcomePartyVenue: 'Siha Cafe',
                 welcomePartyAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
                 welcomePartyTime: '5:00 CH 31/12/2025',
-                wedding: 'Lễ Cưới',
+                wedding: 'Lễ cưới',
                 weddingVenue: 'Chloe Gallery',
                 weddingAddress: '06 Phan Văn Chương\n Tân Mỹ, TP. Hồ Chí Minh',
                 weddingTime: '5:00 CH 1/1/2026',
@@ -363,8 +385,8 @@
             // Story Section
             story: {
                 title: 'Chuyện tình yêu của chúng mình',
-                subtitle: '"Chào mừng đến với câu chuyện của tụi mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè',
-                meetTitle: 'Cùng gặp Cô dâu và Chú rể',
+                subtitle: '"Chào mừng đến với câu chuyện của tụi mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè!',
+                meetTitle: 'Cùng gặp cô dâu và chú rể nhé',
                 brideTitle: 'Cô dâu Minh Anh',
                 brideSubtitle: 'Giao diện đồng hành với hệ điều hành - luôn "chiến"! 🤑',
                 bridePersonalityLabel: 'Tính cách:',
@@ -376,27 +398,39 @@
                 groomPersonalityLabel: 'Tính cách:',
                 groomPersonality: '"Looks like a cinnamon roll, is a cinnamon roll... or maybe not?" 🤔',
                 groomDescriptionLabel: 'Mô tả:',
-                groomDescription: 'Là thẳng nam chính hiệu, luôn điềm tĩnh và né xa rắc rối nhưng lại dính vào Minh Anh - Ủa?! Là Ngộ Không đa tài đa năng có 7749 phép thần thông để làm dịu chill girl. Là vận động viên cầu lông bán chuyên nghiệp tại Peter Maccallum Cancer Centre',
-                howWeMet: 'chúng Mình Gặp Nhau Thế Nào',
-                howWeMetSubtitle: 'Met subtitle',
-                howWeMetIntro: 'How we met intro',
-                bridePerspective: 'Góc nhìn của Ti:',
-                bridePerspectiveStory: 'Story bé Ti',
-                groomPerspective: 'Góc nhìn của Hiệp:',
-                groomPerspectiveStory: 'Story Hiệp',
-                firstDate: 'First date',
-                tripsTitle: 'Những Chuyến Đi',
-                tripsIntro: 'Trips intro',
-                tripsMemories: 'Trips memories',
-                tripsConclusion: 'Trips conclusion',
+                groomDescription: 'Là thẳng nam chính hiệu, luôn điềm tĩnh và né xa rắc rối nhưng lại dính vào Minh Anh - Ủa?! Là Ngộ Không đa tài đa năng có 7749 phép thần thông để làm dịu chill girl. Là vận động viên cầu lông bán chuyên nghiệp tại Peter MacCallum Cancer Centre.',
+                howWeMet: 'Tụi Mình Gặp Nhau Thế Nào',
+                howWeMetIntro: 'Mọi thứ bắt đầu đúng kiểu "đúng người, đúng thời điểm" (và, thật kỳ lạ, là nhờ có đại dịch).',
+                howWeMetParagraph1: 'Chú rể, một chàng trai Hà Nội, quyết định vào TP.HCM làm việc. Cùng lúc đó, cô dâu, dù vẫn đang đi học, nhưng khăng khăng đòi đi làm công việc đầu tiên.',
+                howWeMetParagraph2: 'Như một sự sắp đặt (hay "gài bẫy"?), cả hai "hạ cánh" tại cùng một công ty... chuyên phát triển vắc-xin COVID ngay giữa tâm dịch. Tụi mình bắt đầu là đồng nghiệp, cùng nhau vượt qua những ngày lockdown và deadline "bể" mặt.',
+                howWeMetImage1Alt: 'Tụi mình tại chỗ làm, trông (cố) chuyên nghiệp',
+                howWeMetImage1Caption: 'Tụi mình tại chỗ làm, trông (cố) chuyên nghiệp',
+                howWeMetParagraph3: 'Sau khi hết giãn cách, cô dâu (vai "Đường Tăng" thích khám phá) dắt chú rể đi thăm thú thành phố. Và màn "lời tỏ tình" của chú rể là dắt ngược cô dâu đi một nơi mới. Còn gì lãng mạn hơn... một lớp học vẽ chứ?',
+                howWeMetImage2Alt: 'Kiệt tác nghệ thuật (hoặc thảm họa) của tụi mình tại lớp vẽ',
+                howWeMetImage2Caption: 'Kiệt tác nghệ thuật (hoặc thảm họa) của tụi mình tại lớp vẽ',
+                journeyTitle: 'Hành Trình',
+                journeyIntro: 'Từ đồng nghiệp thành một đôi, tụi mình bắt đầu cùng nhau "lớn lên". Tụi mình ăn mừng những thành tựu lớn...',
+                journeyImage1Alt: 'Ngày tốt nghiệp! Cuối cùng cũng xong.',
+                journeyImage1Caption: 'Ngày tốt nghiệp! Cuối cùng cũng xong.',
+                journeyParagraph1: '...và tụi mình bắt đầu khám phá thế giới, chỉ có hai đứa. Đây là lúc "Đường Tăng" thực sự "hành" "Ngộ Không".',
+                journeyImage2Alt: 'Tụi mình trong một chuyến du lịch!',
+                journeyImage2Caption: 'Tụi mình trong một chuyến du lịch!',
                 proposalTitle: 'Màn Cầu Hôn',
-                proposalIntro: 'Proposal intro',
-                proposalStory: 'Proposal story',
-                proposalConclusion: 'Proposal conclusion',
-                everAfterTitle: 'Ever after title',
-                everAfterIntro: 'Ever after intro',
-                everAfterStory: 'Ever after story',
-                everAfterClosing: 'Ever after closing'
+                proposalIntro: 'Phần này tóm tắt chính xác "vibe" của tụi mình:',
+                proposalGroomLabel: 'Chú rể:',
+                proposalGroomQuote: '"Mình đã cố chuẩn bị một màn bất ngờ với kế hoạch chi tiết, bí mật."',
+                proposalBrideLabel: 'Cô dâu:',
+                proposalBrideQuote: '"Mình biết tỏng rồi. Và thú thật, ban đầu mình không muốn chấp nhận."',
+                proposalImage1Alt: 'Khoảnh khắc \'Em đồng ý\' (sau khi bị ép)',
+                proposalImage1Caption: 'Khoảnh khắc \'Em đồng ý\' (sau khi bị ép)',
+                proposalConclusion: 'Nhưng mà, nói gì thì nói... bất ngờ vẫn là bất ngờ, và đồ ăn ngon = một cái \'Gật đầu\' không thể chối từ.',
+                proposalImage2Alt: 'Bữa tối ăn mừng (và đồ ăn chốt đơn)',
+                proposalImage2Caption: 'Bữa tối ăn mừng (và đồ ăn chốt đơn)',
+                everAfterTitle: '...Và Mãi Mãi Về Sau',
+                everAfterIntro: 'Và giờ đây, hành trình của tụi mình lại tiếp tục! Tụi mình đã "gói ghém" cuộc sống (cùng với "vibe" sát thủ/cục bột) và đang xây dựng chương tiếp theo cùng nhau tại Úc.',
+                everAfterParagraph1: 'Tụi mình rất háo hức xem hành trình này sẽ đưa mình đến đâu, và còn háo hức hơn nữa khi có tất cả các bạn ở đây, ngay vạch xuất phát chính thức này.',
+                everAfterImage1Alt: 'Vài tấm ảnh về cuộc sống mới của tụi mình ở Úc!',
+                everAfterImage1Caption: 'Vài tấm ảnh về cuộc sống mới của tụi mình ở Úc!'
             },
             // Explore Section
             explore: {
@@ -425,6 +459,9 @@
         currentLanguage = lang;
         localStorage.setItem('language', lang);
         document.documentElement.lang = lang;
+
+        // Dispatch language changed event
+        document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
 
         const t = translations[lang];
 
@@ -473,11 +510,8 @@
 
         // Update countdown section
         updateText('[data-i18n="countdown.title"]', t.countdown.title);
-        updateText('[data-i18n="countdown.months"]', t.countdown.months);
-        updateText('[data-i18n="countdown.days"]', t.countdown.days);
-        updateText('[data-i18n="countdown.hours"]', t.countdown.hours);
-        updateText('[data-i18n="countdown.minutes"]', t.countdown.minutes);
-        updateText('[data-i18n="countdown.seconds"]', t.countdown.seconds);
+        // Note: countdown labels (months, days, hours, minutes, seconds) are handled by countdown.js
+        // to support singular/plural forms based on the actual countdown values
 
         // Update RSVP section
         updateText('[data-i18n="rsvp.title"]', t.rsvp.title);
@@ -570,25 +604,37 @@
         updateText('[data-i18n="story.groomDescriptionLabel"]', t.story.groomDescriptionLabel);
         updateText('[data-i18n="story.groomDescription"]', t.story.groomDescription);
         updateText('[data-i18n="story.howWeMet"]', t.story.howWeMet);
-        updateText('[data-i18n="story.howWeMetSubtitle"]', t.story.howWeMetSubtitle);
         updateText('[data-i18n="story.howWeMetIntro"]', t.story.howWeMetIntro);
-        updateText('[data-i18n="story.bridePerspective"]', t.story.bridePerspective);
-        updateText('[data-i18n="story.bridePerspectiveStory"]', t.story.bridePerspectiveStory);
-        updateText('[data-i18n="story.groomPerspective"]', t.story.groomPerspective);
-        updateText('[data-i18n="story.groomPerspectiveStory"]', t.story.groomPerspectiveStory);
-        updateText('[data-i18n="story.firstDate"]', t.story.firstDate);
-        updateText('[data-i18n="story.tripsTitle"]', t.story.tripsTitle);
-        updateText('[data-i18n="story.tripsIntro"]', t.story.tripsIntro);
-        updateText('[data-i18n="story.tripsMemories"]', t.story.tripsMemories);
-        updateText('[data-i18n="story.tripsConclusion"]', t.story.tripsConclusion);
+        updateText('[data-i18n="story.howWeMetParagraph1"]', t.story.howWeMetParagraph1);
+        updateText('[data-i18n="story.howWeMetParagraph2"]', t.story.howWeMetParagraph2);
+        updateText('[data-i18n="story.howWeMetImage1Alt"]', t.story.howWeMetImage1Alt);
+        updateText('[data-i18n="story.howWeMetImage1Caption"]', t.story.howWeMetImage1Caption);
+        updateText('[data-i18n="story.howWeMetParagraph3"]', t.story.howWeMetParagraph3);
+        updateText('[data-i18n="story.howWeMetImage2Alt"]', t.story.howWeMetImage2Alt);
+        updateText('[data-i18n="story.howWeMetImage2Caption"]', t.story.howWeMetImage2Caption);
+        updateText('[data-i18n="story.journeyTitle"]', t.story.journeyTitle);
+        updateText('[data-i18n="story.journeyIntro"]', t.story.journeyIntro);
+        updateText('[data-i18n="story.journeyImage1Alt"]', t.story.journeyImage1Alt);
+        updateText('[data-i18n="story.journeyImage1Caption"]', t.story.journeyImage1Caption);
+        updateText('[data-i18n="story.journeyParagraph1"]', t.story.journeyParagraph1);
+        updateText('[data-i18n="story.journeyImage2Alt"]', t.story.journeyImage2Alt);
+        updateText('[data-i18n="story.journeyImage2Caption"]', t.story.journeyImage2Caption);
         updateText('[data-i18n="story.proposalTitle"]', t.story.proposalTitle);
         updateText('[data-i18n="story.proposalIntro"]', t.story.proposalIntro);
-        updateText('[data-i18n="story.proposalStory"]', t.story.proposalStory);
+        updateText('[data-i18n="story.proposalGroomLabel"]', t.story.proposalGroomLabel);
+        updateText('[data-i18n="story.proposalGroomQuote"]', t.story.proposalGroomQuote);
+        updateText('[data-i18n="story.proposalBrideLabel"]', t.story.proposalBrideLabel);
+        updateText('[data-i18n="story.proposalBrideQuote"]', t.story.proposalBrideQuote);
+        updateText('[data-i18n="story.proposalImage1Alt"]', t.story.proposalImage1Alt);
+        updateText('[data-i18n="story.proposalImage1Caption"]', t.story.proposalImage1Caption);
         updateText('[data-i18n="story.proposalConclusion"]', t.story.proposalConclusion);
+        updateText('[data-i18n="story.proposalImage2Alt"]', t.story.proposalImage2Alt);
+        updateText('[data-i18n="story.proposalImage2Caption"]', t.story.proposalImage2Caption);
         updateText('[data-i18n="story.everAfterTitle"]', t.story.everAfterTitle);
         updateText('[data-i18n="story.everAfterIntro"]', t.story.everAfterIntro);
-        updateText('[data-i18n="story.everAfterStory"]', t.story.everAfterStory);
-        updateText('[data-i18n="story.everAfterClosing"]', t.story.everAfterClosing);
+        updateText('[data-i18n="story.everAfterParagraph1"]', t.story.everAfterParagraph1);
+        updateText('[data-i18n="story.everAfterImage1Alt"]', t.story.everAfterImage1Alt);
+        updateText('[data-i18n="story.everAfterImage1Caption"]', t.story.everAfterImage1Caption);
 
         // Update explore section
         updateText('[data-i18n="explore.text"]', t.explore.text);
@@ -611,8 +657,12 @@
     function updateText(selector, text) {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
+            // Check if this is an image element - update alt attribute
+            if (el.tagName === 'IMG') {
+                el.alt = text;
+            }
             // Check if this is an address element that should preserve line breaks
-            if (selector.includes('Address') || el.classList.contains('venue-info') || el.classList.contains('address')) {
+            else if (selector.includes('Address') || el.classList.contains('venue-info') || el.classList.contains('address')) {
                 // Convert \n to <br> for addresses
                 el.innerHTML = text.replace(/\n/g, '<br>');
             } else {
