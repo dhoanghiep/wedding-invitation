@@ -190,6 +190,8 @@
                 howWeMetParagraph3: 'After the lockdowns lifted, the Bride (being the "Đường Tăng" who loves to explore) took the Groom on tours around the city. The Groom\'s "lời tỏ tình" (his big confession) was to finally take her somewhere new. And what\'s more romantic than... a drawing class?',
                 howWeMetImage2Alt: 'Our artistic masterpieces (or failures) at the drawing activity',
                 howWeMetImage2Caption: 'Our artistic masterpieces (or failures) at the drawing activity',
+                howWeMetImage3Alt: 'Another moment from our early days',
+                howWeMetImage3Caption: 'Another moment from our early days',
                 journeyTitle: 'Our Journey',
                 journeyIntro: 'From colleagues to a couple, we started to grow together. We celebrated the big wins...',
                 journeyImage1Alt: 'Graduation day! We made it!',
@@ -212,7 +214,11 @@
                 everAfterIntro: 'And now, our adventure continues! We\'ve packed up our lives (and our "killer" / "cinnamon roll" dynamic) and are building our next chapter together in Australia.',
                 everAfterParagraph1: 'We\'re so excited to see where this journey takes us, and even more excited to have you all be a part of the official starting line.',
                 everAfterImage1Alt: 'A few snaps of our new life in Australia!',
-                everAfterImage1Caption: 'A few snaps of our new life in Australia!'
+                everAfterImage1Caption: 'A few snaps of our new life in Australia!',
+                everAfterImage2Alt: 'More moments from our new life in Australia!',
+                everAfterImage2Caption: 'More moments from our new life in Australia!',
+                everAfterImage3Alt: 'Building our next chapter together!',
+                everAfterImage3Caption: 'Building our next chapter together!'
             },
             // Explore Section
             explore: {
@@ -408,6 +414,8 @@
                 howWeMetParagraph3: 'Sau khi hết giãn cách, cô dâu (vai "Đường Tăng" thích khám phá) dắt chú rể đi thăm thú thành phố. Và màn "lời tỏ tình" của chú rể là dắt ngược cô dâu đi một nơi mới. Còn gì lãng mạn hơn... một lớp học vẽ chứ?',
                 howWeMetImage2Alt: 'Kiệt tác nghệ thuật (hoặc thảm họa) của tụi mình tại lớp vẽ',
                 howWeMetImage2Caption: 'Kiệt tác nghệ thuật (hoặc thảm họa) của tụi mình tại lớp vẽ',
+                howWeMetImage3Alt: 'Một khoảnh khắc khác từ những ngày đầu của tụi mình',
+                howWeMetImage3Caption: 'Một khoảnh khắc khác từ những ngày đầu của tụi mình',
                 journeyTitle: 'Hành Trình',
                 journeyIntro: 'Từ đồng nghiệp thành một đôi, tụi mình bắt đầu cùng nhau "lớn lên". Tụi mình ăn mừng những thành tựu lớn...',
                 journeyImage1Alt: 'Ngày tốt nghiệp! Cuối cùng cũng xong.',
@@ -430,7 +438,11 @@
                 everAfterIntro: 'Và giờ đây, hành trình của tụi mình lại tiếp tục! Tụi mình đã "gói ghém" cuộc sống (cùng với "vibe" sát thủ/cục bột) và đang xây dựng chương tiếp theo cùng nhau tại Úc.',
                 everAfterParagraph1: 'Tụi mình rất háo hức xem hành trình này sẽ đưa mình đến đâu, và còn háo hức hơn nữa khi có tất cả các bạn ở đây, ngay vạch xuất phát chính thức này.',
                 everAfterImage1Alt: 'Vài tấm ảnh về cuộc sống mới của tụi mình ở Úc!',
-                everAfterImage1Caption: 'Vài tấm ảnh về cuộc sống mới của tụi mình ở Úc!'
+                everAfterImage1Caption: 'Vài tấm ảnh về cuộc sống mới của tụi mình ở Úc!',
+                everAfterImage2Alt: 'Thêm những khoảnh khắc từ cuộc sống mới của tụi mình ở Úc!',
+                everAfterImage2Caption: 'Thêm những khoảnh khắc từ cuộc sống mới của tụi mình ở Úc!',
+                everAfterImage3Alt: 'Xây dựng chương tiếp theo cùng nhau!',
+                everAfterImage3Caption: 'Xây dựng chương tiếp theo cùng nhau!'
             },
             // Explore Section
             explore: {

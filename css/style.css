@@ -1421,6 +1421,228 @@ section {
     margin-bottom: 20px;
 }
 
+/* General story image styles */
+.story-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.story-image-caption {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+}
+
+/* How We Met - 3 columns intro layout */
+.story-intro-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin: 40px 0;
+    align-items: start;
+}
+
+.story-intro-image {
+    width: 100%;
+}
+
+.story-intro-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.story-intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.story-intro-text p {
+    margin: 0;
+}
+
+/* How We Met - 2 columns layout */
+.story-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 40px 0;
+    align-items: start;
+}
+
+.story-column-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.story-column-text p {
+    margin: 0;
+}
+
+.story-column-image {
+    width: 100%;
+}
+
+.story-column-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.story-column-image .story-image-caption {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+}
+
+/* Journey section */
+.story-journey-intro {
+    margin-bottom: 30px;
+}
+
+.story-journey-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.story-journey-image {
+    width: 100%;
+}
+
+.story-journey-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Proposal section - Quotes box */
+.story-quotes-box {
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid var(--primary-color);
+    padding: 30px;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.story-quote {
+    margin: 0;
+}
+
+.story-quote-label {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.story-quote-text {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-style: italic;
+    line-height: 1.8;
+    margin: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Proposal section - Side by side images */
+.story-proposal-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.story-proposal-image {
+    width: 100%;
+}
+
+.story-proposal-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.story-proposal-image .story-image-caption {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+}
+
+.story-proposal-conclusion {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.story-proposal-conclusion-image {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.story-proposal-conclusion-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Ever After section */
+.story-ever-after-intro {
+    margin-bottom: 40px;
+}
+
+.story-ever-after-intro p {
+    margin-bottom: 20px;
+}
+
+.story-ever-after-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.story-ever-after-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.story-ever-after-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.story-ever-after-item .story-image-caption {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+}
+
 .story-perspective {
     margin: 30px 0;
     padding: 20px;
@@ -2129,6 +2351,30 @@ section {
     
     .story-signature {
         font-size: 1rem;
+    }
+    
+    /* How We Met - 3 columns intro layout responsive */
+    .story-intro-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* How We Met - 2 columns layout responsive */
+    .story-two-columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Proposal section - Side by side images responsive */
+    .story-proposal-images {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Ever After section - 3 columns responsive */
+    .story-ever-after-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
     
     .bride-groom-section {

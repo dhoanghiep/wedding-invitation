@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Our Story - How We Met">
     <title>Our Story - Hoàng Hiệp & Minh Anh</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    
+
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <!-- Header placeholder - will be loaded by components.js -->
     <div id="header-placeholder"></div>
@@ -82,24 +84,34 @@
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="story.howWeMet"></h2>
                 </div>
-                
+
                 <div class="story-content">
-                    <p data-i18n="story.howWeMetIntro"></p>
-                    
-                    <p data-i18n="story.howWeMetParagraph1"></p>
-                    
-                    <p data-i18n="story.howWeMetParagraph2"></p>
-                    
-                    <div class="story-image-container">
-                        <img src="" alt="" data-i18n="story.howWeMetImage1Alt" class="story-image" />
-                        <p class="story-image-caption" data-i18n="story.howWeMetImage1Caption"></p>
+                    <!-- Intro: 3 columns layout -->
+                    <div class="story-intro-layout">
+                        <div class="story-intro-image">
+                            <img src="https://i.imgur.com/ns7wVSY.jpeg" alt="" data-i18n="story.howWeMetImage1Alt"
+                                class="story-image" />
+                        </div>
+                        <div class="story-intro-image">
+                            <img src="https://i.imgur.com/L9Fjsmx.jpeg" alt="" data-i18n="story.howWeMetImage2Alt"
+                                class="story-image" />
+                        </div>
+                        <div class="story-intro-text">
+                            <p data-i18n="story.howWeMetParagraph1"></p>
+                            <p data-i18n="story.howWeMetParagraph2"></p>
+                        </div>
                     </div>
-                    
-                    <p data-i18n="story.howWeMetParagraph3"></p>
-                    
-                    <div class="story-image-container">
-                        <img src="" alt="" data-i18n="story.howWeMetImage2Alt" class="story-image" />
-                        <p class="story-image-caption" data-i18n="story.howWeMetImage2Caption"></p>
+
+                    <!-- 2 columns: paragraph 3, image 3 -->
+                    <div class="story-two-columns">
+                        <div class="story-column-text">
+                            <p data-i18n="story.howWeMetParagraph3"></p>
+                        </div>
+                        <div class="story-column-image">
+                            <img src="https://i.imgur.com/arORoeR.jpeg" alt="" data-i18n="story.howWeMetImage3Alt"
+                                class="story-image" />
+                            <p class="story-image-caption" data-i18n="story.howWeMetImage3Caption"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,20 +123,33 @@
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="story.journeyTitle"></h2>
                 </div>
-                
+
                 <div class="story-content">
-                    <p data-i18n="story.journeyIntro"></p>
-                    
-                    <div class="story-image-container">
-                        <img src="" alt="" data-i18n="story.journeyImage1Alt" class="story-image" />
-                        <p class="story-image-caption" data-i18n="story.journeyImage1Caption"></p>
+                    <p class="story-journey-intro" data-i18n="story.journeyIntro"></p>
+
+                    <!-- Group 1: Graduation photos -->
+                    <div class="story-journey-group">
+                        <div class="story-journey-image">
+                            <img src="https://i.imgur.com/WAr4XwR.jpeg" alt="Bride graduation" class="story-image" />
+                        </div>
+                        <div class="story-journey-image">
+                            <img src="https://i.imgur.com/J252uHr.jpeg" alt="Groom graduation" class="story-image" />
+                        </div>
                     </div>
-                    
+
                     <p data-i18n="story.journeyParagraph1"></p>
-                    
-                    <div class="story-image-container">
-                        <img src="" alt="" data-i18n="story.journeyImage2Alt" class="story-image" />
-                        <p class="story-image-caption" data-i18n="story.journeyImage2Caption"></p>
+
+                    <!-- Group 2: Journey/travel photos -->
+                    <div class="story-journey-group">
+                        <div class="story-journey-image">
+                            <img src="https://i.imgur.com/jCqsLzx.jpeg" alt="Journey moment 1" class="story-image" />
+                        </div>
+                        <div class="story-journey-image">
+                            <img src="https://i.imgur.com/MiOGh2f.jpeg" alt="Journey moment 2" class="story-image" />
+                        </div>
+                        <div class="story-journey-image">
+                            <img src="https://i.imgur.com/ScqSgQa.jpeg" alt="Journey moment 3" class="story-image" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,29 +161,36 @@
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="story.proposalTitle"></h2>
                 </div>
-                
+
                 <div class="story-content">
                     <p data-i18n="story.proposalIntro"></p>
-                    
-                    <div class="story-quote story-quote-groom">
-                        <p class="story-quote-label" data-i18n="story.proposalGroomLabel"></p>
-                        <p class="story-quote-text" data-i18n="story.proposalGroomQuote"></p>
+
+                    <!-- Quotes in separate quoted box -->
+                    <div class="story-quotes-box">
+                        <div class="story-quote story-quote-groom">
+                            <p class="story-quote-label" data-i18n="story.proposalGroomLabel"></p>
+                            <p class="story-quote-text" data-i18n="story.proposalGroomQuote"></p>
+                        </div>
+
+                        <div class="story-quote story-quote-bride">
+                            <p class="story-quote-label" data-i18n="story.proposalBrideLabel"></p>
+                            <p class="story-quote-text" data-i18n="story.proposalBrideQuote"></p>
+                        </div>
                     </div>
-                    
-                    <div class="story-quote story-quote-bride">
-                        <p class="story-quote-label" data-i18n="story.proposalBrideLabel"></p>
-                        <p class="story-quote-text" data-i18n="story.proposalBrideQuote"></p>
+
+                    <!-- 2 proposal images side by side -->
+                    <div class="story-proposal-images">
+                        <div class="story-proposal-image">
+                            <img src="https://i.imgur.com/FxhCiCk.jpeg" alt="" data-i18n="story.proposalImage1Alt"
+                                class="story-image" />
+                            <p class="story-image-caption" data-i18n="story.proposalImage1Caption"></p>
+                        </div>
                     </div>
-                    
-                    <div class="story-image-container">
-                        <img src="" alt="" data-i18n="story.proposalImage1Alt" class="story-image" />
-                        <p class="story-image-caption" data-i18n="story.proposalImage1Caption"></p>
-                    </div>
-                    
-                    <p data-i18n="story.proposalConclusion"></p>
-                    
-                    <div class="story-image-container">
-                        <img src="" alt="" data-i18n="story.proposalImage2Alt" class="story-image" />
+
+                    <!-- Conclusion -->
+                    <div class="story-proposal-conclusion-images">
+                        <p class="story-proposal-conclusion" data-i18n="story.proposalConclusion"></p>
+                        <img src="https://i.imgur.com/6nseIZb.jpeg" alt="Celebration" class="story-image" />
                         <p class="story-image-caption" data-i18n="story.proposalImage2Caption"></p>
                     </div>
                 </div>
@@ -171,15 +203,30 @@
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="story.everAfterTitle"></h2>
                 </div>
-                
+
                 <div class="story-content">
-                    <p data-i18n="story.everAfterIntro"></p>
-                    
-                    <p data-i18n="story.everAfterParagraph1"></p>
-                    
-                    <div class="story-image-container">
-                        <img src="" alt="" data-i18n="story.everAfterImage1Alt" class="story-image" />
-                        <p class="story-image-caption" data-i18n="story.everAfterImage1Caption"></p>
+                    <div class="story-ever-after-intro">
+                        <p data-i18n="story.everAfterIntro"></p>
+                        <p data-i18n="story.everAfterParagraph1"></p>
+                    </div>
+
+                    <!-- 3 columns: image + caption -->
+                    <div class="story-ever-after-grid">
+                        <div class="story-ever-after-item">
+                            <img src="https://i.imgur.com/yaZr2rI.jpeg" alt="" data-i18n="story.everAfterImage1Alt"
+                                class="story-image" />
+                            <p class="story-image-caption" data-i18n="story.everAfterImage1Caption"></p>
+                        </div>
+                        <div class="story-ever-after-item">
+                            <img src="https://i.imgur.com/rbozpdo.jpeg" alt="" data-i18n="story.everAfterImage2Alt"
+                                class="story-image" />
+                            <p class="story-image-caption" data-i18n="story.everAfterImage2Caption"></p>
+                        </div>
+                        <div class="story-ever-after-item">
+                            <img src="https://i.imgur.com/smMNQP7.jpeg" alt="" data-i18n="story.everAfterImage3Alt"
+                                class="story-image" />
+                            <p class="story-image-caption" data-i18n="story.everAfterImage3Caption"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,5 +242,5 @@
     <script src="config.js"></script>
     <script src="js/main.js"></script>
 </body>
-</html>
 
+</html>
