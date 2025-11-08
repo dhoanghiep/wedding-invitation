@@ -184,16 +184,19 @@
                 howWeMet: 'How We Met',
                 howWeMetIntro: 'It all started with a classic case of "right place, right time" (and a global pandemic, weirdly enough).',
                 howWeMetParagraph1: 'The Groom, a Hanoi native, decided to take a chance and move to Ho Chi Minh City for work. At the same time, the Bride, still a student, insisted on getting her very first job.',
-                howWeMetParagraph2: 'By pure (or was it planned?) coincidence, we both ended up at the same company... a company developing COVID vaccines during the peak of the pandemic. We were work buddies first, navigating the chaos of lockdowns and projects together.',
+                howWeMetParagraph2: 'By pure (or was it planned?) coincidence, we both ended up at the same company... a company developing COVID vaccines during the peak of the pandemic.<br>We were work buddies first, navigating the chaos of lockdowns and projects together.',
                 howWeMetImage1Alt: 'Us at work, looking professional (or trying to!)',
                 howWeMetImage1Caption: 'Us at work, looking professional (or trying to!)',
-                howWeMetParagraph3: 'After the lockdowns lifted, the Bride (being the "Đường Tăng" who loves to explore) took the Groom on tours around the city. The Groom\'s "lời tỏ tình" (his big confession) was to finally take her somewhere new. And what\'s more romantic than... a drawing class?',
+                howWeMetParagraph3: 'After the lockdowns lifted, the Bride (being the "Đường Tăng" who loves to explore) took the Groom on tours around the city.<br>The Groom\'s "lời tỏ tình" (his big confession) was to finally take her somewhere new. And what\'s more romantic than... a drawing class?',
                 howWeMetImage2Alt: 'Our artistic masterpieces (or failures) at the drawing activity',
                 howWeMetImage2Caption: 'Our artistic masterpieces (or failures) at the drawing activity',
                 howWeMetImage3Alt: 'Another moment from our early days',
                 howWeMetImage3Caption: 'Another moment from our early days',
                 journeyTitle: 'Our Journey',
-                journeyIntro: 'From colleagues to a couple, we started to grow together.',
+                journeyIntro: 'From colleagues to a couple, we started to grow together. We were best buddies trying new things in life.',
+                journeyColumn1Text: 'Like our first time dyeing our hair..',
+                journeyHairImageAlt: 'Our new hair!',
+                journeyColumn2Text: 'professional cafe explorers and reliable "bạn nhậu" (drinking buddies).',
                 journeyParagraph1: 'We weren\'t just a couple; we were best buddies. Our relationship was built on a solid foundation of hanging out at cafes... and also being reliable "bạn nhậu" (drinking buddies).',
                 journeyCafeImage1Alt: 'Us looking civilized at a cafe',
                 journeyCafeImage2Alt: 'Us (less civilized) cheering with beer',
@@ -210,8 +213,8 @@
                 proposalGroomQuote: '"I tried to prepare a surprise with a detailed, secret plan."',
                 proposalBrideLabel: 'Bride:',
                 proposalBrideQuote: '"I already knew. And honestly, I didn\'t want to accept it at first."',
-                proposalImage1Alt: 'The actual \'Will you marry me?\' moment (Nheo finally gave in)',
-                proposalImage1Caption: 'The actual \'Will you marry me?\' moment (Nheo finally gave in)',
+                proposalImage1Alt: 'The actual \'Will you marry me?\' moment (June finally gave in)',
+                proposalImage1Caption: 'The actual \'Will you marry me?\' moment (June finally gave in)',
                 proposalConclusion: 'But let\'s be real... a surprise is a surprise, and good food = an undeniable \'Yes\'.',
                 proposalImage2Alt: 'The celebration dinner (and the food that sealed the deal)',
                 proposalImage2Caption: 'The celebration dinner (and the food that sealed the deal)',
@@ -396,7 +399,7 @@
             // Story Section
             story: {
                 title: 'Chuyện tình yêu của chúng mình',
-                subtitle: '"Chào mừng đến với câu chuyện của tụi mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè!',
+                subtitle: '"Chào mừng đến với câu chuyện của chúng mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè!',
                 meetTitle: 'Cùng gặp cô dâu và chú rể nhé',
                 brideTitle: 'Cô dâu Minh Anh',
                 brideSubtitle: 'Giao diện đồng hành với hệ điều hành - luôn "chiến"! 🤑',
@@ -410,31 +413,34 @@
                 groomPersonality: '"Looks like a cinnamon roll, is a cinnamon roll... or maybe not?" 🤔',
                 groomDescriptionLabel: 'Mô tả:',
                 groomDescription: 'Là thẳng nam chính hiệu, luôn điềm tĩnh và né xa rắc rối nhưng lại dính vào Minh Anh - Ủa?! Là Ngộ Không đa tài đa năng có 7749 phép thần thông để làm dịu chill girl. Là vận động viên cầu lông bán chuyên nghiệp tại Peter MacCallum Cancer Centre.',
-                howWeMet: 'Tụi Mình Gặp Nhau Thế Nào',
+                howWeMet: 'Chúng Mình Gặp Nhau Thế Nào',
                 howWeMetIntro: 'Mọi thứ bắt đầu đúng kiểu "đúng người, đúng thời điểm" (và, thật kỳ lạ, là nhờ có đại dịch).',
                 howWeMetParagraph1: 'Chú rể, một chàng trai Hà Nội, quyết định vào TP.HCM làm việc. Cùng lúc đó, cô dâu, dù vẫn đang đi học, nhưng khăng khăng đòi đi làm công việc đầu tiên.',
-                howWeMetParagraph2: 'Như một sự sắp đặt (hay "gài bẫy"?), cả hai "hạ cánh" tại cùng một công ty... chuyên phát triển vắc-xin COVID ngay giữa tâm dịch. Tụi mình bắt đầu là đồng nghiệp, cùng nhau vượt qua những ngày lockdown và deadline "bể" mặt.',
-                howWeMetImage1Alt: 'Tụi mình tại chỗ làm, trông (cố) chuyên nghiệp',
-                howWeMetImage1Caption: 'Tụi mình tại chỗ làm, trông (cố) chuyên nghiệp',
-                howWeMetParagraph3: 'Sau khi hết giãn cách, cô dâu (vai "Đường Tăng" thích khám phá) dắt chú rể đi thăm thú thành phố. Và màn "lời tỏ tình" của chú rể là dắt ngược cô dâu đi một nơi mới. Còn gì lãng mạn hơn... một lớp học vẽ chứ?',
-                howWeMetImage2Alt: 'Kiệt tác nghệ thuật (hoặc thảm họa) của tụi mình tại lớp vẽ',
-                howWeMetImage2Caption: 'Kiệt tác nghệ thuật (hoặc thảm họa) của tụi mình tại lớp vẽ',
-                howWeMetImage3Alt: 'Một khoảnh khắc khác từ những ngày đầu của tụi mình',
-                howWeMetImage3Caption: 'Một khoảnh khắc khác từ những ngày đầu của tụi mình',
+                howWeMetParagraph2: 'Như một sự sắp đặt (hay "gài bẫy"?), cả hai "hạ cánh" tại cùng một công ty... chuyên phát triển vắc-xin COVID ngay giữa tâm dịch.<br>Chúng mình bắt đầu là đồng nghiệp, cùng nhau vượt qua những ngày lockdown và deadline "bể" mặt.',
+                howWeMetImage1Alt: 'Chúng mình tại chỗ làm, trông (cố) chuyên nghiệp',
+                howWeMetImage1Caption: 'Chúng mình tại chỗ làm, trông (cố) chuyên nghiệp',
+                howWeMetParagraph3: 'Sau khi hết giãn cách, cô dâu (vai "Đường Tăng" thích khám phá) dắt chú rể đi thăm thú thành phố.<br>Và lời tỏ tình của chú rể là dắt ngược cô dâu đi một nơi mới. Còn gì lãng mạn hơn... một lớp học vẽ chứ?',
+                howWeMetImage2Alt: 'Kiệt tác nghệ thuật (hoặc thảm họa) của chúng mình tại lớp vẽ',
+                howWeMetImage2Caption: 'Kiệt tác nghệ thuật (hoặc thảm họa) của chúng mình tại lớp vẽ',
+                howWeMetImage3Alt: 'Một khoảnh khắc khác từ những ngày đầu của chúng mình',
+                howWeMetImage3Caption: 'Một khoảnh khắc khác từ những ngày đầu của chúng mình',
                 journeyTitle: 'Hành Trình',
-                journeyIntro: 'Từ đồng nghiệp thành một đôi, tụi mình bắt đầu cùng nhau "lớn lên".',
-                journeyParagraph1: 'Tụi mình không chỉ là một cặp đôi; tụi mình còn là bạn thân. Mối quan hệ này được xây dựng trên nền tảng vững chắc là... những buổi lê la quán cà phê, và tất nhiên, là những "bạn nhậu" rất hợp cạ.',
-                journeyCafeImage1Alt: 'Tụi mình "chill" ở quán cà phê',
+                journeyIntro: 'Từ đồng nghiệp thành một đôi, chúng mình bắt đầu cùng nhau "lớn lên". Chúng mình là đôi bạn thân cùng nhau thử những điều mới mẻ trong cuộc sống.',
+                journeyColumn1Text: 'Như là lần đầu tiên chúng mình đi nhuộm tóc.....',
+                journeyHairImageAlt: 'Tóc mới, con người mới!',
+                journeyColumn2Text: '"chiến thần" khám phá các quán cà phê và là những "bạn nhậu" đáng tin cậy.',
+                journeyParagraph1: 'Chúng mình không chỉ là một cặp đôi; chúng mình còn là bạn thân. Mối quan hệ này được xây dựng trên nền tảng vững chắc là... những buổi lê la quán cà phê, và tất nhiên, là những "bạn nhậu" rất hợp cạ.',
+                journeyCafeImage1Alt: 'Chúng mình "chill" ở quán cà phê',
                 journeyCafeImage2Alt: '"Dô!" – 100% bạn nhậu',
-                journeyParagraph2: 'Tụi mình đã ở đó trong những cột mốc quan trọng nhất của nhau và ăn mừng tất cả những thành tựu lớn.',
+                journeyParagraph2: 'Chúng mình đã ở đó trong những cột mốc quan trọng nhất của nhau và ăn mừng tất cả những thành tựu lớn.',
                 journeyGraduationImage1Alt: 'Cô dâu tốt nghiệp!',
                 journeyGraduationImage2Alt: 'Chú rể tốt nghiệp!',
-                journeyParagraph3: 'Và, dĩ nhiên, tụi mình bắt đầu khám phá thế giới. Đây là lúc "Đường Tăng" (Minh Anh) thực sự "hành" "Ngộ Không" (Hoàng Hiệp), và hành trình của tụi mình thật sự bắt đầu.',
+                journeyParagraph3: 'Và, dĩ nhiên, chúng mình bắt đầu khám phá thế giới. Đây là lúc "Đường Tăng" (Minh Anh) thực sự "hành" "Ngộ Không" (Hoàng Hiệp), và hành trình của chúng mình thật sự bắt đầu.',
                 journeyTripImage1Alt: 'Chuyến đi 1',
                 journeyTripImage2Alt: 'Chuyến đi 2',
                 journeyTripImage3Alt: 'Chuyến đi 3',
                 proposalTitle: 'Màn Cầu Hôn',
-                proposalIntro: 'Phần này tóm tắt chính xác "vibe" của tụi mình:',
+                proposalIntro: 'Phần này tóm tắt chính xác "vibe" của chúng mình:',
                 proposalGroomLabel: 'Chú rể:',
                 proposalGroomQuote: '"Mình đã cố chuẩn bị một màn bất ngờ với kế hoạch chi tiết, bí mật."',
                 proposalBrideLabel: 'Cô dâu:',
@@ -445,12 +451,12 @@
                 proposalImage2Alt: 'Bữa tối ăn mừng (và đồ ăn chốt đơn)',
                 proposalImage2Caption: 'Bữa tối ăn mừng (và đồ ăn chốt đơn)',
                 everAfterTitle: '...Và Mãi Mãi Về Sau',
-                everAfterIntro: 'Và giờ đây, hành trình của tụi mình lại tiếp tục! Tụi mình đã "gói ghém" cuộc sống (cùng với "vibe" sát thủ/cục bột) và đang xây dựng chương tiếp theo cùng nhau tại Úc.',
-                everAfterParagraph1: 'Tụi mình rất háo hức xem hành trình này sẽ đưa mình đến đâu, và còn háo hức hơn nữa khi có tất cả các bạn ở đây, ngay vạch xuất phát chính thức này.',
-                everAfterImage1Alt: 'Vài tấm ảnh về cuộc sống mới của tụi mình ở Úc!',
-                everAfterImage1Caption: 'Vài tấm ảnh về cuộc sống mới của tụi mình ở Úc!',
-                everAfterImage2Alt: 'Thêm những khoảnh khắc từ cuộc sống mới của tụi mình ở Úc!',
-                everAfterImage2Caption: 'Thêm những khoảnh khắc từ cuộc sống mới của tụi mình ở Úc!',
+                everAfterIntro: 'Và giờ đây, hành trình của chúng mình lại tiếp tục! Chúng mình đã "gói ghém" cuộc sống (cùng với "vibe" sát thủ/cục bột) và đang xây dựng chương tiếp theo cùng nhau tại Úc.',
+                everAfterParagraph1: 'Chúng mình rất háo hức xem hành trình này sẽ đưa mình đến đâu, và còn háo hức hơn nữa khi có tất cả các bạn ở đây, ngay vạch xuất phát chính thức này.',
+                everAfterImage1Alt: 'Vài tấm ảnh về cuộc sống mới của chúng mình ở Úc!',
+                everAfterImage1Caption: 'Vài tấm ảnh về cuộc sống mới của chúng mình ở Úc!',
+                everAfterImage2Alt: 'Thêm những khoảnh khắc từ cuộc sống mới của chúng mình ở Úc!',
+                everAfterImage2Caption: 'Thêm những khoảnh khắc từ cuộc sống mới của chúng mình ở Úc!',
                 everAfterImage3Alt: 'Xây dựng chương tiếp theo cùng nhau!',
                 everAfterImage3Caption: 'Xây dựng chương tiếp theo cùng nhau!'
             },
@@ -636,6 +642,9 @@
         updateText('[data-i18n="story.howWeMetImage2Caption"]', t.story.howWeMetImage2Caption);
         updateText('[data-i18n="story.journeyTitle"]', t.story.journeyTitle);
         updateText('[data-i18n="story.journeyIntro"]', t.story.journeyIntro);
+        updateText('[data-i18n="story.journeyColumn1Text"]', t.story.journeyColumn1Text);
+        updateText('[data-i18n="story.journeyHairImageAlt"]', t.story.journeyHairImageAlt);
+        updateText('[data-i18n="story.journeyColumn2Text"]', t.story.journeyColumn2Text);
         updateText('[data-i18n="story.journeyParagraph1"]', t.story.journeyParagraph1);
         updateText('[data-i18n="story.journeyCafeImage1Alt"]', t.story.journeyCafeImage1Alt);
         updateText('[data-i18n="story.journeyCafeImage2Alt"]', t.story.journeyCafeImage2Alt);
@@ -692,6 +701,10 @@
             else if (selector.includes('Address') || el.classList.contains('venue-info') || el.classList.contains('address')) {
                 // Convert \n to <br> for addresses
                 el.innerHTML = text.replace(/\n/g, '<br>');
+            }
+            // Check if text contains HTML tags - use innerHTML to render them
+            else if (/<[^>]+>/.test(text)) {
+                el.innerHTML = text;
             } else {
                 el.textContent = text;
             }

@@ -537,5 +537,90 @@
         sections[0].style.opacity = '1';
         sections[0].style.transform = 'translateY(0)';
     }
+
+    // Back to Top Button Functionality
+    function createBackToTopButton() {
+        // Check if button already exists
+        if (document.getElementById('back-to-top')) {
+            return;
+        }
+
+        // Create the button element
+        const backToTopButton = document.createElement('button');
+        backToTopButton.id = 'back-to-top';
+        backToTopButton.className = 'back-to-top';
+        backToTopButton.setAttribute('aria-label', 'Back to top');
+        
+        // Create SVG icon
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '24');
+        svg.setAttribute('height', '24');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', 'M12 19V5M12 5L5 12M12 5L19 12');
+        path.setAttribute('stroke', 'currentColor');
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('stroke-linejoin', 'round');
+        
+        svg.appendChild(path);
+        backToTopButton.appendChild(svg);
+        
+        // Append to body
+        document.body.appendChild(backToTopButton);
+        
+        return backToTopButton;
+    }
+
+    function initBackToTop() {
+        // Create button if it doesn't exist
+        let backToTopButton = document.getElementById('back-to-top');
+        if (!backToTopButton) {
+            backToTopButton = createBackToTopButton();
+        }
+        
+        if (!backToTopButton) {
+            return;
+        }
+
+        // Show/hide button based on scroll position
+        function toggleBackToTop() {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+            const showThreshold = 300; // Show button after scrolling 300px
+            
+            if (scrollPosition > showThreshold) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        }
+
+        // Scroll to top when button is clicked
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Check scroll position on scroll
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        
+        // Initial check
+        toggleBackToTop();
+    }
+
+    // Initialize back to top button when DOM is ready
+    function waitForBackToTopButton() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initBackToTop);
+        } else {
+            initBackToTop();
+        }
+    }
+
+    waitForBackToTopButton();
 })();
 

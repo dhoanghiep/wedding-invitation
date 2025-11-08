@@ -138,42 +138,60 @@
                 <div class="story-content">
                     <p class="story-journey-intro" data-i18n="story.journeyIntro"></p>
 
-                    <p data-i18n="story.journeyParagraph1"></p>
-
-                    <!-- Group 1: Cafe photos (overlapping) -->
-                    <div class="story-journey-images-overlap story-journey-images-two">
-                        <div class="story-journey-image-overlap">
-                            <img src="https://i.imgur.com/FjO2T6G.jpeg" alt="" data-i18n="story.journeyCafeImage1Alt" class="story-image" />
+                    <!-- 2 columns: hair dyeing and cafe/drinking buddies -->
+                    <div class="story-journey-two-columns">
+                        <div class="story-journey-column-left">
+                            <p data-i18n="story.journeyColumn1Text"></p>
+                            <div class="story-journey-column-image">
+                                <img src="https://i.imgur.com/30q0RIm.jpeg" alt="" data-i18n="story.journeyHairImageAlt" class="story-image" />
+                                <span class="story-image-alt-text" data-i18n="story.journeyHairImageAlt"></span>
+                            </div>
                         </div>
-                        <div class="story-journey-image-overlap">
-                            <img src="https://i.imgur.com/gVY7DEd.jpeg" alt="" data-i18n="story.journeyCafeImage2Alt" class="story-image" />
+                        <div class="story-journey-column-right">
+                            <p data-i18n="story.journeyColumn2Text"></p>
+                            <div class="story-journey-images-overlap story-journey-images-two">
+                                <div class="story-journey-image-overlap">
+                                    <img src="https://i.imgur.com/FjO2T6G.jpeg" alt="" data-i18n="story.journeyCafeImage1Alt" class="story-image" />
+                                    <span class="story-image-alt-text" data-i18n="story.journeyCafeImage1Alt"></span>
+                                </div>
+                                <div class="story-journey-image-overlap">
+                                    <img src="https://i.imgur.com/gVY7DEd.jpeg" alt="" data-i18n="story.journeyCafeImage2Alt" class="story-image" />
+                                    <span class="story-image-alt-text" data-i18n="story.journeyCafeImage2Alt"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <p data-i18n="story.journeyParagraph2"></p>
 
                     <!-- Group 2: Graduation photos (overlapping) -->
-                    <div class="story-journey-images-overlap story-journey-images-two">
+                    <div class="story-journey-images-overlap story-journey-images-two story-journey-graduation">
                         <div class="story-journey-image-overlap">
                             <img src="https://i.imgur.com/WAr4XwR.jpeg" alt="" data-i18n="story.journeyGraduationImage1Alt" class="story-image" />
+                            <span class="story-image-alt-text" data-i18n="story.journeyGraduationImage1Alt"></span>
                         </div>
                         <div class="story-journey-image-overlap">
-                            <img src="https://i.imgur.com/J252uHr.jpeg" alt="" data-i18n="story.journeyGraduationImage2Alt" class="story-image" />
+                            <img src="https://i.imgur.com/gglpMBV.jpeg" alt="" data-i18n="story.journeyGraduationImage2Alt" class="story-image" />
+                            <span class="story-image-alt-text" data-i18n="story.journeyGraduationImage2Alt"></span>
                         </div>
                     </div>
 
                     <p data-i18n="story.journeyParagraph3"></p>
 
-                    <!-- Group 3: Travel photos (overlapping) -->
-                    <div class="story-journey-images-overlap story-journey-images-three">
-                        <div class="story-journey-image-overlap">
-                            <img src="https://i.imgur.com/jCqsLzx.jpeg" alt="" data-i18n="story.journeyTripImage1Alt" class="story-image" />
+                    <!-- Group 3: Travel photos (grid layout) -->
+                    <div class="story-journey-images-grid">
+                        <div class="story-journey-grid-left">
+                            <div class="story-journey-grid-image">
+                                <img src="https://i.imgur.com/SnmMacb.jpeg" alt="" data-i18n="story.journeyTripImage1Alt" class="story-image" />
+                            </div>
+                            <div class="story-journey-grid-image">
+                                <img src="https://i.imgur.com/jCqsLzx.jpeg" alt="" data-i18n="story.journeyTripImage2Alt" class="story-image" />
+                            </div>
                         </div>
-                        <div class="story-journey-image-overlap">
-                            <img src="https://i.imgur.com/MiOGh2f.jpeg" alt="" data-i18n="story.journeyTripImage2Alt" class="story-image" />
-                        </div>
-                        <div class="story-journey-image-overlap">
-                            <img src="https://i.imgur.com/ScqSgQa.jpeg" alt="" data-i18n="story.journeyTripImage3Alt" class="story-image" />
+                        <div class="story-journey-grid-right">
+                            <div class="story-journey-grid-image">
+                                <img src="https://i.imgur.com/MiOGh2f.jpeg" alt="" data-i18n="story.journeyTripImage3Alt" class="story-image" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -232,7 +250,6 @@
                 <div class="story-content">
                     <div class="story-ever-after-intro">
                         <p data-i18n="story.everAfterIntro"></p>
-                        <p data-i18n="story.everAfterParagraph1"></p>
                     </div>
 
                     <!-- 3 columns: image + caption -->
@@ -252,6 +269,11 @@
                                 class="story-image" />
                             <p class="story-image-caption" data-i18n="story.everAfterImage3Caption"></p>
                         </div>
+                    </div>
+
+                    <!-- Conclusion paragraph -->
+                    <div class="story-ever-after-conclusion">
+                        <p data-i18n="story.everAfterParagraph1"></p>
                     </div>
                 </div>
             </div>
