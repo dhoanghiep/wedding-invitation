@@ -193,12 +193,17 @@
                 howWeMetImage3Alt: 'Another moment from our early days',
                 howWeMetImage3Caption: 'Another moment from our early days',
                 journeyTitle: 'Our Journey',
-                journeyIntro: 'From colleagues to a couple, we started to grow together. We celebrated the big wins...',
-                journeyImage1Alt: 'Graduation day! We made it!',
-                journeyImage1Caption: 'Graduation day! We made it!',
-                journeyParagraph1: '...and we started exploring the world, just the two of us. This is where the "Đường Tăng" really put "Ngộ Không" to the test.',
-                journeyImage2Alt: 'Us on one of our many trips!',
-                journeyImage2Caption: 'Us on one of our many trips!',
+                journeyIntro: 'From colleagues to a couple, we started to grow together.',
+                journeyParagraph1: 'We weren\'t just a couple; we were best buddies. Our relationship was built on a solid foundation of hanging out at cafes... and also being reliable "bạn nhậu" (drinking buddies).',
+                journeyCafeImage1Alt: 'Us looking civilized at a cafe',
+                journeyCafeImage2Alt: 'Us (less civilized) cheering with beer',
+                journeyParagraph2: 'We were there for each other\'s biggest milestones and celebrated all the big wins.',
+                journeyGraduationImage1Alt: 'The Bride\'s graduation!',
+                journeyGraduationImage2Alt: 'The Groom\'s graduation!',
+                journeyParagraph3: 'And, of course, we started exploring the world. This is where "Đường Tăng" really put "Ngộ Không" to the test, and our adventures truly began.',
+                journeyTripImage1Alt: 'Trip 1',
+                journeyTripImage2Alt: 'Trip 2',
+                journeyTripImage3Alt: 'Trip 3',
                 proposalTitle: 'The Proposal',
                 proposalIntro: 'This part really sums up our dynamic.',
                 proposalGroomLabel: 'Groom:',
@@ -417,12 +422,17 @@
                 howWeMetImage3Alt: 'Một khoảnh khắc khác từ những ngày đầu của tụi mình',
                 howWeMetImage3Caption: 'Một khoảnh khắc khác từ những ngày đầu của tụi mình',
                 journeyTitle: 'Hành Trình',
-                journeyIntro: 'Từ đồng nghiệp thành một đôi, tụi mình bắt đầu cùng nhau "lớn lên". Tụi mình ăn mừng những thành tựu lớn...',
-                journeyImage1Alt: 'Ngày tốt nghiệp! Cuối cùng cũng xong.',
-                journeyImage1Caption: 'Ngày tốt nghiệp! Cuối cùng cũng xong.',
-                journeyParagraph1: '...và tụi mình bắt đầu khám phá thế giới, chỉ có hai đứa. Đây là lúc "Đường Tăng" thực sự "hành" "Ngộ Không".',
-                journeyImage2Alt: 'Tụi mình trong một chuyến du lịch!',
-                journeyImage2Caption: 'Tụi mình trong một chuyến du lịch!',
+                journeyIntro: 'Từ đồng nghiệp thành một đôi, tụi mình bắt đầu cùng nhau "lớn lên".',
+                journeyParagraph1: 'Tụi mình không chỉ là một cặp đôi; tụi mình còn là bạn thân. Mối quan hệ này được xây dựng trên nền tảng vững chắc là... những buổi lê la quán cà phê, và tất nhiên, là những "bạn nhậu" rất hợp cạ.',
+                journeyCafeImage1Alt: 'Tụi mình "chill" ở quán cà phê',
+                journeyCafeImage2Alt: '"Dô!" – 100% bạn nhậu',
+                journeyParagraph2: 'Tụi mình đã ở đó trong những cột mốc quan trọng nhất của nhau và ăn mừng tất cả những thành tựu lớn.',
+                journeyGraduationImage1Alt: 'Cô dâu tốt nghiệp!',
+                journeyGraduationImage2Alt: 'Chú rể tốt nghiệp!',
+                journeyParagraph3: 'Và, dĩ nhiên, tụi mình bắt đầu khám phá thế giới. Đây là lúc "Đường Tăng" (Minh Anh) thực sự "hành" "Ngộ Không" (Hoàng Hiệp), và hành trình của tụi mình thật sự bắt đầu.',
+                journeyTripImage1Alt: 'Chuyến đi 1',
+                journeyTripImage2Alt: 'Chuyến đi 2',
+                journeyTripImage3Alt: 'Chuyến đi 3',
                 proposalTitle: 'Màn Cầu Hôn',
                 proposalIntro: 'Phần này tóm tắt chính xác "vibe" của tụi mình:',
                 proposalGroomLabel: 'Chú rể:',
@@ -626,11 +636,16 @@
         updateText('[data-i18n="story.howWeMetImage2Caption"]', t.story.howWeMetImage2Caption);
         updateText('[data-i18n="story.journeyTitle"]', t.story.journeyTitle);
         updateText('[data-i18n="story.journeyIntro"]', t.story.journeyIntro);
-        updateText('[data-i18n="story.journeyImage1Alt"]', t.story.journeyImage1Alt);
-        updateText('[data-i18n="story.journeyImage1Caption"]', t.story.journeyImage1Caption);
         updateText('[data-i18n="story.journeyParagraph1"]', t.story.journeyParagraph1);
-        updateText('[data-i18n="story.journeyImage2Alt"]', t.story.journeyImage2Alt);
-        updateText('[data-i18n="story.journeyImage2Caption"]', t.story.journeyImage2Caption);
+        updateText('[data-i18n="story.journeyCafeImage1Alt"]', t.story.journeyCafeImage1Alt);
+        updateText('[data-i18n="story.journeyCafeImage2Alt"]', t.story.journeyCafeImage2Alt);
+        updateText('[data-i18n="story.journeyParagraph2"]', t.story.journeyParagraph2);
+        updateText('[data-i18n="story.journeyGraduationImage1Alt"]', t.story.journeyGraduationImage1Alt);
+        updateText('[data-i18n="story.journeyGraduationImage2Alt"]', t.story.journeyGraduationImage2Alt);
+        updateText('[data-i18n="story.journeyParagraph3"]', t.story.journeyParagraph3);
+        updateText('[data-i18n="story.journeyTripImage1Alt"]', t.story.journeyTripImage1Alt);
+        updateText('[data-i18n="story.journeyTripImage2Alt"]', t.story.journeyTripImage2Alt);
+        updateText('[data-i18n="story.journeyTripImage3Alt"]', t.story.journeyTripImage3Alt);
         updateText('[data-i18n="story.proposalTitle"]', t.story.proposalTitle);
         updateText('[data-i18n="story.proposalIntro"]', t.story.proposalIntro);
         updateText('[data-i18n="story.proposalGroomLabel"]', t.story.proposalGroomLabel);

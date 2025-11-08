@@ -1466,7 +1466,7 @@ section {
 /* How We Met - 3 columns layout: paragraph 2, image 1, image 2 */
 .story-how-we-met-three-columns {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
     margin: 40px 0;
     align-items: start;
@@ -1481,33 +1481,108 @@ section {
     margin: 0;
 }
 
-.story-how-we-met-column-image {
+.story-how-we-met-column-images {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.story-how-we-met-caption {
-    margin-top: 12px;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    font-style: italic;
-    text-align: center;
-    line-height: 1.4;
-    opacity: 0.8;
-}
-
-/* How We Met - Portrait frame for images with portrait ratio */
-.story-how-we-met-image-frame {
-    width: 100%;
+/* How We Met - Overlapping images */
+.story-how-we-met-images-overlap {
     position: relative;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 300px;
 }
 
-.story-how-we-met-image-frame img {
+.story-how-we-met-image-overlap {
+    position: relative;
+    width: 51%;
+    max-width: 390px;
+    aspect-ratio: 3 / 4;
+    overflow: visible;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    margin: 0 -40px;
+}
+
+.story-how-we-met-image-overlap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 8px;
+}
+
+/* Alt text tooltip on hover */
+.story-image-alt-text {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    max-width: 300px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.story-image-alt-text::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid rgba(0, 0, 0, 0.85);
+}
+
+.story-how-we-met-image-overlap:hover .story-image-alt-text {
+    opacity: 1;
+    visibility: visible;
+    bottom: -45px;
+}
+
+/* Two images overlapping for How We Met */
+.story-how-we-met-images-two {
+    padding: 0;
+}
+
+.story-how-we-met-images-two .story-how-we-met-image-overlap:first-child {
+    z-index: 2;
+    transform: rotate(-5deg) translateX(-120px);
+    margin-right: -120px;
+}
+
+.story-how-we-met-images-two .story-how-we-met-image-overlap:first-child:hover {
+    z-index: 3;
+    transform: rotate(0deg) translateX(-120px) scale(1.05);
+}
+
+.story-how-we-met-images-two .story-how-we-met-image-overlap:last-child {
+    z-index: 1;
+    transform: rotate(5deg) translateX(120px);
+    margin-left: -120px;
+}
+
+.story-how-we-met-images-two .story-how-we-met-image-overlap:last-child:hover {
+    z-index: 3;
+    transform: rotate(0deg) translateX(120px) scale(1.05);
 }
 
 /* How We Met - 2 columns layout */
@@ -1530,6 +1605,7 @@ section {
 
 .story-column-image {
     width: 100%;
+    position: relative;
 }
 
 .story-column-image img {
@@ -1537,6 +1613,14 @@ section {
     height: auto;
     object-fit: cover;
     display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-column-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .story-column-image .story-image-caption {
@@ -1552,22 +1636,120 @@ section {
     margin-bottom: 30px;
 }
 
-.story-journey-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.story-journey-images-overlap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 40px 0;
-}
-
-.story-journey-image {
+    min-height: 300px;
     width: 100%;
 }
 
-.story-journey-image img {
-    width: 100%;
+.story-journey-image-overlap {
+    position: relative;
+    width: 60%;
+    max-width: 400px;
+    max-height: 500px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    margin: 0 -40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-journey-image-overlap img {
+    width: auto;
     height: auto;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     display: block;
+    border-radius: 8px;
+}
+
+/* Two images overlapping */
+.story-journey-images-two {
+    padding: 0 60px;
+}
+
+.story-journey-images-two .story-journey-image-overlap:first-child {
+    z-index: 2;
+    transform: rotate(-5deg) translateX(20px);
+    margin-right: -80px;
+}
+
+.story-journey-images-two .story-journey-image-overlap:last-child {
+    z-index: 1;
+    transform: rotate(5deg) translateX(-20px);
+    margin-left: -80px;
+}
+
+.story-journey-images-two .story-journey-image-overlap:hover {
+    z-index: 3;
+    transform: rotate(0deg) translateX(0) scale(1.05);
+}
+
+/* Three images overlapping */
+.story-journey-images-three {
+    padding: 0 80px;
+}
+
+.story-journey-images-three .story-journey-image-overlap:nth-child(1) {
+    z-index: 3;
+    transform: rotate(-8deg) translateX(30px);
+    margin-right: -60px;
+}
+
+.story-journey-images-three .story-journey-image-overlap:nth-child(2) {
+    z-index: 2;
+    transform: rotate(0deg) translateX(0);
+    margin: 0 -60px;
+}
+
+.story-journey-images-three .story-journey-image-overlap:nth-child(3) {
+    z-index: 1;
+    transform: rotate(8deg) translateX(-30px);
+    margin-left: -60px;
+}
+
+.story-journey-images-three .story-journey-image-overlap:hover {
+    z-index: 4;
+    transform: rotate(0deg) translateX(0) scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .story-journey-images-overlap {
+        flex-direction: column;
+        gap: 20px;
+        min-height: auto;
+        padding: 0 !important;
+    }
+
+    .story-journey-image-overlap {
+        width: 80%;
+        max-width: 300px;
+        max-height: 400px;
+        transform: none !important;
+        margin: 0 !important;
+    }
+
+    .story-journey-images-two .story-journey-image-overlap:first-child,
+    .story-journey-images-two .story-journey-image-overlap:last-child,
+    .story-journey-images-three .story-journey-image-overlap:nth-child(1),
+    .story-journey-images-three .story-journey-image-overlap:nth-child(2),
+    .story-journey-images-three .story-journey-image-overlap:nth-child(3) {
+        transform: none !important;
+        margin: 0 !important;
+    }
+
+    .story-journey-image-overlap:hover {
+        transform: scale(1.02) !important;
+    }
 }
 
 /* Proposal section - Quotes box */
@@ -2400,6 +2582,44 @@ section {
     .story-how-we-met-three-columns {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+
+    /* How We Met - Overlapping images responsive */
+    .story-how-we-met-images-overlap {
+        flex-direction: column;
+        gap: 30px;
+        min-height: auto;
+        padding: 0 !important;
+    }
+
+    .story-how-we-met-image-overlap {
+        width: 85%;
+        max-width: 350px;
+        transform: none !important;
+        margin: 0 !important;
+        overflow: visible;
+    }
+
+    .story-how-we-met-images-two .story-how-we-met-image-overlap:first-child,
+    .story-how-we-met-images-two .story-how-we-met-image-overlap:last-child {
+        transform: none !important;
+        margin: 0 !important;
+    }
+
+    .story-how-we-met-image-overlap:hover {
+        transform: scale(1.02) !important;
+    }
+
+    /* Alt text tooltip responsive */
+    .story-image-alt-text {
+        bottom: -35px;
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        max-width: 250px;
+    }
+
+    .story-how-we-met-image-overlap:hover .story-image-alt-text {
+        bottom: -40px;
     }
     
     /* How We Met - paragraph 3 and image 3 responsive */
