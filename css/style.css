@@ -79,7 +79,12 @@ html.lightbox-open {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(139, 74, 74, 0.2);
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(0);
+}
+
+.header.hidden {
+    transform: translateY(-100%);
 }
 
 .navbar {
@@ -1437,40 +1442,78 @@ section {
     text-align: center;
 }
 
-/* How We Met - 3 columns intro layout */
-.story-intro-layout {
+/* How We Met section */
+.story-how-we-met-text {
+    margin-bottom: 40px;
+}
+
+.story-how-we-met-text p {
+    margin-bottom: 20px;
+}
+
+.story-how-we-met-text p:last-child {
+    margin-bottom: 0;
+}
+
+.story-how-we-met-intro {
+    margin-bottom: 20px;
+}
+
+.story-how-we-met-p1 {
+    margin-bottom: 20px;
+}
+
+/* How We Met - 3 columns layout: paragraph 2, image 1, image 2 */
+.story-how-we-met-three-columns {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
     margin: 40px 0;
     align-items: start;
 }
 
-.story-intro-image {
-    width: 100%;
-}
-
-.story-intro-image img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-}
-
-.story-intro-text {
+.story-how-we-met-column-text {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
-.story-intro-text p {
+.story-how-we-met-column-text p {
     margin: 0;
+}
+
+.story-how-we-met-column-image {
+    width: 100%;
+}
+
+.story-how-we-met-caption {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+
+/* How We Met - Portrait frame for images with portrait ratio */
+.story-how-we-met-image-frame {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.story-how-we-met-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* How We Met - 2 columns layout */
 .story-two-columns {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: 40px;
     margin: 40px 0;
     align-items: start;
@@ -2353,13 +2396,13 @@ section {
         font-size: 1rem;
     }
     
-    /* How We Met - 3 columns intro layout responsive */
-    .story-intro-layout {
+    /* How We Met - 3 columns layout responsive */
+    .story-how-we-met-three-columns {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 30px;
     }
     
-    /* How We Met - 2 columns layout responsive */
+    /* How We Met - paragraph 3 and image 3 responsive */
     .story-two-columns {
         grid-template-columns: 1fr;
         gap: 20px;

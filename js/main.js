@@ -139,21 +139,59 @@
             }
         });
 
-        // Sticky header on scroll
+        // Hide/show header on scroll
         let lastScroll = 0;
-        window.addEventListener('scroll', () => {
+        const scrollThreshold = 100; // Hide header after scrolling down this many pixels
+        
+        function handleScroll() {
             if (!header) return;
             
-            const currentScroll = window.pageYOffset;
+            const currentScroll = window.pageYOffset || window.scrollY || document.documentElement.scrollTop;
+            const scrollDifference = currentScroll - lastScroll;
 
+            // Update box shadow based on scroll position
             if (currentScroll > 100) {
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.15)';
             } else {
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                // Always show header when near top
+                header.classList.remove('hidden');
+            }
+
+            // Hide/show header based on scroll direction
+            if (currentScroll > scrollThreshold) {
+                if (scrollDifference > 5) {
+                    // Scrolling down - hide header
+                    header.classList.add('hidden');
+                } else if (scrollDifference < -5) {
+                    // Scrolling up - show header
+                    header.classList.remove('hidden');
+                }
+            } else {
+                // Near top - always show
+                header.classList.remove('hidden');
             }
 
             lastScroll = currentScroll;
-        });
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        // Show header when hovering near the top of the page
+        let hoverTimeout = null;
+        document.addEventListener('mousemove', (e) => {
+            if (!header) return;
+            
+            // Check if mouse is within 80px from the top
+            if (e.clientY <= 80) {
+                header.classList.remove('hidden');
+                // Clear any pending timeout
+                if (hoverTimeout) {
+                    clearTimeout(hoverTimeout);
+                    hoverTimeout = null;
+                }
+            }
+        }, { passive: true });
     }
 
     // Wait for components to load, then initialize navigation
