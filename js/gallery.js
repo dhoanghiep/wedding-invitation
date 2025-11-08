@@ -153,24 +153,10 @@
         }
     }
     
-    // Sample video URLs - Replace with actual videos
-    const videos = [
-        {
-            title: 'Our Engagement',
-            url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-            thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg'
-        },
-        {
-            title: 'Date Night',
-            url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-            thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg'
-        }
-    ];
     
     const journeyGrid = document.getElementById('journey-grid');
     const preWeddingGrid = document.getElementById('pre-wedding-grid');
     const weddingPhotosGrid = document.getElementById('wedding-photos-grid');
-    const videoGrid = document.getElementById('video-grid');
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxClose = document.querySelector('.lightbox-close');
@@ -195,7 +181,6 @@
         loadCategoryPhotosToGrid('wedding-photos');
         
         loadSubsections();
-        loadVideos();
         console.log('[Gallery] initGalleries: Gallery initialization completed');
     }
     
@@ -476,27 +461,6 @@
         img.src = urlToLoad;
     }
     
-    // Load videos into grid
-    function loadVideos() {
-        if (!videoGrid) {
-            console.warn('Video grid element not found');
-            return;
-        }
-        
-        videos.forEach((video) => {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            const iframe = document.createElement('iframe');
-            iframe.src = video.url;
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-            iframe.allowFullscreen = true;
-            iframe.frameBorder = '0';
-            
-            videoItem.appendChild(iframe);
-            videoGrid.appendChild(videoItem);
-        });
-    }
     
     // Helper function to size image properly within viewport
     function sizeLightboxImage(img) {
@@ -810,14 +774,12 @@
         const preWeddingGallery = document.getElementById('pre-wedding-gallery');
         const weddingPhotosGallery = document.getElementById('wedding-photos-gallery');
         const guestUploadsGallery = document.getElementById('guest-uploads-gallery');
-        const videosGallery = document.getElementById('videos-gallery');
         
         // Get description elements
         const journeyDesc = document.getElementById('journey-desc');
         const preWeddingDesc = document.getElementById('pre-wedding-desc');
         const weddingPhotosDesc = document.getElementById('wedding-photos-desc');
         const guestUploadsDesc = document.getElementById('guest-uploads-desc');
-        const videosDesc = document.getElementById('videos-desc');
         
         tabBtns.forEach(btn => {
             btn.classList.remove('active');
@@ -831,14 +793,12 @@
         if (preWeddingDesc) preWeddingDesc.classList.remove('active');
         if (weddingPhotosDesc) weddingPhotosDesc.classList.remove('active');
         if (guestUploadsDesc) guestUploadsDesc.classList.remove('active');
-        if (videosDesc) videosDesc.classList.remove('active');
         
         // Hide all galleries
         if (journeyGallery) journeyGallery.classList.remove('active');
         if (preWeddingGallery) preWeddingGallery.classList.remove('active');
         if (weddingPhotosGallery) weddingPhotosGallery.classList.remove('active');
         if (guestUploadsGallery) guestUploadsGallery.classList.remove('active');
-        if (videosGallery) videosGallery.classList.remove('active');
         
         // Show selected gallery and description
         switch (tabName) {
@@ -857,10 +817,6 @@
             case 'guest-uploads':
                 if (guestUploadsGallery) guestUploadsGallery.classList.add('active');
                 if (guestUploadsDesc) guestUploadsDesc.classList.add('active');
-                break;
-            case 'videos':
-                if (videosGallery) videosGallery.classList.add('active');
-                if (videosDesc) videosDesc.classList.add('active');
                 break;
         }
     }
