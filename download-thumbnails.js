@@ -65,7 +65,14 @@ if (!fs.existsSync(FULL_IMAGE_DIR)) {
 // Landing and intro images configuration (full-size downloads)
 const LANDING_INTRO_IMAGES = {
     landing: 'https://images.pixieset.com/82784299/90cc6fcf2e899b038db4af58559a8bda-cover.jpg',
-    intro: 'https://i.imgur.com/WvIv4Y1.jpeg'
+    intro: 'https://i.imgur.com/WvIv4Y1.jpeg',
+    'rsvp-banner': 'https://images.pixieset.com/82784299/0977e1564f7442fe1cf6513cf67a8df1-xxlarge.JPG'
+};
+
+// Index page timeline images configuration (full-size downloads)
+const INDEX_IMAGES = {
+    'timeline-welcome-party': 'https://i.imgur.com/UkI2PQu.jpeg',
+    'timeline-wedding': 'https://i.imgur.com/CTVQFqt.jpeg'
 };
 
 // Story section images configuration (full-size downloads for web quality)
@@ -344,6 +351,20 @@ async function downloadStoryImages() {
 }
 
 /**
+ * Download index page images (full-size)
+ */
+async function downloadIndexImages() {
+    const indexConfig = await downloadFullSizeImages(INDEX_IMAGES, 'Index Page');
+    
+    // Save index config
+    const indexConfigFile = path.join(__dirname, 'images', 'index-config.json');
+    fs.writeFileSync(indexConfigFile, JSON.stringify(indexConfig, null, 2));
+    console.log(`\nIndex configuration saved to: ${indexConfigFile}`);
+    
+    return indexConfig;
+}
+
+/**
  * Process all albums
  */
 async function processAlbums() {
@@ -451,6 +472,9 @@ if (require.main === module) {
             // Download landing and intro images first (full-size)
             await downloadLandingIntroImages();
             
+            // Download index page images (full-size)
+            await downloadIndexImages();
+            
             // Download story section images (full-size)
             await downloadStoryImages();
             
@@ -463,5 +487,5 @@ if (require.main === module) {
     })();
 }
 
-module.exports = { processAlbums, loadImgurAlbum, downloadThumbnail, downloadLandingIntroImages, downloadStoryImages };
+module.exports = { processAlbums, loadImgurAlbum, downloadThumbnail, downloadLandingIntroImages, downloadStoryImages, downloadIndexImages };
 

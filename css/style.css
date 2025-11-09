@@ -2373,7 +2373,8 @@ section {
     height: 80vh;
     min-height: 600px;
     background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
-    background-image: url('https://images.pixieset.com/82784299/0977e1564f7442fe1cf6513cf67a8df1-xxlarge.JPG');
+    /* Use local image first, fallback to original URL if not available */
+    background-image: url('../images/full/rsvp-banner.JPG'), url('https://images.pixieset.com/82784299/0977e1564f7442fe1cf6513cf67a8df1-xxlarge.JPG');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
