@@ -18,20 +18,8 @@
                 title: "Minh Anh \n & \n Hoàng Hiệp",
                 date: 'January 1, 2026',
             },
-            // Bride and Groom Section
-            brideGroom: {
-                title: 'Bride & Groom',
-                subtitle: 'Hello! We\’re the happy couple at the center of all this, and we\’re so excited you\'re here!',
-                intro: 'Come see how we met and followed the path all the way to "I do"!',
-                button: 'Explore'
-            },
             // Gallery Section
             gallery: {
-                title: 'Memories we\'ve shared together',
-                subtitle: 'Memories we\'ve shared together',
-                welcome: 'Welcome to our photo album! Here are a few of our favorite moments from our journey so far.',
-                photos: 'Photos',
-                videos: 'Videos',
                 journey: 'Our Journey',
                 journeyDesc: 'A little look back at our adventure, from our first photos together to becoming fiancés!',
                 journeySubsections: {
@@ -63,7 +51,6 @@
             },
             // Countdown Section
             countdown: {
-                title: 'Countdown to Our Special Day',
                 months: 'Months',
                 month: 'Month',
                 days: 'Days',
@@ -90,13 +77,10 @@
                 guestOfGroom: 'The Groom',
                 guestOfBoth: 'Both',
                 phone: 'Phone Number',
-                phoneOptional: '(Optional)',
                 guests: 'Number of Guests *',
                 attendance: 'Will you be celebrating with us? *',
-                selectOption: 'Please select...',
                 yes: 'Yes, I\'ll be there!',
                 no: 'No, sorry, I can\'t make it.',
-                maybe: 'Maybe',
                 eventsAttending: 'That\'s great! Please check all the events you\'ll be attending:',
                 welcomeParty: 'Welcome Party',
                 mainWedding: 'Main Wedding (Ceremony & Reception)',
@@ -104,8 +88,6 @@
                 messagePlaceholder: 'e.g., a song request, a sweet note!',
                 otherRequests: 'Other Requests',
                 otherRequestsPlaceholder: 'e.g., dietary allergies, accessibility needs',
-                dietary: 'Dietary Restrictions or Allergies',
-                dietaryPlaceholder: 'Please let us know of any dietary restrictions or allergies',
                 submit: 'Submit RSVP',
                 submitting: 'Submitting...',
                 success: 'Thank you for your RSVP! We look forward to seeing you.',
@@ -130,11 +112,7 @@
                 title: 'Wedding schedule',
                 subtitle: 'Here\'s the plan for our celebration. We can\'t wait to see you there!',
                 welcomeParty: 'Welcome Party',
-                welcomePartyDate: '5:00 PM, 31/12/2025',
-                welcomePartyLocation: 'Siha cafe \n 58 Nguyen Dinh Chinh, Phu Nhuan \n Ho Chi Minh City',
                 wedding: 'Wedding Ceremony',
-                weddingDate: '5:00 PM, 1/1/2026',
-                weddingLocation: 'Chloe Gallery \n 06 Phan Van Chuong, Tan My \n Ho Chi Minh City',
                 timeLabel: 'Date & Time:',
                 locationLabel: 'Location:',
                 addressLabel: 'Address:',
@@ -160,7 +138,6 @@
                 timeLabel: 'Date & Time:',
                 locationLabel: 'Location:',
                 addressLabel: 'Address:',
-                viewMap: 'View on Google Maps',
                 accommodationTitle: 'Accommodations',
                 accommodationSubtitle: 'Recommended places to stay',
                 homeHotelTitle: 'Home Hotel',
@@ -191,12 +168,9 @@
                 howWeMetParagraph1: 'Hiep, a Hanoiian, decided to take a chance and move to Ho Chi Minh City for work. At the same time, June, still a student, insisted on getting her very first job.',
                 howWeMetParagraph2: 'By pure coincidence, we both ended up at the same company, and the company is developing COVID vaccines during the peak of the pandemic (luckily we are not jobless).<br>We were work buddies first, navigating the chaos of lockdowns and deadlines together.',
                 howWeMetImage1Alt: 'June at work, looking like a scientist!',
-                howWeMetImage1Caption: 'Us at work, looking professional (or trying to!)',
                 howWeMetParagraph3: 'After the lockdowns lifted, June (being the "Buddhist" who loves to explore) took Hiep on tours around the city. Hiep\'s big confession was to finally take her somewhere new. And what\'s more romantic than... a drawing class?',
                 howWeMetImage2Alt: 'Hiep in his natural habitat<br>(although not seeing the face,<br>but the person on the left is Hiep!)',
-                howWeMetImage2Caption: 'Our artistic masterpieces (or failures) at the drawing activity',
                 howWeMetImage3Alt: 'Us and our shared "masterpiece"',
-                howWeMetImage3Caption: 'Another moment from our early days',
                 journeyTitle: 'Our journey',
                 journeyIntro: 'From colleagues to a couple, we started to grow together. We were best buddies trying new things in life.',
                 journeyColumn1Text: 'Like our first time dyeing our hair...',
@@ -227,11 +201,8 @@
                 everAfterIntro: 'And now, our adventure continues! We\'ve packed up our lives and are building our next chapter together in Australia.',
                 everAfterParagraph1: 'We\'re so excited to see where this journey takes us, and even more excited to have you all be a part of the official starting line.<br>See you at the wedding!',
                 everAfterImage1Alt: 'June pointing out the real view.<br>The Opera House is not that good!',
-                everAfterImage1Caption: 'A few snaps of our new life in Australia!',
                 everAfterImage2Alt: 'Us in our bedroom in Melbourne.<br>A bit minimal but the rent is great!',
-                everAfterImage2Caption: 'More moments from our new life in Australia!',
-                everAfterImage3Alt: 'June driving Hiep across Australia.<br>The "Buddhist" and "Wukong"\'s journey continues...',
-                everAfterImage3Caption: 'Building our next chapter together!'
+                everAfterImage3Alt: 'June driving Hiep across Australia.<br>The "Buddhist" and "Wukong"\'s journey continues...'
             },
             // Explore Section
             explore: {
@@ -255,20 +226,8 @@
                 title: 'Minh Anh \n & \n Hoàng Hiệp',
                 date: 'Ngày 1 tháng 1, 2026',
             },
-            // Bride and Groom Section
-            brideGroom: {
-                title: 'Cô dâu & Chú rể',
-                subtitle: 'Xin chào! Chúng mình là cặp đôi hạnh phúc (và là nhân vật chính) của buổi tiệc này, và chúng mình rất vui khi các bạn có mặt!',
-                intro: 'Cùng xem chúng mình đã gặp nhau thế nào và cùng đi trên hành trình đến ngày chung đôi ra sao nhé!',
-                button: 'khám phá'
-            },
             // Gallery Section
             gallery: {
-                title: 'Những kỷ niệm của chúng mình',
-                subtitle: 'Những Kỷ Niệm của chúng mình',
-                welcome: 'Chào mừng đến với album ảnh của chúng mình! Đây là một vài khoảnh khắc yêu thích trong suốt hành trình của cả hai.',
-                photos: 'Ảnh',
-                videos: 'Video',
                 journey: 'Hành trình của chúng mình',
                 journeyDesc: 'Cùng nhìn lại một chút về cuộc phiêu lưu của chúng mình, từ những bức ảnh đầu tiên chụp chung cho đến khi đính hôn!',
                 journeySubsections: {
@@ -300,7 +259,6 @@
             },
             // Countdown Section
             countdown: {
-                title: 'Đếm ngược đến ngày đặc biệt',
                 months: 'Tháng',
                 month: 'Tháng',
                 days: 'Ngày',
@@ -327,13 +285,10 @@
                 guestOfGroom: 'Chú rể',
                 guestOfBoth: 'Cả hai',
                 phone: 'Số điện thoại',
-                phoneOptional: '(Không bắt buộc)',
                 guests: 'Số lượng khách tham dự *',
                 attendance: 'Bạn có tham dự cùng chúng mình không? *',
-                selectOption: 'Vui lòng chọn...',
                 yes: 'Có, mình sẽ đến!',
                 no: 'Rất tiếc, mình không đến được.',
-                maybe: 'Có thể',
                 eventsAttending: 'Tuyệt vời! Vui lòng chọn các sự kiện bạn sẽ tham dự:',
                 welcomeParty: 'Tiệc thân mật',
                 mainWedding: 'Lễ cưới',
@@ -341,8 +296,6 @@
                 messagePlaceholder: 'vd: yêu cầu bài hát, một lời chúc dễ thương!',
                 otherRequests: 'Yêu cầu khác',
                 otherRequestsPlaceholder: 'vd: dị ứng đồ ăn, cần hỗ trợ di chuyển',
-                dietary: 'Hạn chế về chế độ ăn uống hoặc dị ứng',
-                dietaryPlaceholder: 'Vui lòng cho chúng tôi biết về bất kỳ hạn chế về chế độ ăn uống hoặc dị ứng',
                 submit: 'Gửi Phản Hồi',
                 submitting: 'Đang gửi...',
                 success: 'Cảm ơn bạn đã xác nhận! Chúng tôi rất mong được gặp bạn.',
@@ -367,11 +320,7 @@
                 title: 'Lịch trình ngày cưới',
                 subtitle: 'Đây là kế hoạch cho ngày vui của chúng mình. Rất mong được gặp các bạn ở đó!',
                 welcomeParty: 'Tiệc thân mật',
-                welcomePartyDate: 'Ngày & Giờ',
-                welcomePartyLocation: 'Địa điểm',
                 wedding: 'Lễ cưới',
-                weddingDate: 'Ngày & Giờ',
-                weddingLocation: 'Địa điểm',
                 timeLabel: 'Ngày & Giờ:',
                 locationLabel: 'Địa điểm:',
                 addressLabel: 'Địa chỉ:',
@@ -397,7 +346,6 @@
                 timeLabel: 'Ngày & Giờ:',
                 locationLabel: 'Địa điểm:',
                 addressLabel: 'Địa chỉ:',
-                viewMap: 'Xem trên Google Maps',
                 accommodationTitle: 'Nơi ở',
                 accommodationSubtitle: 'Những địa điểm lưu trứ để các bạn tiện di chuyển',
                 homeHotelTitle: 'Home Hotel',
@@ -428,10 +376,8 @@
                 howWeMetParagraph1: 'Hiệp, một người Hà Nội, quyết định vào TP Hồ Chí Minh làm việc. Cùng lúc đó, Minh Anh, dù vẫn đang đi học, nhưng quyết định đi làm công việc đầu tiên.',
                 howWeMetParagraph2: 'Như một sự trùng hợp, cả hai cùng vào một công ty để phát triển vắc-xin COVID ngay giữa tâm dịch (may mà không thất nghiệp).<br>Chúng mình bắt đầu là đồng nghiệp, cùng nhau vượt qua những ngày lockdown và deadline ngập mặt.',
                 howWeMetImage1Alt: 'Minh Anh tại công ty,<br>trông rất giống nhà khoa học!',
-                howWeMetImage1Caption: 'Chúng mình tại chỗ làm, trông (cố) chuyên nghiệp',
                 howWeMetParagraph3: 'Sau khi hết giãn cách, Minh Anh (vai "Đường Tăng" thích khám phá) dắt Hiệp đi thăm thú thành phố.<br>Và lời tỏ tình của Hiệp là dẫn Minh Anh khám phá một nơi mới. Còn gì lãng mạn hơn... một lớp học vẽ?',
                 howWeMetImage2Alt: 'Hiệp trong môi trường tự nhiên<br>(mặc dù không thấy mặt,<br>nhưng người bên trái là Hiệp!)',
-                howWeMetImage2Caption: 'Kiệt tác nghệ thuật (hoặc thảm họa) của chúng mình tại lớp vẽ',
                 howWeMetImage3Alt: 'Chúng mình cùng với<br>"kiệt tác nghệ thuật" chung của cả hai',
                 journeyTitle: 'Hành trình',
                 journeyIntro: 'Từ đồng nghiệp thành một đôi, chúng mình bắt đầu cùng nhau trưởng thành. Chúng mình là đôi bạn thân cùng nhau thử những điều mới mẻ trong cuộc sống.',
@@ -463,11 +409,8 @@
                 everAfterIntro: 'Và giờ đây, hành trình của chúng mình lại tiếp tục! Chúng mình đang cùng nhau thu xếp cuộc sống mới và viết tiếp chương tiếp theo ở Úc.',
                 everAfterParagraph1: 'Chúng mình rất háo hức xem hành trình này sẽ đi đến đâu, và còn háo hức hơn nữa khi có tất cả các bạn ở đây, ngay vạch xuất phát chính thức này.<br>Hẹn gặp các bạn ở đám cưới nhé!',
                 everAfterImage1Alt: 'Minh Anh đang chỉ "view" xịn nhất.<br>Nhà hát con sò cũng thường thôi!',
-                everAfterImage1Caption: 'Vài tấm ảnh về cuộc sống mới của chúng mình ở Úc!',
                 everAfterImage2Alt: 'Phòng ngủ của chúng mình ở Melbourne.<br>Hơi theo phong cách tối giản nhưng được cái giá rẻ!',
-                everAfterImage2Caption: 'Thêm những khoảnh khắc từ cuộc sống mới của chúng mình ở Úc!',
-                everAfterImage3Alt: 'Minh Anh chở Hiệp đi xuyên nước Úc.<br>Hành trình của "Đường Tăng" và "Ngộ Không" vẫn tiếp diễn...',
-                everAfterImage3Caption: 'Xây dựng chương tiếp theo cùng nhau!'
+                everAfterImage3Alt: 'Minh Anh chở Hiệp đi xuyên nước Úc.<br>Hành trình của "Đường Tăng" và "Ngộ Không" vẫn tiếp diễn...'
             },
             // Explore Section
             explore: {
@@ -514,16 +457,7 @@
         updateText('[data-i18n="hero.title"]', t.hero.title);
         updateText('[data-i18n="hero.date"]', t.hero.date);
 
-        // Update bride and groom section
-        updateText('[data-i18n="brideGroom.title"]', t.brideGroom.title);
-        updateText('[data-i18n="brideGroom.subtitle"]', t.brideGroom.subtitle);
-        updateText('[data-i18n="brideGroom.intro"]', t.brideGroom.intro);
-        updateText('[data-i18n="brideGroom.button"]', t.brideGroom.button);
-
         // Update gallery section
-        updateText('[data-i18n="gallery.title"]', t.gallery.title);
-        updateText('[data-i18n="gallery.photos"]', t.gallery.photos);
-        updateText('[data-i18n="gallery.videos"]', t.gallery.videos);
         updateText('[data-i18n="gallery.journey"]', t.gallery.journey);
         updateText('[data-i18n="gallery.journeyDesc"]', t.gallery.journeyDesc);
         updateText('[data-i18n="gallery.journeySubsections.firstDays"]', t.gallery.journeySubsections.firstDays);
@@ -545,8 +479,6 @@
         updateText('[data-i18n="gallery.comingSoon"]', t.gallery.comingSoon);
         updateText('[data-i18n="gallery.uploadButton"]', t.gallery.uploadButton);
 
-        // Update countdown section
-        updateText('[data-i18n="countdown.title"]', t.countdown.title);
         // Note: countdown labels (months, days, hours, minutes, seconds) are handled by countdown.js
         // to support singular/plural forms based on the actual countdown values
 
@@ -591,11 +523,7 @@
         updateText('[data-i18n="timeline.title"]', t.timeline.title);
         updateText('[data-i18n="timeline.subtitle"]', t.timeline.subtitle);
         updateText('[data-i18n="timeline.welcomeParty"]', t.timeline.welcomeParty);
-        updateText('[data-i18n="timeline.welcomePartyDate"]', t.timeline.welcomePartyDate);
-        updateText('[data-i18n="timeline.welcomePartyLocation"]', t.timeline.welcomePartyLocation);
         updateText('[data-i18n="timeline.wedding"]', t.timeline.wedding);
-        updateText('[data-i18n="timeline.weddingDate"]', t.timeline.weddingDate);
-        updateText('[data-i18n="timeline.weddingLocation"]', t.timeline.weddingLocation);
         updateText('[data-i18n="timeline.timeLabel"]', t.timeline.timeLabel);
         updateText('[data-i18n="timeline.locationLabel"]', t.timeline.locationLabel);
         updateText('[data-i18n="timeline.addressLabel"]', t.timeline.addressLabel);
@@ -620,7 +548,6 @@
         updateText('[data-i18n="location.timeLabel"]', t.location.timeLabel);
         updateText('[data-i18n="location.locationLabel"]', t.location.locationLabel);
         updateText('[data-i18n="location.addressLabel"]', t.location.addressLabel);
-        updateText('[data-i18n="location.viewMap"]', t.location.viewMap);
         updateText('[data-i18n="location.accommodationTitle"]', t.location.accommodationTitle);
         updateText('[data-i18n="location.accommodationSubtitle"]', t.location.accommodationSubtitle);
         updateText('[data-i18n="location.homeHotelTitle"]', t.location.homeHotelTitle);
@@ -650,12 +577,9 @@
         updateText('[data-i18n="story.howWeMetParagraph1"]', t.story.howWeMetParagraph1);
         updateText('[data-i18n="story.howWeMetParagraph2"]', t.story.howWeMetParagraph2);
         updateText('[data-i18n="story.howWeMetImage1Alt"]', t.story.howWeMetImage1Alt);
-        updateText('[data-i18n="story.howWeMetImage1Caption"]', t.story.howWeMetImage1Caption);
         updateText('[data-i18n="story.howWeMetParagraph3"]', t.story.howWeMetParagraph3);
         updateText('[data-i18n="story.howWeMetImage2Alt"]', t.story.howWeMetImage2Alt);
-        updateText('[data-i18n="story.howWeMetImage2Caption"]', t.story.howWeMetImage2Caption);
         updateText('[data-i18n="story.howWeMetImage3Alt"]', t.story.howWeMetImage3Alt);
-        updateText('[data-i18n="story.howWeMetImage3Caption"]', t.story.howWeMetImage3Caption);
         updateText('[data-i18n="story.journeyTitle"]', t.story.journeyTitle);
         updateText('[data-i18n="story.journeyIntro"]', t.story.journeyIntro);
         updateText('[data-i18n="story.journeyColumn1Text"]', t.story.journeyColumn1Text);
@@ -686,11 +610,8 @@
         updateText('[data-i18n="story.everAfterIntro"]', t.story.everAfterIntro);
         updateText('[data-i18n="story.everAfterParagraph1"]', t.story.everAfterParagraph1);
         updateText('[data-i18n="story.everAfterImage1Alt"]', t.story.everAfterImage1Alt);
-        updateText('[data-i18n="story.everAfterImage1Caption"]', t.story.everAfterImage1Caption);
         updateText('[data-i18n="story.everAfterImage2Alt"]', t.story.everAfterImage2Alt);
-        updateText('[data-i18n="story.everAfterImage2Caption"]', t.story.everAfterImage2Caption);
         updateText('[data-i18n="story.everAfterImage3Alt"]', t.story.everAfterImage3Alt);
-        updateText('[data-i18n="story.everAfterImage3Caption"]', t.story.everAfterImage3Caption);
 
         // Update explore section
         updateText('[data-i18n="explore.text"]', t.explore.text);
@@ -752,13 +673,6 @@
         });
     }
 
-    // Helper function to update select options
-    function updateSelectOptions(selector, text) {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
-            el.textContent = text;
-        });
-    }
 
     // Setup language toggle button
     function setupLanguageToggle() {

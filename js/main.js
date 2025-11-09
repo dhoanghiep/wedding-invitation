@@ -868,8 +868,8 @@
         });
 
         // Update translations after rendering
-        if (typeof updateAllTexts === 'function') {
-            updateAllTexts();
+        if (window.Language) {
+            window.Language.setLanguage(window.Language.getLanguage());
         }
 
         // Initialize image carousels
