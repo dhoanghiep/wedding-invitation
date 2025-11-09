@@ -381,6 +381,9 @@
             for (const [key, value] of formData.entries()) {
                 if (key === 'ceremonies') {
                     ceremonies.push(value);
+                } else if (key === 'phone') {
+                    // Ensure phone is saved as text to preserve leading zeros
+                    data[key] = String(value || '');
                 } else {
                     data[key] = value;
                 }
@@ -392,16 +395,8 @@
             }
 
             // Form validation
-            if (!data.name || !data.email || !data.guestOf || !data.attendance) {
+            if (!data.name || !data.guestOf || !data.attendance) {
                 const msg = window.Language ? window.Language.t('rsvp.fillFields') : 'Please fill in all required fields.';
-                showMessage(rsvpMessage, msg, 'error');
-                return;
-            }
-
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                const msg = window.Language ? window.Language.t('rsvp.validEmail') : 'Please enter a valid email address.';
                 showMessage(rsvpMessage, msg, 'error');
                 return;
             }

@@ -58,12 +58,17 @@ function doPost(e) {
     
     // Append row with RSVP data
     // Column order: Timestamp | Name | Email | Guest Of | Phone | Number of Guests | Attendance | Events Attending | Other Requests | Message
+    // Prefix phone with single quote to force Google Sheets to treat it as text (preserves leading zeros)
+    var phoneValue = data.phone || '';
+    if (phoneValue) {
+      phoneValue = "'" + String(phoneValue);
+    }
     sheet.appendRow([
       new Date(),
       data.name || '',
       data.email || '',
       data.guestOf || '',
-      data.phone || '',
+      phoneValue,
       data.guests || '',
       data.attendance || '',
       data.ceremonies || '',
