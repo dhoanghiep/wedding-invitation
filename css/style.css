@@ -1,7 +1,7 @@
 /* ============================================
    Google Fonts Import
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Allura&family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 
 /* ============================================
@@ -30,7 +30,7 @@ html {
 }
 
 body {
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-light);
@@ -1078,7 +1078,7 @@ section {
     font-weight: normal;
     letter-spacing: 2px;
     text-transform: none;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .timeline-date {
@@ -1087,7 +1087,7 @@ section {
     font-size: 1.75rem;
     font-weight: normal;
     letter-spacing: 1px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
 }
 
@@ -1097,7 +1097,7 @@ section {
     font-size: 1.25rem;
     font-weight: normal;
     letter-spacing: 1px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
     line-height: 1.8;
 }
@@ -1110,7 +1110,7 @@ section {
     font-size: 1.25em;
     font-weight: normal;
     letter-spacing: 1px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
 }
 
@@ -1121,7 +1121,7 @@ section {
     font-size: 1.25rem;
     font-weight: normal;
     letter-spacing: 1px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     transition: opacity 0.3s ease;
 }
 
@@ -1135,7 +1135,7 @@ section {
     font-size: 1.25rem;
     font-weight: normal;
     letter-spacing: 1px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     transition: opacity 0.3s ease;
 }
 
@@ -1260,7 +1260,7 @@ section {
     transition: all 0.3s ease;
     white-space: nowrap;
     pointer-events: none;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
 }
 
@@ -1443,7 +1443,7 @@ section {
     font-size: 2rem;
     color: var(--primary-color);
     margin-bottom: 10px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-weight: normal;
     letter-spacing: 1px;
 }
@@ -1453,7 +1453,7 @@ section {
     color: var(--text-light);
     line-height: 1.6;
     margin-bottom: 25px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .story-person-section {
@@ -1464,7 +1464,7 @@ section {
     font-size: 1.1rem;
     color: var(--primary-color);
     margin-bottom: 10px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1478,7 +1478,7 @@ section {
     border-left: none;
     padding-left: 0;
     margin-bottom: 15px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .story-person-bio {
@@ -1486,7 +1486,7 @@ section {
     color: var(--text-light);
     line-height: 1.8;
     margin-bottom: 15px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     padding-left: 20px;
     list-style-type: disc;
     list-style-position: outside;
@@ -1501,7 +1501,7 @@ section {
     font-size: 1rem;
     color: var(--primary-color);
     font-style: italic;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     padding-left: 20px;
     border-left: 3px solid var(--primary-color);
     margin-top: 15px;
@@ -1513,7 +1513,7 @@ section {
     font-size: 1.1rem;
     color: var(--text-light);
     line-height: 1.8;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     overflow: visible;
 }
 
@@ -2206,7 +2206,7 @@ section {
     color: var(--primary-color);
     font-weight: bold;
     margin-bottom: 8px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .story-quote-text {
@@ -2215,7 +2215,7 @@ section {
     font-style: italic;
     line-height: 1.6;
     margin: 0;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Proposal section - Side by side images */
@@ -2404,7 +2404,7 @@ section {
     font-weight: normal;
     letter-spacing: 2px;
     color: #FFFFFF;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     margin-top: 0;
 }
 
@@ -2414,7 +2414,7 @@ section {
     font-weight: normal;
     letter-spacing: 2px;
     color: #FFFFFF;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.3;
 }
 
@@ -2476,7 +2476,7 @@ section {
     font-size: 1.3rem;
     color: var(--text-color);
     margin-bottom: 2.5rem;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
     max-width: 800px;
     margin: 0 auto 2.5rem auto;
