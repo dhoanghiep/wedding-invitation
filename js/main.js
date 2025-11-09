@@ -146,6 +146,11 @@
         function handleScroll() {
             if (!header) return;
             
+            // Don't show header if timeline navigation is active
+            if (window.timelineNavigationActive) {
+                return;
+            }
+            
             const currentScroll = window.pageYOffset || window.scrollY || document.documentElement.scrollTop;
             const scrollDifference = currentScroll - lastScroll;
 
@@ -622,5 +627,126 @@
     }
 
     waitForBackToTopButton();
+
+    // Story Timeline Functionality
+    function initStoryTimeline() {
+        const timeline = document.getElementById('story-timeline');
+        if (!timeline) {
+            return; // Not on story page
+        }
+
+        const timelineItems = timeline.querySelectorAll('.story-timeline-item');
+        const heroSection = document.getElementById('story-intro');
+        const sections = [
+            document.getElementById('story-meet'),
+            document.getElementById('story-how-we-met'),
+            document.getElementById('story-journey'),
+            document.getElementById('story-proposal'),
+            document.getElementById('story-ever-after')
+        ].filter(Boolean); // Remove null/undefined sections
+
+        if (timelineItems.length === 0 || sections.length === 0) {
+            return;
+        }
+
+        // Handle click on timeline items
+        timelineItems.forEach((item) => {
+            const sectionId = item.getAttribute('data-section');
+            const targetSection = document.getElementById(sectionId);
+
+            if (targetSection) {
+                item.addEventListener('click', () => {
+                    const header = document.getElementById('header');
+
+                    // Set flag to keep header hidden (use window property to share with scroll handler)
+                    window.timelineNavigationActive = true;
+                    
+                    // Hide header
+                    if (header) {
+                        header.classList.add('hidden');
+                    }
+
+                    // Scroll directly to section start (no header offset since header is hidden)
+                    const targetPosition = targetSection.offsetTop;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Re-enable header after scroll completes
+                    setTimeout(() => {
+                        window.timelineNavigationActive = false;
+                    }, 1000);
+                });
+            }
+        });
+
+        // Track active section based on scroll position
+        function updateActiveTimelineItem() {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+            const header = document.getElementById('header');
+            const headerHeight = header ? header.offsetHeight : 0;
+            const viewportHeight = window.innerHeight;
+            const threshold = viewportHeight * 0.3; // Activate when section is 30% from top
+
+
+            let activeIndex = -1;
+
+            sections.forEach((section, index) => {
+                if (!section) return;
+
+                const sectionTop = section.offsetTop - headerHeight;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                // Check if section is in viewport with threshold
+                if (scrollPosition + threshold >= sectionTop && scrollPosition < sectionBottom) {
+                    activeIndex = index;
+                }
+            });
+
+            // If no section is active, check if we're past the first section
+            if (activeIndex === -1 && sections[0]) {
+                const firstSectionTop = sections[0].offsetTop - headerHeight;
+                if (scrollPosition >= firstSectionTop && scrollPosition < firstSectionTop + sections[0].offsetHeight) {
+                    activeIndex = 0;
+                }
+            }
+
+            // If still no active section, use the last section if we're past it
+            if (activeIndex === -1 && sections.length > 0) {
+                const lastSection = sections[sections.length - 1];
+                if (lastSection && scrollPosition >= lastSection.offsetTop - headerHeight) {
+                    activeIndex = sections.length - 1;
+                }
+            }
+
+            // Update active state
+            timelineItems.forEach((item, index) => {
+                if (index === activeIndex) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // Update on scroll
+        window.addEventListener('scroll', updateActiveTimelineItem, { passive: true });
+
+        // Initial update
+        updateActiveTimelineItem();
+    }
+
+    // Initialize timeline when DOM is ready
+    function waitForStoryTimeline() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initStoryTimeline);
+        } else {
+            initStoryTimeline();
+        }
+    }
+
+    waitForStoryTimeline();
 })();
 

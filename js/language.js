@@ -168,7 +168,7 @@
             story: {
                 title: 'Our love story',
                 subtitle: 'Welcome to our love story! Please read through some fun facts prior the party so you can win some games at our wedding!',
-                meetTitle: 'First, meet the bride & groom',
+                meetTitle: 'Bride & Groom',
                 brideTitle: 'Our bride ',
                 brideSubtitle: 'A chill girl who wanna be young & rich 🤑',
                 bridePersonalityLabel: 'Personality:',
@@ -400,7 +400,7 @@
             story: {
                 title: 'Chuyện tình yêu của chúng mình',
                 subtitle: '"Chào mừng đến với câu chuyện của chúng mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè!',
-                meetTitle: 'Cùng gặp cô dâu và chú rể nhé',
+                meetTitle: 'Cô dâu & Chú rể',
                 brideTitle: 'Cô dâu Minh Anh',
                 brideSubtitle: 'Giao diện đồng hành với hệ điều hành - luôn "chiến"! 🤑',
                 bridePersonalityLabel: 'Tính cách:',

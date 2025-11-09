@@ -1255,9 +1255,111 @@ section {
 /* ============================================
    Story Page Sections
    ============================================ */
+
+/* Story Timeline Header */
+.story-timeline {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    background: rgba(245, 241, 235, 0.7);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(139, 74, 74, 0.15);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.story-timeline-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.story-timeline-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.story-timeline-item:hover {
+    background: rgba(139, 74, 74, 0.05);
+}
+
+.story-timeline-item:hover .story-timeline-dot {
+    transform: scale(1.3);
+    background: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(139, 74, 74, 0.2);
+}
+
+.story-timeline-item.active .story-timeline-dot {
+    background: var(--primary-color);
+    transform: scale(1.2);
+    box-shadow: 0 0 0 3px rgba(139, 74, 74, 0.3);
+}
+
+.story-timeline-item.active .story-timeline-label {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.story-timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    opacity: 0.5;
+    border: 2px solid var(--bg-light);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.story-timeline-item.active .story-timeline-dot {
+    opacity: 1;
+}
+
+.story-timeline-label {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    pointer-events: none;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    text-align: center;
+}
+
+/* Responsive: Adjust timeline for smaller screens */
+@media (max-width: 1024px) {
+    .story-timeline-container {
+        gap: 20px;
+        padding: 12px 15px;
+    }
+    
+    .story-timeline-label {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .story-timeline {
+        display: none;
+    }
+}
+
 .story-intro {
-    height: 100vh;
-    min-height: 100vh;
+    height: calc(100vh - 160px);
+    min-height: calc(100vh - 160px);
     background-image: url('https://i.imgur.com/M6qpe4S.jpeg');
     background-size: cover;
     background-position: center;
