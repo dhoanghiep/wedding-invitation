@@ -1103,6 +1103,11 @@ section {
     line-height: 1.8;
 }
 
+.timeline-info[data-i18n*="Intro"] {
+    width: 65%;
+    margin: 0 auto 1rem auto;
+}
+
 .timeline-location-name,
 .timeline-address,
 .timeline-city {

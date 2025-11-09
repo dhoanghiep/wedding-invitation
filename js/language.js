@@ -113,7 +113,9 @@
                 title: 'Wedding schedule',
                 subtitle: 'Here\'s the plan for our celebration. We can\'t wait to see you there!',
                 welcomeParty: 'Welcome Party',
+                welcomePartyIntro: 'A pre-wedding party for our closest friends! Get ready for exciting games, talks filled with laughter, and a night of fun!',
                 wedding: 'Wedding Ceremony',
+                weddingIntro: 'The official wedding ceremony with our family and friends! What better way to start the new year? Let\'s celebrate our new beginning together... and wait for the surprise!',
                 timeLabel: 'Date & Time:',
                 locationLabel: 'Location:',
                 addressLabel: 'Address:',
@@ -249,7 +251,7 @@
                     wedding: 'Lễ cưới'
                 },
                 guestUploads: 'Ảnh từ khách mời',
-                guestUploadsDesc: 'Các bạn chính là những nhiếp ảnh gia xịn nhất! Nếu bạn có bất kỳ khoảnh khắc nào trong ngày cưới (hoặc bất kỳ kỷ niệm vui nào với chúng mình), hãy chia sẻ tại đây nhé. Chúng mình rất muốn nhìn thấy ngày vui qua lăng kính của các bạn.',
+                guestUploadsDesc: 'Các bạn chính là những nhiếp ảnh gia xịn nhất! Nếu bạn có bất kỳ khoảnh khắc nào trong ngày cưới (hoặc bất kỳ kỷ niệm vui nào với chúng mình), chia sẻ tại đây nhé. Chúng mình rất muốn nhìn thấy ngày vui qua lăng kính của các bạn.',
                 videosDesc: 'Một vài khoảnh khắc yêu thích nhất của chúng mình qua những thước phim.',
                 comingSoon: 'Ảnh sắp có...',
                 uploadTitle: 'Chia sẻ ảnh của bạn',
@@ -320,7 +322,9 @@
                 title: 'Lịch trình ngày cưới',
                 subtitle: 'Đây là kế hoạch cho ngày vui của chúng mình. Rất mong được gặp các bạn ở đó!',
                 welcomeParty: 'Tiệc thân mật',
+                welcomePartyIntro: 'Bữa tiệc trước ngày đám cưới dành cho những người bạn thân nhất của chúng mình! Sẵn sàng cho những trò chơi thú vị, những câu chuyện đầy ắp tiếng cười, và một đêm thật vui nhé!',
                 wedding: 'Lễ cưới',
+                weddingIntro: 'Buổi lễ cưới chính thức cùng gia đình và bạn bè! Còn gì tuyệt vời hơn là bắt đầu năm mới cùng nhau? Cùng chúng mình ăn mừng khởi đầu mới... và chờ đón điều bất ngờ nhé!',
                 timeLabel: 'Ngày & Giờ:',
                 locationLabel: 'Địa điểm:',
                 addressLabel: 'Địa chỉ:',
@@ -521,7 +525,9 @@
         updateText('[data-i18n="timeline.title"]', t.timeline.title);
         updateText('[data-i18n="timeline.subtitle"]', t.timeline.subtitle);
         updateText('[data-i18n="timeline.welcomeParty"]', t.timeline.welcomeParty);
+        updateText('[data-i18n="timeline.welcomePartyIntro"]', t.timeline.welcomePartyIntro);
         updateText('[data-i18n="timeline.wedding"]', t.timeline.wedding);
+        updateText('[data-i18n="timeline.weddingIntro"]', t.timeline.weddingIntro);
         updateText('[data-i18n="timeline.timeLabel"]', t.timeline.timeLabel);
         updateText('[data-i18n="timeline.locationLabel"]', t.timeline.locationLabel);
         updateText('[data-i18n="timeline.addressLabel"]', t.timeline.addressLabel);
