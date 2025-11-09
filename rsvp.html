@@ -37,6 +37,11 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="phone" data-i18n="rsvp.phone"></label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
                         <label data-i18n="rsvp.guestOf"></label>
                         <div class="radio-group">
                             <label class="radio-label">
@@ -52,16 +57,6 @@
                                 <span data-i18n="rsvp.guestOfBoth"></span>
                             </label>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone" data-i18n="rsvp.phone"></label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="guests" data-i18n="rsvp.guests"></label>
-                        <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
                     </div>
                     
                     <div class="form-group">
@@ -81,7 +76,12 @@
                     <!-- Conditional Fields - Only show if user clicks "Yes" -->
                     <div class="conditional-fields" id="conditional-fields" style="display: none;">
                         <div class="form-group">
-                            <label data-i18n="rsvp.eventsAttending"></label> <span class="required-asterisk">*</span>
+                            <label for="guests" data-i18n="rsvp.guests"></label>
+                            <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="rsvp.eventsAttending"></label>
                             <div class="ceremony-checkboxes" id="ceremony-checkboxes">
                                 <label class="checkbox-label">
                                     <input type="checkbox" name="ceremonies" value="welcome-party" id="ceremony-welcome-party">

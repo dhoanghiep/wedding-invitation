@@ -317,13 +317,22 @@
         const conditionalFields = document.getElementById('conditional-fields');
         const ceremoniesError = document.getElementById('ceremonies-error');
         const ceremonyCheckboxes = document.querySelectorAll('#ceremony-checkboxes input[type="checkbox"]');
+        const guestsInput = document.getElementById('guests');
         
         if (attendanceYes && attendanceNo && conditionalFields) {
             const toggleFields = () => {
                 if (attendanceYes.checked) {
                     conditionalFields.style.display = 'block';
+                    // Make guests field required when "Yes" is selected
+                    if (guestsInput) {
+                        guestsInput.required = true;
+                    }
                 } else {
                     conditionalFields.style.display = 'none';
+                    // Remove required attribute when "No" is selected
+                    if (guestsInput) {
+                        guestsInput.required = false;
+                    }
                     // Clear error and uncheck ceremonies when "No" is selected
                     if (ceremoniesError) {
                         ceremoniesError.style.display = 'none';
@@ -387,6 +396,14 @@
                 } else {
                     data[key] = value;
                 }
+            }
+            
+            // Set guests to 0 if attendance is "no"
+            if (data.attendance === 'no') {
+                data.guests = '0';
+            } else if (!data.guests) {
+                // If attendance is "yes" but no guests value, default to 1
+                data.guests = '1';
             }
             
             // Add ceremonies as comma-separated string if any are selected
