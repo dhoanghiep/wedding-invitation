@@ -1565,7 +1565,7 @@ section {
 .story-how-we-met-image-overlap:hover .story-image-alt-text {
     opacity: 1;
     visibility: visible;
-    bottom: -45px;
+    bottom: -35px;
 }
 
 /* Journey images alt text on hover */
@@ -1574,7 +1574,15 @@ section {
 .story-journey-grid-image:hover .story-image-alt-text {
     opacity: 1;
     visibility: visible;
-    bottom: -45px;
+    bottom: -35px;
+}
+
+/* Column image and ever after item alt text on hover */
+.story-column-image:hover .story-image-alt-text,
+.story-ever-after-item:hover .story-image-alt-text {
+    opacity: 1;
+    visibility: visible;
+    bottom: -35px;
 }
 
 /* Two images overlapping for How We Met */
@@ -1666,7 +1674,7 @@ section {
 /* Journey 2 columns layout */
 .story-journey-two-columns {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 0.9fr 2fr;
     gap: 30px;
     margin: 0;
     align-items: start;
@@ -1917,6 +1925,61 @@ section {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    /* Disable all hover effects on smaller devices */
+    .story-how-we-met-image-overlap:hover,
+    .story-journey-image-overlap:hover,
+    .story-journey-column-image:hover,
+    .story-journey-grid-image:hover,
+    .story-column-image:hover,
+    .story-proposal-image:hover,
+    .story-proposal-conclusion-images:hover,
+    .story-ever-after-item:hover {
+        transform: none !important;
+        box-shadow: inherit !important;
+        scale: 1 !important;
+    }
+    
+    /* Specifically disable box-shadow changes on hover for images */
+    .story-how-we-met-image-overlap img:hover,
+    .story-journey-image-overlap img:hover,
+    .story-journey-column-image img:hover,
+    .story-journey-grid-image img:hover,
+    .story-column-image img:hover,
+    .story-proposal-image img:hover,
+    .story-proposal-conclusion-images img:hover,
+    .story-ever-after-item img:hover {
+        transform: none !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        scale: 1 !important;
+    }
+    
+    /* Disable shadow changes when hovering over containers (which affects alt text) */
+    .story-how-we-met-image-overlap:hover,
+    .story-journey-image-overlap:hover,
+    .story-journey-column-image:hover,
+    .story-journey-grid-image:hover {
+        box-shadow: none !important;
+        transition: none !important;
+    }
+    
+    .story-how-we-met-image-overlap:hover img,
+    .story-journey-image-overlap:hover img,
+    .story-journey-column-image:hover img,
+    .story-journey-grid-image:hover img {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        transition: none !important;
+    }
+    
+    .story-journey-column-image:hover,
+    .story-journey-grid-image:hover {
+        transform: none !important;
+    }
+    
+    .story-journey-column-image:hover img,
+    .story-journey-grid-image:hover img {
+        transform: none !important;
+    }
+    
     .story-journey-images-overlap {
         flex-direction: column;
         gap: 20px;
@@ -1930,6 +1993,15 @@ section {
         max-height: 400px;
         transform: none !important;
         margin: 0 !important;
+        flex-direction: column;
+        padding-bottom: 0;
+        box-shadow: none;
+        transition: none !important;
+    }
+
+    .story-journey-image-overlap img {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: none !important;
     }
 
     .story-journey-images-two .story-journey-image-overlap:first-child,
@@ -1942,7 +2014,14 @@ section {
     }
 
     .story-journey-image-overlap:hover {
-        transform: scale(1.02) !important;
+        transform: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+    
+    .story-journey-image-overlap:hover img {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        transition: none !important;
     }
 
     /* Travel photos grid responsive */
@@ -1953,6 +2032,14 @@ section {
 
     .story-journey-grid-image {
         max-height: 400px;
+        flex-direction: column;
+        padding-bottom: 0;
+        transition: none !important;
+        box-shadow: none !important;
+    }
+    
+    .story-journey-grid-image img {
+        transition: none !important;
     }
 
     .story-journey-grid-left .story-journey-grid-image:first-child {
@@ -1983,13 +2070,17 @@ section {
 
     .story-journey-column-image {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding-bottom: 0;
+        transition: none !important;
     }
 
     .story-journey-column-image img {
         max-height: 300px;
         margin: 0 auto;
+        transition: none !important;
     }
 }
 
@@ -2035,8 +2126,8 @@ section {
 }
 
 .story-proposal-image {
-    width: 600px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 600px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -2071,12 +2162,12 @@ section {
 }
 
 .story-proposal-conclusion {
-    margin-top: 20px;
+
     text-align: center;
 }
 
 .story-proposal-conclusion-images {
-    margin-top: 20px;
+
     width: 100%;
     max-width: 800px;
     margin-left: auto;
@@ -2120,7 +2211,7 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    margin: 30px 0;
+    margin: 0 0;
 }
 
 .story-ever-after-item {
@@ -2155,7 +2246,6 @@ section {
 }
 
 .story-ever-after-conclusion {
-    margin-top: 30px;
     text-align: center;
 }
 
@@ -2863,6 +2953,20 @@ section {
         flex-direction: column;
     }
     
+    /* Groom section: image should appear before content on smaller devices */
+    .story-person.story-groom {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .story-person.story-groom .story-person-photo {
+        order: -1;
+    }
+    
+    .story-person.story-groom .story-person-content {
+        order: 0;
+    }
+    
     .story-person-photo {
         width: 250px;
         height: 330px;
@@ -2929,9 +3033,11 @@ section {
     /* How We Met - Overlapping images responsive */
     .story-how-we-met-images-overlap {
         flex-direction: column;
-        gap: 30px;
+        gap: 40px;
         min-height: auto;
         padding: 0 !important;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
     }
 
     .story-how-we-met-image-overlap {
@@ -2940,6 +3046,9 @@ section {
         transform: none !important;
         margin: 0 !important;
         overflow: visible;
+        flex-direction: column;
+        padding-bottom: 0;
+        min-height: auto;
     }
 
     .story-how-we-met-images-two .story-how-we-met-image-overlap:first-child,
@@ -2948,20 +3057,70 @@ section {
         margin: 0 !important;
     }
 
+    .story-how-we-met-images-two .story-how-we-met-image-overlap:first-child {
+        margin-bottom: 20px !important;
+    }
+
     .story-how-we-met-image-overlap:hover {
-        transform: scale(1.02) !important;
+        transform: none !important;
     }
 
     /* Alt text tooltip responsive */
     .story-image-alt-text {
-        bottom: -35px;
-        font-size: 0.85rem;
-        padding: 6px 12px;
-        max-width: 250px;
+        position: static;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        background: transparent;
+        color: var(--primary-color);
+        padding: 10px 0 0 0;
+        border-radius: 0;
+        font-size: 0.9rem;
+        white-space: normal;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: none;
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+        line-height: 1.4;
+        margin-top: 8px;
+        margin-bottom: 15px;
+        display: block;
+    }
+    
+    /* Prevent hover on parent when hovering over alt text */
+    .story-image-alt-text:hover {
+        pointer-events: none;
+    }
+    
+    .story-how-we-met-image-overlap:has(.story-image-alt-text:hover),
+    .story-journey-image-overlap:has(.story-image-alt-text:hover),
+    .story-journey-column-image:has(.story-image-alt-text:hover),
+    .story-journey-grid-image:has(.story-image-alt-text:hover) {
+        box-shadow: none !important;
+    }
+    
+    .story-how-we-met-image-overlap:has(.story-image-alt-text:hover) img,
+    .story-journey-image-overlap:has(.story-image-alt-text:hover) img,
+    .story-journey-column-image:has(.story-image-alt-text:hover) img,
+    .story-journey-grid-image:has(.story-image-alt-text:hover) img {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
     }
 
-    .story-how-we-met-image-overlap:hover .story-image-alt-text {
-        bottom: -40px;
+    .story-image-alt-text::before {
+        display: none;
+    }
+
+    .story-how-we-met-image-overlap:hover .story-image-alt-text,
+    .story-journey-column-image:hover .story-image-alt-text,
+    .story-journey-image-overlap:hover .story-image-alt-text,
+    .story-journey-grid-image:hover .story-image-alt-text,
+    .story-column-image:hover .story-image-alt-text,
+    .story-ever-after-item:hover .story-image-alt-text {
+        opacity: 1;
+        visibility: visible;
+        bottom: auto;
     }
     
     /* How We Met - paragraph 3 and image 3 responsive */

@@ -422,8 +422,7 @@
                 howWeMetParagraph3: 'Sau khi hết giãn cách, cô dâu (vai "Đường Tăng" thích khám phá) dắt chú rể đi thăm thú thành phố.<br>Và lời tỏ tình của chú rể là dắt ngược cô dâu đi một nơi mới. Còn gì lãng mạn hơn... một lớp học vẽ chứ?',
                 howWeMetImage2Alt: 'Kiệt tác nghệ thuật (hoặc thảm họa) của chúng mình tại lớp vẽ',
                 howWeMetImage2Caption: 'Kiệt tác nghệ thuật (hoặc thảm họa) của chúng mình tại lớp vẽ',
-                howWeMetImage3Alt: 'Một khoảnh khắc khác từ những ngày đầu của chúng mình',
-                howWeMetImage3Caption: 'Một khoảnh khắc khác từ những ngày đầu của chúng mình',
+                howWeMetImage3Alt: 'lớp vẽ',
                 journeyTitle: 'Hành Trình',
                 journeyIntro: 'Từ đồng nghiệp thành một đôi, chúng mình bắt đầu cùng nhau "lớn lên". Chúng mình là đôi bạn thân cùng nhau thử những điều mới mẻ trong cuộc sống.',
                 journeyColumn1Text: 'Như là lần đầu tiên chúng mình đi nhuộm tóc.....',
@@ -640,6 +639,8 @@
         updateText('[data-i18n="story.howWeMetParagraph3"]', t.story.howWeMetParagraph3);
         updateText('[data-i18n="story.howWeMetImage2Alt"]', t.story.howWeMetImage2Alt);
         updateText('[data-i18n="story.howWeMetImage2Caption"]', t.story.howWeMetImage2Caption);
+        updateText('[data-i18n="story.howWeMetImage3Alt"]', t.story.howWeMetImage3Alt);
+        updateText('[data-i18n="story.howWeMetImage3Caption"]', t.story.howWeMetImage3Caption);
         updateText('[data-i18n="story.journeyTitle"]', t.story.journeyTitle);
         updateText('[data-i18n="story.journeyIntro"]', t.story.journeyIntro);
         updateText('[data-i18n="story.journeyColumn1Text"]', t.story.journeyColumn1Text);
@@ -671,6 +672,10 @@
         updateText('[data-i18n="story.everAfterParagraph1"]', t.story.everAfterParagraph1);
         updateText('[data-i18n="story.everAfterImage1Alt"]', t.story.everAfterImage1Alt);
         updateText('[data-i18n="story.everAfterImage1Caption"]', t.story.everAfterImage1Caption);
+        updateText('[data-i18n="story.everAfterImage2Alt"]', t.story.everAfterImage2Alt);
+        updateText('[data-i18n="story.everAfterImage2Caption"]', t.story.everAfterImage2Caption);
+        updateText('[data-i18n="story.everAfterImage3Alt"]', t.story.everAfterImage3Alt);
+        updateText('[data-i18n="story.everAfterImage3Caption"]', t.story.everAfterImage3Caption);
 
         // Update explore section
         updateText('[data-i18n="explore.text"]', t.explore.text);
