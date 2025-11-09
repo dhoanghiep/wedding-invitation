@@ -1070,6 +1070,7 @@ section {
     gap: 0.5rem;
     align-items: center;
     text-align: center;
+    width: 65%;
 }
 
 .timeline-title {
@@ -1104,8 +1105,8 @@ section {
 }
 
 .timeline-info[data-i18n*="Intro"] {
-    width: 65%;
-    margin: 0 auto 1rem auto;
+    width: 95%;
+    margin: 0 0 1rem 0;
 }
 
 .timeline-location-name,
