@@ -748,5 +748,96 @@
     }
 
     waitForStoryTimeline();
+
+    // Accommodation Cards Rendering
+    function renderAccommodations() {
+        const accommodationGrid = document.querySelector('.accommodation-grid');
+        if (!accommodationGrid || !CONFIG.ACCOMMODATIONS) {
+            return; // Not on location page or no accommodations configured
+        }
+
+        // Clear existing content
+        accommodationGrid.innerHTML = '';
+
+        // Render each accommodation using venue layout
+        CONFIG.ACCOMMODATIONS.forEach(accommodation => {
+            const card = document.createElement('div');
+            card.className = 'venue-card';
+            card.setAttribute('data-accommodation-id', accommodation.id);
+
+            // Get title and address based on accommodation ID
+            let titleHTML, addressHTML;
+            if (accommodation.id === 'home-hotel') {
+                titleHTML = '<h3 data-i18n="location.homeHotelTitle">Home Hotel</h3>';
+                addressHTML = '<span data-i18n="location.homeHotelAddress" style="white-space: pre-line;">158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City</span>';
+            } else {
+                titleHTML = `<h3>${accommodation.title || 'Accommodation'}</h3>`;
+                addressHTML = `<span style="white-space: pre-line;">${(accommodation.address || '').replace(/\n/g, '\n')}</span>`;
+            }
+
+            // Build venue-content structure
+            let venueDetailsHTML = `
+                <p class="venue-info">
+                    <strong data-i18n="location.addressLabel">Address:</strong> 
+                    ${addressHTML}
+                </p>
+            `;
+
+            // Add phone number if available
+            if (accommodation.phone) {
+                venueDetailsHTML += `
+                    <p class="venue-info">
+                        <strong data-i18n="location.phoneLabel">Phone:</strong> 
+                        <a href="tel:${accommodation.phone.replace(/\s/g, '')}" style="color: var(--primary-color); text-decoration: none;">${accommodation.phone}</a>
+                    </p>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="venue-content">
+                    <div class="venue-text">
+                        ${titleHTML}
+                        <div class="venue-details">
+                            ${venueDetailsHTML}
+                        </div>
+                    </div>
+                    <div class="venue-map" id="${accommodation.id}-map">
+                        <iframe 
+                            src="${accommodation.mapUrl}" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            `;
+
+            accommodationGrid.appendChild(card);
+        });
+
+        // Update translations after rendering
+        if (typeof updateAllTexts === 'function') {
+            updateAllTexts();
+        }
+    }
+
+    // Initialize accommodations when DOM is ready
+    function waitForAccommodations() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAccommodations);
+        } else {
+            renderAccommodations();
+        }
+    }
+
+    waitForAccommodations();
+
+    // Re-render accommodations when language changes
+    document.addEventListener('languageChanged', () => {
+        renderAccommodations();
+    });
 })();
 

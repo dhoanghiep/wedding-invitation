@@ -128,7 +128,7 @@
             // Timeline Section
             timeline: {
                 title: 'Wedding schedule',
-                subtitle: 'Here\'s the plan for our celebration! We can\'t wait to see you there.',
+                subtitle: 'Here\'s the plan for our celebration. We can\'t wait to see you there!',
                 welcomeParty: 'Welcome Party',
                 welcomePartyDate: '5:00 PM, 31/12/2025',
                 welcomePartyLocation: 'Siha cafe \n 58 Nguyen Dinh Chinh, Phu Nhuan \n Ho Chi Minh City',
@@ -162,7 +162,10 @@
                 addressLabel: 'Address:',
                 viewMap: 'View on Google Maps',
                 accommodationTitle: 'Accommodations',
-                accommodationSubtitle: 'Recommended places to stay'
+                accommodationSubtitle: 'Recommended places to stay',
+                homeHotelTitle: 'Home Hotel',
+                homeHotelAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
+                phoneLabel: 'Phone:'
             },
             // Story Section
             story: {
@@ -360,7 +363,7 @@
             // Timeline Section
             timeline: {
                 title: 'Lịch trình ngày cưới',
-                subtitle: 'Đây là kế hoạch cho ngày vui của chúng mình! Rất mong được gặp các bạn ở đó.',
+                subtitle: 'Đây là kế hoạch cho ngày vui của chúng mình. Rất mong được gặp các bạn ở đó!',
                 welcomeParty: 'Tiệc thân mật',
                 welcomePartyDate: 'Ngày & Giờ',
                 welcomePartyLocation: 'Địa điểm',
@@ -394,12 +397,15 @@
                 addressLabel: 'Địa chỉ:',
                 viewMap: 'Xem trên Google Maps',
                 accommodationTitle: 'Nơi ở',
-                accommodationSubtitle: 'Các địa điểm lưu trú được đề xuất'
+                accommodationSubtitle: 'Những địa điểm lưu trứ để các bạn tiện di chuyển',
+                homeHotelTitle: 'Home Hotel',
+                homeHotelAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
+                phoneLabel: 'Điện thoại:'
             },
             // Story Section
             story: {
                 title: 'Chuyện tình yêu của chúng mình',
-                subtitle: '"Chào mừng đến với câu chuyện của chúng mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè!',
+                subtitle: 'Chào mừng đến với câu chuyện của chúng mình! Mời mọi người đọc qua vài hint để khi dự tiệc sẽ săn được nhiều quà nè!',
                 meetTitle: 'Cô dâu & Chú rể',
                 brideTitle: 'Cô dâu Minh Anh',
                 brideSubtitle: 'Giao diện đồng hành với hệ điều hành - luôn "chiến"! 🤑',
@@ -468,7 +474,7 @@
         }
     };
 
-    let currentLanguage = localStorage.getItem('language') || 'en';
+    let currentLanguage = localStorage.getItem('language') || 'vi';
 
     // Initialize language on page load
     function init() {
@@ -613,6 +619,9 @@
         updateText('[data-i18n="location.viewMap"]', t.location.viewMap);
         updateText('[data-i18n="location.accommodationTitle"]', t.location.accommodationTitle);
         updateText('[data-i18n="location.accommodationSubtitle"]', t.location.accommodationSubtitle);
+        updateText('[data-i18n="location.homeHotelTitle"]', t.location.homeHotelTitle);
+        updateText('[data-i18n="location.homeHotelAddress"]', t.location.homeHotelAddress);
+        updateText('[data-i18n="location.phoneLabel"]', t.location.phoneLabel);
 
         // Update story section
         updateText('[data-i18n="story.title"]', t.story.title);

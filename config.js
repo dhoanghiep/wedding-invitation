@@ -46,6 +46,15 @@ const CONFIG = {
     // Google Drive folder where guest photos will be uploaded
     // Get folder ID from the Google Drive folder URL:
     // https://drive.google.com/drive/folders/FOLDER_ID → FOLDER_ID is '1XMrIeZl9sNAQuHNk43C426NDWhffDfPW'
-    GOOGLE_DRIVE_UPLOAD_FOLDER_ID: '1XMrIeZl9sNAQuHNk43C426NDWhffDfPW'
+    GOOGLE_DRIVE_UPLOAD_FOLDER_ID: '1XMrIeZl9sNAQuHNk43C426NDWhffDfPW',
+    
+    // Accommodations Configuration
+    ACCOMMODATIONS: [
+        {
+            id: 'home-hotel',
+            mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.7999197722372!2d106.67518592859969!3d10.796013316699485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175296be108ef67%3A0x46d52c90cf3bdb99!2sHome%20Hotel!5e0!3m2!1sen!2sau!4v1762652779884!5m2!1sen!2sau',
+            phone: '+84 282 222 2201'
+        }
+    ]
 
 };
