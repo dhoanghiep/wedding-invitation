@@ -51,6 +51,16 @@ const CONFIG = {
     // Accommodations Configuration
     ACCOMMODATIONS: [
         {
+            id: 'airbnb-profile',
+            link: 'https://www.airbnb.com.au/users/profile/1463849642311823052',
+            images: [
+                'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTM3NzM4MzA3MzYxMjExOTA3MA==/original/51c5946d-630d-4685-8c17-e5943def0393.jpeg?im_w=720',
+                'https://a0.muscache.com/im/pictures/hosting/Hosting-1479436268371841895/original/e7d896c6-b20e-4871-838a-be3349e3c38d.jpeg?im_w=720',
+                'https://a0.muscache.com/im/pictures/hosting/Hosting-1494263093294061880/original/e042c3a4-c042-413f-af53-9ea9d87307a4.jpeg?im_w=720',
+                'https://a0.muscache.com/im/pictures/hosting/Hosting-1529569605530570606/original/e3737d59-cc80-4a43-bae7-9a7725dada4c.jpeg?im_w=720'
+            ]
+        },
+        {
             id: 'home-hotel',
             mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.7999197722372!2d106.67518592859969!3d10.796013316699485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175296be108ef67%3A0x46d52c90cf3bdb99!2sHome%20Hotel!5e0!3m2!1sen!2sau!4v1762652779884!5m2!1sen!2sau',
             phone: '+84 282 222 2201'

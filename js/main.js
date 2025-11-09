@@ -770,18 +770,24 @@
             if (accommodation.id === 'home-hotel') {
                 titleHTML = '<h3 data-i18n="location.homeHotelTitle">Home Hotel</h3>';
                 addressHTML = '<span data-i18n="location.homeHotelAddress" style="white-space: pre-line;">158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City</span>';
+            } else if (accommodation.id === 'airbnb-profile') {
+                titleHTML = '<h3 data-i18n="location.airbnbProfileTitle">Airbnb Profile</h3>';
+                addressHTML = '';
             } else {
                 titleHTML = `<h3>${accommodation.title || 'Accommodation'}</h3>`;
                 addressHTML = `<span style="white-space: pre-line;">${(accommodation.address || '').replace(/\n/g, '\n')}</span>`;
             }
 
             // Build venue-content structure
-            let venueDetailsHTML = `
-                <p class="venue-info">
-                    <strong data-i18n="location.addressLabel">Address:</strong> 
-                    ${addressHTML}
-                </p>
-            `;
+            let venueDetailsHTML = '';
+            if (addressHTML) {
+                venueDetailsHTML = `
+                    <p class="venue-info">
+                        <strong data-i18n="location.addressLabel">Address:</strong> 
+                        ${addressHTML}
+                    </p>
+                `;
+            }
 
             // Add phone number if available
             if (accommodation.phone) {
@@ -793,14 +799,45 @@
                 `;
             }
 
-            card.innerHTML = `
-                <div class="venue-content">
-                    <div class="venue-text">
-                        ${titleHTML}
-                        <div class="venue-details">
-                            ${venueDetailsHTML}
+            // Determine if we should show a map, images gallery, or a link button
+            let mapOrLinkHTML = '';
+            if (accommodation.images && accommodation.images.length > 0) {
+                // Show image gallery with carousel
+                const imageItems = accommodation.images.map((img, index) => 
+                    `<div class="accommodation-image-slide ${index === 0 ? 'active' : ''}" style="background-image: url('${img}');"></div>`
+                ).join('');
+                
+                const imageIndicators = accommodation.images.map((img, index) => 
+                    `<button class="accommodation-image-indicator ${index === 0 ? 'active' : ''}" data-slide="${index}" aria-label="Slide ${index + 1}"></button>`
+                ).join('');
+                
+                mapOrLinkHTML = `
+                    <div class="venue-map accommodation-image-gallery" id="${accommodation.id}-gallery" style="position: relative; overflow: hidden;">
+                        <div class="accommodation-image-carousel" style="position: relative; width: 100%; height: 100%;">
+                            ${imageItems}
+                        </div>
+                        <div class="accommodation-image-indicators" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 2;">
+                            ${imageIndicators}
+                        </div>
+                        <div style="position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); z-index: 2;">
+                            <a href="${accommodation.link || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+                                <span data-i18n="location.viewProfile">View Profile</span>
+                            </a>
                         </div>
                     </div>
+                `;
+            } else if (accommodation.link) {
+                // Show link button instead of map
+                mapOrLinkHTML = `
+                    <div class="venue-map" id="${accommodation.id}-link" style="display: flex; align-items: center; justify-content: center;">
+                        <a href="${accommodation.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="text-decoration: none;">
+                            <span data-i18n="location.viewProfile">View Profile</span>
+                        </a>
+                    </div>
+                `;
+            } else if (accommodation.mapUrl) {
+                // Show map iframe
+                mapOrLinkHTML = `
                     <div class="venue-map" id="${accommodation.id}-map">
                         <iframe 
                             src="${accommodation.mapUrl}" 
@@ -812,6 +849,18 @@
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="venue-content">
+                    <div class="venue-text">
+                        ${titleHTML}
+                        <div class="venue-details">
+                            ${venueDetailsHTML}
+                        </div>
+                    </div>
+                    ${mapOrLinkHTML}
                 </div>
             `;
 
@@ -822,6 +871,82 @@
         if (typeof updateAllTexts === 'function') {
             updateAllTexts();
         }
+
+        // Initialize image carousels
+        initAccommodationImageCarousels();
+    }
+
+    // Initialize accommodation image carousels
+    function initAccommodationImageCarousels() {
+        const galleries = document.querySelectorAll('.accommodation-image-gallery');
+        
+        galleries.forEach(gallery => {
+            const carousel = gallery.querySelector('.accommodation-image-carousel');
+            if (!carousel) return;
+            
+            const slides = carousel.querySelectorAll('.accommodation-image-slide');
+            const indicators = gallery.querySelectorAll('.accommodation-image-indicator');
+            
+            if (slides.length <= 1) return; // No need for carousel if only one image
+            
+            let currentSlide = 0;
+            let carouselInterval = null;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Remove active class from all slides and indicators
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                // Add active class to current slide and indicator
+                if (slides[index]) {
+                    slides[index].classList.add('active');
+                }
+                if (indicators[index]) {
+                    indicators[index].classList.add('active');
+                }
+                
+                currentSlide = index;
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+            
+            // Auto-rotate carousel every 4 seconds
+            function startCarousel() {
+                if (carouselInterval) {
+                    clearInterval(carouselInterval);
+                }
+                carouselInterval = setInterval(nextSlide, 4000);
+            }
+            
+            // Pause carousel on hover
+            gallery.addEventListener('mouseenter', () => {
+                if (carouselInterval) {
+                    clearInterval(carouselInterval);
+                }
+            });
+            
+            // Resume carousel on mouse leave
+            gallery.addEventListener('mouseleave', () => {
+                startCarousel();
+            });
+            
+            // Handle indicator clicks
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    showSlide(index);
+                    // Restart auto-rotation after manual navigation
+                    startCarousel();
+                });
+            });
+            
+            // Start the carousel
+            startCarousel();
+        });
     }
 
     // Initialize accommodations when DOM is ready
