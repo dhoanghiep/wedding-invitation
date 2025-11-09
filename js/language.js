@@ -141,8 +141,6 @@
                 addressLabel: 'Address:',
                 accommodationTitle: 'Accommodations',
                 accommodationSubtitle: 'Recommended places to stay',
-                homeHotelTitle: 'Home Hotel',
-                homeHotelAddress: '158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City',
                 phoneLabel: 'Phone:',
                 airbnbProfileTitle: 'Airbnb - Maoki House',
                 viewProfile: 'View Profile'
@@ -350,8 +348,6 @@
                 addressLabel: 'Địa chỉ:',
                 accommodationTitle: 'Nơi ở',
                 accommodationSubtitle: 'Những địa điểm lưu trứ để các bạn tiện di chuyển',
-                homeHotelTitle: 'Home Hotel',
-                homeHotelAddress: '158 Nguyễn Đình Chính\n Phú Nhuận, TP. Hồ Chí Minh',
                 phoneLabel: 'Điện thoại:',
                 airbnbProfileTitle: 'Airbnb - Maoki House',
                 viewProfile: 'Xem hồ sơ'
@@ -552,8 +548,6 @@
         updateText('[data-i18n="location.addressLabel"]', t.location.addressLabel);
         updateText('[data-i18n="location.accommodationTitle"]', t.location.accommodationTitle);
         updateText('[data-i18n="location.accommodationSubtitle"]', t.location.accommodationSubtitle);
-        updateText('[data-i18n="location.homeHotelTitle"]', t.location.homeHotelTitle);
-        updateText('[data-i18n="location.homeHotelAddress"]', t.location.homeHotelAddress);
         updateText('[data-i18n="location.phoneLabel"]', t.location.phoneLabel);
         updateText('[data-i18n="location.airbnbProfileTitle"]', t.location.airbnbProfileTitle);
         updateText('[data-i18n="location.viewProfile"]', t.location.viewProfile);

@@ -59,11 +59,6 @@ const CONFIG = {
                 'https://a0.muscache.com/im/pictures/hosting/Hosting-1494263093294061880/original/e042c3a4-c042-413f-af53-9ea9d87307a4.jpeg?im_w=720',
                 'https://a0.muscache.com/im/pictures/hosting/Hosting-1529569605530570606/original/e3737d59-cc80-4a43-bae7-9a7725dada4c.jpeg?im_w=720'
             ]
-        },
-        {
-            id: 'home-hotel',
-            mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.7999197722372!2d106.67518592859969!3d10.796013316699485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175296be108ef67%3A0x46d52c90cf3bdb99!2sHome%20Hotel!5e0!3m2!1sen!2sau!4v1762652779884!5m2!1sen!2sau',
-            phone: '+84 282 222 2201'
         }
     ]
 

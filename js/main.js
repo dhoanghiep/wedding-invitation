@@ -814,10 +814,7 @@
 
             // Get title and address based on accommodation ID
             let titleHTML, addressHTML;
-            if (accommodation.id === 'home-hotel') {
-                titleHTML = '<h3 data-i18n="location.homeHotelTitle">Home Hotel</h3>';
-                addressHTML = '<span data-i18n="location.homeHotelAddress" style="white-space: pre-line;">158 Nguyen Dinh Chinh\n Phu Nhuan, Ho Chi Minh City</span>';
-            } else if (accommodation.id === 'airbnb-profile') {
+            if (accommodation.id === 'airbnb-profile') {
                 titleHTML = '<h3 data-i18n="location.airbnbProfileTitle">Airbnb Profile</h3>';
                 addressHTML = '';
             } else {
