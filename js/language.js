@@ -93,7 +93,8 @@
                 success: 'Thank you for your RSVP! We look forward to seeing you.',
                 error: 'Sorry, there was an error submitting your RSVP. Please try again later or contact us directly.',
                 fillFields: 'Please fill in all required fields.',
-                validEmail: 'Please enter a valid email address.'
+                validEmail: 'Please enter a valid email address.',
+                selectAtLeastOneEvent: 'Please select at least one event you will be attending.'
             },
             // Contact Section
             contact: {
@@ -274,7 +275,7 @@
             rsvp: {
                 title: 'Phản hồi',
                 intro: 'Vui lòng cho chúng mình biết kế hoạch của bạn để chúng mình tiện sắp xếp nhé. Rất mong được chung vui cùng bạn!',
-                subtitle: 'Vui lòng cho chúng tôi biết bạn có tham dự không',
+                subtitle: 'Vui lòng cho chúng mình biết bạn có tham dự không',
                 bannerTitle: 'Hy vọng bạn sẽ đến!',
                 bannerSubtitle: 'Chúng mình đang đếm ngược từng ngày và rất hy vọng bạn có thể ở đó để chung vui cùng chúng mình!',
                 bannerCta: 'Sẵn sàng "quẩy" chưa? Bấm vào bên dưới để cho chúng mình biết nhé.',
@@ -298,20 +299,21 @@
                 otherRequestsPlaceholder: 'vd: dị ứng đồ ăn, cần hỗ trợ di chuyển',
                 submit: 'Gửi Phản Hồi',
                 submitting: 'Đang gửi...',
-                success: 'Cảm ơn bạn đã xác nhận! Chúng tôi rất mong được gặp bạn.',
-                error: 'Xin lỗi, đã có lỗi khi gửi xác nhận. Vui lòng thử lại sau hoặc liên hệ trực tiếp với chúng tôi.',
+                success: 'Cảm ơn bạn đã xác nhận! Chúng mình rất mong được gặp bạn.',
+                error: 'Oops! Có lỗi khi gửi xác nhận rồi. Thử lại sau hoặc liên hệ với chúng mình nhé.',
                 fillFields: 'Vui lòng điền vào tất cả các trường bắt buộc.',
-                validEmail: 'Vui lòng nhập địa chỉ email hợp lệ.'
+                validEmail: 'Vui lòng nhập địa chỉ email hợp lệ.',
+                selectAtLeastOneEvent: 'Vui lòng chọn ít nhất một sự kiện bạn sẽ tham dự.'
             },
             // Contact Section
             contact: {
                 title: 'Liên hệ',
-                subtitle: 'Có câu hỏi? Chúng tôi rất muốn nghe từ bạn',
+                subtitle: 'Có câu hỏi? Chúng mình rất muốn nghe từ bạn',
                 yourName: 'Tên của bạn *',
                 yourEmail: 'Email của bạn *',
                 message: 'Lời nhắn *',
                 send: 'Gửi tin nhắn',
-                success: 'Cảm ơn bạn đã gửi tin nhắn! Chúng tôi sẽ phản hồi sớm.',
+                success: 'Cảm ơn bạn đã gửi tin nhắn! Chúng mình sẽ phản hồi sớm.',
                 fillFields: 'Vui lòng điền vào tất cả các trường bắt buộc.',
                 validEmail: 'Vui lòng nhập địa chỉ email hợp lệ.'
             },
@@ -389,7 +391,7 @@
                 journeyCafeImage2Alt: '1,2,3... Dzô!!!',
                 journeyParagraph2: 'Chúng mình cùng có mặt ở những cột mốc quan trọng nhất của nhau và ăn mừng tất cả những thành tựu lớn.',
                 journeyGraduationImage1Alt: 'Minh Anh trong ngày tốt nghiệp!',
-                journeyGraduationImage2Alt: 'Hiệp nhận tốt nghiệp!',
+                journeyGraduationImage2Alt: 'Hiệp nhận giấy tốt nghiệp!',
                 journeyParagraph3: 'Và chúng mình bắt đầu khám phá thế giới. Đây chính là lúc "Đường Tăng" thực sự thử thách "Ngộ Không"!',
                 journeyTripImage1Alt: 'Chuyến đi 1',
                 journeyTripImage2Alt: 'Chuyến đi 2',
@@ -402,7 +404,7 @@
                 proposalBrideQuote: '"Mình biết thừa rồi, và suýt nữa định không đồng ý." <span style="font-style: normal;">🤭</span>',
                 proposalImage1Alt: 'Khoảnh khắc "Em đồng ý" (Minh Anh cuối cùng cũng chịu để chụp ảnh)',
                 proposalImage1Caption: 'Khoảnh khắc "Em đồng ý" (Minh Anh cuối cùng cũng chịu để chụp ảnh)',
-                proposalConclusion: 'Nhưng mà, bất ngờ vẫn là bất ngờ, và đồ ăn ngon thì không thể chối từ!',
+                proposalConclusion: 'Nhưng mà bất ngờ vẫn là bất ngờ, và đồ ăn ngon thì không thể chối từ!',
                 proposalImage2Alt: 'Bữa tối ăn mừng (và đồ ăn chốt đơn)',
                 proposalImage2Caption: 'Bữa tối ăn mừng (và đồ ăn chốt đơn)',
                 everAfterTitle: '...Và mãi mãi về sau',

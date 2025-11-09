@@ -61,7 +61,7 @@
                     
                     <div class="form-group">
                         <label for="guests" data-i18n="rsvp.guests"></label>
-                        <input type="number" id="guests" name="guests" min="1" max="5" value="1" required>
+                        <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
                     </div>
                     
                     <div class="form-group">
@@ -81,17 +81,18 @@
                     <!-- Conditional Fields - Only show if user clicks "Yes" -->
                     <div class="conditional-fields" id="conditional-fields" style="display: none;">
                         <div class="form-group">
-                            <label data-i18n="rsvp.eventsAttending"></label>
-                            <div class="ceremony-checkboxes">
+                            <label data-i18n="rsvp.eventsAttending"></label> <span class="required-asterisk">*</span>
+                            <div class="ceremony-checkboxes" id="ceremony-checkboxes">
                                 <label class="checkbox-label">
-                                    <input type="checkbox" name="ceremonies" value="welcome-party">
+                                    <input type="checkbox" name="ceremonies" value="welcome-party" id="ceremony-welcome-party">
                                     <span data-i18n="rsvp.welcomeParty"></span>
                                 </label>
                                 <label class="checkbox-label">
-                                    <input type="checkbox" name="ceremonies" value="main-wedding">
+                                    <input type="checkbox" name="ceremonies" value="main-wedding" id="ceremony-main-wedding">
                                     <span data-i18n="rsvp.mainWedding"></span>
                                 </label>
                             </div>
+                            <div class="form-error" id="ceremonies-error" style="display: none; color: #721c24; font-size: 0.875rem; margin-top: 5px;"></div>
                         </div>
                         
                         <div class="form-group">

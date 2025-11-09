@@ -315,6 +315,8 @@
         const attendanceYes = document.getElementById('attendance-yes');
         const attendanceNo = document.getElementById('attendance-no');
         const conditionalFields = document.getElementById('conditional-fields');
+        const ceremoniesError = document.getElementById('ceremonies-error');
+        const ceremonyCheckboxes = document.querySelectorAll('#ceremony-checkboxes input[type="checkbox"]');
         
         if (attendanceYes && attendanceNo && conditionalFields) {
             const toggleFields = () => {
@@ -322,6 +324,13 @@
                     conditionalFields.style.display = 'block';
                 } else {
                     conditionalFields.style.display = 'none';
+                    // Clear error and uncheck ceremonies when "No" is selected
+                    if (ceremoniesError) {
+                        ceremoniesError.style.display = 'none';
+                    }
+                    ceremonyCheckboxes.forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
                 }
             };
             
@@ -331,6 +340,15 @@
             // Add event listeners
             attendanceYes.addEventListener('change', toggleFields);
             attendanceNo.addEventListener('change', toggleFields);
+            
+            // Clear error when user selects an event
+            ceremonyCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    if (ceremoniesError) {
+                        ceremoniesError.style.display = 'none';
+                    }
+                });
+            });
         }
     }
 
@@ -386,6 +404,35 @@
                 const msg = window.Language ? window.Language.t('rsvp.validEmail') : 'Please enter a valid email address.';
                 showMessage(rsvpMessage, msg, 'error');
                 return;
+            }
+
+            // Validate that at least one event is selected when attendance is "yes"
+            if (data.attendance === 'yes') {
+                if (ceremonies.length === 0) {
+                    const ceremoniesError = document.getElementById('ceremonies-error');
+                    const errorMsg = window.Language ? window.Language.t('rsvp.selectAtLeastOneEvent') : 'Please select at least one event you will be attending.';
+                    
+                    if (ceremoniesError) {
+                        ceremoniesError.textContent = errorMsg;
+                        ceremoniesError.style.display = 'block';
+                    }
+                    
+                    showMessage(rsvpMessage, errorMsg, 'error');
+                    
+                    // Scroll to the ceremonies section
+                    const conditionalFields = document.getElementById('conditional-fields');
+                    if (conditionalFields) {
+                        conditionalFields.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                    
+                    return;
+                } else {
+                    // Clear error if ceremonies are selected
+                    const ceremoniesError = document.getElementById('ceremonies-error');
+                    if (ceremoniesError) {
+                        ceremoniesError.style.display = 'none';
+                    }
+                }
             }
 
             // Disable submit button during submission
