@@ -1373,7 +1373,11 @@ section {
     background: var(--bg-light);
 }
 
-.story-how-we-met,
+.story-how-we-met {
+    padding: 20px 0 80px 0;
+    background: var(--bg-light);
+}
+
 .story-journey,
 .story-trips,
 .story-proposal,
