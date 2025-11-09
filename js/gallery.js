@@ -9,6 +9,58 @@
         'wedding-photos': []
     };
     
+    // Thumbnail configuration (loaded from thumbnail-config.json)
+    let thumbnailConfig = null;
+    
+    // Load thumbnail configuration
+    async function loadThumbnailConfig() {
+        try {
+            const response = await fetch('images/thumbnail-config.json');
+            if (response.ok) {
+                thumbnailConfig = await response.json();
+                console.log('[Gallery] Thumbnail configuration loaded');
+            } else {
+                console.log('[Gallery] No thumbnail configuration found, using full images');
+            }
+        } catch (error) {
+            console.log('[Gallery] Could not load thumbnail configuration, using full images:', error);
+        }
+    }
+    
+    // Get photo object with thumbnail and full URL
+    function getPhotoObject(fullUrl, category, index, albumId) {
+        // Check if we have thumbnail config
+        if (thumbnailConfig) {
+            // Check category photos
+            if (thumbnailConfig[category] && thumbnailConfig[category][index]) {
+                const config = thumbnailConfig[category][index];
+                if (config.full === fullUrl && config.thumbnail) {
+                    return {
+                        thumbnail: config.thumbnail,
+                        full: config.full
+                    };
+                }
+            }
+            
+            // Check subsection photos
+            if (albumId && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
+                const subsectionPhotos = thumbnailConfig.subsections[albumId];
+                if (subsectionPhotos[index] && subsectionPhotos[index].full === fullUrl) {
+                    return {
+                        thumbnail: subsectionPhotos[index].thumbnail,
+                        full: subsectionPhotos[index].full
+                    };
+                }
+            }
+        }
+        
+        // Fallback: return full URL for both thumbnail and full
+        return {
+            thumbnail: fullUrl,
+            full: fullUrl
+        };
+    }
+    
     // Load photos for a specific category
     async function loadCategoryPhotos(category) {
         console.log(`[Gallery] Loading photos for category: ${category}`);
@@ -29,7 +81,13 @@
                 // Use static URLs from config (local images or direct URLs)
                 if (CONFIG.PHOTOS && CONFIG.PHOTOS.length > 0) {
                     console.log(`[Gallery] Found ${CONFIG.PHOTOS.length} static photos in config`);
-                    categoryPhotoList = CONFIG.PHOTOS;
+                    // Convert string URLs to photo objects
+                    categoryPhotoList = CONFIG.PHOTOS.map(url => {
+                        if (typeof url === 'string') {
+                            return { thumbnail: url, full: url };
+                        }
+                        return url; // Already an object
+                    });
                 } else {
                     console.warn('[Gallery] No static photos in config, using default photos');
                     categoryPhotoList = getDefaultPhotos();
@@ -45,7 +103,25 @@
                 
                 if (albumId) {
                     console.log(`[Gallery] Loading Imgur album with ID: ${albumId}`);
-                    categoryPhotoList = await loadImgurAlbum(albumId);
+                    const imgurPhotos = await loadImgurAlbum(albumId);
+                    
+                    // Check if we have local thumbnails in config for this category
+                    if (thumbnailConfig && thumbnailConfig[category]) {
+                        // Merge with thumbnail config
+                        categoryPhotoList = imgurPhotos.map((photo, index) => {
+                            const configPhoto = thumbnailConfig[category][index];
+                            if (configPhoto && configPhoto.full === photo.full) {
+                                return {
+                                    thumbnail: configPhoto.thumbnail,
+                                    full: configPhoto.full
+                                };
+                            }
+                            return photo;
+                        });
+                    } else {
+                        categoryPhotoList = imgurPhotos;
+                    }
+                    
                     console.log(`[Gallery] Loaded ${categoryPhotoList.length} photos from Imgur`);
                 } else {
                     console.warn(`[Gallery] Imgur Album ID not configured for category: ${category}`);
@@ -99,6 +175,7 @@
     }
     
     // Load photos from Imgur album
+    // Returns array of photo objects with {thumbnail, full} URLs
     async function loadImgurAlbum(albumId) {
         try {
             console.log(`[Gallery] Loading Imgur album: ${albumId}`);
@@ -121,9 +198,43 @@
             if (data.success && data.data) {
                 // Check if data.data has an images array (album response)
                 const images = data.data.images || (Array.isArray(data.data) ? data.data : []);
-                const imageLinks = images.map(image => image.link || image);
-                console.log(`[Gallery] Loaded ${imageLinks.length} images from Imgur album ${albumId}`);
-                return imageLinks;
+                
+                // Map to photo objects with thumbnail and full URLs
+                const photoObjects = images.map((image, index) => {
+                    const fullUrl = image.link || image;
+                    
+                    // Try to get thumbnail from config first, otherwise use Imgur thumbnail URL
+                    let thumbnailUrl = fullUrl;
+                    
+                    // Check if we have a local thumbnail in config
+                    if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
+                        const subsectionPhotos = thumbnailConfig.subsections[albumId];
+                        if (subsectionPhotos[index] && subsectionPhotos[index].full === fullUrl) {
+                            thumbnailUrl = subsectionPhotos[index].thumbnail;
+                        }
+                    }
+                    
+                    // If no local thumbnail found, generate Imgur thumbnail URL
+                    if (thumbnailUrl === fullUrl) {
+                        if (image.id) {
+                            thumbnailUrl = `https://i.imgur.com/${image.id}m.jpg`; // 'm' = medium thumbnail (320x320)
+                        } else if (fullUrl.includes('i.imgur.com')) {
+                            // Extract image ID from URL and create thumbnail URL
+                            const match = fullUrl.match(/i\.imgur\.com\/([^\.]+)/);
+                            if (match) {
+                                thumbnailUrl = `https://i.imgur.com/${match[1]}m.jpg`;
+                            }
+                        }
+                    }
+                    
+                    return {
+                        thumbnail: thumbnailUrl,
+                        full: fullUrl
+                    };
+                });
+                
+                console.log(`[Gallery] Loaded ${photoObjects.length} images from Imgur album ${albumId}`);
+                return photoObjects;
             } else {
                 console.warn(`[Gallery] Imgur API returned unsuccessful response:`, data);
                 return [];
@@ -172,6 +283,10 @@
     // Initialize galleries
     async function initGalleries() {
         console.log('[Gallery] initGalleries: Starting gallery initialization');
+        
+        // Load thumbnail configuration first
+        await loadThumbnailConfig();
+        
         await loadPhotoUrls();
         
         // Load photos into their respective grids
@@ -231,12 +346,36 @@
             
             switch (source) {
                 case 'static':
-                    photoList = CONFIG.SUBSECTION_ALBUMS[albumId] || [];
+                    const staticPhotos = CONFIG.SUBSECTION_ALBUMS[albumId] || [];
+                    // Convert string URLs to photo objects
+                    photoList = staticPhotos.map(url => {
+                        if (typeof url === 'string') {
+                            return { thumbnail: url, full: url };
+                        }
+                        return url; // Already an object
+                    });
                     break;
                 case 'imgur':
                     const imgurAlbumId = CONFIG.SUBSECTION_ALBUMS[albumId];
                     if (imgurAlbumId) {
-                        photoList = await loadImgurAlbum(imgurAlbumId);
+                        const imgurPhotos = await loadImgurAlbum(imgurAlbumId);
+                        
+                        // Check if we have local thumbnails in config for this subsection
+                        if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
+                            // Merge with thumbnail config
+                            photoList = imgurPhotos.map((photo, index) => {
+                                const configPhoto = thumbnailConfig.subsections[albumId][index];
+                                if (configPhoto && configPhoto.full === photo.full) {
+                                    return {
+                                        thumbnail: configPhoto.thumbnail,
+                                        full: configPhoto.full
+                                    };
+                                }
+                                return photo;
+                            });
+                        } else {
+                            photoList = imgurPhotos;
+                        }
                     }
                     break;
                 case 'cloudinary':
@@ -248,7 +387,24 @@
             console.log(`[Gallery] Using category-level album config for ${albumId}`);
             const imgurAlbumId = CONFIG.IMGUR_ALBUMS[albumId];
             if (imgurAlbumId) {
-                photoList = await loadImgurAlbum(imgurAlbumId);
+                const imgurPhotos = await loadImgurAlbum(imgurAlbumId);
+                
+                // Check if we have local thumbnails in config for this subsection
+                if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
+                    // Merge with thumbnail config
+                    photoList = imgurPhotos.map((photo, index) => {
+                        const configPhoto = thumbnailConfig.subsections[albumId][index];
+                        if (configPhoto && configPhoto.full === photo.full) {
+                            return {
+                                thumbnail: configPhoto.thumbnail,
+                                full: configPhoto.full
+                            };
+                        }
+                        return photo;
+                    });
+                } else {
+                    photoList = imgurPhotos;
+                }
             }
         } else {
             console.log(`[Gallery] No subsection-specific or category-level album config found for ${albumId}`);
@@ -271,7 +427,7 @@
         }
         
         // Load photos into grid
-        photoList.forEach((photoUrl, index) => {
+        photoList.forEach((photo, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
             
@@ -279,8 +435,16 @@
             img.alt = `Photo ${index + 1}`;
             img.loading = 'lazy';
             
+            // Get photo object (handle both string URLs and objects)
+            const photoObj = typeof photo === 'string' 
+                ? { thumbnail: photo, full: photo }
+                : photo;
+            
+            // Use thumbnail for grid display
+            const thumbnailUrl = photoObj.thumbnail || photoObj.full;
+            
             img.addEventListener('error', function(e) {
-                console.warn(`Failed to load image ${index + 1} after all retries:`, photoUrl);
+                console.warn(`Failed to load thumbnail ${index + 1} after all retries:`, thumbnailUrl);
                 console.warn(`Error details:`, e);
                 
                 img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300"%3E%3Crect fill="%23ddd" width="300" height="300"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="16" dy="10.5" font-weight="bold" x="50%25" y="50%25" text-anchor="middle"%3EImage not available%3C/text%3E%3C/svg%3E';
@@ -291,12 +455,15 @@
                 galleryItem.classList.remove('error');
             });
             
-            loadImageWithRetry(img, photoUrl, index);
+            loadImageWithRetry(img, thumbnailUrl, index);
             
             galleryItem.appendChild(img);
             
-            // Store all photos for this subsection for lightbox navigation
-            const allSubsectionPhotos = photoList;
+            // Store all photos for this subsection for lightbox navigation (use full URLs)
+            const allSubsectionPhotos = photoList.map(p => {
+                if (typeof p === 'string') return p;
+                return p.full || p.thumbnail;
+            });
             galleryItem.addEventListener('click', () => {
                 openLightbox(index, subsection, allSubsectionPhotos);
             });
@@ -376,7 +543,7 @@
         console.log(`[Gallery] Clearing grid and loading ${categoryPhotoList.length} photos for ${category}`);
         gridElement.innerHTML = '';
         
-        categoryPhotoList.forEach((photoUrl, index) => {
+        categoryPhotoList.forEach((photo, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
             
@@ -384,9 +551,18 @@
             img.alt = `Photo ${index + 1}`;
             img.loading = 'lazy';
             
+            // Get photo object (handle both string URLs and objects)
+            const photoObj = typeof photo === 'string' 
+                ? { thumbnail: photo, full: photo }
+                : photo;
+            
+            // Use thumbnail for grid display
+            const thumbnailUrl = photoObj.thumbnail || photoObj.full;
+            const fullUrl = photoObj.full || photoObj.thumbnail;
+            
             // Add error handling for failed image loads (after all retries fail)
             img.addEventListener('error', function(e) {
-                console.warn(`[Gallery] Failed to load image ${index + 1} after all retries:`, photoUrl);
+                console.warn(`[Gallery] Failed to load thumbnail ${index + 1} after all retries:`, thumbnailUrl);
                 console.warn(`[Gallery] Error details:`, e);
                 console.warn(`[Gallery] Image element:`, img);
                 
@@ -401,17 +577,23 @@
                 galleryItem.classList.remove('error');
             });
             
-            // Load image with retry on 429
-            loadImageWithRetry(img, photoUrl, index);
+            // Load thumbnail image with retry on 429
+            loadImageWithRetry(img, thumbnailUrl, index);
             
             galleryItem.appendChild(img);
-            galleryItem.addEventListener('click', () => openLightbox(index, category));
+            
+            // Store full URLs for lightbox
+            const allCategoryPhotos = categoryPhotoList.map(p => {
+                if (typeof p === 'string') return p;
+                return p.full || p.thumbnail;
+            });
+            galleryItem.addEventListener('click', () => openLightbox(index, category, allCategoryPhotos));
             
             // Safety check before appending
             if (gridElement) {
                 gridElement.appendChild(galleryItem);
                 if (index === 0) {
-                    console.log(`[Gallery] Added first photo to ${category} grid:`, photoUrl.substring(0, 100));
+                    console.log(`[Gallery] Added first photo to ${category} grid:`, thumbnailUrl.substring(0, 100));
                 }
             } else {
                 console.warn(`[Gallery] Grid element is null for category: ${category}, cannot append gallery item`);

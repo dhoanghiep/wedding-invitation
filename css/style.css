@@ -212,7 +212,8 @@ html.lightbox-open {
 .hero {
     height: 100vh;
     background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
-    background-image: url('https://images.pixieset.com/82784299/90cc6fcf2e899b038db4af58559a8bda-cover.jpg');
+    /* Use local image first, fallback to original URL if not available */
+    background-image: url('../images/full/landing.jpg'), url('https://images.pixieset.com/82784299/90cc6fcf2e899b038db4af58559a8bda-cover.jpg');
     background-size: cover;
     background-position: center 65%;
     background-repeat: no-repeat;
@@ -1321,7 +1322,8 @@ section {
 .story-intro {
     height: calc(100vh - 160px);
     min-height: calc(100vh - 160px);
-    background-image: url('https://i.imgur.com/WvIv4Y1.jpeg');
+    /* Use local image first, fallback to original URL if not available */
+    background-image: url('../images/full/intro.jpeg'), url('https://i.imgur.com/WvIv4Y1.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
