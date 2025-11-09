@@ -347,7 +347,7 @@
                 locationLabel: 'Địa điểm:',
                 addressLabel: 'Địa chỉ:',
                 accommodationTitle: 'Nơi ở',
-                accommodationSubtitle: 'Những địa điểm lưu trứ để các bạn tiện di chuyển',
+                accommodationSubtitle: 'Những địa điểm lưu trú để các bạn tiện di chuyển',
                 phoneLabel: 'Điện thoại:',
                 airbnbProfileTitle: 'Airbnb - Maoki House',
                 viewProfile: 'Xem hồ sơ'
