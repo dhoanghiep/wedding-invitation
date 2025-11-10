@@ -2471,6 +2471,28 @@ section {
 }
 
 /* ============================================
+   Story Join Us Section
+   ============================================ */
+.story-join-us {
+    padding: 80px 0;
+    background: var(--bg-light);
+    text-align: center;
+}
+
+.story-join-us-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.story-join-us-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* ============================================
    Explore Section
    ============================================ */
 .explore-section {
@@ -3011,6 +3033,16 @@ section {
         margin: 1.5rem 0 1rem 0;
     }
     
+    .story-join-us {
+        padding: 60px 0;
+    }
+    
+    .story-join-us-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
     .explore-section {
         padding: 60px 0;
     }
@@ -3262,6 +3294,10 @@ section {
     .rsvp-banner-cta {
         font-size: 0.9rem;
         margin: 1.5rem 0 1rem 0;
+    }
+    
+    .story-join-us {
+        padding: 50px 0;
     }
     
     .explore-section {

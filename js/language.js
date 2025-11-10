@@ -203,7 +203,9 @@
                 everAfterParagraph1: 'We\'re so excited to see where this journey takes us, and even more excited to have you all be a part of the official starting line.<br>See you at the wedding!',
                 everAfterImage1Alt: 'June pointing out the real view.<br>The Opera House is not that good!',
                 everAfterImage2Alt: 'Us in our bedroom in Melbourne.<br>A bit minimal but the rent is great!',
-                everAfterImage3Alt: 'June driving Hiep across Australia.<br>The "Buddhist" and "Wukong"\'s journey continues...'
+                everAfterImage3Alt: 'June driving Hiep across Australia.<br>The "Buddhist" and "Wukong"\'s journey continues...',
+                rsvpButton: 'RSVP',
+                galleryButton: 'See more photos'
             },
             // Explore Section
             explore: {
@@ -412,7 +414,9 @@
                 everAfterParagraph1: 'Chúng mình rất háo hức xem hành trình này sẽ đi đến đâu, và còn háo hức hơn nữa khi có tất cả các bạn ở đây, ngay vạch xuất phát chính thức này.<br>Hẹn gặp các bạn ở đám cưới nhé!',
                 everAfterImage1Alt: 'Minh Anh đang chỉ "view" xịn nhất.<br>Nhà hát con sò cũng thường thôi!',
                 everAfterImage2Alt: 'Phòng ngủ của chúng mình ở Melbourne.<br>Hơi theo phong cách tối giản nhưng được cái giá rẻ!',
-                everAfterImage3Alt: 'Minh Anh chở Hiệp đi xuyên nước Úc.<br>Hành trình của "Đường Tăng" và "Ngộ Không" vẫn tiếp diễn...'
+                everAfterImage3Alt: 'Minh Anh chở Hiệp đi xuyên nước Úc.<br>Hành trình của "Đường Tăng" và "Ngộ Không" vẫn tiếp diễn...',
+                rsvpButton: 'Phản hồi',
+                galleryButton: 'Xem thêm ảnh'
             },
             // Explore Section
             explore: {
@@ -614,6 +618,8 @@
         updateText('[data-i18n="story.everAfterImage1Alt"]', t.story.everAfterImage1Alt);
         updateText('[data-i18n="story.everAfterImage2Alt"]', t.story.everAfterImage2Alt);
         updateText('[data-i18n="story.everAfterImage3Alt"]', t.story.everAfterImage3Alt);
+        updateText('[data-i18n="story.rsvpButton"]', t.story.rsvpButton);
+        updateText('[data-i18n="story.galleryButton"]', t.story.galleryButton);
 
         // Update explore section
         updateText('[data-i18n="explore.text"]', t.explore.text);
