@@ -84,19 +84,20 @@
 
                 <!-- Question Display -->
                 <div class="quiz-question-container">
-                    <div class="quiz-timer" id="quiz-timer">
+                    <div class="quiz-timer" id="quiz-timer" role="timer" aria-live="polite" aria-atomic="true">
                         <div class="quiz-timer-circle">
-                            <svg class="quiz-timer-svg" viewBox="0 0 100 100">
+                            <svg class="quiz-timer-svg" viewBox="0 0 100 100" aria-hidden="true">
                                 <circle class="quiz-timer-bg" cx="50" cy="50" r="45"></circle>
                                 <circle class="quiz-timer-progress" id="quiz-timer-progress" cx="50" cy="50" r="45"></circle>
                             </svg>
-                            <div class="quiz-timer-text" id="quiz-timer-text">30</div>
+                            <div class="quiz-timer-text" id="quiz-timer-text" aria-label="Time remaining">30</div>
+                            <span class="sr-only" id="quiz-timer-announce">30 seconds remaining</span>
                         </div>
                     </div>
                     
-                    <h2 class="quiz-question-text" id="quiz-question-text"></h2>
+                    <h2 class="quiz-question-text" id="quiz-question-text" role="heading" aria-level="2"></h2>
                     
-                    <div class="quiz-answers" id="quiz-answers">
+                    <div class="quiz-answers" id="quiz-answers" role="group" aria-label="Answer options">
                         <!-- Answer buttons will be dynamically generated -->
                     </div>
                 </div>

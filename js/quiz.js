@@ -300,13 +300,22 @@
             
             // Create answer buttons
             const colors = ['red', 'blue', 'yellow', 'green'];
+            const colorLabels = ['Red', 'Blue', 'Yellow', 'Green'];
             question.shuffledAnswers.forEach((answer, index) => {
                 const button = document.createElement('button');
                 button.className = `quiz-answer-btn quiz-answer-${colors[index]}`;
                 button.textContent = answer;
                 button.dataset.answerIndex = index;
                 button.dataset.isCorrect = (index === question.correctIndex).toString();
+                button.setAttribute('aria-label', `${colorLabels[index]} option: ${answer}`);
+                button.setAttribute('tabindex', '0');
                 button.addEventListener('click', () => handleAnswerSelect(button, question));
+                button.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleAnswerSelect(button, question);
+                    }
+                });
                 answersContainer.appendChild(button);
             });
         }
@@ -331,12 +340,33 @@
             timeRemaining -= 0.1;
             
             if (timerText) {
-                timerText.textContent = Math.ceil(timeRemaining).toString();
+                const seconds = Math.ceil(timeRemaining);
+                timerText.textContent = seconds.toString();
+                
+                // Update aria-label for screen readers
+                const timerAnnounce = document.getElementById('quiz-timer-announce');
+                if (timerAnnounce) {
+                    timerAnnounce.textContent = seconds === 1 ? '1 second remaining' : seconds + ' seconds remaining';
+                }
+                
+                // Add warning class when time is running out
+                if (timeRemaining <= 5 && timeRemaining > 0) {
+                    timerText.classList.add('warning');
+                } else {
+                    timerText.classList.remove('warning');
+                }
             }
 
             if (timerProgress) {
                 const progress = (timeRemaining / (timeLimit / 1000)) * 100;
                 timerProgress.style.strokeDashoffset = (100 - progress) * 2.827; // 2πr for r=45
+                
+                // Change color when time is running out
+                if (timeRemaining <= 5 && timeRemaining > 0) {
+                    timerProgress.style.stroke = '#F44336';
+                } else {
+                    timerProgress.style.stroke = 'var(--primary-color)';
+                }
             }
 
             if (timeRemaining <= 0) {
@@ -362,8 +392,10 @@
             const buttons = answersContainer.querySelectorAll('.quiz-answer-btn');
             buttons.forEach(btn => {
                 btn.disabled = true;
+                btn.setAttribute('tabindex', '-1');
                 if (btn === button) {
                     btn.classList.add('selected');
+                    btn.setAttribute('aria-pressed', 'true');
                 }
             });
         }
