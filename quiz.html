@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding Quiz - Test your knowledge about the couple!">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2Q0C3C4NT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T2Q0C3C4NT');
+    </script>
+    
+    <title>Wedding Quiz</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+    <!-- Header placeholder - will be loaded by components.js -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Content -->
+    <main style="padding-top: 80px;">
+        <!-- User Registration/Login Section -->
+        <section class="quiz-section" id="quiz-registration" style="display: block;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="quiz.title">Wedding Quiz</h2>
+                    <p class="section-subtitle" data-i18n="quiz.subtitle">Test your knowledge about the couple!</p>
+                </div>
+                
+                <div class="quiz-registration-form" id="quiz-registration-form">
+                    <div class="form-group">
+                        <label for="quiz-email" data-i18n="quiz.email">Email Address *</label>
+                        <input type="email" id="quiz-email" name="email" required placeholder="your.email@example.com">
+                        <small class="form-hint" data-i18n="quiz.emailHint">Your email will be used to identify you</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quiz-name" data-i18n="quiz.name">Your Name *</label>
+                        <input type="text" id="quiz-name" name="name" required placeholder="Enter your name">
+                        <small class="form-hint" data-i18n="quiz.nameHint">You can change this later</small>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" id="quiz-start-btn" data-i18n="quiz.startQuiz">Start Quiz</button>
+                    
+                    <div class="form-message" id="quiz-registration-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Player Section -->
+        <section class="quiz-section" id="quiz-player" style="display: none;">
+            <div class="container">
+                <!-- Quiz Header -->
+                <div class="quiz-header">
+                    <div class="quiz-info">
+                        <div class="quiz-user-info">
+                            <span id="quiz-current-name"></span>
+                            <button class="btn-link" id="quiz-change-name-btn" data-i18n="quiz.changeName">Change Name</button>
+                        </div>
+                        <div class="quiz-score">
+                            <span data-i18n="quiz.score">Score:</span>
+                            <span id="quiz-current-score">0</span>
+                        </div>
+                    </div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                        <div class="quiz-progress-text">
+                            <span id="quiz-question-number">0</span> / <span id="quiz-total-questions">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Display -->
+                <div class="quiz-question-container">
+                    <div class="quiz-timer" id="quiz-timer">
+                        <div class="quiz-timer-circle">
+                            <svg class="quiz-timer-svg" viewBox="0 0 100 100">
+                                <circle class="quiz-timer-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="quiz-timer-progress" id="quiz-timer-progress" cx="50" cy="50" r="45"></circle>
+                            </svg>
+                            <div class="quiz-timer-text" id="quiz-timer-text">30</div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="quiz-question-text" id="quiz-question-text"></h2>
+                    
+                    <div class="quiz-answers" id="quiz-answers">
+                        <!-- Answer buttons will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Results Section -->
+        <section class="quiz-section" id="quiz-results" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="quiz.resultsTitle">Quiz Results</h2>
+                </div>
+                
+                <div class="quiz-results-container">
+                    <div class="quiz-results-summary">
+                        <div class="quiz-result-stat">
+                            <div class="quiz-result-value" id="quiz-final-score">0</div>
+                            <div class="quiz-result-label" data-i18n="quiz.finalScore">Final Score</div>
+                        </div>
+                        <div class="quiz-result-stat">
+                            <div class="quiz-result-value" id="quiz-correct-answers">0</div>
+                            <div class="quiz-result-label" data-i18n="quiz.correctAnswers">Correct Answers</div>
+                        </div>
+                        <div class="quiz-result-stat">
+                            <div class="quiz-result-value" id="quiz-accuracy">0%</div>
+                            <div class="quiz-result-label" data-i18n="quiz.accuracy">Accuracy</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button type="button" class="btn btn-primary" id="quiz-restart-btn" data-i18n="quiz.restartQuiz">Take Quiz Again</button>
+                        <button type="button" class="btn btn-secondary" id="quiz-review-btn" data-i18n="quiz.reviewAnswers">Review Answers</button>
+                    </div>
+                    
+                    <div class="quiz-answer-review" id="quiz-answer-review" style="display: none;">
+                        <!-- Answer review will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer placeholder - will be loaded by components.js -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript files -->
+    <script src="js/components.js"></script>
+    <script src="js/language.js"></script>
+    <script src="config.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+</html>
+

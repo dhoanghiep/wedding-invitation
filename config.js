@@ -60,6 +60,19 @@ const CONFIG = {
                 'https://a0.muscache.com/im/pictures/hosting/Hosting-1529569605530570606/original/e3737d59-cc80-4a43-bae7-9a7725dada4c.jpeg?im_w=720'
             ]
         }
-    ]
+    ],
+
+    // Quiz Configuration
+    QUIZ_CONFIG: {
+        GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbx452XArh1-M05G55rNgnnVSum9YVQPqEf6QEWZZ7C9YqECACTHC_hha-dqampiV7HS/exec',
+        MAX_PARTICIPANTS: 100,
+        QUESTION_TIME_LIMIT: 30000, // 30 seconds in milliseconds
+        QUESTIONS_TSV_PATH: 'data/quiz-questions.tsv',
+        BASE_POINTS: 1000,
+        TIME_BONUS_MAX: 500,
+        ENABLE_LEADERBOARD: true,
+        SHOW_CORRECT_ANSWER_DELAY: 2000, // 2 seconds
+        AUTO_ADVANCE_DELAY: 3000 // 3 seconds
+    }
 
 };
