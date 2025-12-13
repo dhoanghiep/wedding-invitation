@@ -204,7 +204,7 @@
                 everAfterImage1Alt: 'June pointing out the real view.<br>The Opera House is not that good!',
                 everAfterImage2Alt: 'Us in our bedroom in Melbourne.<br>A bit minimal but the rent is great!',
                 everAfterImage3Alt: 'June driving Hiep across Australia.<br>The "Buddhist" and "Wukong"\'s journey continues...',
-                rsvpButton: 'RSVP',
+                rsvpButton: 'RSVP & Message us',
                 galleryButton: 'See more photos'
             },
             // Explore Section
@@ -221,7 +221,7 @@
                 location: 'Địa điểm',
                 story: 'Chuyện tình',
                 gallery: 'Thư viện ảnh',
-                rsvp: 'Phản hồi',
+                rsvp: 'Phản hồi & Nhắn chúng mình',
                 contact: 'Liên hệ'
             },
             // Hero Section
@@ -415,7 +415,7 @@
                 everAfterImage1Alt: 'Minh Anh đang chỉ "view" xịn nhất.<br>Nhà hát con sò cũng thường thôi!',
                 everAfterImage2Alt: 'Phòng ngủ của chúng mình ở Melbourne.<br>Hơi theo phong cách tối giản nhưng được cái giá rẻ!',
                 everAfterImage3Alt: 'Minh Anh chở Hiệp đi xuyên nước Úc.<br>Hành trình của "Đường Tăng" và "Ngộ Không" vẫn tiếp diễn...',
-                rsvpButton: 'Phản hồi',
+                rsvpButton: 'Phản hồi & Nhắn chúng mình',
                 galleryButton: 'Xem thêm ảnh'
             },
             // Explore Section
