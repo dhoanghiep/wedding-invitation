@@ -10,7 +10,7 @@
                 location: 'Location',
                 story: 'Love Story',
                 gallery: 'Gallery',
-                rsvp: 'RSVP',
+                rsvp: 'RSVP & Share a wish',
                 contact: 'Contact'
             },
             // Hero Section
@@ -70,6 +70,7 @@
                 bannerTitle: 'We hope you can join us!',
                 bannerSubtitle: 'We\'re counting down the days and really hope you can be there to celebrate with us!',
                 bannerCta: 'Ready to party? Click below to let us know.',
+                bannerButton: 'RSVP & Share a wish',
                 fullName: 'Name *',
                 email: 'Email',
                 guestOf: 'You are a guest of: *',
@@ -204,7 +205,7 @@
                 everAfterImage1Alt: 'June pointing out the real view.<br>The Opera House is not that good!',
                 everAfterImage2Alt: 'Us in our bedroom in Melbourne.<br>A bit minimal but the rent is great!',
                 everAfterImage3Alt: 'June driving Hiep across Australia.<br>The "Buddhist" and "Wukong"\'s journey continues...',
-                rsvpButton: 'RSVP & Message us',
+                rsvpButton: 'RSVP & Share a wish',
                 galleryButton: 'See more photos'
             },
             // Explore Section
@@ -221,7 +222,7 @@
                 location: 'Địa điểm',
                 story: 'Chuyện tình',
                 gallery: 'Thư viện ảnh',
-                rsvp: 'Phản hồi & Nhắn chúng mình',
+                rsvp: 'Nhắn chúng mình',
                 contact: 'Liên hệ'
             },
             // Hero Section
@@ -281,6 +282,7 @@
                 bannerTitle: 'Hy vọng bạn sẽ đến!',
                 bannerSubtitle: 'Chúng mình đang đếm ngược từng ngày và rất hy vọng bạn có thể ở đó để chung vui cùng chúng mình!',
                 bannerCta: 'Sẵn sàng "quẩy" chưa? Bấm vào bên dưới để cho chúng mình biết nhé.',
+                bannerButton: 'Nhắn chúng mình',
                 fullName: 'Tên của bạn *',
                 email: 'Email',
                 guestOf: 'Bạn là khách mời của: *',
@@ -415,7 +417,7 @@
                 everAfterImage1Alt: 'Minh Anh đang chỉ "view" xịn nhất.<br>Nhà hát con sò cũng thường thôi!',
                 everAfterImage2Alt: 'Phòng ngủ của chúng mình ở Melbourne.<br>Hơi theo phong cách tối giản nhưng được cái giá rẻ!',
                 everAfterImage3Alt: 'Minh Anh chở Hiệp đi xuyên nước Úc.<br>Hành trình của "Đường Tăng" và "Ngộ Không" vẫn tiếp diễn...',
-                rsvpButton: 'Phản hồi & Nhắn chúng mình',
+                rsvpButton: 'Nhắn chúng mình',
                 galleryButton: 'Xem thêm ảnh'
             },
             // Explore Section
@@ -495,6 +497,7 @@
         updateText('[data-i18n="rsvp.bannerTitle"]', t.rsvp.bannerTitle);
         updateText('[data-i18n="rsvp.bannerSubtitle"]', t.rsvp.bannerSubtitle);
         updateText('[data-i18n="rsvp.bannerCta"]', t.rsvp.bannerCta);
+        updateText('[data-i18n="rsvp.bannerButton"]', t.rsvp.bannerButton);
         updateText('[data-i18n="rsvp.fullName"]', t.rsvp.fullName);
         updateText('[data-i18n="rsvp.email"]', t.rsvp.email);
         updateText('[data-i18n="rsvp.guestOf"]', t.rsvp.guestOf);
