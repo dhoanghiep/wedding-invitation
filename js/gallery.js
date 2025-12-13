@@ -101,31 +101,55 @@
                     ? CONFIG.IMGUR_ALBUMS[category]
                     : (category === 'pre-wedding' ? CONFIG.IMGUR_ALBUM_ID : null);
                 
+                // FIRST: Load cached thumbnails from config if available
+                if (thumbnailConfig && thumbnailConfig[category] && thumbnailConfig[category].length > 0) {
+                    console.log(`[Gallery] Found ${thumbnailConfig[category].length} cached thumbnails for category: ${category}`);
+                    categoryPhotoList = [...thumbnailConfig[category]]; // Use cached thumbnails immediately
+                }
+                
+                // THEN: Try to load from Imgur API asynchronously (don't wait)
                 if (albumId) {
-                    console.log(`[Gallery] Loading Imgur album with ID: ${albumId}`);
-                    const imgurPhotos = await loadImgurAlbum(albumId);
-                    
-                    // Check if we have local thumbnails in config for this category
-                    if (thumbnailConfig && thumbnailConfig[category]) {
-                        // Merge with thumbnail config
-                        categoryPhotoList = imgurPhotos.map((photo, index) => {
-                            const configPhoto = thumbnailConfig[category][index];
-                            if (configPhoto && configPhoto.full === photo.full) {
-                                return {
-                                    thumbnail: configPhoto.thumbnail,
-                                    full: configPhoto.full
-                                };
+                    console.log(`[Gallery] Loading Imgur album with ID: ${albumId} (async, will update if successful)`);
+                    // Load asynchronously without blocking
+                    loadImgurAlbum(albumId).then(imgurPhotos => {
+                        if (imgurPhotos && imgurPhotos.length > 0) {
+                            console.log(`[Gallery] Imgur API loaded ${imgurPhotos.length} photos, updating full URLs`);
+                            // Update full URLs while keeping local thumbnails
+                            if (thumbnailConfig && thumbnailConfig[category]) {
+                                // Merge: use local thumbnails but update full URLs from API
+                                const updatedPhotos = imgurPhotos.map((photo, index) => {
+                                    const configPhoto = thumbnailConfig[category] && thumbnailConfig[category][index];
+                                    if (configPhoto) {
+                                        return {
+                                            thumbnail: configPhoto.thumbnail, // Keep local thumbnail
+                                            full: photo.full // Update full URL from API
+                                        };
+                                    }
+                                    return photo;
+                                });
+                                
+                                // Update the category photos
+                                categoryPhotos[category] = updatedPhotos;
+                                
+                                // Update the grid if it's the current category
+                                if (category === currentCategory || photos.length === 0) {
+                                    loadCategoryPhotosToGrid(category);
+                                }
+                            } else {
+                                // No cached thumbnails, use API photos
+                                categoryPhotos[category] = imgurPhotos;
+                                if (category === currentCategory || photos.length === 0) {
+                                    loadCategoryPhotosToGrid(category);
+                                }
                             }
-                            return photo;
-                        });
-                    } else {
-                        categoryPhotoList = imgurPhotos;
-                    }
-                    
-                    console.log(`[Gallery] Loaded ${categoryPhotoList.length} photos from Imgur`);
+                        } else {
+                            console.log(`[Gallery] Imgur API failed or returned no photos, keeping cached thumbnails`);
+                        }
+                    }).catch(error => {
+                        console.warn(`[Gallery] Imgur API error for ${albumId}, keeping cached thumbnails:`, error);
+                    });
                 } else {
                     console.warn(`[Gallery] Imgur Album ID not configured for category: ${category}`);
-                    categoryPhotoList = [];
                 }
                 break;
                 
@@ -357,25 +381,46 @@
                     break;
                 case 'imgur':
                     const imgurAlbumId = CONFIG.SUBSECTION_ALBUMS[albumId];
+                    
+                    // FIRST: Load cached thumbnails from config if available
+                    if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId] && thumbnailConfig.subsections[albumId].length > 0) {
+                        console.log(`[Gallery] Found ${thumbnailConfig.subsections[albumId].length} cached thumbnails for subsection: ${albumId}`);
+                        photoList = [...thumbnailConfig.subsections[albumId]]; // Use cached thumbnails immediately
+                    }
+                    
+                    // THEN: Try to load from Imgur API asynchronously (don't wait)
                     if (imgurAlbumId) {
-                        const imgurPhotos = await loadImgurAlbum(imgurAlbumId);
-                        
-                        // Check if we have local thumbnails in config for this subsection
-                        if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
-                            // Merge with thumbnail config
-                            photoList = imgurPhotos.map((photo, index) => {
-                                const configPhoto = thumbnailConfig.subsections[albumId][index];
-                                if (configPhoto && configPhoto.full === photo.full) {
-                                    return {
-                                        thumbnail: configPhoto.thumbnail,
-                                        full: configPhoto.full
-                                    };
+                        console.log(`[Gallery] Loading Imgur album with ID: ${imgurAlbumId} (async, will update if successful)`);
+                        // Load asynchronously without blocking
+                        loadImgurAlbum(imgurAlbumId).then(imgurPhotos => {
+                            if (imgurPhotos && imgurPhotos.length > 0) {
+                                console.log(`[Gallery] Imgur API loaded ${imgurPhotos.length} photos for ${albumId}, updating full URLs`);
+                                // Update full URLs while keeping local thumbnails
+                                if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
+                                    // Merge: use local thumbnails but update full URLs from API
+                                    const updatedPhotos = imgurPhotos.map((photo, index) => {
+                                        const configPhoto = thumbnailConfig.subsections[albumId][index];
+                                        if (configPhoto) {
+                                            return {
+                                                thumbnail: configPhoto.thumbnail, // Keep local thumbnail
+                                                full: photo.full // Update full URL from API
+                                            };
+                                        }
+                                        return photo;
+                                    });
+                                    
+                                    // Reload the grid with updated photos
+                                    loadSubsectionPhotosToGrid(gridElement, subsection, albumId, updatedPhotos);
+                                } else {
+                                    // No cached thumbnails, use API photos
+                                    loadSubsectionPhotosToGrid(gridElement, subsection, albumId, imgurPhotos);
                                 }
-                                return photo;
-                            });
-                        } else {
-                            photoList = imgurPhotos;
-                        }
+                            } else {
+                                console.log(`[Gallery] Imgur API failed or returned no photos for ${albumId}, keeping cached thumbnails`);
+                            }
+                        }).catch(error => {
+                            console.warn(`[Gallery] Imgur API error for ${imgurAlbumId}, keeping cached thumbnails:`, error);
+                        });
                     }
                     break;
                 case 'cloudinary':
@@ -386,25 +431,46 @@
             // Fall back to category-level album if subsection-specific not found
             console.log(`[Gallery] Using category-level album config for ${albumId}`);
             const imgurAlbumId = CONFIG.IMGUR_ALBUMS[albumId];
+            
+            // FIRST: Load cached thumbnails from config if available
+            if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId] && thumbnailConfig.subsections[albumId].length > 0) {
+                console.log(`[Gallery] Found ${thumbnailConfig.subsections[albumId].length} cached thumbnails for subsection: ${albumId}`);
+                photoList = [...thumbnailConfig.subsections[albumId]]; // Use cached thumbnails immediately
+            }
+            
+            // THEN: Try to load from Imgur API asynchronously (don't wait)
             if (imgurAlbumId) {
-                const imgurPhotos = await loadImgurAlbum(imgurAlbumId);
-                
-                // Check if we have local thumbnails in config for this subsection
-                if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
-                    // Merge with thumbnail config
-                    photoList = imgurPhotos.map((photo, index) => {
-                        const configPhoto = thumbnailConfig.subsections[albumId][index];
-                        if (configPhoto && configPhoto.full === photo.full) {
-                            return {
-                                thumbnail: configPhoto.thumbnail,
-                                full: configPhoto.full
-                            };
+                console.log(`[Gallery] Loading Imgur album with ID: ${imgurAlbumId} (async, will update if successful)`);
+                // Load asynchronously without blocking
+                loadImgurAlbum(imgurAlbumId).then(imgurPhotos => {
+                    if (imgurPhotos && imgurPhotos.length > 0) {
+                        console.log(`[Gallery] Imgur API loaded ${imgurPhotos.length} photos for ${albumId}, updating full URLs`);
+                        // Update full URLs while keeping local thumbnails
+                        if (thumbnailConfig && thumbnailConfig.subsections && thumbnailConfig.subsections[albumId]) {
+                            // Merge: use local thumbnails but update full URLs from API
+                            const updatedPhotos = imgurPhotos.map((photo, index) => {
+                                const configPhoto = thumbnailConfig.subsections[albumId][index];
+                                if (configPhoto) {
+                                    return {
+                                        thumbnail: configPhoto.thumbnail, // Keep local thumbnail
+                                        full: photo.full // Update full URL from API
+                                    };
+                                }
+                                return photo;
+                            });
+                            
+                            // Reload the grid with updated photos
+                            loadSubsectionPhotosToGrid(gridElement, subsection, albumId, updatedPhotos);
+                        } else {
+                            // No cached thumbnails, use API photos
+                            loadSubsectionPhotosToGrid(gridElement, subsection, albumId, imgurPhotos);
                         }
-                        return photo;
-                    });
-                } else {
-                    photoList = imgurPhotos;
-                }
+                    } else {
+                        console.log(`[Gallery] Imgur API failed or returned no photos for ${albumId}, keeping cached thumbnails`);
+                    }
+                }).catch(error => {
+                    console.warn(`[Gallery] Imgur API error for ${imgurAlbumId}, keeping cached thumbnails:`, error);
+                });
             }
         } else {
             console.log(`[Gallery] No subsection-specific or category-level album config found for ${albumId}`);
@@ -420,6 +486,12 @@
         
         console.log(`[Gallery] loadSubsectionPhotos: ${photoList.length} photos for ${subsection}`);
         
+        // Load photos into grid
+        loadSubsectionPhotosToGrid(gridElement, subsection, albumId, photoList);
+    }
+    
+    // Helper function to load photos into subsection grid
+    function loadSubsectionPhotosToGrid(gridElement, subsection, albumId, photoList) {
         // Clear existing content (except "coming soon" messages)
         const comingSoon = gridElement.querySelector('p[data-i18n="gallery.comingSoon"]');
         if (!comingSoon) {
