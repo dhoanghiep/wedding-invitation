@@ -6,6 +6,7 @@
     const adminState = {
         activeSessions: [],
         leaderboard: [],
+        currentQuestion: null,
         refreshInterval: null
     };
 
@@ -13,11 +14,35 @@
     function initAdmin() {
         setupEventListeners();
         loadData();
-        
-        // Auto-refresh every 5 seconds
-        adminState.refreshInterval = setInterval(() => {
-            loadData();
-        }, 5000);
+        loadGameStatus();
+        loadActiveSessions();
+        loadLeaderboard();
+    }
+
+    // Helper function to handle fetch with CORS error handling
+    async function fetchWithCorsHandling(url, options) {
+        try {
+            const response = await fetch(url, options);
+            
+            // Try to read response
+            try {
+                if (!response.ok && response.status !== 0) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+                return { success: true, data: result, corsError: false };
+            } catch (readError) {
+                // CORS error - can't read response but request likely succeeded
+                return { success: true, data: null, corsError: true };
+            }
+        } catch (error) {
+            // Network/CORS error - request may have still succeeded on server
+            if (error.name === 'TypeError' && (error.message.includes('Failed to fetch') || error.message.includes('CORS'))) {
+                // CORS/network error - assume request succeeded on server
+                return { success: true, data: null, corsError: true };
+            }
+            throw error;
+        }
     }
 
     // Set up event listeners
@@ -26,22 +51,269 @@
         if (refreshBtn) {
             refreshBtn.addEventListener('click', () => {
                 loadData();
+                loadGameStatus();
+                loadActiveSessions();
+                loadLeaderboard();
             });
         }
 
-        const forceNextBtn = document.getElementById('force-next-btn');
-        if (forceNextBtn) {
-            forceNextBtn.addEventListener('click', () => {
-                forceAllSessionsNext();
+        const startGameBtn = document.getElementById('start-game-btn');
+        if (startGameBtn) {
+            startGameBtn.addEventListener('click', () => {
+                startGame();
             });
+        }
+
+        const restartGameBtn = document.getElementById('restart-game-btn');
+        if (restartGameBtn) {
+            restartGameBtn.addEventListener('click', () => {
+                restartGame();
+            });
+        }
+
+        const closeQuestionBtn = document.getElementById('close-question-btn');
+        if (closeQuestionBtn) {
+            closeQuestionBtn.addEventListener('click', () => {
+                closeCurrentQuestion();
+            });
+        }
+
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        if (nextQuestionBtn) {
+            nextQuestionBtn.addEventListener('click', () => {
+                nextQuestion();
+            });
+        }
+    }
+
+    // Start game (move all sessions to first question, set status to OPEN)
+    async function startGame() {
+        const startGameBtn = document.getElementById('start-game-btn');
+        const messageEl = document.getElementById('admin-game-message');
+        
+        if (startGameBtn) {
+            startGameBtn.disabled = true;
+            startGameBtn.innerHTML = '<span class="btn-icon">⏳</span> Starting...';
+        }
+
+        if (messageEl) {
+            messageEl.className = 'admin-message info';
+            messageEl.textContent = 'Starting game - moving all sessions to first question...';
+            messageEl.style.display = 'block';
+        }
+
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                throw new Error('Google Script URL not configured');
+            }
+
+            // Go to question 0 (first question)
+            const formData = new URLSearchParams();
+            formData.append('action', 'goToQuestion');
+            formData.append('questionIndex', '0');
+
+            // Use no-cors mode to avoid CORS errors
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            }).catch(() => {
+                // Silently ignore - request was sent
+            });
+            
+            // Wait a bit then refresh to show updated status
+            setTimeout(() => {
+                loadData();
+                loadGameStatus();
+                loadActiveSessions();
+                loadLeaderboard();
+            }, 1000);
+            
+            if (messageEl) {
+                messageEl.className = 'admin-message success';
+                messageEl.textContent = 'Game started! All sessions moved to question 1 (status: OPEN).';
+            }
+        } catch (error) {
+            console.error('Error starting game:', error);
+            if (messageEl) {
+                messageEl.className = 'admin-message error';
+                messageEl.textContent = `Error: ${error.message || 'Failed to start game'}`;
+            }
+        } finally {
+            if (startGameBtn) {
+                startGameBtn.disabled = false;
+                startGameBtn.innerHTML = '<span class="btn-icon">🚀</span> Start Game';
+            }
+        }
+    }
+
+    // Restart game (move all sessions to first question, set status to OPEN)
+    async function restartGame() {
+        const restartGameBtn = document.getElementById('restart-game-btn');
+        const messageEl = document.getElementById('admin-game-message');
+        
+        if (restartGameBtn) {
+            restartGameBtn.disabled = true;
+            restartGameBtn.innerHTML = '<span class="btn-icon">⏳</span> Restarting...';
+        }
+
+        if (messageEl) {
+            messageEl.className = 'admin-message info';
+            messageEl.textContent = 'Restarting game - moving all sessions to first question...';
+            messageEl.style.display = 'block';
+        }
+
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                throw new Error('Google Script URL not configured');
+            }
+
+            // Go to question 0 (first question) - mark as restart to reset completed sessions
+            const formData = new URLSearchParams();
+            formData.append('action', 'goToQuestion');
+            formData.append('questionIndex', '0');
+            formData.append('restartGame', 'true');
+
+            // Use no-cors mode to avoid CORS errors
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            }).catch(() => {
+                // Silently ignore - request was sent
+            });
+            
+            // Wait a bit then refresh to show updated status
+            setTimeout(() => {
+                loadData();
+                loadGameStatus();
+                loadActiveSessions();
+                loadLeaderboard();
+            }, 1000);
+            
+            if (messageEl) {
+                messageEl.className = 'admin-message success';
+                messageEl.textContent = 'Game restarted! All sessions moved to question 1 (status: OPEN).';
+            }
+        } catch (error) {
+            console.error('Error restarting game:', error);
+            if (messageEl) {
+                messageEl.className = 'admin-message error';
+                messageEl.textContent = `Error: ${error.message || 'Failed to restart game'}`;
+            }
+        } finally {
+            if (restartGameBtn) {
+                restartGameBtn.disabled = false;
+                restartGameBtn.innerHTML = '<span class="btn-icon">🔄</span> Restart Game';
+            }
+        }
+    }
+
+    // Next question (advance all sessions to next question)
+    async function nextQuestion() {
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const messageEl = document.getElementById('admin-message');
+        
+        if (nextQuestionBtn) {
+            nextQuestionBtn.disabled = true;
+            nextQuestionBtn.innerHTML = '<span class="btn-icon">⏳</span> Processing...';
+        }
+
+        if (messageEl) {
+            messageEl.className = 'admin-message info';
+            messageEl.textContent = 'Advancing to next question...';
+            messageEl.style.display = 'block';
+        }
+
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                throw new Error('Google Script URL not configured');
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('action', 'allowNextQuestion');
+
+            // Use no-cors mode to avoid CORS errors
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            }).catch(() => {
+                // Silently ignore - request was sent
+            });
+            
+            // Refresh data immediately and then again after delay to ensure updates are shown
+            loadData();
+            loadGameStatus();
+            loadActiveSessions();
+            loadLeaderboard();
+            
+            // Refresh again after delay to catch any backend updates
+            setTimeout(() => {
+                loadData();
+                loadGameStatus();
+                loadActiveSessions();
+                loadLeaderboard();
+            }, 1500);
+            
+            // One more refresh after longer delay to ensure everything is updated
+            setTimeout(() => {
+                loadData();
+                loadGameStatus();
+                loadActiveSessions();
+                loadLeaderboard();
+            }, 3000);
+            
+            if (messageEl) {
+                messageEl.className = 'admin-message success';
+                messageEl.textContent = 'Request sent. All sessions should advance to next question.';
+            }
+        } catch (error) {
+            console.error('Error advancing to next question:', error);
+            if (messageEl) {
+                messageEl.className = 'admin-message error';
+                messageEl.textContent = `Error: ${error.message || 'Failed to advance question'}`;
+            }
+        } finally {
+            if (nextQuestionBtn) {
+                nextQuestionBtn.disabled = false;
+                nextQuestionBtn.innerHTML = '<span class="btn-icon">⏭️</span> Next Question';
+            }
         }
     }
 
     // Load all data
     async function loadData() {
         await Promise.all([
-            loadActiveSessions(),
-            loadLeaderboard()
+            loadCurrentQuestion(),
+            loadGameStatus()
         ]);
     }
 
@@ -68,23 +340,34 @@
             const formData = new URLSearchParams();
             formData.append('action', 'getActiveSessions');
 
-            const response = await fetch(scriptUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData.toString()
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            // Try to fetch, but handle CORS errors gracefully
+            let fetchResult;
+            try {
+                fetchResult = await fetchWithCorsHandling(scriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
+                });
+            } catch (error) {
+                // If fetch completely fails due to CORS, return CORS error state
+                fetchResult = { success: true, data: null, corsError: true };
             }
-
-            const result = await response.json();
             
             if (loadingEl) loadingEl.style.display = 'none';
             
-            if (result.success && result.sessions) {
+            if (fetchResult.corsError) {
+                // CORS error - can't read response
+                if (listEl) {
+                    listEl.innerHTML = '<div class="admin-sessions-empty">Unable to load (CORS error)</div>';
+                }
+                if (countEl) countEl.textContent = '-';
+                return;
+            }
+            
+            const result = fetchResult.data;
+            if (result && result.success && result.sessions) {
                 adminState.activeSessions = result.sessions;
                 displayActiveSessions(result.sessions);
                 if (countEl) countEl.textContent = result.sessions.length.toString();
@@ -105,7 +388,7 @@
         }
     }
 
-    // Display active sessions
+    // Display active sessions (simplified - just names)
     function displayActiveSessions(sessions) {
         const listEl = document.getElementById('active-sessions-list');
         if (!listEl) return;
@@ -117,40 +400,9 @@
 
         let html = '';
         sessions.forEach((session) => {
-            const progress = session.totalQuestions > 0 
-                ? Math.round((session.currentQuestionIndex / session.totalQuestions) * 100)
-                : 0;
-            
-            const startTime = new Date(session.startTime);
-            const timeElapsed = Math.floor((Date.now() - startTime.getTime()) / 1000 / 60); // minutes
-            
             html += `
                 <div class="admin-session-item">
-                    <div class="admin-session-info">
-                        <div class="admin-session-name">${escapeHtml(session.name || 'Anonymous')}</div>
-                        <div class="admin-session-details">
-                            <div class="admin-session-detail">
-                                <span class="admin-session-detail-label">Email:</span>
-                                <span>${escapeHtml(session.email || 'N/A')}</span>
-                            </div>
-                            <div class="admin-session-detail">
-                                <span class="admin-session-detail-label">Session:</span>
-                                <span>${escapeHtml(session.sessionId || 'N/A')}</span>
-                            </div>
-                            <div class="admin-session-detail">
-                                <span class="admin-session-detail-label">Time:</span>
-                                <span>${timeElapsed} min</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="admin-session-progress">
-                        <div class="admin-session-progress-bar">
-                            <div class="admin-session-progress-fill" style="width: ${progress}%"></div>
-                        </div>
-                        <div class="admin-session-progress-text">
-                            Question ${session.currentQuestionIndex + 1} / ${session.totalQuestions}
-                        </div>
-                    </div>
+                    <div class="admin-session-name">${escapeHtml(session.name || 'Anonymous')}</div>
                 </div>
             `;
         });
@@ -181,23 +433,27 @@
             const formData = new URLSearchParams();
             formData.append('action', 'getLeaderboard');
 
-            const response = await fetch(scriptUrl, {
+            const fetchResult = await fetchWithCorsHandling(scriptUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: formData.toString()
             });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const result = await response.json();
             
             if (loadingEl) loadingEl.style.display = 'none';
             
-            if (result.success && result.leaderboard) {
+            if (fetchResult.corsError) {
+                // CORS error - can't read response
+                if (leaderboardEl) {
+                    leaderboardEl.innerHTML = '<div class="admin-leaderboard-empty">Unable to load (CORS error)</div>';
+                }
+                if (countEl) countEl.textContent = '-';
+                return;
+            }
+            
+            const result = fetchResult.data;
+            if (result && result.success && result.leaderboard) {
                 adminState.leaderboard = result.leaderboard;
                 displayLeaderboard(result.leaderboard);
                 if (countEl) countEl.textContent = result.leaderboard.length.toString();
@@ -256,19 +512,181 @@
         leaderboardEl.innerHTML = html;
     }
 
-    // Force all sessions to next question
-    async function forceAllSessionsNext() {
-        const forceNextBtn = document.getElementById('force-next-btn');
+    // Load game status
+    async function loadGameStatus() {
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                throw new Error('Google Script URL not configured');
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('action', 'getCurrentQuestion');
+
+            const fetchResult = await fetchWithCorsHandling(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            });
+            
+            if (fetchResult.corsError) {
+                updateGameStatusDisplay(null);
+                return;
+            }
+            
+            const result = fetchResult.data;
+            if (result && result.success) {
+                // Ensure we have a valid gameStartStatus value
+                const gameStartStatus = result.gameStartStatus !== undefined && result.gameStartStatus !== null 
+                    ? result.gameStartStatus 
+                    : 0; // Default to 0 if not provided
+                updateGameStatusDisplay(gameStartStatus);
+            } else {
+                // Don't update to null - keep current state if fetch fails
+                // updateGameStatusDisplay(null);
+            }
+        } catch (error) {
+            console.error('Error loading game status:', error);
+            updateGameStatusDisplay(null);
+        }
+    }
+
+    // Update game status display
+    function updateGameStatusDisplay(gameStartStatus) {
+        const statusEl = document.getElementById('admin-game-start-status');
+        if (!statusEl) return;
+        
+        // Handle null, undefined, or empty string - default to 0 (not started)
+        if (gameStartStatus === null || gameStartStatus === undefined || gameStartStatus === '') {
+            statusEl.textContent = 'Not Started (0)';
+            statusEl.className = 'admin-status-value not-started';
+            return;
+        }
+        
+        // Parse the status - handle string "0", "1" or number 0, 1
+        const status = parseInt(gameStartStatus);
+        // Check for NaN after parseInt
+        if (isNaN(status)) {
+            statusEl.textContent = 'Not Started (0)';
+            statusEl.className = 'admin-status-value not-started';
+            return;
+        }
+        
+        if (status === 1) {
+            statusEl.textContent = 'Started (1)';
+            statusEl.className = 'admin-status-value started';
+        } else {
+            statusEl.textContent = 'Not Started (0)';
+            statusEl.className = 'admin-status-value not-started';
+        }
+    }
+
+    // Load current question
+    async function loadCurrentQuestion() {
+        const loadingEl = document.getElementById('question-loading');
+        const questionTextEl = document.getElementById('admin-question-text');
+        const questionIndexEl = document.getElementById('admin-question-index');
+        const questionStatusEl = document.getElementById('admin-question-status');
+        
+        if (loadingEl) loadingEl.style.display = 'block';
+
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                throw new Error('Google Script URL not configured');
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('action', 'getCurrentQuestion');
+
+            // Try to fetch, but handle CORS errors gracefully
+            let fetchResult;
+            try {
+                fetchResult = await fetchWithCorsHandling(scriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
+                });
+            } catch (error) {
+                // If fetch completely fails due to CORS, return CORS error state
+                fetchResult = { success: true, data: null, corsError: true };
+            }
+            
+            if (loadingEl) loadingEl.style.display = 'none';
+            
+            if (fetchResult.corsError) {
+                // CORS error - can't read response, show default state
+                if (questionTextEl) questionTextEl.textContent = 'Unable to verify (CORS)';
+                if (questionIndexEl) questionIndexEl.textContent = 'Question: -';
+                if (questionStatusEl) {
+                    questionStatusEl.textContent = 'Status: Unknown';
+                    questionStatusEl.className = 'admin-question-status';
+                }
+                return;
+            }
+            
+            const result = fetchResult.data;
+            if (result && result.success) {
+                adminState.currentQuestion = result;
+                
+                if (questionTextEl) {
+                    questionTextEl.textContent = result.currentQuestionText || 'No question active';
+                }
+                
+                if (questionIndexEl) {
+                    questionIndexEl.textContent = `Question: ${result.currentQuestionIndex + 1}`;
+                }
+                
+                if (questionStatusEl) {
+                    const status = result.questionStatus || 'CLOSED';
+                    questionStatusEl.textContent = `Status: ${status}`;
+                    questionStatusEl.className = `admin-question-status ${status.toLowerCase()}`;
+                }
+                
+                // Also update game status when loading question
+                // Ensure we have a valid gameStartStatus value
+                const gameStartStatus = result.gameStartStatus !== undefined && result.gameStartStatus !== null 
+                    ? result.gameStartStatus 
+                    : 0; // Default to 0 if not provided
+                updateGameStatusDisplay(gameStartStatus);
+            } else {
+                if (questionTextEl) questionTextEl.textContent = 'Error loading question';
+            }
+        } catch (error) {
+            console.error('Error loading current question:', error);
+            if (loadingEl) loadingEl.style.display = 'none';
+            if (questionTextEl) questionTextEl.textContent = 'Error loading question';
+        }
+    }
+
+
+    // Close current question
+    async function closeCurrentQuestion() {
+        const closeBtn = document.getElementById('close-question-btn');
         const messageEl = document.getElementById('admin-message');
         
-        if (forceNextBtn) {
-            forceNextBtn.disabled = true;
-            forceNextBtn.textContent = 'Processing...';
+        if (closeBtn) {
+            closeBtn.disabled = true;
+            closeBtn.innerHTML = '<span class="btn-icon">⏳</span> Processing...';
         }
 
         if (messageEl) {
             messageEl.className = 'admin-message info';
-            messageEl.textContent = 'Forcing all active sessions to next question...';
+            messageEl.textContent = 'Closing current question...';
             messageEl.style.display = 'block';
         }
 
@@ -284,48 +702,46 @@
             }
 
             const formData = new URLSearchParams();
-            formData.append('action', 'forceNextQuestion');
+            formData.append('action', 'closeCurrentQuestion');
 
-            const response = await fetch(scriptUrl, {
+            // Use no-cors mode to avoid CORS errors (we don't need to read response for write operations)
+            fetch(scriptUrl, {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: formData.toString()
+            }).catch(() => {
+                // Silently ignore - request was sent
             });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const result = await response.json();
             
-            if (result.success) {
-                if (messageEl) {
-                    messageEl.className = 'admin-message success';
-                    messageEl.textContent = `Successfully advanced ${result.advancedCount || 0} session(s) to next question.`;
-                }
-                
-                // Refresh data after a short delay
-                setTimeout(() => {
-                    loadData();
-                }, 1000);
-            } else {
-                throw new Error(result.error || 'Failed to force next question');
+            // Wait a bit then refresh to show updated status
+            setTimeout(() => {
+                loadData();
+                loadGameStatus();
+                loadActiveSessions();
+                loadLeaderboard();
+            }, 1000);
+            
+            if (messageEl) {
+                messageEl.className = 'admin-message success';
+                messageEl.textContent = 'Request sent. Current question should be closed. Answers submitted after this time will receive 0 points.';
             }
         } catch (error) {
-            console.error('Error forcing next question:', error);
+            console.error('Error closing question:', error);
             if (messageEl) {
                 messageEl.className = 'admin-message error';
-                messageEl.textContent = `Error: ${error.message || 'Failed to force next question'}`;
+                messageEl.textContent = `Error: ${error.message || 'Failed to close question'}`;
             }
         } finally {
-            if (forceNextBtn) {
-                forceNextBtn.disabled = false;
-                forceNextBtn.innerHTML = '<span class="btn-icon">⏭️</span> Force All Sessions to Next Question';
+            if (closeBtn) {
+                closeBtn.disabled = false;
+                closeBtn.innerHTML = '<span class="btn-icon">🔒</span> Lock Question';
             }
         }
     }
+
 
     // Helper function to escape HTML
     function escapeHtml(text) {

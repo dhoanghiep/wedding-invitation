@@ -49,7 +49,9 @@ function doPost(e) {
     // Handle quiz actions
     if (action === 'startSession' || action === 'submitAnswer' || action === 'endSession' || 
         action === 'updateUserName' || action === 'getUserHistory' || action === 'getLeaderboard' ||
-        action === 'getActiveSessions' || action === 'forceNextQuestion' || action === 'checkForcedAdvance') {
+        action === 'getActiveSessions' || action === 'forceNextQuestion' || action === 'checkForcedAdvance' ||
+        action === 'getCurrentQuestion' || action === 'allowNextQuestion' || action === 'goToQuestion' ||
+        action === 'closeCurrentQuestion' || action === 'checkQuestionState') {
       return handleQuizAction(e);
     }
     
@@ -526,6 +528,16 @@ function handleQuizAction(e) {
         return checkForcedAdvance(e);
       case 'updateQuestionIndex':
         return updateQuestionIndex(e);
+      case 'getCurrentQuestion':
+        return getCurrentQuestion(e);
+      case 'allowNextQuestion':
+        return allowNextQuestion(e);
+      case 'goToQuestion':
+        return goToQuestion(e);
+      case 'closeCurrentQuestion':
+        return closeCurrentQuestion(e);
+      case 'checkQuestionState':
+        return checkQuestionState(e);
       default:
         return returnJson({
           success: false,
@@ -606,6 +618,7 @@ function submitQuizAnswer(e) {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     var answersSheet = getOrCreateSheet(spreadsheet, 'Detailed Answers');
     var scoresSheet = getOrCreateSheet(spreadsheet, 'Player Scores');
+    var stateSheet = getOrCreateSheet(spreadsheet, 'Quiz State');
     
     var email = e.parameter.email || '';
     var name = e.parameter.name || '';
@@ -617,6 +630,21 @@ function submitQuizAnswer(e) {
     var isCorrect = e.parameter.isCorrect === 'true';
     var timeTaken = e.parameter.timeTaken || '0';
     var points = e.parameter.points || '0';
+    var questionIndex = parseInt(e.parameter.questionIndex || 0);
+    
+    // Check if question is closed - if so, set points to 0
+    var stateData = stateSheet.getDataRange().getValues();
+    var questionClosed = false;
+    if (stateData.length >= 2) {
+      var stateRow = stateData[1];
+      var currentQuestionIndex = parseInt(stateRow[0] || 0);
+      var questionStatus = stateRow[2] || 'CLOSED';
+      // Question is closed if status is CLOSED or if it's not the current question
+      if (questionStatus === 'CLOSED' || currentQuestionIndex !== questionIndex) {
+        questionClosed = true;
+        points = '0'; // Force points to 0 for closed questions
+      }
+    }
     
     // Validate inputs
     if (!email || !sessionId || !questionId) {
@@ -642,7 +670,7 @@ function submitQuizAnswer(e) {
     
     // Append to answers sheet
     // Column order: Timestamp | Session ID | Email | Name | Question ID | Question Text | 
-    //               Selected Answer | Correct Answer | Is Correct | Time Taken (ms) | Points
+    //               Selected Answer | Correct Answer | Is Correct | Time Taken (ms) | Points | Question Closed
     answersSheet.appendRow([
       new Date(),
       sessionId,
@@ -654,7 +682,8 @@ function submitQuizAnswer(e) {
       correctAnswer,
       isCorrect,
       timeTaken,
-      points
+      points,
+      questionClosed
     ]);
     
     // Update or create user score entry
@@ -868,27 +897,81 @@ function getLeaderboard(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     var scoresSheet = getOrCreateSheet(spreadsheet, 'Player Scores');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
     
-    // Get all player scores
+    var leaderboard = [];
+    var leaderboardMap = {}; // Use map to combine scores from both sheets
+    
+    // Get completed scores from Player Scores sheet
     // Column order: Email | Name | Session ID | Total Score | Total Questions | Correct Answers | Completion Time
     var scoresData = scoresSheet.getDataRange().getValues();
-    var leaderboard = [];
     
     // Skip header row (row 1)
     for (var i = 1; i < scoresData.length; i++) {
       var row = scoresData[i];
       
-      // Only include entries with completion time (completed quizzes)
+      // Include entries with completion time (completed quizzes)
       if (row[6]) { // Completion Time column (index 6)
-        leaderboard.push({
-          email: row[0] || '', // Email
-          name: row[1] || 'Anonymous', // Name
-          sessionId: row[2] || '', // Session ID
-          totalScore: parseInt(row[3] || 0), // Total Score
-          totalQuestions: parseInt(row[4] || 0), // Total Questions
-          correctAnswers: parseInt(row[5] || 0) // Correct Answers
-        });
+        var email = row[0] || '';
+        var key = email; // Use email as key
+        
+        leaderboardMap[key] = {
+          email: email,
+          name: row[1] || 'Anonymous',
+          sessionId: row[2] || '',
+          totalScore: parseInt(row[3] || 0),
+          totalQuestions: parseInt(row[4] || 0),
+          correctAnswers: parseInt(row[5] || 0),
+          isCompleted: true
+        };
       }
+    }
+    
+    // Get in-progress sessions from Sessions sheet
+    // Column order: Session ID | Start Time | End Time | Status | Total Questions | Email | Name | Current Question Index | Last Forced Advance
+    var sessionsData = sessionsSheet.getDataRange().getValues();
+    
+    // Skip header row (row 1)
+    for (var j = 1; j < sessionsData.length; j++) {
+      var sessionRow = sessionsData[j];
+      
+      // Only include IN_PROGRESS sessions
+      if (sessionRow[3] === 'IN_PROGRESS') {
+        var sessionEmail = sessionRow[5] || '';
+        var key = sessionEmail;
+        
+        // Get current score from Player Scores for this session (if exists)
+        var currentScore = 0;
+        var currentQuestions = 0;
+        var currentCorrect = 0;
+        
+        // Look for existing score entry for this session
+        for (var k = 1; k < scoresData.length; k++) {
+          if (scoresData[k][0] === sessionEmail && scoresData[k][2] === sessionRow[0]) {
+            currentScore = parseInt(scoresData[k][3] || 0);
+            currentQuestions = parseInt(scoresData[k][4] || 0);
+            currentCorrect = parseInt(scoresData[k][5] || 0);
+            break;
+          }
+        }
+        
+        // Always update/overwrite with in-progress session data
+        // This ensures in-progress sessions are always shown with their latest scores
+        leaderboardMap[key] = {
+          email: sessionEmail,
+          name: sessionRow[6] || 'Anonymous',
+          sessionId: sessionRow[0] || '',
+          totalScore: currentScore,
+          totalQuestions: parseInt(sessionRow[4] || 0),
+          correctAnswers: currentCorrect,
+          isCompleted: false
+        };
+      }
+    }
+    
+    // Convert map to array
+    for (var key in leaderboardMap) {
+      leaderboard.push(leaderboardMap[key]);
     }
     
     // Sort by total score (descending), then by correct answers
@@ -930,10 +1013,15 @@ function getOrCreateSheet(spreadsheet, sheetName) {
     if (sheetName === 'Sessions') {
       // Sessions table: Session tracking
       sheet.appendRow(['Session ID', 'Start Time', 'End Time', 'Status', 'Total Questions', 'Email', 'Name', 'Current Question Index', 'Last Forced Advance']);
+    } else if (sheetName === 'Quiz State') {
+      // Quiz State table: Current question tracking
+      sheet.appendRow(['Current Question Index', 'Current Question Text', 'Question Status', 'Last Updated', 'Game Start Status']);
+      // Initialize with first question, game start status = 0 (not started)
+      sheet.appendRow([0, '', 'CLOSED', new Date(), 0]);
     } else if (sheetName === 'Detailed Answers') {
       // Detailed Answers table: Individual answer submissions
       sheet.appendRow(['Timestamp', 'Session ID', 'Email', 'Name', 'Question ID', 'Question Text', 
-                       'Selected Answer', 'Correct Answer', 'Is Correct', 'Time Taken (ms)', 'Points']);
+                       'Selected Answer', 'Correct Answer', 'Is Correct', 'Time Taken (ms)', 'Points', 'Question Closed']);
     } else if (sheetName === 'Player Scores') {
       // Player Scores table: Final scores per session
       sheet.appendRow(['Email', 'Name', 'Session ID', 'Total Score', 'Total Questions', 
@@ -1184,17 +1272,333 @@ function checkForcedAdvance(e) {
   }
 }
 
+// Get current question state
+function getCurrentQuestion(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var stateSheet = getOrCreateSheet(spreadsheet, 'Quiz State');
+    
+    // Get current state (row 2, since row 1 is header)
+    var stateData = stateSheet.getDataRange().getValues();
+    if (stateData.length < 2) {
+      return returnJson({
+        success: true,
+        currentQuestionIndex: 0,
+        currentQuestionText: '',
+        questionStatus: 'CLOSED',
+        gameStartStatus: 0
+      });
+    }
+    
+    var row = stateData[1]; // Row 2 (index 1)
+    // Handle backward compatibility - if column doesn't exist, default to 0 (game not started)
+    // CRITICAL: Check if value exists (not undefined/null), not if it's truthy (0 is falsy!)
+    var gameStartStatus = 0; // Default to 0 (not started)
+    if (row.length > 4 && row[4] !== null && row[4] !== undefined && row[4] !== '') {
+      gameStartStatus = parseInt(row[4]);
+    }
+    return returnJson({
+      success: true,
+      currentQuestionIndex: parseInt(row[0] || 0),
+      currentQuestionText: row[1] || '',
+      questionStatus: row[2] || 'CLOSED',
+      lastUpdated: row[3] ? row[3].getTime() : null,
+      gameStartStatus: gameStartStatus
+    });
+  } catch (error) {
+    Logger.log('Error getting current question: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+// Allow next question (advance all sessions and open new question)
+function allowNextQuestion(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
+    var stateSheet = getOrCreateSheet(spreadsheet, 'Quiz State');
+    
+    // Get current question index from state
+    var stateData = stateSheet.getDataRange().getValues();
+    var currentIndex = 0;
+    if (stateData.length >= 2) {
+      currentIndex = parseInt(stateData[1][0] || 0);
+    }
+    
+    var newIndex = currentIndex + 1;
+    // Question text is not needed - it's already in the TSV file loaded client-side
+    
+    // IMPORTANT: Update quiz state FIRST (atomically) before updating sessions
+    // This ensures status is OPEN when users check, even if session updates are still processing
+    var now = new Date();
+    // Preserve game start status (don't change it when advancing questions)
+    var currentGameStartStatus = 0; // Default to 0 (not started)
+    if (stateData.length >= 2) {
+      var row = stateData[1];
+      // CRITICAL: Check if value exists (not undefined/null), not if it's truthy (0 is falsy!)
+      if (row.length > 4 && row[4] !== null && row[4] !== undefined && row[4] !== '') {
+        currentGameStartStatus = parseInt(row[4]);
+      }
+    }
+    
+    // Ensure we have 5 columns for Game Start Status
+    var numCols = stateSheet.getLastColumn();
+    if (numCols < 5) {
+      stateSheet.insertColumnAfter(4);
+      stateSheet.getRange(1, 5).setValue('Game Start Status');
+    }
+    
+    if (stateData.length < 2) {
+      stateSheet.appendRow([newIndex, '', 'OPEN', now, currentGameStartStatus]);
+    } else {
+      // Update all state fields in a single operation for atomicity, preserving game start status
+      stateSheet.getRange(2, 1, 1, 5).setValues([[newIndex, '', 'OPEN', now, currentGameStartStatus]]);
+    }
+    
+    // Now update all active sessions
+    var sessionsData = sessionsSheet.getDataRange().getValues();
+    var advancedCount = 0;
+    
+    for (var i = 1; i < sessionsData.length; i++) {
+      var row = sessionsData[i];
+      if (row[3] === 'IN_PROGRESS') {
+        var totalQuestions = parseInt(row[4] || 0);
+        if (newIndex < totalQuestions) {
+          sessionsSheet.getRange(i + 1, 8).setValue(newIndex);
+          advancedCount++;
+        }
+      }
+    }
+    
+    return returnJson({
+      success: true,
+      advancedCount: advancedCount,
+      newQuestionIndex: newIndex
+    });
+  } catch (error) {
+    Logger.log('Error allowing next question: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+// Go to specific question (jump to any question number)
+function goToQuestion(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
+    var stateSheet = getOrCreateSheet(spreadsheet, 'Quiz State');
+    
+    var targetIndex = parseInt(e.parameter.questionIndex || 0);
+    var restartGame = e.parameter.restartGame === 'true'; // Check if this is a restart
+    
+    // Update all sessions (both IN_PROGRESS and COMPLETED if restarting)
+    var sessionsData = sessionsSheet.getDataRange().getValues();
+    var updatedCount = 0;
+    
+    for (var i = 1; i < sessionsData.length; i++) {
+      var row = sessionsData[i];
+      var sessionStatus = row[3]; // Status column
+      
+      // Update IN_PROGRESS sessions always, or COMPLETED sessions if restarting
+      var shouldUpdate = false;
+      if (sessionStatus === 'IN_PROGRESS') {
+        shouldUpdate = true;
+      } else if (restartGame && sessionStatus === 'COMPLETED') {
+        shouldUpdate = true;
+      }
+      
+      if (shouldUpdate) {
+        var totalQuestions = parseInt(row[4] || 0);
+        // When restarting, always update to question 0. Otherwise, check if target is within valid range.
+        var shouldUpdateIndex = false;
+        if (restartGame) {
+          // Force update when restarting (always go to question 0)
+          shouldUpdateIndex = (targetIndex >= 0);
+        } else {
+          // Normal update: check if target index is within valid range
+          shouldUpdateIndex = (targetIndex >= 0 && targetIndex < totalQuestions);
+        }
+        
+        if (shouldUpdateIndex) {
+          // Update question index (column 8, index 7)
+          sessionsSheet.getRange(i + 1, 8).setValue(targetIndex);
+          
+          // If restarting and session was completed, reset it to IN_PROGRESS
+          if (restartGame && sessionStatus === 'COMPLETED') {
+            sessionsSheet.getRange(i + 1, 3).setValue(''); // Clear End Time
+            sessionsSheet.getRange(i + 1, 4).setValue('IN_PROGRESS'); // Reset Status
+          }
+          
+          updatedCount++;
+        }
+      }
+    }
+    
+    // Update quiz state - open the selected question (atomically)
+    var stateData = stateSheet.getDataRange().getValues();
+    var now = new Date();
+    var gameStartStatus = 1; // When going to question (start game), set status to 1
+    if (restartGame) {
+      gameStartStatus = 0; // When restarting, set status to 0
+    }
+    
+    // Check if Game Start Status column exists, if not, add it
+    var headerRow = stateSheet.getRange(1, 1, 1, stateSheet.getLastColumn()).getValues()[0];
+    var hasGameStartStatusColumn = headerRow.length >= 5 && headerRow[4] === 'Game Start Status';
+    
+    if (!hasGameStartStatusColumn && stateData.length >= 2) {
+      // Add the column header
+      stateSheet.getRange(1, 5).setValue('Game Start Status');
+    }
+    
+    if (stateData.length < 2) {
+      stateSheet.appendRow([targetIndex, '', 'OPEN', now, gameStartStatus]);
+    } else {
+      // Update all state fields in a single operation for atomicity
+      // Ensure we have 5 columns
+      var numCols = Math.max(5, stateSheet.getLastColumn());
+      if (numCols < 5) {
+        stateSheet.insertColumnAfter(4);
+        stateSheet.getRange(1, 5).setValue('Game Start Status');
+      }
+      stateSheet.getRange(2, 1, 1, 5).setValues([[targetIndex, '', 'OPEN', now, gameStartStatus]]);
+    }
+    
+    return returnJson({
+      success: true,
+      updatedCount: updatedCount,
+      questionIndex: targetIndex
+    });
+  } catch (error) {
+    Logger.log('Error going to question: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+// Close current question
+function closeCurrentQuestion(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var stateSheet = getOrCreateSheet(spreadsheet, 'Quiz State');
+    
+    var stateData = stateSheet.getDataRange().getValues();
+    if (stateData.length < 2) {
+      return returnJson({
+        success: false,
+        error: 'No question state found'
+      });
+    }
+    
+    // Update status to CLOSED (preserve game start status)
+    var row = stateData[1];
+    var currentGameStartStatus = 0; // Default to 0 (not started)
+    // CRITICAL: Check if value exists (not undefined/null), not if it's truthy (0 is falsy!)
+    if (row.length > 4 && row[4] !== null && row[4] !== undefined && row[4] !== '') {
+      currentGameStartStatus = parseInt(row[4]);
+    }
+    
+    // Ensure we have 5 columns for Game Start Status
+    var numCols = stateSheet.getLastColumn();
+    if (numCols < 5) {
+      stateSheet.insertColumnAfter(4);
+      stateSheet.getRange(1, 5).setValue('Game Start Status');
+    }
+    
+    stateSheet.getRange(2, 3).setValue('CLOSED'); // Status
+    stateSheet.getRange(2, 4).setValue(new Date()); // Last Updated
+    stateSheet.getRange(2, 5).setValue(currentGameStartStatus); // Preserve Game Start Status
+    
+    return returnJson({
+      success: true,
+      message: 'Current question closed'
+    });
+  } catch (error) {
+    Logger.log('Error closing current question: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+// Check question state (called by client)
+function checkQuestionState(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var stateSheet = getOrCreateSheet(spreadsheet, 'Quiz State');
+    
+    var questionIndex = parseInt(e.parameter.questionIndex || 0);
+    
+    // Force fresh read - clear any potential cache by reading specific range
+    // Read row 2 (index 1) directly to ensure we get the latest value
+    var lastRow = stateSheet.getLastRow();
+    if (lastRow < 2) {
+      return returnJson({
+        success: true,
+        isOpen: false,
+        questionStatus: 'CLOSED',
+        currentQuestionIndex: 0,
+        gameStartStatus: 0
+      });
+    }
+    
+    // Read row 2 directly (more reliable than getDataRange which might cache)
+    var row2 = stateSheet.getRange(2, 1, 1, stateSheet.getLastColumn()).getValues()[0];
+    
+    var currentQuestionIndex = parseInt(row2[0] || 0);
+    var questionStatus = row2[2] || 'CLOSED';
+    
+    // Handle backward compatibility - if column doesn't exist, default to 0 (game not started)
+    // CRITICAL: Check if value exists (not undefined/null), not if it's truthy (0 is falsy!)
+    var gameStartStatus = 0; // Default to 0 (not started)
+    if (row2.length > 4 && row2[4] !== null && row2[4] !== undefined && row2[4] !== '') {
+      var rawValue = row2[4];
+      gameStartStatus = parseInt(rawValue);
+      // Additional validation - if parseInt returns NaN, default to 0
+      if (isNaN(gameStartStatus)) {
+        gameStartStatus = 0;
+      }
+    }
+    
+    var isOpen = (currentQuestionIndex === questionIndex && questionStatus === 'OPEN');
+    
+    return returnJson({
+      success: true,
+      isOpen: isOpen,
+      questionStatus: questionStatus,
+      currentQuestionIndex: currentQuestionIndex,
+      gameStartStatus: gameStartStatus
+    });
+  } catch (error) {
+    Logger.log('Error checking question state: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
 // Setup function to create all quiz sheets with headers
 function setupQuizSheets() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   
-  // Create all required sheets (3 tables)
+  // Create all required sheets (4 tables)
   getOrCreateSheet(spreadsheet, 'Sessions');
   getOrCreateSheet(spreadsheet, 'Player Scores');
   getOrCreateSheet(spreadsheet, 'Detailed Answers');
+  getOrCreateSheet(spreadsheet, 'Quiz State');
   
   Logger.log('Quiz sheets set up successfully!');
-  Logger.log('Created sheets: Sessions, Player Scores, Detailed Answers');
+  Logger.log('Created sheets: Sessions, Player Scores, Detailed Answers, Quiz State');
 }
 
 
