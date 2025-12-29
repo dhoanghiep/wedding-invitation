@@ -12,7 +12,8 @@
         score: 0,
         answers: [],
         startTime: null,
-        questionStartTime: null
+        questionStartTime: null,
+        forcedAdvanceCheckInterval: null
     };
 
     // Initialize quiz when DOM is ready
@@ -61,11 +62,18 @@
             restartBtn.addEventListener('click', handleRestartQuiz);
         }
 
-        // Review answers button
-        const reviewBtn = document.getElementById('quiz-review-btn');
-        if (reviewBtn) {
-            reviewBtn.addEventListener('click', handleReviewAnswers);
+        // Next question button
+        const nextBtn = document.getElementById('quiz-next-btn');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', handleNextQuestion);
         }
+
+        // Begin quiz button (from rules page)
+        const beginBtn = document.getElementById('quiz-begin-btn');
+        if (beginBtn) {
+            beginBtn.addEventListener('click', handleBeginQuiz);
+        }
+
     }
 
     // Load questions from TSV file
@@ -193,9 +201,8 @@
             quizState.answers = [];
             quizState.currentQuestionIndex = 0;
 
-            // Show quiz player
-            showSection('quiz-player');
-            displayQuestion();
+            // Show rules section instead of going directly to quiz
+            showSection('quiz-rules');
         } catch (error) {
             console.error('Error starting quiz session:', error);
             showMessage('quiz-registration-message', 
@@ -320,69 +327,16 @@
             });
         }
 
-        // Start timer
-        startTimer();
+        // Hide Next button for new question
+        const nextContainer = document.getElementById('quiz-next-container');
+        if (nextContainer) {
+            nextContainer.style.display = 'none';
+        }
+
+        // Start tracking time for scoring (no visual timer)
         quizState.questionStartTime = Date.now();
     }
 
-    // Start timer for current question
-    function startTimer() {
-        const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
-            ? CONFIG.QUIZ_CONFIG 
-            : { QUESTION_TIME_LIMIT: 30000 };
-
-        const timeLimit = config.QUESTION_TIME_LIMIT || 30000;
-        let timeRemaining = timeLimit / 1000; // Convert to seconds
-        const timerText = document.getElementById('quiz-timer-text');
-        const timerProgress = document.getElementById('quiz-timer-progress');
-
-        const timerInterval = setInterval(() => {
-            timeRemaining -= 0.1;
-            
-            if (timerText) {
-                const seconds = Math.ceil(timeRemaining);
-                timerText.textContent = seconds.toString();
-                
-                // Update aria-label for screen readers
-                const timerAnnounce = document.getElementById('quiz-timer-announce');
-                if (timerAnnounce) {
-                    timerAnnounce.textContent = seconds === 1 ? '1 second remaining' : seconds + ' seconds remaining';
-                }
-                
-                // Add warning class when time is running out
-                if (timeRemaining <= 5 && timeRemaining > 0) {
-                    timerText.classList.add('warning');
-                } else {
-                    timerText.classList.remove('warning');
-                }
-            }
-
-            if (timerProgress) {
-                const progress = (timeRemaining / (timeLimit / 1000)) * 100;
-                timerProgress.style.strokeDashoffset = (100 - progress) * 2.827; // 2πr for r=45
-                
-                // Change color when time is running out
-                if (timeRemaining <= 5 && timeRemaining > 0) {
-                    timerProgress.style.stroke = '#F44336';
-                } else {
-                    timerProgress.style.stroke = 'var(--primary-color)';
-                }
-            }
-
-            if (timeRemaining <= 0) {
-                clearInterval(timerInterval);
-                // Auto-submit if no answer selected
-                const answersContainer = document.getElementById('quiz-answers');
-                if (answersContainer) {
-                    const buttons = answersContainer.querySelectorAll('.quiz-answer-btn');
-                    if (buttons.length > 0 && !answersContainer.querySelector('.selected')) {
-                        // No answer selected, mark as incorrect
-                        handleAnswerTimeout();
-                    }
-                }
-            }
-        }, 100);
-    }
 
     // Handle answer selection
     function handleAnswerSelect(button, question) {
@@ -429,66 +383,63 @@
             points: points
         });
 
-        // Show correct/incorrect feedback
+        // Show only if selected answer is correct or incorrect (don't reveal correct answer)
         if (answersContainer) {
-            const buttons = answersContainer.querySelectorAll('.quiz-answer-btn');
-            buttons.forEach(btn => {
-                if (btn.dataset.isCorrect === 'true') {
-                    btn.classList.add('correct');
-                } else if (btn === button && !isCorrect) {
-                    btn.classList.add('incorrect');
-                }
-            });
+            if (isCorrect) {
+                button.classList.add('correct');
+            } else {
+                button.classList.add('incorrect');
+            }
         }
 
         // Submit answer to server
         submitAnswer(question, button.textContent, timeTaken, points, isCorrect);
 
-        // Move to next question after delay
-        setTimeout(() => {
-            quizState.currentQuestionIndex++;
-            displayQuestion();
-        }, config.SHOW_CORRECT_ANSWER_DELAY || 2000);
+        // Show Next button instead of auto-advancing
+        const nextContainer = document.getElementById('quiz-next-container');
+        if (nextContainer) {
+            nextContainer.style.display = 'block';
+        }
     }
 
-    // Handle answer timeout
-    function handleAnswerTimeout() {
-        const question = quizState.questions[quizState.currentQuestionIndex];
-        
-        // Store answer as incorrect
-        quizState.answers.push({
-            questionId: question.id,
-            questionText: question.question,
-            selectedAnswer: null,
-            correctAnswer: question.correctAnswerText,
-            isCorrect: false,
-            timeTaken: (typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG && CONFIG.QUIZ_CONFIG.QUESTION_TIME_LIMIT) || 30000,
-            points: 0
-        });
 
-        // Show correct answer
-        const answersContainer = document.getElementById('quiz-answers');
-        if (answersContainer) {
-            const buttons = answersContainer.querySelectorAll('.quiz-answer-btn');
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                if (btn.dataset.isCorrect === 'true') {
-                    btn.classList.add('correct');
-                }
-            });
+    // Update question index when starting quiz
+    async function updateQuestionIndexOnStart() {
+        if (!quizState.sessionId || !quizState.userEmail) {
+            return;
         }
 
-        // Submit answer to server
-        const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
-            ? CONFIG.QUIZ_CONFIG 
-            : { QUESTION_TIME_LIMIT: 30000 };
-        submitAnswer(question, null, config.QUESTION_TIME_LIMIT || 30000, 0, false);
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
 
-        // Move to next question after delay
-        setTimeout(() => {
-            quizState.currentQuestionIndex++;
-            displayQuestion();
-        }, config.SHOW_CORRECT_ANSWER_DELAY || 2000);
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('action', 'updateQuestionIndex');
+            formData.append('sessionId', quizState.sessionId);
+            formData.append('email', quizState.userEmail);
+            formData.append('questionIndex', quizState.currentQuestionIndex.toString());
+
+            const response = await fetch(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            });
+
+            if (!response.ok) {
+                console.error('Failed to update question index');
+            }
+        } catch (error) {
+            console.error('Error updating question index:', error);
+        }
     }
 
     // Submit answer to server
@@ -556,6 +507,9 @@
 
     // End quiz
     async function endQuiz() {
+        // Stop forced advance checking
+        stopForcedAdvanceCheck();
+        
         // Submit end session
         try {
             await endQuizSession();
@@ -566,19 +520,19 @@
         // Calculate results
         const correctAnswers = quizState.answers.filter(a => a.isCorrect).length;
         const totalQuestions = quizState.questions.length;
-        const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
 
         // Display results
         const finalScore = document.getElementById('quiz-final-score');
         const correctAnswersEl = document.getElementById('quiz-correct-answers');
-        const accuracyEl = document.getElementById('quiz-accuracy');
 
         if (finalScore) finalScore.textContent = quizState.score.toString();
         if (correctAnswersEl) correctAnswersEl.textContent = `${correctAnswers} / ${totalQuestions}`;
-        if (accuracyEl) accuracyEl.textContent = accuracy + '%';
 
         // Show results section
         showSection('quiz-results');
+        
+        // Load and display leaderboard
+        await loadLeaderboard();
     }
 
     // End quiz session
@@ -679,8 +633,73 @@
         }
     }
 
+    // Handle begin quiz (from rules page)
+    async function handleBeginQuiz() {
+        // Start checking for forced advances
+        startForcedAdvanceCheck();
+        
+        // Update server with initial question index
+        await updateQuestionIndexOnStart();
+        
+        // Show quiz player and start with first question
+        showSection('quiz-player');
+        displayQuestion();
+    }
+
+    // Handle next question
+    async function handleNextQuestion() {
+        quizState.currentQuestionIndex++;
+        
+        // Update server-side question index
+        await updateQuestionIndex();
+        
+        displayQuestion();
+    }
+
+    // Update question index on server
+    async function updateQuestionIndex() {
+        if (!quizState.sessionId || !quizState.userEmail) {
+            return;
+        }
+
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('action', 'updateQuestionIndex');
+            formData.append('sessionId', quizState.sessionId);
+            formData.append('email', quizState.userEmail);
+            formData.append('questionIndex', quizState.currentQuestionIndex.toString());
+
+            const response = await fetch(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            });
+
+            if (!response.ok) {
+                console.error('Failed to update question index');
+            }
+        } catch (error) {
+            console.error('Error updating question index:', error);
+        }
+    }
+
     // Handle restart quiz
     function handleRestartQuiz() {
+        // Stop forced advance checking
+        stopForcedAdvanceCheck();
+        
         // Reset quiz state
         quizState.currentQuestionIndex = 0;
         quizState.score = 0;
@@ -691,49 +710,97 @@
         showSection('quiz-registration');
     }
 
-    // Handle review answers
-    function handleReviewAnswers() {
-        const reviewContainer = document.getElementById('quiz-answer-review');
-        if (!reviewContainer) return;
+    // Start checking for forced advances
+    function startForcedAdvanceCheck() {
+        // Only check if we're in the quiz player section
+        if (!quizState.sessionId || !quizState.userEmail) {
+            return;
+        }
 
-        if (reviewContainer.style.display === 'none') {
-            // Show review
-            reviewContainer.innerHTML = '';
-            
-            quizState.answers.forEach((answer, index) => {
-                const reviewItem = document.createElement('div');
-                reviewItem.className = `quiz-review-item ${answer.isCorrect ? 'correct' : 'incorrect'}`;
-                reviewItem.innerHTML = `
-                    <div class="quiz-review-question">
-                        <strong>Question ${index + 1}:</strong> ${answer.questionText}
-                    </div>
-                    <div class="quiz-review-answers">
-                        <div class="quiz-review-answer ${answer.isCorrect ? '' : 'wrong'}">
-                            <span class="quiz-review-label">Your Answer:</span>
-                            <span>${answer.selectedAnswer || 'No answer'}</span>
-                        </div>
-                        <div class="quiz-review-answer correct">
-                            <span class="quiz-review-label">Correct Answer:</span>
-                            <span>${answer.correctAnswer}</span>
-                        </div>
-                        <div class="quiz-review-points">
-                            Points: ${answer.points}
-                        </div>
-                    </div>
-                `;
-                reviewContainer.appendChild(reviewItem);
-            });
+        // Check every 2 seconds
+        quizState.forcedAdvanceCheckInterval = setInterval(() => {
+            checkForcedAdvance();
+        }, 2000);
+    }
 
-            reviewContainer.style.display = 'block';
-        } else {
-            // Hide review
-            reviewContainer.style.display = 'none';
+    // Stop checking for forced advances
+    function stopForcedAdvanceCheck() {
+        if (quizState.forcedAdvanceCheckInterval) {
+            clearInterval(quizState.forcedAdvanceCheckInterval);
+            quizState.forcedAdvanceCheckInterval = null;
         }
     }
 
+    // Check if admin has forced advance to next question
+    async function checkForcedAdvance() {
+        if (!quizState.sessionId || !quizState.userEmail) {
+            return;
+        }
+
+        // Only check if we're in the quiz player section
+        const playerSection = document.getElementById('quiz-player');
+        if (!playerSection || playerSection.style.display === 'none') {
+            return;
+        }
+
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('action', 'checkForcedAdvance');
+            formData.append('sessionId', quizState.sessionId);
+            formData.append('email', quizState.userEmail);
+            formData.append('currentQuestionIndex', quizState.currentQuestionIndex.toString());
+
+            const response = await fetch(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            });
+
+            if (!response.ok) {
+                return;
+            }
+
+            const result = await response.json();
+            
+            if (result.success && result.shouldAdvance) {
+                // Admin has forced advance - move to the target question
+                const targetIndex = result.targetQuestionIndex || (quizState.currentQuestionIndex + 1);
+                
+                if (targetIndex > quizState.currentQuestionIndex && targetIndex < quizState.questions.length) {
+                    // Advance to the target question
+                    quizState.currentQuestionIndex = targetIndex;
+                    
+                    // If we're past the last question, end the quiz
+                    if (quizState.currentQuestionIndex >= quizState.questions.length) {
+                        endQuiz();
+                    } else {
+                        // Display the new question
+                        displayQuestion();
+                    }
+                }
+            }
+        } catch (error) {
+            // Silently fail - don't interrupt the user experience
+            console.log('Error checking forced advance:', error);
+        }
+    }
+
+
     // Show specific section
     function showSection(sectionId) {
-        const sections = ['quiz-registration', 'quiz-player', 'quiz-results'];
+        const sections = ['quiz-registration', 'quiz-rules', 'quiz-player', 'quiz-results'];
         sections.forEach(id => {
             const section = document.getElementById(id);
             if (section) {
@@ -750,6 +817,114 @@
             element.className = `form-message ${type}`;
             element.style.display = 'block';
         }
+    }
+
+    // Load leaderboard
+    async function loadLeaderboard() {
+        const leaderboardContainer = document.getElementById('quiz-leaderboard');
+        const leaderboardLoading = document.getElementById('quiz-leaderboard-loading');
+        
+        if (!leaderboardContainer) return;
+        
+        // Show loading state
+        if (leaderboardLoading) {
+            leaderboardLoading.style.display = 'block';
+        }
+        leaderboardContainer.innerHTML = '';
+        
+        try {
+            const config = typeof CONFIG !== 'undefined' && CONFIG.QUIZ_CONFIG 
+                ? CONFIG.QUIZ_CONFIG 
+                : { GOOGLE_SCRIPT_URL: CONFIG.GOOGLE_SCRIPT_URL };
+
+            const scriptUrl = config.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL;
+            
+            if (!scriptUrl) {
+                throw new Error('Google Script URL not configured');
+            }
+
+            // Fetch leaderboard
+            const formData = new URLSearchParams();
+            formData.append('action', 'getLeaderboard');
+
+            const response = await fetch(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            if (leaderboardLoading) {
+                leaderboardLoading.style.display = 'none';
+            }
+            
+            if (result.success && result.leaderboard) {
+                displayLeaderboard(result.leaderboard);
+            } else {
+                leaderboardContainer.innerHTML = '<p class="quiz-leaderboard-error">Unable to load leaderboard at this time.</p>';
+            }
+        } catch (error) {
+            console.error('Error loading leaderboard:', error);
+            if (leaderboardLoading) {
+                leaderboardLoading.style.display = 'none';
+            }
+            leaderboardContainer.innerHTML = '<p class="quiz-leaderboard-error">Unable to load leaderboard at this time.</p>';
+        }
+    }
+
+    // Display leaderboard
+    function displayLeaderboard(leaderboard) {
+        const leaderboardContainer = document.getElementById('quiz-leaderboard');
+        if (!leaderboardContainer) return;
+
+        if (leaderboard.length === 0) {
+            leaderboardContainer.innerHTML = '<p class="quiz-leaderboard-empty">No scores yet. Be the first!</p>';
+            return;
+        }
+
+        // Find current user's position
+        const currentUserIndex = leaderboard.findIndex(entry => entry.email === quizState.userEmail);
+        
+        let html = '<div class="quiz-leaderboard-list">';
+        
+        leaderboard.forEach((entry, index) => {
+            const isCurrentUser = entry.email === quizState.userEmail;
+            const rank = index + 1;
+            const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+            
+            html += `
+                <div class="quiz-leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+                    <div class="quiz-leaderboard-rank">
+                        ${medal} <span class="rank-number">${rank}</span>
+                    </div>
+                    <div class="quiz-leaderboard-info">
+                        <div class="quiz-leaderboard-name">${escapeHtml(entry.name || 'Anonymous')}</div>
+                        <div class="quiz-leaderboard-details">
+                            <span>Score: ${entry.totalScore || 0}</span>
+                            <span>•</span>
+                            <span>${entry.correctAnswers || 0}/${entry.totalQuestions || 0} correct</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        leaderboardContainer.innerHTML = html;
+    }
+
+    // Helper function to escape HTML
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 
     // Validate email

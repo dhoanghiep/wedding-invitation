@@ -49,7 +49,8 @@ function doPost(e) {
     
     // Handle quiz actions
     if (action === 'startSession' || action === 'submitAnswer' || action === 'endSession' || 
-        action === 'updateUserName' || action === 'getUserHistory') {
+        action === 'updateUserName' || action === 'getUserHistory' || action === 'getLeaderboard' ||
+        action === 'getActiveSessions' || action === 'forceNextQuestion' || action === 'checkForcedAdvance') {
       return handleQuizAction(e);
     }
     
@@ -516,6 +517,16 @@ function handleQuizAction(e) {
         return updateQuizUserName(e);
       case 'getUserHistory':
         return getUserQuizHistory(e);
+      case 'getLeaderboard':
+        return getLeaderboard(e);
+      case 'getActiveSessions':
+        return getActiveSessions(e);
+      case 'forceNextQuestion':
+        return forceNextQuestion(e);
+      case 'checkForcedAdvance':
+        return checkForcedAdvance(e);
+      case 'updateQuestionIndex':
+        return updateQuestionIndex(e);
       default:
         return returnJson({
           success: false,
@@ -565,7 +576,7 @@ function startQuizSession(e) {
     var startTime = new Date();
     
     // Append to sessions sheet
-    // Column order: Session ID | Start Time | End Time | Status | Total Questions | Email | Name
+    // Column order: Session ID | Start Time | End Time | Status | Total Questions | Email | Name | Current Question Index | Last Forced Advance
     sessionsSheet.appendRow([
       sessionId,
       startTime,
@@ -573,7 +584,9 @@ function startQuizSession(e) {
       'IN_PROGRESS',
       totalQuestions,
       email,
-      name
+      name,
+      0, // Current Question Index (starts at 0)
+      '' // Last Forced Advance timestamp
     ]);
     
     // Add initial entry to Quiz summary sheet
@@ -892,6 +905,61 @@ function getUserQuizHistory(e) {
   }
 }
 
+// Get leaderboard
+function getLeaderboard(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var quizSheet = getOrCreateSheet(spreadsheet, 'Quiz');
+    
+    // Get all completed quiz entries
+    var quizData = quizSheet.getDataRange().getValues();
+    var leaderboard = [];
+    
+    // Skip header row (row 1)
+    for (var i = 1; i < quizData.length; i++) {
+      var row = quizData[i];
+      
+      // Check if entry is completed
+      if (row[9] === 'COMPLETED') { // Status column (index 9)
+        leaderboard.push({
+          email: row[0] || '', // Email
+          name: row[1] || 'Anonymous', // Name
+          sessionId: row[2] || '', // Session ID
+          totalScore: parseInt(row[5] || 0), // Total Score
+          totalQuestions: parseInt(row[6] || 0), // Total Questions
+          correctAnswers: parseInt(row[7] || 0) // Correct Answers
+        });
+      }
+    }
+    
+    // Sort by total score (descending), then by correct answers
+    leaderboard.sort(function(a, b) {
+      // First sort by total score
+      if (b.totalScore !== a.totalScore) {
+        return b.totalScore - a.totalScore;
+      }
+      // Then by correct answers
+      return b.correctAnswers - a.correctAnswers;
+    });
+    
+    // Limit to top 50 entries
+    if (leaderboard.length > 50) {
+      leaderboard = leaderboard.slice(0, 50);
+    }
+    
+    return returnJson({
+      success: true,
+      leaderboard: leaderboard
+    });
+  } catch (error) {
+    Logger.log('Error getting leaderboard: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
 // Helper function to get or create a sheet
 function getOrCreateSheet(spreadsheet, sheetName) {
   var sheet = spreadsheet.getSheetByName(sheetName);
@@ -901,7 +969,7 @@ function getOrCreateSheet(spreadsheet, sheetName) {
     
     // Set up headers based on sheet name
     if (sheetName === 'Quiz Sessions') {
-      sheet.appendRow(['Session ID', 'Start Time', 'End Time', 'Status', 'Total Questions', 'Email', 'Name']);
+      sheet.appendRow(['Session ID', 'Start Time', 'End Time', 'Status', 'Total Questions', 'Email', 'Name', 'Current Question Index', 'Last Forced Advance']);
     } else if (sheetName === 'User Answers') {
       sheet.appendRow(['Timestamp', 'Session ID', 'Email', 'Name', 'Question ID', 'Question Text', 
                        'Selected Answer', 'Correct Answer', 'Is Correct', 'Time Taken (ms)', 'Points']);
@@ -965,6 +1033,197 @@ function updateUserScore(scoresSheet, email, name, sessionId, points, isCorrect)
 function isValidEmail(email) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
+}
+
+// Get active sessions
+function getActiveSessions(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    
+    var sessionsData = sessionsSheet.getDataRange().getValues();
+    var activeSessions = [];
+    
+    // Skip header row (row 1)
+    // Column order: Session ID | Start Time | End Time | Status | Total Questions | Email | Name | Current Question Index | Last Forced Advance
+    for (var i = 1; i < sessionsData.length; i++) {
+      var row = sessionsData[i];
+      
+      // Check if session is in progress
+      if (row[3] === 'IN_PROGRESS') {
+        activeSessions.push({
+          sessionId: row[0] || '',
+          email: row[5] || '',
+          name: row[6] || 'Anonymous',
+          startTime: row[1] ? row[1].getTime() : Date.now(),
+          totalQuestions: parseInt(row[4] || 0),
+          currentQuestionIndex: parseInt(row[7] || 0),
+          lastForcedAdvance: row[8] || null
+        });
+      }
+    }
+    
+    return returnJson({
+      success: true,
+      sessions: activeSessions
+    });
+  } catch (error) {
+    Logger.log('Error getting active sessions: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+// Force all active sessions to next question
+function forceNextQuestion(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    
+    var sessionsData = sessionsSheet.getDataRange().getValues();
+    var advancedCount = 0;
+    var forcedTime = new Date();
+    
+    // Skip header row (row 1)
+    // Column order: Session ID | Start Time | End Time | Status | Total Questions | Email | Name | Current Question Index | Last Forced Advance
+    for (var i = 1; i < sessionsData.length; i++) {
+      var row = sessionsData[i];
+      
+      // Check if session is in progress
+      if (row[3] === 'IN_PROGRESS') {
+        var currentIndex = parseInt(row[7] || 0);
+        var totalQuestions = parseInt(row[4] || 0);
+        
+        // Only advance if not at the last question
+        if (currentIndex < totalQuestions - 1) {
+          // Increment current question index (column 8, index 7)
+          sessionsSheet.getRange(i + 1, 8).setValue(currentIndex + 1);
+          // Update last forced advance timestamp (column 9, index 8)
+          sessionsSheet.getRange(i + 1, 9).setValue(forcedTime);
+          advancedCount++;
+        }
+      }
+    }
+    
+    return returnJson({
+      success: true,
+      advancedCount: advancedCount,
+      timestamp: forcedTime.getTime()
+    });
+  } catch (error) {
+    Logger.log('Error forcing next question: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+// Update question index (called by client when moving to next question)
+function updateQuestionIndex(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    
+    var sessionId = e.parameter.sessionId || '';
+    var email = e.parameter.email || '';
+    var questionIndex = parseInt(e.parameter.questionIndex || 0);
+    
+    if (!sessionId || !email) {
+      return returnJson({
+        success: false,
+        error: 'Session ID and email are required'
+      });
+    }
+    
+    var sessionsData = sessionsSheet.getDataRange().getValues();
+    
+    // Find the session and update question index
+    for (var i = 1; i < sessionsData.length; i++) {
+      var row = sessionsData[i];
+      
+      if (row[0] === sessionId && row[5] === email && row[3] === 'IN_PROGRESS') {
+        // Update current question index (column 8, index 7)
+        sessionsSheet.getRange(i + 1, 8).setValue(questionIndex);
+        
+        return returnJson({
+          success: true,
+          questionIndex: questionIndex
+        });
+      }
+    }
+    
+    return returnJson({
+      success: false,
+      error: 'Session not found'
+    });
+  } catch (error) {
+    Logger.log('Error updating question index: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+// Check if session should advance (called by client)
+function checkForcedAdvance(e) {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    
+    var sessionId = e.parameter.sessionId || '';
+    var email = e.parameter.email || '';
+    var clientQuestionIndex = parseInt(e.parameter.currentQuestionIndex || 0);
+    
+    if (!sessionId || !email) {
+      return returnJson({
+        success: false,
+        error: 'Session ID and email are required'
+      });
+    }
+    
+    var sessionsData = sessionsSheet.getDataRange().getValues();
+    
+    // Find the session
+    for (var i = 1; i < sessionsData.length; i++) {
+      var row = sessionsData[i];
+      
+      if (row[0] === sessionId && row[5] === email && row[3] === 'IN_PROGRESS') {
+        var serverQuestionIndex = parseInt(row[7] || 0);
+        var lastForcedAdvance = row[8];
+        
+        // If server index is ahead of client index, client should advance
+        if (serverQuestionIndex > clientQuestionIndex) {
+          return returnJson({
+            success: true,
+            shouldAdvance: true,
+            targetQuestionIndex: serverQuestionIndex,
+            lastForcedAdvance: lastForcedAdvance ? lastForcedAdvance.getTime() : null
+          });
+        }
+        
+        return returnJson({
+          success: true,
+          shouldAdvance: false,
+          currentQuestionIndex: serverQuestionIndex
+        });
+      }
+    }
+    
+    return returnJson({
+      success: false,
+      error: 'Session not found'
+    });
+  } catch (error) {
+    Logger.log('Error checking forced advance: ' + error.toString());
+    return returnJson({
+      success: false,
+      error: error.toString()
+    });
+  }
 }
 
 // Setup function to create all quiz sheets with headers

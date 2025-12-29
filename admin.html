@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quiz Admin Panel - Manage quiz sessions and view leaderboard">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2Q0C3C4NT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T2Q0C3C4NT');
+    </script>
+    
+    <title>Quiz Admin Panel</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Header placeholder - will be loaded by components.js -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Content -->
+    <main style="padding-top: 80px;">
+        <div class="container">
+            <div class="admin-header">
+                <h1 class="section-title">Quiz Admin Panel</h1>
+                <p class="section-subtitle">Manage quiz sessions and monitor leaderboard</p>
+            </div>
+
+            <!-- Admin Controls -->
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-card-title">Session Controls</h2>
+                    <div class="admin-controls">
+                        <button type="button" class="btn btn-primary btn-large" id="refresh-btn">
+                            <span class="btn-icon">🔄</span>
+                            Refresh Data
+                        </button>
+                        <button type="button" class="btn btn-warning btn-large" id="force-next-btn">
+                            <span class="btn-icon">⏭️</span>
+                            Force All Sessions to Next Question
+                        </button>
+                    </div>
+                    <div class="admin-message" id="admin-message"></div>
+                </div>
+            </section>
+
+            <!-- Active Sessions -->
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-card-title">
+                        Active Sessions
+                        <span class="badge" id="active-sessions-count">0</span>
+                    </h2>
+                    <div class="admin-loading" id="sessions-loading" style="display: none;">
+                        Loading active sessions...
+                    </div>
+                    <div class="admin-sessions-list" id="active-sessions-list">
+                        <!-- Active sessions will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboard -->
+            <section class="admin-section">
+                <div class="admin-card">
+                    <h2 class="admin-card-title">
+                        Leaderboard
+                        <span class="badge" id="leaderboard-count">0</span>
+                    </h2>
+                    <div class="admin-loading" id="leaderboard-loading" style="display: none;">
+                        Loading leaderboard...
+                    </div>
+                    <div class="admin-leaderboard" id="admin-leaderboard">
+                        <!-- Leaderboard will be populated here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer placeholder - will be loaded by components.js -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript files -->
+    <script src="js/components.js"></script>
+    <script src="config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
+

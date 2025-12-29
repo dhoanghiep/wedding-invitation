@@ -57,6 +57,30 @@
             </div>
         </section>
 
+        <!-- Quiz Rules Section -->
+        <section class="quiz-section" id="quiz-rules" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="quiz.rulesTitle">Quiz Rules</h2>
+                </div>
+                
+                <div class="quiz-rules-container">
+                    <div class="quiz-rules-content">
+                        <ul class="quiz-rules-list">
+                            <li data-i18n="quiz.rule1">MC will guide you through the questions</li>
+                            <li data-i18n="quiz.rule2">There is only 1 correct answer</li>
+                            <li data-i18n="quiz.rule3">Some questions will have immediate present</li>
+                            <li data-i18n="quiz.rule4">Time will be calculated for the score, so try to answer the question ASAP after reveal it</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quiz-rules-actions">
+                        <button type="button" class="btn btn-primary btn-large" id="quiz-begin-btn" data-i18n="quiz.beginQuiz">Go to First Question</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Quiz Player Section -->
         <section class="quiz-section" id="quiz-player" style="display: none;">
             <div class="container">
@@ -84,21 +108,14 @@
 
                 <!-- Question Display -->
                 <div class="quiz-question-container">
-                    <div class="quiz-timer" id="quiz-timer" role="timer" aria-live="polite" aria-atomic="true">
-                        <div class="quiz-timer-circle">
-                            <svg class="quiz-timer-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="quiz-timer-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="quiz-timer-progress" id="quiz-timer-progress" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <div class="quiz-timer-text" id="quiz-timer-text" aria-label="Time remaining">30</div>
-                            <span class="sr-only" id="quiz-timer-announce">30 seconds remaining</span>
-                        </div>
-                    </div>
-                    
                     <h2 class="quiz-question-text" id="quiz-question-text" role="heading" aria-level="2"></h2>
                     
                     <div class="quiz-answers" id="quiz-answers" role="group" aria-label="Answer options">
                         <!-- Answer buttons will be dynamically generated -->
+                    </div>
+                    
+                    <div class="quiz-next-container" id="quiz-next-container" style="display: none;">
+                        <button type="button" class="btn btn-primary" id="quiz-next-btn" data-i18n="quiz.nextQuestion">Next Question</button>
                     </div>
                 </div>
             </div>
@@ -121,19 +138,21 @@
                             <div class="quiz-result-value" id="quiz-correct-answers">0</div>
                             <div class="quiz-result-label" data-i18n="quiz.correctAnswers">Correct Answers</div>
                         </div>
-                        <div class="quiz-result-stat">
-                            <div class="quiz-result-value" id="quiz-accuracy">0%</div>
-                            <div class="quiz-result-label" data-i18n="quiz.accuracy">Accuracy</div>
-                        </div>
                     </div>
                     
                     <div class="quiz-actions">
                         <button type="button" class="btn btn-primary" id="quiz-restart-btn" data-i18n="quiz.restartQuiz">Take Quiz Again</button>
-                        <button type="button" class="btn btn-secondary" id="quiz-review-btn" data-i18n="quiz.reviewAnswers">Review Answers</button>
                     </div>
                     
-                    <div class="quiz-answer-review" id="quiz-answer-review" style="display: none;">
-                        <!-- Answer review will be dynamically generated -->
+                    <!-- Leaderboard Section -->
+                    <div class="quiz-leaderboard-container" id="quiz-leaderboard-container">
+                        <h3 class="quiz-leaderboard-title" data-i18n="quiz.leaderboard">Leaderboard</h3>
+                        <div class="quiz-leaderboard-loading" id="quiz-leaderboard-loading" style="display: none;">
+                            Loading leaderboard...
+                        </div>
+                        <div class="quiz-leaderboard" id="quiz-leaderboard">
+                            <!-- Leaderboard will be dynamically generated -->
+                        </div>
                     </div>
                 </div>
             </div>
