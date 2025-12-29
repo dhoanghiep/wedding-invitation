@@ -4,12 +4,20 @@
 // IMPORTANT: Set up your Google Sheet with the following header row (first row):
 // Timestamp | Name | Email | Guest Of | Phone | Number of Guests | Attendance | Events Attending | Other Requests | Message
 //
+// QUIZ SHEETS:
+// The script will automatically create the following sheets for quiz functionality:
+// - Quiz: Summary view with Email, Name, Session ID, Start Time, End Time, Total Score, Total Questions, Correct Answers, Accuracy %, Status
+// - Quiz Sessions: Detailed session tracking
+// - User Answers: Individual answer submissions
+// - User Scores: User score tracking
+//
 // Instructions:
 // 1. Create a new Google Sheet
-// 2. Add the header row in the first row (see above)
+// 2. Add the header row in the first row (see above) for RSVP data
 // 3. Copy this code into Google Apps Script (script.google.com)
-// 4. Deploy as a web app with "Execute as: Me" and "Who has access: Anyone"
-// 5. Copy the web app URL and paste it into config.js as GOOGLE_SCRIPT_URL
+// 4. Run the setupQuizSheets() function once to create all quiz sheets (or they will be created automatically)
+// 5. Deploy as a web app with "Execute as: Me" and "Who has access: Anyone"
+// 6. Copy the web app URL and paste it into config.js as GOOGLE_SCRIPT_URL
 //
 // ============================================
 // GOOGLE PHOTOS SHARED ALBUM SETUP
@@ -528,6 +536,7 @@ function startQuizSession(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    var quizSheet = getOrCreateSheet(spreadsheet, 'Quiz');
     
     var email = e.parameter.email || '';
     var name = e.parameter.name || '';
@@ -553,16 +562,32 @@ function startQuizSession(e) {
       sessionId = 'SESSION_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
     
+    var startTime = new Date();
+    
     // Append to sessions sheet
     // Column order: Session ID | Start Time | End Time | Status | Total Questions | Email | Name
     sessionsSheet.appendRow([
       sessionId,
-      new Date(),
+      startTime,
       '',
       'IN_PROGRESS',
       totalQuestions,
       email,
       name
+    ]);
+    
+    // Add initial entry to Quiz summary sheet
+    quizSheet.appendRow([
+      email,
+      name,
+      sessionId,
+      startTime,
+      '', // End Time (empty for now)
+      '0', // Total Score
+      totalQuestions,
+      '0', // Correct Answers
+      '0', // Accuracy %
+      'IN_PROGRESS' // Status
     ]);
     
     return returnJson({
@@ -656,6 +681,7 @@ function endQuizSession(e) {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
     var scoresSheet = getOrCreateSheet(spreadsheet, 'User Scores');
+    var quizSheet = getOrCreateSheet(spreadsheet, 'Quiz');
     
     var email = e.parameter.email || '';
     var sessionId = e.parameter.sessionId || '';
@@ -671,15 +697,21 @@ function endQuizSession(e) {
       });
     }
     
-    // Update session status
+    // Get user name and start time from sessions sheet
+    var userName = '';
+    var startTime = null;
     var sessionsData = sessionsSheet.getDataRange().getValues();
     for (var i = 1; i < sessionsData.length; i++) {
       if (sessionsData[i][0] === sessionId && sessionsData[i][5] === email) {
+        startTime = sessionsData[i][1]; // Start Time
+        userName = sessionsData[i][6] || ''; // Name
         sessionsSheet.getRange(i + 1, 3).setValue(new Date()); // End Time
         sessionsSheet.getRange(i + 1, 4).setValue('COMPLETED'); // Status
         break;
       }
     }
+    
+    var endTime = new Date();
     
     // Update final score in scores sheet
     var scoresData = scoresSheet.getDataRange().getValues();
@@ -688,9 +720,49 @@ function endQuizSession(e) {
         scoresSheet.getRange(j + 1, 4).setValue(totalScore); // Total Score
         scoresSheet.getRange(j + 1, 5).setValue(totalQuestions); // Total Questions
         scoresSheet.getRange(j + 1, 6).setValue(correctAnswers); // Correct Answers
-        scoresSheet.getRange(j + 1, 7).setValue(new Date()); // Completion Time
+        scoresSheet.getRange(j + 1, 7).setValue(endTime); // Completion Time
         break;
       }
+    }
+    
+    // Calculate accuracy
+    var accuracy = 0;
+    if (parseInt(totalQuestions) > 0) {
+      accuracy = Math.round((parseInt(correctAnswers) / parseInt(totalQuestions)) * 100);
+    }
+    
+    // Add/update entry in Quiz summary sheet
+    var quizData = quizSheet.getDataRange().getValues();
+    var foundInQuiz = false;
+    for (var k = 1; k < quizData.length; k++) {
+      if (quizData[k][0] === email && quizData[k][2] === sessionId) {
+        // Update existing entry
+        quizSheet.getRange(k + 1, 4).setValue(startTime); // Start Time
+        quizSheet.getRange(k + 1, 5).setValue(endTime); // End Time
+        quizSheet.getRange(k + 1, 6).setValue(totalScore); // Total Score
+        quizSheet.getRange(k + 1, 7).setValue(totalQuestions); // Total Questions
+        quizSheet.getRange(k + 1, 8).setValue(correctAnswers); // Correct Answers
+        quizSheet.getRange(k + 1, 9).setValue(accuracy); // Accuracy %
+        quizSheet.getRange(k + 1, 10).setValue('COMPLETED'); // Status
+        foundInQuiz = true;
+        break;
+      }
+    }
+    
+    if (!foundInQuiz) {
+      // Add new entry to Quiz summary sheet
+      quizSheet.appendRow([
+        email,
+        userName,
+        sessionId,
+        startTime,
+        endTime,
+        totalScore,
+        totalQuestions,
+        correctAnswers,
+        accuracy,
+        'COMPLETED'
+      ]);
     }
     
     return returnJson({
@@ -836,6 +908,10 @@ function getOrCreateSheet(spreadsheet, sheetName) {
     } else if (sheetName === 'User Scores') {
       sheet.appendRow(['Email', 'Name', 'Session ID', 'Total Score', 'Total Questions', 
                        'Correct Answers', 'Completion Time']);
+    } else if (sheetName === 'Quiz') {
+      // Quiz summary tab with consolidated view
+      sheet.appendRow(['Email', 'Name', 'Session ID', 'Start Time', 'End Time', 'Total Score', 
+                       'Total Questions', 'Correct Answers', 'Accuracy %', 'Status']);
     }
     
     // Format header row
@@ -896,11 +972,13 @@ function setupQuizSheets() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   
   // Create all required sheets
+  getOrCreateSheet(spreadsheet, 'Quiz');
   getOrCreateSheet(spreadsheet, 'Quiz Sessions');
   getOrCreateSheet(spreadsheet, 'User Answers');
   getOrCreateSheet(spreadsheet, 'User Scores');
   
   Logger.log('Quiz sheets set up successfully!');
+  Logger.log('Created sheets: Quiz (summary), Quiz Sessions, User Answers, User Scores');
 }
 
 
