@@ -6,10 +6,9 @@
 //
 // QUIZ SHEETS:
 // The script will automatically create the following sheets for quiz functionality:
-// - Quiz: Summary view with Email, Name, Session ID, Start Time, End Time, Total Score, Total Questions, Correct Answers, Accuracy %, Status
-// - Quiz Sessions: Detailed session tracking
-// - User Answers: Individual answer submissions
-// - User Scores: User score tracking
+// - Sessions: Session tracking with Session ID, Start Time, End Time, Status, Total Questions, Email, Name, Current Question Index, Last Forced Advance
+// - Player Scores: Player scores with Email, Name, Session ID, Total Score, Total Questions, Correct Answers, Completion Time
+// - Detailed Answers: Individual answer submissions with Timestamp, Session ID, Email, Name, Question ID, Question Text, Selected Answer, Correct Answer, Is Correct, Time Taken, Points
 //
 // Instructions:
 // 1. Create a new Google Sheet
@@ -546,8 +545,7 @@ function handleQuizAction(e) {
 function startQuizSession(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
-    var quizSheet = getOrCreateSheet(spreadsheet, 'Quiz');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
     
     var email = e.parameter.email || '';
     var name = e.parameter.name || '';
@@ -589,20 +587,6 @@ function startQuizSession(e) {
       '' // Last Forced Advance timestamp
     ]);
     
-    // Add initial entry to Quiz summary sheet
-    quizSheet.appendRow([
-      email,
-      name,
-      sessionId,
-      startTime,
-      '', // End Time (empty for now)
-      '0', // Total Score
-      totalQuestions,
-      '0', // Correct Answers
-      '0', // Accuracy %
-      'IN_PROGRESS' // Status
-    ]);
-    
     return returnJson({
       success: true,
       sessionId: sessionId
@@ -620,8 +604,8 @@ function startQuizSession(e) {
 function submitQuizAnswer(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var answersSheet = getOrCreateSheet(spreadsheet, 'User Answers');
-    var scoresSheet = getOrCreateSheet(spreadsheet, 'User Scores');
+    var answersSheet = getOrCreateSheet(spreadsheet, 'Detailed Answers');
+    var scoresSheet = getOrCreateSheet(spreadsheet, 'Player Scores');
     
     var email = e.parameter.email || '';
     var name = e.parameter.name || '';
@@ -692,9 +676,8 @@ function submitQuizAnswer(e) {
 function endQuizSession(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
-    var scoresSheet = getOrCreateSheet(spreadsheet, 'User Scores');
-    var quizSheet = getOrCreateSheet(spreadsheet, 'Quiz');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
+    var scoresSheet = getOrCreateSheet(spreadsheet, 'Player Scores');
     
     var email = e.parameter.email || '';
     var sessionId = e.parameter.sessionId || '';
@@ -726,55 +709,30 @@ function endQuizSession(e) {
     
     var endTime = new Date();
     
-    // Update final score in scores sheet
+    // Update or create final score in Player Scores sheet
     var scoresData = scoresSheet.getDataRange().getValues();
+    var foundInScores = false;
     for (var j = 1; j < scoresData.length; j++) {
       if (scoresData[j][0] === email && scoresData[j][2] === sessionId) {
         scoresSheet.getRange(j + 1, 4).setValue(totalScore); // Total Score
         scoresSheet.getRange(j + 1, 5).setValue(totalQuestions); // Total Questions
         scoresSheet.getRange(j + 1, 6).setValue(correctAnswers); // Correct Answers
         scoresSheet.getRange(j + 1, 7).setValue(endTime); // Completion Time
+        foundInScores = true;
         break;
       }
     }
     
-    // Calculate accuracy
-    var accuracy = 0;
-    if (parseInt(totalQuestions) > 0) {
-      accuracy = Math.round((parseInt(correctAnswers) / parseInt(totalQuestions)) * 100);
-    }
-    
-    // Add/update entry in Quiz summary sheet
-    var quizData = quizSheet.getDataRange().getValues();
-    var foundInQuiz = false;
-    for (var k = 1; k < quizData.length; k++) {
-      if (quizData[k][0] === email && quizData[k][2] === sessionId) {
-        // Update existing entry
-        quizSheet.getRange(k + 1, 4).setValue(startTime); // Start Time
-        quizSheet.getRange(k + 1, 5).setValue(endTime); // End Time
-        quizSheet.getRange(k + 1, 6).setValue(totalScore); // Total Score
-        quizSheet.getRange(k + 1, 7).setValue(totalQuestions); // Total Questions
-        quizSheet.getRange(k + 1, 8).setValue(correctAnswers); // Correct Answers
-        quizSheet.getRange(k + 1, 9).setValue(accuracy); // Accuracy %
-        quizSheet.getRange(k + 1, 10).setValue('COMPLETED'); // Status
-        foundInQuiz = true;
-        break;
-      }
-    }
-    
-    if (!foundInQuiz) {
-      // Add new entry to Quiz summary sheet
-      quizSheet.appendRow([
+    // Create new entry if not found
+    if (!foundInScores) {
+      scoresSheet.appendRow([
         email,
         userName,
         sessionId,
-        startTime,
-        endTime,
         totalScore,
         totalQuestions,
         correctAnswers,
-        accuracy,
-        'COMPLETED'
+        endTime
       ]);
     }
     
@@ -797,9 +755,9 @@ function endQuizSession(e) {
 function updateQuizUserName(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var answersSheet = getOrCreateSheet(spreadsheet, 'User Answers');
-    var scoresSheet = getOrCreateSheet(spreadsheet, 'User Scores');
-    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    var answersSheet = getOrCreateSheet(spreadsheet, 'Detailed Answers');
+    var scoresSheet = getOrCreateSheet(spreadsheet, 'Player Scores');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
     
     var email = e.parameter.email || '';
     var newName = e.parameter.newName || '';
@@ -863,7 +821,7 @@ function updateQuizUserName(e) {
 function getUserQuizHistory(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var scoresSheet = getOrCreateSheet(spreadsheet, 'User Scores');
+    var scoresSheet = getOrCreateSheet(spreadsheet, 'Player Scores');
     
     var email = e.parameter.email || '';
     
@@ -909,25 +867,26 @@ function getUserQuizHistory(e) {
 function getLeaderboard(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var quizSheet = getOrCreateSheet(spreadsheet, 'Quiz');
+    var scoresSheet = getOrCreateSheet(spreadsheet, 'Player Scores');
     
-    // Get all completed quiz entries
-    var quizData = quizSheet.getDataRange().getValues();
+    // Get all player scores
+    // Column order: Email | Name | Session ID | Total Score | Total Questions | Correct Answers | Completion Time
+    var scoresData = scoresSheet.getDataRange().getValues();
     var leaderboard = [];
     
     // Skip header row (row 1)
-    for (var i = 1; i < quizData.length; i++) {
-      var row = quizData[i];
+    for (var i = 1; i < scoresData.length; i++) {
+      var row = scoresData[i];
       
-      // Check if entry is completed
-      if (row[9] === 'COMPLETED') { // Status column (index 9)
+      // Only include entries with completion time (completed quizzes)
+      if (row[6]) { // Completion Time column (index 6)
         leaderboard.push({
           email: row[0] || '', // Email
           name: row[1] || 'Anonymous', // Name
           sessionId: row[2] || '', // Session ID
-          totalScore: parseInt(row[5] || 0), // Total Score
-          totalQuestions: parseInt(row[6] || 0), // Total Questions
-          correctAnswers: parseInt(row[7] || 0) // Correct Answers
+          totalScore: parseInt(row[3] || 0), // Total Score
+          totalQuestions: parseInt(row[4] || 0), // Total Questions
+          correctAnswers: parseInt(row[5] || 0) // Correct Answers
         });
       }
     }
@@ -968,18 +927,17 @@ function getOrCreateSheet(spreadsheet, sheetName) {
     sheet = spreadsheet.insertSheet(sheetName);
     
     // Set up headers based on sheet name
-    if (sheetName === 'Quiz Sessions') {
+    if (sheetName === 'Sessions') {
+      // Sessions table: Session tracking
       sheet.appendRow(['Session ID', 'Start Time', 'End Time', 'Status', 'Total Questions', 'Email', 'Name', 'Current Question Index', 'Last Forced Advance']);
-    } else if (sheetName === 'User Answers') {
+    } else if (sheetName === 'Detailed Answers') {
+      // Detailed Answers table: Individual answer submissions
       sheet.appendRow(['Timestamp', 'Session ID', 'Email', 'Name', 'Question ID', 'Question Text', 
                        'Selected Answer', 'Correct Answer', 'Is Correct', 'Time Taken (ms)', 'Points']);
-    } else if (sheetName === 'User Scores') {
+    } else if (sheetName === 'Player Scores') {
+      // Player Scores table: Final scores per session
       sheet.appendRow(['Email', 'Name', 'Session ID', 'Total Score', 'Total Questions', 
                        'Correct Answers', 'Completion Time']);
-    } else if (sheetName === 'Quiz') {
-      // Quiz summary tab with consolidated view
-      sheet.appendRow(['Email', 'Name', 'Session ID', 'Start Time', 'End Time', 'Total Score', 
-                       'Total Questions', 'Correct Answers', 'Accuracy %', 'Status']);
     }
     
     // Format header row
@@ -1039,7 +997,7 @@ function isValidEmail(email) {
 function getActiveSessions(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
     
     var sessionsData = sessionsSheet.getDataRange().getValues();
     var activeSessions = [];
@@ -1080,7 +1038,7 @@ function getActiveSessions(e) {
 function forceNextQuestion(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
     
     var sessionsData = sessionsSheet.getDataRange().getValues();
     var advancedCount = 0;
@@ -1125,7 +1083,7 @@ function forceNextQuestion(e) {
 function updateQuestionIndex(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
     
     var sessionId = e.parameter.sessionId || '';
     var email = e.parameter.email || '';
@@ -1172,7 +1130,7 @@ function updateQuestionIndex(e) {
 function checkForcedAdvance(e) {
   try {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Quiz Sessions');
+    var sessionsSheet = getOrCreateSheet(spreadsheet, 'Sessions');
     
     var sessionId = e.parameter.sessionId || '';
     var email = e.parameter.email || '';
@@ -1230,14 +1188,13 @@ function checkForcedAdvance(e) {
 function setupQuizSheets() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   
-  // Create all required sheets
-  getOrCreateSheet(spreadsheet, 'Quiz');
-  getOrCreateSheet(spreadsheet, 'Quiz Sessions');
-  getOrCreateSheet(spreadsheet, 'User Answers');
-  getOrCreateSheet(spreadsheet, 'User Scores');
+  // Create all required sheets (3 tables)
+  getOrCreateSheet(spreadsheet, 'Sessions');
+  getOrCreateSheet(spreadsheet, 'Player Scores');
+  getOrCreateSheet(spreadsheet, 'Detailed Answers');
   
   Logger.log('Quiz sheets set up successfully!');
-  Logger.log('Created sheets: Quiz (summary), Quiz Sessions, User Answers, User Scores');
+  Logger.log('Created sheets: Sessions, Player Scores, Detailed Answers');
 }
 
 

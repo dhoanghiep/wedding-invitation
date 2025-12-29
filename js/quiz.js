@@ -111,33 +111,41 @@
             if (!line.trim()) return;
 
             const parts = line.split('\t');
-            if (parts.length < 5) {
-                console.warn(`Skipping invalid question at line ${index + 1}: ${line}`);
+            if (parts.length < 6) {
+                console.warn(`Skipping invalid question at line ${index + 1}: Expected 6 columns (Question, Answer1, Answer2, Answer3, Answer4, CorrectIndex), got ${parts.length}`);
                 return;
             }
 
             const question = parts[0].trim();
-            const correctAnswer = parts[1].trim();
+            const answer1 = parts[1].trim();
             const answer2 = parts[2].trim();
             const answer3 = parts[3].trim();
             const answer4 = parts[4].trim();
+            const correctAnswerIndex = parseInt(parts[5].trim(), 10);
 
-            // Create answers array
-            const answers = [correctAnswer, answer2, answer3, answer4];
+            // Validate correct answer index (should be 1, 2, 3, or 4)
+            if (isNaN(correctAnswerIndex) || correctAnswerIndex < 1 || correctAnswerIndex > 4) {
+                console.warn(`Skipping invalid question at line ${index + 1}: Correct answer index must be 1, 2, 3, or 4, got ${parts[5]}`);
+                return;
+            }
+
+            // Create answers array (index 0-3, but correctAnswerIndex is 1-4)
+            const answers = [answer1, answer2, answer3, answer4];
+            const correctAnswerText = answers[correctAnswerIndex - 1]; // Convert 1-4 to 0-3 index
             
             // Shuffle answers for display
             const shuffledAnswers = [...answers];
             shuffleArray(shuffledAnswers);
             
             // Find correct answer index in shuffled array
-            const correctIndex = shuffledAnswers.indexOf(correctAnswer);
+            const correctIndex = shuffledAnswers.indexOf(correctAnswerText);
 
             questions.push({
                 id: index + 1,
                 question: question,
                 answers: answers,
-                correctAnswer: 0, // Original index
-                correctAnswerText: correctAnswer,
+                correctAnswer: correctAnswerIndex - 1, // Original index (0-3)
+                correctAnswerText: correctAnswerText,
                 shuffledAnswers: shuffledAnswers,
                 correctIndex: correctIndex
             });
