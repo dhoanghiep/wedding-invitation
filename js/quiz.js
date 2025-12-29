@@ -130,13 +130,7 @@
             // Create answers array (index 0-3, but correctAnswerIndex is 1-4)
             const answers = [answer1, answer2, answer3, answer4];
             const correctAnswerText = answers[correctAnswerIndex - 1]; // Convert 1-4 to 0-3 index
-            
-            // Shuffle answers for display
-            const shuffledAnswers = [...answers];
-            shuffleArray(shuffledAnswers);
-            
-            // Find correct answer index in shuffled array
-            const correctIndex = shuffledAnswers.indexOf(correctAnswerText);
+            const correctIndex = correctAnswerIndex - 1; // Original index (0-3)
 
             questions.push({
                 id: index + 1,
@@ -144,20 +138,11 @@
                 answers: answers,
                 correctAnswer: correctAnswerIndex - 1, // Original index (0-3)
                 correctAnswerText: correctAnswerText,
-                shuffledAnswers: shuffledAnswers,
                 correctIndex: correctIndex
             });
         });
 
         return questions;
-    }
-
-    // Shuffle array (Fisher-Yates algorithm)
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
     }
 
     // Handle start quiz
@@ -349,7 +334,7 @@
             // Create answer buttons
             const colors = ['red', 'blue', 'yellow', 'green'];
             const colorLabels = ['Red', 'Blue', 'Yellow', 'Green'];
-            question.shuffledAnswers.forEach((answer, index) => {
+            question.answers.forEach((answer, index) => {
                 const button = document.createElement('button');
                 button.className = `quiz-answer-btn quiz-answer-${colors[index]}`;
                 button.textContent = answer;
