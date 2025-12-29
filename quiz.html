@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding Quiz - Test your knowledge about the couple!">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2Q0C3C4NT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T2Q0C3C4NT');
+    </script>
+    
+    <title>Wedding Quiz</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+    <!-- Header placeholder - will be loaded by components.js -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Content -->
+    <main style="padding-top: 80px;">
+        <!-- User Registration/Login Section -->
+        <section class="quiz-section" id="quiz-registration" style="display: block;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="quiz.title">Wedding Quiz</h2>
+                    <p class="section-subtitle" data-i18n="quiz.subtitle">Test your knowledge about the couple!</p>
+                </div>
+                
+                <div class="quiz-registration-form" id="quiz-registration-form">
+                    <div class="form-group">
+                        <label for="quiz-name" data-i18n="quiz.name">Your Name *</label>
+                        <input type="text" id="quiz-name" name="name" required placeholder="Enter your name">
+                        <small class="form-hint" data-i18n="quiz.nameHint">You can change this later</small>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" id="quiz-start-btn" data-i18n="quiz.startQuiz">Continue</button>
+                    
+                    <div class="form-message" id="quiz-registration-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Rules Section -->
+        <section class="quiz-section" id="quiz-rules" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="quiz.rulesTitle">Quiz Rules</h2>
+                </div>
+                
+                <div class="quiz-rules-container">
+                    <div class="quiz-rules-content">
+                        <ul class="quiz-rules-list">
+                            <li data-i18n="quiz.rule1">MC will guide you through the questions</li>
+                            <li data-i18n="quiz.rule2">There is only 1 correct answer</li>
+                            <li data-i18n="quiz.rule3">Some questions will have immediate present</li>
+                            <li data-i18n="quiz.rule4">Time will be calculated for the score, so try to answer the question ASAP after reveal it</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quiz-rules-actions">
+                        <button type="button" class="btn btn-primary btn-large" id="quiz-begin-btn" data-i18n="quiz.beginQuiz">I'm Ready</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Waiting Section -->
+        <section class="quiz-section" id="quiz-waiting" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Waiting for Quiz to Start</h2>
+                    <p class="section-subtitle">Please wait for the administrator to begin the quiz...</p>
+                </div>
+                
+                <div class="quiz-waiting-container">
+                    <div class="quiz-waiting-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                    <p class="quiz-waiting-text">The quiz will begin shortly. Please stay on this page.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Player Section -->
+        <section class="quiz-section" id="quiz-player" style="display: none;">
+            <div class="container">
+                <!-- Quiz Header -->
+                <div class="quiz-header">
+                    <div class="quiz-info">
+                        <div class="quiz-user-info">
+                            <span id="quiz-current-name"></span>
+                            <button class="btn-link" id="quiz-change-name-btn" data-i18n="quiz.changeName">Change Name</button>
+                        </div>
+                        <div class="quiz-score">
+                            <span data-i18n="quiz.score">Score:</span>
+                            <span id="quiz-current-score">0</span>
+                        </div>
+                    </div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                        </div>
+                        <div class="quiz-progress-text">
+                            <span id="quiz-question-number">0</span> / <span id="quiz-total-questions">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Display -->
+                <div class="quiz-question-container">
+                    <div class="quiz-question-status" id="quiz-question-status" style="display: none;">
+                        <div class="quiz-status-message quiz-status-closed">
+                            <span class="quiz-status-icon">🔒</span>
+                            <span class="quiz-status-text">This question is closed. Answers submitted now will receive 0 points.</span>
+                        </div>
+                    </div>
+                    <h2 class="quiz-question-text" id="quiz-question-text" role="heading" aria-level="2"></h2>
+                    
+                    <div class="quiz-answers" id="quiz-answers" role="group" aria-label="Answer options">
+                        <!-- Answer buttons will be dynamically generated -->
+                    </div>
+                    
+                    <div class="quiz-waiting-message" id="quiz-waiting-message" style="display: none;">
+                        <p>Waiting for next question to be available...</p>
+                    </div>
+                    
+                    <!-- Answer Submitted Waiting Section -->
+                    <div class="quiz-answer-waiting" id="quiz-answer-waiting" style="display: none;">
+                        <div class="quiz-answer-waiting-spinner">
+                            <div class="spinner"></div>
+                        </div>
+                        <p class="quiz-answer-waiting-text">Waiting for the host to reveal the answer and move to next question</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Results Section -->
+        <section class="quiz-section" id="quiz-results" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="quiz.resultsTitle">Quiz Results</h2>
+                </div>
+                
+                <div class="quiz-results-container">
+                    <div class="quiz-results-summary">
+                        <div class="quiz-result-stat">
+                            <div class="quiz-result-value" id="quiz-final-score">0</div>
+                            <div class="quiz-result-label" data-i18n="quiz.finalScore">Final Score</div>
+                        </div>
+                        <div class="quiz-result-stat">
+                            <div class="quiz-result-value" id="quiz-correct-answers">0</div>
+                            <div class="quiz-result-label" data-i18n="quiz.correctAnswers">Correct Answers</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button type="button" class="btn btn-primary" id="quiz-restart-btn" data-i18n="quiz.restartQuiz">Take Quiz Again</button>
+                    </div>
+                    
+                    <!-- Leaderboard Section -->
+                    <div class="quiz-leaderboard-container" id="quiz-leaderboard-container">
+                        <h3 class="quiz-leaderboard-title" data-i18n="quiz.leaderboard">Leaderboard</h3>
+                        <div class="quiz-leaderboard-loading" id="quiz-leaderboard-loading" style="display: none;">
+                            Loading leaderboard...
+                        </div>
+                        <div class="quiz-leaderboard" id="quiz-leaderboard">
+                            <!-- Leaderboard will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer placeholder - will be loaded by components.js -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript files -->
+    <script src="js/components.js"></script>
+    <script src="js/language.js"></script>
+    <script src="config.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+</html>
+
