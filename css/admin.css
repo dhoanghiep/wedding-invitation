@@ -37,6 +37,11 @@
     font-weight: 600;
 }
 
+.leaderboard-title {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
 .badge {
     background: var(--primary-color);
     color: white;
@@ -421,8 +426,11 @@
 
 .admin-monitoring-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .admin-monitoring-content {
@@ -438,6 +446,33 @@
 .admin-sessions-panel,
 .admin-leaderboard-panel {
     height: 100%;
+}
+
+/* Leaderboard Page Specific Styles */
+.leaderboard-container {
+    padding: 0 10px;
+    max-width: 100%;
+}
+
+.leaderboard-section {
+    margin-bottom: 0;
+}
+
+.leaderboard-card {
+    padding: 1rem 1.5rem;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-card .admin-monitoring-header {
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.leaderboard-card .admin-leaderboard {
+    flex: 1;
+    overflow-y: auto;
 }
 
 /* Responsive Design */

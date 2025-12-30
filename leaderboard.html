@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quiz Leaderboard - View current rankings">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2Q0C3C4NT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T2Q0C3C4NT');
+    </script>
+    
+    <title>Quiz Leaderboard</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Header placeholder - will be loaded by components.js -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Content -->
+    <main style="padding-top: 20px;">
+        <div class="container leaderboard-container">
+            <!-- Leaderboard Section -->
+            <section class="admin-section leaderboard-section">
+                <div class="admin-card leaderboard-card">
+                    <div class="admin-monitoring-header">
+                        <h2 class="admin-card-title leaderboard-title">
+                            Leaderboard
+                            <span class="badge" id="leaderboard-count">0</span>
+                        </h2>
+                        <button type="button" class="btn btn-primary" id="refresh-btn">
+                            <span class="btn-icon">🔄</span>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="admin-leaderboard" id="leaderboard">
+                        <!-- Leaderboard will be populated here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer placeholder - will be loaded by components.js -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript files -->
+    <script src="js/components.js"></script>
+    <script src="config.js"></script>
+    <script src="js/leaderboard.js"></script>
+</body>
+</html>
+
